@@ -1,7 +1,6 @@
 ---
-
+marp: true
 ---
-
 # Trabajo de Investigación
 
 | <!-- -->      | <!-- -->        | <!-- -->      |
@@ -29,19 +28,44 @@
     - Uso de herramientas como Visual Studio Code, Chrome DevTools, etc.
   
 ### Modelos de Programación en Entornos Cliente/Servidor
+    - Modelo Punto a Punto
+
+    ![Punto a Punto](https://2.bp.blogspot.com/-MoAoJ_BPZtA/UI_wHcq2xVI/AAAAAAAAAAY/oO2T3uXYB8w/s1600/conectando-dos-pc-punto-a-punto-3.jpg)
+
+    - Modelo Cliente-Servidor
+
+    ![Cliente-Servidor](https://infimg.com/bimg/2019/02/diagrama-cliente-servidor.jpeg)
+
+    - Modelo con servidor de aplicaciones
+
+    ![servidor de aplicaciones](https://javiergarciaescobedo.es/images/stories/despliegue_web/01_implantacion/Modelo_servidor_aplicaciones_1.png)
+
+    - Modelo con servidor de aplicaciones externo
+
+    ![servidor de aplicaciones externo](https://javiergarciaescobedo.es/images/stories/despliegue_web/01_implantacion/Modelo_servidor_aplicaciones_externo.png)
+
+    - Modelo con varios servidores de aplicaciones
+
+    ![varios servidores de aplicaciones](https://javiergarciaescobedo.es/images/stories/despliegue_web/01_implantacion/Modelo_servidor_aplicaciones_varios.png)
+
     [Modelos de arquitectura web mas comunes](https://javiergarciaescobedo.es/despliegue-de-aplicaciones-web/76-arquitecturas-web/253-modelos-de-arquitecturas-web)
 ### Mecanismos de Ejecución de Código en un Navegador Web
+
     [Ejecucion de javaScript en web](https://programamos.es/unidad-2-los-entornos-de-ejecucion/)
 ### Lenguajes de Programación en Entorno Cliente
-    1. JavaScript
-    2. TypeScript
-    3. SASS
-    4. Elm
-    5. React
+    - JavaScript
+    - TypeScript
+    - SASS
+    - Elm
+    - React
+
     [Lenguajes de de programacion cliente](https://blog.back4app.com/es/los-10-principales-lenguajes-de-desarrollo-del-lado-del-cliente/)
 ### Características de los Lenguajes de Script
+
     [Características](https://www.hostingplus.com.es/blog/estos-son-los-lenguajes-de-programacion-mas-destacables-de-script/)
 ### Tecnologías y Lenguajes Asociados
     
+
 ### Herramientas de Programación
+
     [Herramientas](https://www.hostinger.es/tutoriales/herramientas-de-programacion)
