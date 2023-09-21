@@ -121,11 +121,17 @@ Algunas formas de solucionar estos errores son:
 [Compatibilidad entre navegadores](https://developer.mozilla.org/es/docs/Learn/Tools_and_testing/Cross_browser_testing)  
 [Analisis y solucion de la compatibilidad con JavaScript](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Cross_browser_testing/JavaScript)
 ### Lenguajes de Programación en Entorno Cliente
-- JavaScript
-- TypeScript
-- SASS
-- Elm
-- React
+- **JavaScript**:  
+Siendo un lenguaje de programación interpretado y orientado a objetos, es de tipado dinámico, lo que significa que los tipos de datos son asignados en tiempo de ejecución. JavaScript es la base de muchos frameworks y librerías populares en el desarrollo web, como React, Angular y Vue.js y es soportado por todos los navegadores web modernos.
+- **TypeScript**:  
+TypeScript es una extensión de JavaScript que agrega tipos estáticos al lenguaje, lo que significa que los tipos de datos se comprueban en tiempo de compilación, este lenguaje puede utilizarse con librerías y frameworks JavaScript existentes, y es especialmente popular en proyectos que utilizan Angulary tambien ayuda a detectar errores en tiempo de desarrollo y proporciona un código más limpio y autodocumentado.
+- **SASS (Syntactically Awesome Style Sheets)**:  
+Es un preprocesador de CSS, se suele utilizar para mejorar la legibilidad y mantenibilidad del código CSS, permitiendo variables, anidamiento, mixins y más, se caracteríza por tener que ser compilado a CSS antes de ser interpretado por el navegador y facilita la reutilización de código y la organización de estilos en proyectos grandes.
+- **Elm**:  
+Está diseñado específicamente para crear aplicaciones web front-end, utiliza un sistema de tipos fuertes y estáticos, lo que ayuda a evitar errores comunes en tiempo de compilación, promueve la arquitectura de aplicaciones conocida como *Elm Architecture*, que es altamente modular y escalable y se destaca por su enfoque en eliminar errores en tiempo de compilación.
+- **React**:  
+Utiliza principalmente JavaScript (o TypeScript) para desarrollar interfaces de usuario, se basa en la creación de componentes reutilizables que gestionan su propio estado y renderizado, utiliza un Virtual DOM para optimizar las actualizaciones de la interfaz de usuario y mejorar el rendimiento y al ser una librería de vista para construir interfaces de usuario interactivas, se integra bien con otras bibliotecas y tecnologías.  
+En resumen, JavaScript es el lenguaje base para el desarrollo web en el lado del cliente, mientras que TypeScript agrega tipos estáticos. SASS es un preprocesador CSS que mejora la estructura de los estilos. Elm es un lenguaje funcional especializado en front-end que garantiza la ausencia de errores. React es una librería de vista que simplifica la creación de interfaces de usuario interactivas en JavaScript o TypeScript. La elección entre estos lenguajes y tecnologías dependerá de los requisitos específicos de tu proyecto y tus preferencias personales.
 
 [Lenguajes de programacion cliente](https://blog.back4app.com/es/los-10-principales-lenguajes-de-desarrollo-del-lado-del-cliente/)
 ### Características de los Lenguajes de Script
