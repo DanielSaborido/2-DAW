@@ -160,5 +160,10 @@ Como **los lenguajes de scripting** a menudo se utilizan en aplicaciones web y m
     
 
 ### Herramientas de Programación
+- **Sublime Text**:  
+- **Visual Studio Code**:  
+- **IntelliJ**:  
+- **Eclipse**:  
+- **GitHub**:  
 
-[Herramientas](https://www.hostinger.es/tutoriales/herramientas-de-programacion)
+[Herramientas de programación](https://www.hostinger.es/tutoriales/herramientas-de-programacion)
