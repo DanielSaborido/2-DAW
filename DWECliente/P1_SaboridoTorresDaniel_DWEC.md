@@ -133,10 +133,29 @@ Está diseñado específicamente para crear aplicaciones web front-end, utiliza 
 Utiliza principalmente JavaScript (o TypeScript) para desarrollar interfaces de usuario, se basa en la creación de componentes reutilizables que gestionan su propio estado y renderizado, utiliza un Virtual DOM para optimizar las actualizaciones de la interfaz de usuario y mejorar el rendimiento y al ser una librería de vista para construir interfaces de usuario interactivas, se integra bien con otras bibliotecas y tecnologías.  
 En resumen, JavaScript es el lenguaje base para el desarrollo web en el lado del cliente, mientras que TypeScript agrega tipos estáticos. SASS es un preprocesador CSS que mejora la estructura de los estilos. Elm es un lenguaje funcional especializado en front-end que garantiza la ausencia de errores. React es una librería de vista que simplifica la creación de interfaces de usuario interactivas en JavaScript o TypeScript. La elección entre estos lenguajes y tecnologías dependerá de los requisitos específicos de tu proyecto y tus preferencias personales.
 
-[Lenguajes de programacion cliente](https://blog.back4app.com/es/los-10-principales-lenguajes-de-desarrollo-del-lado-del-cliente/)
+[Lenguajes de programacion en entorno cliente](https://blog.back4app.com/es/los-10-principales-lenguajes-de-desarrollo-del-lado-del-cliente/)
 ### Características de los Lenguajes de Script
+Un lenguaje de Script tiene una serie de características básicas:  
+- **Son interpretados**: El código de un script no necesita ser compilado, basta con que sea interpretado por un programa para que se ejecute su código.
+- **No necesitan la declaración de variables**: Estos lenguajes no necesitan una declaración explícita de variables para asignar su tipo. El tipo de dato de cada variable es deducido del contexto en el que se utiliza, en el momento en el que se le asigna un valor. Esta tipología débil requiere de una especial atención a la hora de trabajar con variables.
+- **Utilizan instrucciones**: Las instrucciones son fundamentales para que el intérprete pueda ejecutar las acciones que se quieren realizar.
+- **Código simple**: Los scripts pueden llegar a ser complicados, pero normalmente se trata de programas cortos y concisos que persiguen ejecutar una acción concreta, por lo que se busca la simplicidad y la eficiencia.  
 
-[Características](https://www.hostingplus.com.es/blog/estos-son-los-lenguajes-de-programacion-mas-destacables-de-script/)
+Si se compara con el lengaje de programacion se ven diversas diferancias entre ellas están:
+- Los lenguajes de scripting suelen enfocarse en la automatización de tareas y son utilizados para escribir scripts que controlan la ejecución de programas o acciones específicas mientras que los lenguajes de programación tienen una amplia gama de aplicaciones y se utilizan para desarrollar aplicaciones completas y sistemas de software.  
+- **Interpretado vs. Compilado:**  
+Una de las diferencias más importante es que **los lenguajes de scripting** son principalmente **interpretados**, lo que significa que el código se ejecuta línea por línea por un intérprete en tiempo de ejecución mientras que **los lenguajes de programación** se tienen que **compilar** antes de realizar la ejecución, lo que implica que se traducen completamente a código máquina o bytecode antes de su ejecución.
+- **Plataforma:**  
+Por una parte **los lenguajes de scripting** suelen estar ligados a una plataforma o entorno de ejecución **específico** y por otra **los lenguajes de programación** están diseñados para ser independientes de la plataforma y pueden ejecutarse en **múltiples sistemas operativos**.
+- **Velocidad en Runtime:**  
+**Los lenguajes de scripting** deben interpretar línea por línea el código y disponen de una menor optimización en comparacion con los lenguajes de programación dando como resultado que estos sean mas lentos que **los lenguajes de programación** que obtienen su optimizacion por compilar el código siendo estos mas rápidos.
+- **Codificación**:  
+**Los lenguajes de scripting** son más adecuados para tareas de **automatización** requiriendo menos código para lograr ciertos objetivos y por otra parte **los lenguajes de programación** suelen requerir más **código manual**, ya que ofrecen mayor flexibilidad y control sobre la lógica del programa.
+- **Aplicacion**:  
+Como **los lenguajes de scripting** a menudo se utilizan en aplicaciones web y móviles suelen depender de **entornos de ejecución específicos** formando parte de una pila tecnológica más amplia, luego estan **los lenguajes de programación** que son utilizados para crear **aplicaciones autónomas** ya sean de escritorio, móviles o sistemas embebidos.
+
+[Características de los Lenguajes de Script](https://www.hostingplus.com.es/blog/estos-son-los-lenguajes-de-programacion-mas-destacables-de-script/)  
+[Comparativa de lenguaje Script y lenguaje Programación](https://kinsta.com/es/blog/lenguajes-script/)
 ### Tecnologías y Lenguajes Asociados
     
 
