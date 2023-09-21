@@ -46,10 +46,80 @@ Un servidor de aplicaciones es esencial en el desarrollo de aplicaciones web din
 
 [Modelos de arquitectura web mas comunes](https://javiergarciaescobedo.es/despliegue-de-aplicaciones-web/76-arquitecturas-web/253-modelos-de-arquitecturas-web)
 ### Mecanismos de Ejecución de Código en un Navegador Web
+![Logo JavaScript](https://www.thecrazyprogrammer.com/wp-content/uploads/2020/11/JavaScript-Logo-150x150.png?ezimgfmt=ng:webp/ngcb1)  
+Para ejecutar una aplicación JavaScript en un navegador web, es necesario incluir el código JavaScript dentro de un documento HTML, ya que es el formato que el navegador comprende y representa.  
+Existen diversas maneras de integrar código JavaScript en un documento HTML:  
+1. **Inclusión en línea**:  
+Puedes insertar el código directamente en cualquier parte del documento utilizando el elemento \<script> de HTML. Un ejemplo de esta forma sería:
+~~~
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>El resultado de la suma es: <span id="resultado"></span></p>
+    <script>
+      var num1 = 10;
+      var num2 = 20;
+      document.getElementById("resultado").innerHTML = num1 + num2;
+    </script>
+</body>
+</html>
+~~~
+2. **Inclusión en la sección \<head>**:  
+También puedes agregar scripts en la sección <head> del documento HTML. Sin embargo, si deseas manipular el DOM desde allí, debes esperar a que el documento se cargue completamente utilizando el evento DOMContentLoaded. Un ejemplo de esta forma sería:
+~~~
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+      var num1 = 10;
+      var num2 = 25;
+      document.addEventListener('DOMContentLoaded', function(){
+        document.getElementById("resultado").innerHTML = num1 + num2;
+      });
+    </script>
+</head>
+<body>
+    <p>El resultado de la suma es: <span id="resultado"></span></p>
+</body>
+</html>
+~~~
+3. **Archivos externos**:  
+A medida que tu código JavaScript crece, es conveniente escribirlo en archivos externos al documento HTML y referenciarlos mediante el atributo src del elemento \<script>. Un ejemplo de esta forma sería:
+~~~
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./suma.js"></script>
+</head>
+<body>
+    <p>El resultado de la suma es: <span id="resultado"></span></p>
+</body>
+</html>
+~~~  
+Históricamente, JavaScript tenía problemas de compatibilidad entre navegadores, ya que diferentes navegadores como Internet Explorer y Netscape implementaban scripts en formato de lenguaje diferentes y a pesar de que JavaScript y JScript eran compatibles en cierta medida, a menudo surgían problemas de implementación conflictiva, lo que causaba dificultades a los desarrolladores.  
+Estos problemas persistieron hasta principios de la década de 2000 debido al uso continuo de navegadores antiguos que requerían soporte. Esto llevó al desarrollo de bibliotecas como jQuery, que se crearon para ocultar las diferencias en las implementaciones del navegador y permitir a los desarrolladores escribir código más simple. jQuery y otras bibliotecas se encargaban de gestionar las diferencias en segundo plano.  
+Afortunadamente, la compatibilidad entre navegadores ha mejorado significativamente con el tiempo, y los navegadores modernos ahora admiten mejor las características estándar de JavaScript. Esto ha reducido la necesidad de utilizar código específico para resolver problemas de compatibilidad, aunque aún existen navegadores antiguos que requieren consideración en este aspecto haciendo que en la actualidad los errores mas comunes sean pocos entre estos estan:
+- Cuando el código de detección del navegador es de mala calidad, el código de detección de características y el uso del prefijo del proveedor impiden que los navegadores ejecuten código que de otro modo podrían usar bien.
+- Cuando los desarrolladores hacen uso de nuevas características de JavaScript en su código, como API web modernas, y encontrar que tales características no funcionan en navegadores más antiguos.  
 
-![Logo JavaScript](https://www.thecrazyprogrammer.com/wp-content/uploads/2020/11/JavaScript-Logo-150x150.png?ezimgfmt=ng:webp/ngcb1)
+Algunas formas de solucionar estos errores son:  
+- Asegurarse de que las operaciones asincrónicas han devuelto un valor en específico antes de intentar utilizar dichos valores. 
+- Revisar el codigo cada vez que se modifique en caso de que surja algun imprevisto de compatibilidad, ya que pueden surjir un error de sintaxis (aquellos que son por escribir mal un comando) que son faciles de solucionar o un error lógico siendo este mas coplicado de solucionar ya que no suele ser indicado en la consola de comando y no trada de directamente fallar el programa sino de darte un resultadoerroneo.
 
-[Ejecucion de javaScript en web](https://programamos.es/unidad-2-los-entornos-de-ejecucion/)
+[Ejecucion de javaScript en web](https://programamos.es/unidad-2-los-entornos-de-ejecucion/)  
+[Compatibilidad entre navegadores](https://developer.mozilla.org/es/docs/Learn/Tools_and_testing/Cross_browser_testing)  
+[Analisis y solucion de la compatibilidad con JavaScript](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Cross_browser_testing/JavaScript)
 ### Lenguajes de Programación en Entorno Cliente
 - JavaScript
 - TypeScript
@@ -57,7 +127,7 @@ Un servidor de aplicaciones es esencial en el desarrollo de aplicaciones web din
 - Elm
 - React
 
-[Lenguajes de de programacion cliente](https://blog.back4app.com/es/los-10-principales-lenguajes-de-desarrollo-del-lado-del-cliente/)
+[Lenguajes de programacion cliente](https://blog.back4app.com/es/los-10-principales-lenguajes-de-desarrollo-del-lado-del-cliente/)
 ### Características de los Lenguajes de Script
 
 [Características](https://www.hostingplus.com.es/blog/estos-son-los-lenguajes-de-programacion-mas-destacables-de-script/)
