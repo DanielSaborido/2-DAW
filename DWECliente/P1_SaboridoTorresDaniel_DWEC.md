@@ -48,7 +48,7 @@ Un servidor de aplicaciones es esencial en el desarrollo de aplicaciones web din
 ### Mecanismos de Ejecución de Código en un Navegador Web
 | <!-- -->|<!-- -->   |
 |:-------------:|:---------------|  
-|<image src="https://www.thecrazyprogrammer.com/wp-content/uploads/2020/11/JavaScript-Logo-150x150.png?ezimgfmt=ng:webp/ngcb1" width=500px/>|Para ejecutar una aplicación JavaScript en un navegador web, es necesario incluir el código JavaScript dentro de un documento HTML, ya que es el formato que el navegador comprende y representa.|
+|<image src="https://www.thecrazyprogrammer.com/wp-content/uploads/2020/11/JavaScript-Logo-150x150.png?ezimgfmt=ng:webp/ngcb1" width=250px/>|Para ejecutar una aplicación JavaScript en un navegador web, es necesario incluir el código JavaScript dentro de un documento HTML, ya que es el formato que el navegador comprende y representa.|
 
 Existen diversas maneras de integrar código JavaScript en un documento HTML:  
 1. **Inclusión en línea**:  
