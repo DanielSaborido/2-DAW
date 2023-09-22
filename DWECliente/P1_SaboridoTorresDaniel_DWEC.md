@@ -27,7 +27,7 @@
 ### Modelos de Programación en Entornos Cliente/Servidor
 - **Modelo Punto a Punto**:  
 Una red P2P (Peer-to-Peer) es una estructura de red en la que los dispositivos individuales (peers) se comportan tanto como proveedores como consumidores de recursos, en contraposición al modelo cliente-servidor donde los clientes obtienen recursos de servidores centralizados.  
-![Punto a Punto](https://2.bp.blogspot.com/-MoAoJ_BPZtA/UI_wHcq2xVI/AAAAAAAAAAY/oO2T3uXYB8w/s1600/conectando-dos-pc-punto-a-punto-3.jpg)  
+<image src="https://2.bp.blogspot.com/-MoAoJ_BPZtA/UI_wHcq2xVI/AAAAAAAAAAY/oO2T3uXYB8w/s1600/conectando-dos-pc-punto-a-punto-3.jpg" width=500px/>  
 Luego las redes P2P ofrecen ventajas como escalabilidad, robustez y resistencia a la centralización, pero también tienen desafíos relacionados con la fiabilidad de los recursos y la gestión descentralizada.  
 Estas características hacen que las redes P2P sean adecuadas para ciertos tipos de aplicaciones, como BitTorrent, Skype o Tribler debido a su intercambio de archivos y la distribución de contenido, pero no para todas las situaciones. La elección de utilizar una red P2P o un modelo cliente-servidor dependerá de los objetivos específicos y los requisitos de la aplicación.
 
@@ -46,8 +46,10 @@ Un servidor de aplicaciones es esencial en el desarrollo de aplicaciones web din
 
 [Modelos de arquitectura web mas comunes](https://javiergarciaescobedo.es/despliegue-de-aplicaciones-web/76-arquitecturas-web/253-modelos-de-arquitecturas-web)
 ### Mecanismos de Ejecución de Código en un Navegador Web
-![Logo JavaScript](https://www.thecrazyprogrammer.com/wp-content/uploads/2020/11/JavaScript-Logo-150x150.png?ezimgfmt=ng:webp/ngcb1)  
-Para ejecutar una aplicación JavaScript en un navegador web, es necesario incluir el código JavaScript dentro de un documento HTML, ya que es el formato que el navegador comprende y representa.  
+| <!-- -->|<!-- -->   |
+|:-------------:|:---------------|  
+|<image src="https://www.thecrazyprogrammer.com/wp-content/uploads/2020/11/JavaScript-Logo-150x150.png?ezimgfmt=ng:webp/ngcb1" width=500px/>|Para ejecutar una aplicación JavaScript en un navegador web, es necesario incluir el código JavaScript dentro de un documento HTML, ya que es el formato que el navegador comprende y representa.|
+
 Existen diversas maneras de integrar código JavaScript en un documento HTML:  
 1. **Inclusión en línea**:  
 Puedes insertar el código directamente en cualquier parte del documento utilizando el elemento \<script> de HTML. Un ejemplo de esta forma sería:
@@ -141,7 +143,9 @@ Un lenguaje de Script tiene una serie de características básicas:
 - **Utilizan instrucciones**: Las instrucciones son fundamentales para que el intérprete pueda ejecutar las acciones que se quieren realizar.
 - **Código simple**: Los scripts pueden llegar a ser complicados, pero normalmente se trata de programas cortos y concisos que persiguen ejecutar una acción concreta, por lo que se busca la simplicidad y la eficiencia.  
 
-Si se compara con el lengaje de programacion se ven diversas diferancias entre ellas están:
+<image src="https://cdn.educba.com/academy/wp-content/uploads/2018/07/Programming-Languages-vs-Scripting-Languages-2.jpg.webp"/>  
+
+Si se compara con el lengaje de programacion se ven diversas diferencias entre ellas están:  
 - Los lenguajes de scripting suelen enfocarse en la automatización de tareas y son utilizados para escribir scripts que controlan la ejecución de programas o acciones específicas mientras que los lenguajes de programación tienen una amplia gama de aplicaciones y se utilizan para desarrollar aplicaciones completas y sistemas de software.  
 - **Interpretado vs. Compilado:**  
 Una de las diferencias más importante es que **los lenguajes de scripting** son principalmente **interpretados**, lo que significa que el código se ejecuta línea por línea por un intérprete en tiempo de ejecución mientras que **los lenguajes de programación** se tienen que **compilar** antes de realizar la ejecución, lo que implica que se traducen completamente a código máquina o bytecode antes de su ejecución.
@@ -165,9 +169,10 @@ Para lograr esto, los desarrolladores frontend utilizan lenguajes de programaci�
 - **Vue.js**: es un framework de JavaScript para el desarrollo de aplicaciones web interactivas y reactivas. Se centra en la creación de interfaces de usuario reutilizables y se caracteriza por su simplicidad y flexibilidad. Vue.js permite construir aplicaciones frontend complejas de manera eficiente.
 - **React**: React es una biblioteca de JavaScript desarrollada por Facebook para la construcción de interfaces de usuario interactivas. Se basa en la creación de componentes reutilizables y utiliza un enfoque declarativo para definir cómo debería verse la interfaz en función del estado de la aplicación. React es ampliamente utilizado en el desarrollo de aplicaciones web modernas y se integra bien con otras tecnologías.  
 Tambien estaría bien añadir que Vue.js y React son opciones bastante populares para el desarrollo de aplicaciones web frontend, y la elección entre ellos a menudo depende de las preferencias del equipo de desarrollo y los requisitos del proyecto, esto se debe a que ambos tienen una gran comunidad de desarrolladores y una amplia variedad de recursos disponibles para aprender y utilizar.  
+
 Codigo de ejemplo:
+- **HTML:**
 ~~~
-HTML:
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -197,8 +202,8 @@ HTML:
 <script src="index.js"></script>
 </html>
 ~~~
+- **CSS:**
 ~~~
-CSS:
 body {
     color: rgb(0, 0, 0);
 }
@@ -232,8 +237,8 @@ body {
     width: 30%;
 }
 ~~~
+- **JavaScript:**
 ~~~
-JavaScript:
 function multriplicacion(){
     var num = document.getElementById("num").value;
     if (isNaN(num)) {alert("[ERROR] El valor introduciodo es un String.")}
@@ -280,31 +285,40 @@ function reseteo(){
 
 [Tecnologías frontend](https://apliint.com/2022/02/15/cual-es-la-diferencia-entre-frontend-y-backend-en-el-desarrollo-de-software/)
 ### Herramientas de Programación
-- **Sublime Text**:  
-![logosublime](https://damiandeluca.com.ar/wp-content/uploads/2012/08/sublime-100x100.png) Sublime Text es un editor de texto multiplataforma ampliamente utilizado por su velocidad y simplicidad, se caracteriza por una clave que incluye resaltado de sintaxis personalizable, autocompletado inteligente y una interfaz de usuario minimalista, tiene complementos y paquetes de terceros, disponibles a través de Package Control, amplían sus funcionalidades para adaptarse a las necesidades específicas de los desarrolladores.
-Es una elección popular para la edición rápida de código HTML, CSS, JavaScript y otros lenguajes.
-- **Visual Studio Code**:  
-![logovisual](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/100px-Visual_Studio_Code_1.35_icon.svg.png)
-Visual Studio Code es un editor de código fuente desarrollado por Microsoft que se ha convertido en una herramienta muy popular en la comunidad de desarrollo web.
-Ofrece una amplia gama de extensiones disponibles a través de su marketplace que permiten a los desarrolladores trabajar con diversos lenguajes y marcos de trabajo web.
-VS Code incluye características como depuración integrada, control de versiones con Git, terminal integrada y soporte para extensiones que mejoran la productividad.
-- **IntelliJ**:  
-![logointellij](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/IntelliJ_IDEA_Icon.svg/100px-IntelliJ_IDEA_Icon.svg.png) 
-IntelliJ IDEA es un entorno de desarrollo integrado (IDE) desarrollado por JetBrains. WebStorm es una versión de IntelliJ específicamente diseñada para el desarrollo web front-end.
-WebStorm es ampliamente elogiado por su inteligencia en el código JavaScript, autocompletado avanzado, análisis de código y depuración.
-También ofrece soporte para frameworks y bibliotecas populares como React, Angular y Vue.js.
-- **Eclipse**:  
-![logoeclipse](https://arquisoft.github.io/Trivial3b/images/eclipse.png)
-Eclipse es un IDE ampliamente utilizado en el desarrollo Java, pero también es adecuado para el desarrollo web.
-A través de plugins como Eclipse IDE for Java EE Developers, los desarrolladores pueden trabajar en proyectos web, incluyendo aplicaciones Java EE y desarrollos en PHP.
-Eclipse es conocido por su comunidad activa de usuarios y su amplia gama de herramientas de desarrollo.
-- **Atom**:  
-Atom es un editor de código fuente de código abierto desarrollado por GitHub.
-Ofrece una interfaz de usuario moderna y altamente personalizable, con soporte para temas y paquetes de extensión que pueden personalizar la experiencia de desarrollo.
-Características como la vista previa en tiempo real y la edición en vivo facilitan el desarrollo web front-end con HTML y CSS.
-- **Bootstrap**:  
-Bootstrap es un marco de diseño front-end de código abierto creado por Twitter y ahora mantenido por la comunidad.
-Proporciona una colección de componentes predefinidos, estilos CSS y JavaScript que facilitan la creación de sitios web y aplicaciones web con un diseño responsive y atractivo.
-Bootstrap es ampliamente utilizado para crear interfaces de usuario atractivas y funcionales, y es especialmente valioso para proyectos web que desean lograr un diseño consistente y adaptativo en diferentes dispositivos y pantallas.
+- **Sublime Text**:
+
+|  <!-- -->|  <!-- -->  |
+|:-------------:|:---------------|  
+|<image src="https://damiandeluca.com.ar/wp-content/uploads/2012/08/sublime-150x150.png" width=600px/>| Sublime Text es un editor de texto multiplataforma ampliamente utilizado por su velocidad y simplicidad, se caracteriza por una clave que incluye resaltado de sintaxis personalizable, autocompletado inteligente y una interfaz de usuario minimalista, tiene complementos y paquetes de terceros, disponibles a través de Package Control, amplían sus funcionalidades para adaptarse a las necesidades específicas de los desarrolladores. Es una elección popular para la edición rápida de código HTML, CSS, JavaScript y otros lenguajes.|
+
+- **Visual Studio Code**:
+
+| <!-- -->|<!-- -->  |
+|:-------------:|:---------------|  
+|<image src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/150px-Visual_Studio_Code_1.35_icon.svg.png" width=500px/>| Visual Studio Code es un editor de código fuente desarrollado por Microsoft que se ha convertido en una herramienta muy popular en la comunidad de desarrollo web.Ofrece una amplia gama de extensiones disponibles a través de su marketplace que permiten a los desarrolladores trabajar con diversos lenguajes y marcos de trabajo web. VS Code incluye características como depuración integrada, control de versiones con Git, terminal integrada y soporte para extensiones que mejoran la productividad.|
+
+- **IntelliJ**:
+  
+| <!-- -->|<!-- -->  |
+|:-------------:|:---------------|  
+|<image src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/IntelliJ_IDEA_Icon.svg/100px-IntelliJ_IDEA_Icon.svg.png" width=500px/>|IntelliJ IDEA es un entorno de desarrollo integrado (IDE) desarrollado por JetBrains. WebStorm es una versión de IntelliJ específicamente diseñada para el desarrollo web front-end.WebStorm es ampliamente elogiado por su inteligencia en el código JavaScript, autocompletado avanzado, análisis de código y depuración.También ofrece soporte para frameworks y bibliotecas populares como React, Angular y Vue.js.|
+
+- **Eclipse**:
+  
+| <!-- -->|<!-- -->  |
+|:-------------:|:---------------|  
+|<image src="https://arquisoft.github.io/Trivial3b/images/eclipse.png" width=500px/>|Eclipse es un IDE ampliamente utilizado en el desarrollo Java, pero también es adecuado para el desarrollo web.A través de plugins como Eclipse IDE for Java EE Developers, los desarrolladores pueden trabajar en proyectos web, incluyendo aplicaciones Java EE y desarrollos en PHP.Eclipse es conocido por su comunidad activa de usuarios y su amplia gama de herramientas de desarrollo.|
+
+- **Atom**:
+ 
+| <!-- -->|<!-- -->   |
+|:-------------:|:---------------|  
+|<image src="https://www.wenjianbaike.com/wp-content/uploads/2020/05/atom.png" width=500px/>|Atom es un editor de código fuente de código abierto desarrollado por GitHub.Ofrece una interfaz de usuario moderna y altamente personalizable, con soporte para temas y paquetes de extensión que pueden personalizar la experiencia de desarrollo.Características como la vista previa en tiempo real y la edición en vivo facilitan el desarrollo web front-end con HTML y CSS.|
+
+- **Bootstrap**:
+
+| <!-- -->|<!-- -->    |
+|:-------------:|:---------------|  
+|<image src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bootstrap_logo.svg/120px-Bootstrap_logo.svg.png" width=500px/>|Bootstrap es un marco de diseño front-end de código abierto creado por Twitter y ahora mantenido por la comunidad.Proporciona una colección de componentes predefinidos, estilos CSS y JavaScript que facilitan la creación de sitios web y aplicaciones web con un diseño responsive y atractivo.Bootstrap es ampliamente utilizado para crear interfaces de usuario atractivas y funcionales, y es especialmente valioso para proyectos web que desean lograr un diseño consistente y adaptativo en diferentes dispositivos y pantallas.|
 
 [Herramientas de programación](https://kinsta.com/es/blog/herramientas-desarrollo-web/)
