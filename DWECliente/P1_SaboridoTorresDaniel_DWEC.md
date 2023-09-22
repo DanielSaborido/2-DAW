@@ -24,7 +24,7 @@
 6. Herramientas de Programación:
     - Uso de herramientas como Visual Studio Code, Chrome DevTools, etc.
   
-### Modelos de Programación en Entornos Cliente/Servidor
+### Modelos de arquitectura web
 - **Modelo Punto a Punto**:  
 Una red P2P (Peer-to-Peer) es una estructura de red en la que los dispositivos individuales (peers) se comportan tanto como proveedores como consumidores de recursos, en contraposición al modelo cliente-servidor donde los clientes obtienen recursos de servidores centralizados.  
 <image src="https://2.bp.blogspot.com/-MoAoJ_BPZtA/UI_wHcq2xVI/AAAAAAAAAAY/oO2T3uXYB8w/s1600/conectando-dos-pc-punto-a-punto-3.jpg" width=500px/>  
