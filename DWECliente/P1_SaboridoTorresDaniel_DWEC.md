@@ -34,7 +34,7 @@ Estas características hacen que las redes P2P sean adecuadas para ciertos tipos
 - **Modelo Cliente-Servidor**:  
 El modelo cliente-servidor es un enfoque arquitectónico ampliamente utilizado en informática y redes, donde las tareas y la distribución de recursos se dividen entre dos tipos de entidades: los servidores, que proporcionan recursos o servicios, y los clientes, que solicitan y utilizan esos recursos o servicios.  
 La comunicación en un modelo cliente-servidor generalmente se lleva a cabo a través de una red informática, aunque también es posible que los clientes y servidores residan en la misma máquina. Los servidores son hosts que ejecutan uno o más programas servidores diseñados para compartir sus recursos con los clientes. Esto puede incluir recursos como datos, aplicaciones, almacenamiento o capacidades de procesamiento.  
-![Cliente-Servidor](https://infimg.com/bimg/2019/02/diagrama-cliente-servidor.jpeg)  
+![Cliente-Servidor](https://infimg.com/bimg/2019/02/diagrama-cliente-servidor.jpeg) 
 Luego el modelo cliente-servidor es fundamental en la informática moderna y ofrece ventajas como el control centralizado y la escalabilidad, pero también enfrenta desafíos como la congestión de tráfico y la falta de robustez en comparación con algunas redes P2P. Su elección depende de los objetivos y requisitos específicos de cada aplicación o sistema.  
 Estas características hacen que el modelo cliente-servidor sea adecuado para ciertos tipos de aplicaciones, como HTTP, FTP, Zoom, Whatsapp, IMAP o POP3.
 
