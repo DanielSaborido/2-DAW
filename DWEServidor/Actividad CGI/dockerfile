@@ -1,0 +1,3 @@
+FROM fjortegan/dwes:cgi
+COPY otro.py /var/www/cgi
+RUN cmod 755 /var/www/cgi/otro.py

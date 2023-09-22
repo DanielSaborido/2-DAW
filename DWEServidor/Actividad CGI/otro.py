@@ -1,0 +1,13 @@
+#!/usr/bin/python3
+print("Content-type: text/html")
+print("")
+print('<html>')
+print('<head>')
+print('<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">')
+print('<title>Otro archivo</title>')
+print('</head>')
+print('<body>')
+print('Enlace al <a herf="helloworld">helloworld</a>')
+print('</body>')
+print('</html>')
+exit(0)
