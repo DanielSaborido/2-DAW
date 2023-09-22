@@ -117,7 +117,7 @@ Afortunadamente, la compatibilidad entre navegadores ha mejorado significativame
 
 Algunas formas de solucionar estos errores son:  
 - Asegurarse de que las operaciones asincrónicas han devuelto un valor en específico antes de intentar utilizar dichos valores. 
-- Revisar el codigo cada vez que se modifique en caso de que surja algun imprevisto de compatibilidad, ya que pueden surjir un error de sintaxis (aquellos que son por escribir mal un comando) que son faciles de solucionar o un error lógico siendo este mas coplicado de solucionar ya que no suele ser indicado en la consola de comando y no trada de directamente fallar el programa sino de darte un resultadoerroneo.
+- Revisar el codigo cada vez que se modifique en caso de que surja algun imprevisto de compatibilidad, ya que pueden surgir un error de sintaxis (aquellos que son por escribir mal un comando) que son faciles de solucionar o un error lógico siendo este mas coplicado de solucionar ya que no suele ser indicado en la consola de comando y no se trata de directamente fallar el programa sino de darte un resultado erroneo.
 
 [Ejecucion de javaScript en web](https://programamos.es/unidad-2-los-entornos-de-ejecucion/)  
 [Compatibilidad entre navegadores](https://developer.mozilla.org/es/docs/Learn/Tools_and_testing/Cross_browser_testing)  
@@ -132,7 +132,8 @@ Es un preprocesador de CSS, se suele utilizar para mejorar la legibilidad y mant
 - **Elm**:  
 Está diseñado específicamente para crear aplicaciones web front-end, utiliza un sistema de tipos fuertes y estáticos, lo que ayuda a evitar errores comunes en tiempo de compilación, promueve la arquitectura de aplicaciones conocida como *Elm Architecture*, que es altamente modular y escalable y se destaca por su enfoque en eliminar errores en tiempo de compilación.
 - **React**:  
-Utiliza principalmente JavaScript (o TypeScript) para desarrollar interfaces de usuario, se basa en la creación de componentes reutilizables que gestionan su propio estado y renderizado, utiliza un Virtual DOM para optimizar las actualizaciones de la interfaz de usuario y mejorar el rendimiento y al ser una librería de vista para construir interfaces de usuario interactivas, se integra bien con otras bibliotecas y tecnologías.  
+Utiliza principalmente JavaScript (o TypeScript) para desarrollar interfaces de usuario, se basa en la creación de componentes reutilizables que gestionan su propio estado y renderizado, utiliza un Virtual DOM para optimizar las actualizaciones de la interfaz de usuario y mejorar el rendimiento y al ser una librería de vista para construir interfaces de usuario interactivas, se integra bien con otras bibliotecas y tecnologías.
+
 En resumen, JavaScript es el lenguaje base para el desarrollo web en el lado del cliente, mientras que TypeScript agrega tipos estáticos. SASS es un preprocesador CSS que mejora la estructura de los estilos. Elm es un lenguaje funcional especializado en front-end que garantiza la ausencia de errores. React es una librería de vista que simplifica la creación de interfaces de usuario interactivas en JavaScript o TypeScript. La elección entre estos lenguajes y tecnologías dependerá de los requisitos específicos de tu proyecto y tus preferencias personales.
 
 [Lenguajes de programacion en entorno cliente](https://blog.back4app.com/es/los-10-principales-lenguajes-de-desarrollo-del-lado-del-cliente/)
@@ -167,7 +168,8 @@ Para lograr esto, los desarrolladores frontend utilizan lenguajes de programaci�
 - **CSS**: se utiliza para dar estilo y formato a los elementos HTML. Permite controlar aspectos como colores, fuentes, márgenes, alineación y diseño de página. CSS es esencial para la presentación visual y la estética de una página web.
 - **JavaScript**: sirve para agregar interactividad y dinamismo a las páginas web. Permite la manipulación de elementos HTML, la gestión de eventos, la validación de formularios y la comunicación con servidores a través de AJAX. Es uno de los lenguajes más utilizados en el desarrollo web frontend y backend.
 - **Vue.js**: es un framework de JavaScript para el desarrollo de aplicaciones web interactivas y reactivas. Se centra en la creación de interfaces de usuario reutilizables y se caracteriza por su simplicidad y flexibilidad. Vue.js permite construir aplicaciones frontend complejas de manera eficiente.
-- **React**: React es una biblioteca de JavaScript desarrollada por Facebook para la construcción de interfaces de usuario interactivas. Se basa en la creación de componentes reutilizables y utiliza un enfoque declarativo para definir cómo debería verse la interfaz en función del estado de la aplicación. React es ampliamente utilizado en el desarrollo de aplicaciones web modernas y se integra bien con otras tecnologías.  
+- **React**: React es una biblioteca de JavaScript desarrollada por Facebook para la construcción de interfaces de usuario interactivas. Se basa en la creación de componentes reutilizables y utiliza un enfoque declarativo para definir cómo debería verse la interfaz en función del estado de la aplicación. React es ampliamente utilizado en el desarrollo de aplicaciones web modernas y se integra bien con otras tecnologías.
+
 Tambien estaría bien añadir que Vue.js y React son opciones bastante populares para el desarrollo de aplicaciones web frontend, y la elección entre ellos a menudo depende de las preferencias del equipo de desarrollo y los requisitos del proyecto, esto se debe a que ambos tienen una gran comunidad de desarrolladores y una amplia variedad de recursos disponibles para aprender y utilizar.  
 
 Codigo de ejemplo:
