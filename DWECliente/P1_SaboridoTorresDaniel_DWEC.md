@@ -281,17 +281,20 @@ function reseteo(){
 [Tecnologías frontend](https://apliint.com/2022/02/15/cual-es-la-diferencia-entre-frontend-y-backend-en-el-desarrollo-de-software/)
 ### Herramientas de Programación
 - **Sublime Text**:  
-Sublime Text es un editor de texto multiplataforma ampliamente utilizado por su velocidad y simplicidad, se caracteriza por una clave que incluye resaltado de sintaxis personalizable, autocompletado inteligente y una interfaz de usuario minimalista, tiene complementos y paquetes de terceros, disponibles a través de Package Control, amplían sus funcionalidades para adaptarse a las necesidades específicas de los desarrolladores.
+![logosublime](https://damiandeluca.com.ar/wp-content/uploads/2012/08/sublime-100x100.png) Sublime Text es un editor de texto multiplataforma ampliamente utilizado por su velocidad y simplicidad, se caracteriza por una clave que incluye resaltado de sintaxis personalizable, autocompletado inteligente y una interfaz de usuario minimalista, tiene complementos y paquetes de terceros, disponibles a través de Package Control, amplían sus funcionalidades para adaptarse a las necesidades específicas de los desarrolladores.
 Es una elección popular para la edición rápida de código HTML, CSS, JavaScript y otros lenguajes.
 - **Visual Studio Code**:  
+![logovisual](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/100px-Visual_Studio_Code_1.35_icon.svg.png)
 Visual Studio Code es un editor de código fuente desarrollado por Microsoft que se ha convertido en una herramienta muy popular en la comunidad de desarrollo web.
 Ofrece una amplia gama de extensiones disponibles a través de su marketplace que permiten a los desarrolladores trabajar con diversos lenguajes y marcos de trabajo web.
 VS Code incluye características como depuración integrada, control de versiones con Git, terminal integrada y soporte para extensiones que mejoran la productividad.
 - **IntelliJ**:  
+![logointellij](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/IntelliJ_IDEA_Icon.svg/100px-IntelliJ_IDEA_Icon.svg.png) 
 IntelliJ IDEA es un entorno de desarrollo integrado (IDE) desarrollado por JetBrains. WebStorm es una versión de IntelliJ específicamente diseñada para el desarrollo web front-end.
 WebStorm es ampliamente elogiado por su inteligencia en el código JavaScript, autocompletado avanzado, análisis de código y depuración.
 También ofrece soporte para frameworks y bibliotecas populares como React, Angular y Vue.js.
 - **Eclipse**:  
+![logoeclipse](https://arquisoft.github.io/Trivial3b/images/eclipse.png)
 Eclipse es un IDE ampliamente utilizado en el desarrollo Java, pero también es adecuado para el desarrollo web.
 A través de plugins como Eclipse IDE for Java EE Developers, los desarrolladores pueden trabajar en proyectos web, incluyendo aplicaciones Java EE y desarrollos en PHP.
 Eclipse es conocido por su comunidad activa de usuarios y su amplia gama de herramientas de desarrollo.
