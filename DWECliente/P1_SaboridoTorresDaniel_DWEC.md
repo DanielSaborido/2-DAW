@@ -281,9 +281,27 @@ function reseteo(){
 [Tecnologías frontend](https://apliint.com/2022/02/15/cual-es-la-diferencia-entre-frontend-y-backend-en-el-desarrollo-de-software/)
 ### Herramientas de Programación
 - **Sublime Text**:  
+Sublime Text es un editor de texto multiplataforma ampliamente utilizado por su velocidad y simplicidad, se caracteriza por una clave que incluye resaltado de sintaxis personalizable, autocompletado inteligente y una interfaz de usuario minimalista, tiene complementos y paquetes de terceros, disponibles a través de Package Control, amplían sus funcionalidades para adaptarse a las necesidades específicas de los desarrolladores.
+Es una elección popular para la edición rápida de código HTML, CSS, JavaScript y otros lenguajes.
 - **Visual Studio Code**:  
+Visual Studio Code es un editor de código fuente desarrollado por Microsoft que se ha convertido en una herramienta muy popular en la comunidad de desarrollo web.
+Ofrece una amplia gama de extensiones disponibles a través de su marketplace que permiten a los desarrolladores trabajar con diversos lenguajes y marcos de trabajo web.
+VS Code incluye características como depuración integrada, control de versiones con Git, terminal integrada y soporte para extensiones que mejoran la productividad.
 - **IntelliJ**:  
+IntelliJ IDEA es un entorno de desarrollo integrado (IDE) desarrollado por JetBrains. WebStorm es una versión de IntelliJ específicamente diseñada para el desarrollo web front-end.
+WebStorm es ampliamente elogiado por su inteligencia en el código JavaScript, autocompletado avanzado, análisis de código y depuración.
+También ofrece soporte para frameworks y bibliotecas populares como React, Angular y Vue.js.
 - **Eclipse**:  
-- **GitHub**:  
+Eclipse es un IDE ampliamente utilizado en el desarrollo Java, pero también es adecuado para el desarrollo web.
+A través de plugins como Eclipse IDE for Java EE Developers, los desarrolladores pueden trabajar en proyectos web, incluyendo aplicaciones Java EE y desarrollos en PHP.
+Eclipse es conocido por su comunidad activa de usuarios y su amplia gama de herramientas de desarrollo.
+- **Atom**:  
+Atom es un editor de código fuente de código abierto desarrollado por GitHub.
+Ofrece una interfaz de usuario moderna y altamente personalizable, con soporte para temas y paquetes de extensión que pueden personalizar la experiencia de desarrollo.
+Características como la vista previa en tiempo real y la edición en vivo facilitan el desarrollo web front-end con HTML y CSS.
+- **Bootstrap**:  
+Bootstrap es un marco de diseño front-end de código abierto creado por Twitter y ahora mantenido por la comunidad.
+Proporciona una colección de componentes predefinidos, estilos CSS y JavaScript que facilitan la creación de sitios web y aplicaciones web con un diseño responsive y atractivo.
+Bootstrap es ampliamente utilizado para crear interfaces de usuario atractivas y funcionales, y es especialmente valioso para proyectos web que desean lograr un diseño consistente y adaptativo en diferentes dispositivos y pantallas.
 
-[Herramientas de programación](https://www.hostinger.es/tutoriales/herramientas-de-programacion)
+[Herramientas de programación](https://kinsta.com/es/blog/herramientas-desarrollo-web/)
