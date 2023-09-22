@@ -26,20 +26,20 @@
   
 ### Modelos de Programación en Entornos Cliente/Servidor
 - **Modelo Punto a Punto**:  
-Una red P2P (Peer-to-Peer) es una estructura de red en la que los dispositivos individuales (peers) se comportan tanto como proveedores como consumidores de recursos, en contraposición al modelo cliente-servidor donde los clientes obtienen recursos de servidores centralizados.
+Una red P2P (Peer-to-Peer) es una estructura de red en la que los dispositivos individuales (peers) se comportan tanto como proveedores como consumidores de recursos, en contraposición al modelo cliente-servidor donde los clientes obtienen recursos de servidores centralizados.  
 ![Punto a Punto](https://2.bp.blogspot.com/-MoAoJ_BPZtA/UI_wHcq2xVI/AAAAAAAAAAY/oO2T3uXYB8w/s1600/conectando-dos-pc-punto-a-punto-3.jpg)  
 Luego las redes P2P ofrecen ventajas como escalabilidad, robustez y resistencia a la centralización, pero también tienen desafíos relacionados con la fiabilidad de los recursos y la gestión descentralizada.  
 Estas características hacen que las redes P2P sean adecuadas para ciertos tipos de aplicaciones, como BitTorrent, Skype o Tribler debido a su intercambio de archivos y la distribución de contenido, pero no para todas las situaciones. La elección de utilizar una red P2P o un modelo cliente-servidor dependerá de los objetivos específicos y los requisitos de la aplicación.
 
 - **Modelo Cliente-Servidor**:  
 El modelo cliente-servidor es un enfoque arquitectónico ampliamente utilizado en informática y redes, donde las tareas y la distribución de recursos se dividen entre dos tipos de entidades: los servidores, que proporcionan recursos o servicios, y los clientes, que solicitan y utilizan esos recursos o servicios.  
-La comunicación en un modelo cliente-servidor generalmente se lleva a cabo a través de una red informática, aunque también es posible que los clientes y servidores residan en la misma máquina. Los servidores son hosts que ejecutan uno o más programas servidores diseñados para compartir sus recursos con los clientes. Esto puede incluir recursos como datos, aplicaciones, almacenamiento o capacidades de procesamiento.
+La comunicación en un modelo cliente-servidor generalmente se lleva a cabo a través de una red informática, aunque también es posible que los clientes y servidores residan en la misma máquina. Los servidores son hosts que ejecutan uno o más programas servidores diseñados para compartir sus recursos con los clientes. Esto puede incluir recursos como datos, aplicaciones, almacenamiento o capacidades de procesamiento.  
 ![Cliente-Servidor](https://infimg.com/bimg/2019/02/diagrama-cliente-servidor.jpeg)  
 Luego el modelo cliente-servidor es fundamental en la informática moderna y ofrece ventajas como el control centralizado y la escalabilidad, pero también enfrenta desafíos como la congestión de tráfico y la falta de robustez en comparación con algunas redes P2P. Su elección depende de los objetivos y requisitos específicos de cada aplicación o sistema.  
 Estas características hacen que el modelo cliente-servidor sea adecuado para ciertos tipos de aplicaciones, como HTTP, FTP, Zoom, Whatsapp, IMAP o POP3.
 
 - **Modelo con servidor de aplicaciones**:  
-Un servidor de aplicaciones es una parte fundamental de muchas arquitecturas de software empresarial. A diferencia de un servidor web que se encarga principalmente de entregar contenido estático, como páginas HTML o archivos multimedia, un servidor de aplicaciones se utiliza para ejecutar código dinámico y procesar solicitudes de manera programática.
+Un servidor de aplicaciones es una parte fundamental de muchas arquitecturas de software empresarial. A diferencia de un servidor web que se encarga principalmente de entregar contenido estático, como páginas HTML o archivos multimedia, un servidor de aplicaciones se utiliza para ejecutar código dinámico y procesar solicitudes de manera programática.  
 ![servidor de aplicaciones](https://javiergarciaescobedo.es/images/stories/despliegue_web/01_implantacion/Modelo_servidor_aplicaciones_1.png)  
 Un servidor de aplicaciones a menudo trabaja en conjunto con un servidor web. El servidor web se encarga de manejar las solicitudes HTTP entrantes y, si se trata de contenido estático, puede responder directamente al cliente. Sin embargo, si la solicitud requiere procesamiento dinámico, el servidor web puede transferir la solicitud al servidor de aplicaciones, que ejecuta el código necesario y devuelve una respuesta al servidor web para que se entregue al cliente.  
 Un servidor de aplicaciones es esencial en el desarrollo de aplicaciones web dinámicas y empresariales, ya que permite la ejecución de código, la gestión de sesiones, la integración de bases de datos y muchas otras funcionalidades críticas para aplicaciones en línea avanzadas, algunos ejemplos son Facebook, World of Warcraft, Amazon Web Services y Magento.
@@ -157,8 +157,128 @@ Como **los lenguajes de scripting** a menudo se utilizan en aplicaciones web y m
 [Características de los Lenguajes de Script](https://www.hostingplus.com.es/blog/estos-son-los-lenguajes-de-programacion-mas-destacables-de-script/)  
 [Comparativa de lenguaje Script y lenguaje Programación](https://kinsta.com/es/blog/lenguajes-script/)
 ### Tecnologías y Lenguajes Asociados
-    
+La tecnología frontend es la encargada de la parte visible en la que interactuan los usuarios y aunque a menudo, el término "desarrollador frontend" se confunde con los diseñadores web o gráficos, ya que ambos roles están intrínsecamente relacionados con la apariencia y la presentación de una página web o aplicación, la diferencia clave radica en que los desarrolladores frontend son responsables de tomar los diseños y las ideas concebidas por los diseñadores y convertirlas en software funcional.  
+Para lograr esto, los desarrolladores frontend utilizan lenguajes de programación como:
+- **HTML**: es el lenguaje de marcado utilizado para crear la estructura y el contenido de una página web. Utiliza etiquetas para definir elementos como encabezados, párrafos, imágenes, enlaces y otros elementos.
+- **CSS**: se utiliza para dar estilo y formato a los elementos HTML. Permite controlar aspectos como colores, fuentes, márgenes, alineación y diseño de página. CSS es esencial para la presentación visual y la estética de una página web.
+- **JavaScript**: sirve para agregar interactividad y dinamismo a las páginas web. Permite la manipulación de elementos HTML, la gestión de eventos, la validación de formularios y la comunicación con servidores a través de AJAX. Es uno de los lenguajes más utilizados en el desarrollo web frontend y backend.
+- **Vue.js**: es un framework de JavaScript para el desarrollo de aplicaciones web interactivas y reactivas. Se centra en la creación de interfaces de usuario reutilizables y se caracteriza por su simplicidad y flexibilidad. Vue.js permite construir aplicaciones frontend complejas de manera eficiente.
+- **React**: React es una biblioteca de JavaScript desarrollada por Facebook para la construcción de interfaces de usuario interactivas. Se basa en la creación de componentes reutilizables y utiliza un enfoque declarativo para definir cómo debería verse la interfaz en función del estado de la aplicación. React es ampliamente utilizado en el desarrollo de aplicaciones web modernas y se integra bien con otras tecnologías.  
+Tambien estaría bien añadir que Vue.js y React son opciones bastante populares para el desarrollo de aplicaciones web frontend, y la elección entre ellos a menudo depende de las preferencias del equipo de desarrollo y los requisitos del proyecto, esto se debe a que ambos tienen una gran comunidad de desarrolladores y una amplia variedad de recursos disponibles para aprender y utilizar.  
+Codigo de ejemplo:
+~~~
+HTML:
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tablas</title>
+        <link href='index.css' rel='stylesheet' type='text/css'>
+    </head>
+    <header>
+        <h1>Daniel Saborido Torres</h1>
+    </header>
+    <body>
+        <div class="seleccion">
+            <h1>Tablas de multiplicar</h1>
+            <label for="num">Ingresa un número:</label>
+	        <input type="text" id="num">
+        </div>
+        <div class="botones">
+            <div class="boton" id="BorrarR" onclick="reseteo();">Reseteo</div>
+            <div class="boton" id="Resultado" onclick="multriplicacion();">Resultado</div>
+        </div>
+        <br>
+        <div class="tabla" id="tabla">
+        </div>
+    </body>
+<script src="index.js"></script>
+</html>
+~~~
+~~~
+CSS:
+body {
+    color: rgb(0, 0, 0);
+}
 
+.tabla{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    margin: auto;
+    margin-top: 5%;
+    width: 35%;
+    border-collapse: collapse;
+    padding: 5px;
+    font-size: 25px;
+    text-align: center;
+}
+
+.botones, .seleccion {
+    margin: auto;
+    width: 35%;
+    text-align: center;
+}
+
+.boton {
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 30%;
+}
+~~~
+~~~
+JavaScript:
+function multriplicacion(){
+    var num = document.getElementById("num").value;
+    if (isNaN(num)) {alert("[ERROR] El valor introduciodo es un String.")}
+    else if (Number.isInteger(parseInt(num))) {
+        if (num.length > 15) {
+            alert("[ERROR] El numero es demasiado largo (max 15 caracteres).");
+            document.getElementById("num").value = "";
+        }
+        else{
+            var tabla = document.getElementById("tabla");
+            tabla.innerHTML = "";
+            for (var i = 0; i <= 10; i++) {
+                var div1 = document.createElement("div");
+                div1.innerHTML = i;
+                tabla.appendChild(div1);
+
+                var div2 = document.createElement("div");
+                div2.innerHTML = " x ";
+                tabla.appendChild(div2);
+
+                var div3 = document.createElement("div");
+                div3.innerHTML = num;
+                tabla.appendChild(div3);
+
+                var div4 = document.createElement("div");
+                div4.innerHTML = " = ";
+                tabla.appendChild(div4);
+
+                var div5 = document.createElement("div");
+                div5.innerHTML = (num*i);
+                tabla.appendChild(div5);
+            }
+        }
+    }
+    else {alert("[ERROR] No se introdujo ningún valor.")}
+}
+
+function reseteo(){
+    var tabla = document.getElementById("tabla");
+    tabla.innerHTML = "";
+    document.getElementById("num").value = "";
+}
+~~~
+
+[Tecnologías frontend](https://apliint.com/2022/02/15/cual-es-la-diferencia-entre-frontend-y-backend-en-el-desarrollo-de-software/)
 ### Herramientas de Programación
 - **Sublime Text**:  
 - **Visual Studio Code**:  
