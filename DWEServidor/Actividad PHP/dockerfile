@@ -1,2 +1,2 @@
 FROM fjortegan/dwes:php-inicial
-COPY pagina /var/www/html
+COPY . /var/www/html
