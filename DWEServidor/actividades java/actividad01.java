@@ -120,89 +120,96 @@ public class actividad01 {
 
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
-            /*Actividad 1*/
-            System.out.print("Ingresa el primer numero a multriplicar: ");
-            double x = scanner.nextDouble();
-            System.out.print("Ingresa el segundo numero a multriplicar: ");
-            double y = scanner.nextDouble();
-            multriplicacion(x,y);
+            System.out.print("\nSeleccione la actividad a ejecutar: ");
+            int actividad = scanner.nextInt();
+            switch(actividad){
+                case 0:
+                    System.out.println("Dejando las actividades del pdf 02.");
+                    break;
+                case 1:
+                    System.out.print("Ingresa el primer numero a multriplicar: ");
+                    double x = scanner.nextDouble();
+                    System.out.print("Ingresa el segundo numero a multriplicar: ");
+                    double y = scanner.nextDouble();
+                    multriplicacion(x,y);
 
-            /*Actividad 2*/
-            System.out.print("\nIngresa la cantidad en euros: ");
-            double euros = scanner.nextDouble();
-            pasapesetas(euros);
+                case 2:
+                    System.out.print("\nIngresa la cantidad en euros: ");
+                    double euros = scanner.nextDouble();
+                    pasapesetas(euros);
 
-            /*Actividad 3*/
-            System.out.print("\nIngresa la cantidad en pesetas: ");
-            double pesetas = scanner.nextDouble();
-            pasaeuros(pesetas);
+                case 3:
+                    System.out.print("\nIngresa la cantidad en pesetas: ");
+                    double pesetas = scanner.nextDouble();
+                    pasaeuros(pesetas);
 
-            /*Actividad 4*/
-            System.out.print("\nIngresa el primer numero a multriplicar: ");
-            x = scanner.nextDouble();
-            System.out.print("Ingresa el segundo numero a multriplicar: ");
-            y = scanner.nextDouble();
-            suma(x,y);
-            resta(x,y);
-            multriplicacion(x,y);
-            division(x,y);
+                case 4:
+                    System.out.print("\nIngresa el primer numero a multriplicar: ");
+                    x = scanner.nextDouble();
+                    System.out.print("Ingresa el segundo numero a multriplicar: ");
+                    y = scanner.nextDouble();
+                    suma(x,y);
+                    resta(x,y);
+                    multriplicacion(x,y);
+                    division(x,y);
 
-            /*Actividad 5*/
-            System.out.print("\nIngresa la base del rectángulo: ");
-            double base= scanner.nextDouble();
-            System.out.print("Ingresa la altura del rectángulo: ");
-            double altura= scanner.nextDouble();
-            arectangulo(base, altura);
+                case 5:
+                    System.out.print("\nIngresa la base del rectángulo: ");
+                    double base= scanner.nextDouble();
+                    System.out.print("Ingresa la altura del rectángulo: ");
+                    double altura= scanner.nextDouble();
+                    arectangulo(base, altura);
 
-            /*Actividad 6*/
-            System.out.print("\nIngresa la base del triangulo: ");
-            base= scanner.nextDouble();
-            System.out.print("Ingresa la altura del triangulo: ");
-            altura= scanner.nextDouble();
-            atriangulo(base, altura);
+                case 6:
+                    System.out.print("\nIngresa la base del triangulo: ");
+                    base= scanner.nextDouble();
+                    System.out.print("Ingresa la altura del triangulo: ");
+                    altura= scanner.nextDouble();
+                    atriangulo(base, altura);
 
-            /*Actividad 7*/
-            System.out.print("\nIngresa la base imponible (IVA 21%): ");
-            double baseimponible = scanner.nextDouble();
-            factura(baseimponible);
+                case 7:
+                    System.out.print("\nIngresa la base imponible (IVA 21%): ");
+                    double baseimponible = scanner.nextDouble();
+                    factura(baseimponible);
 
-            /*Actividad 8*/
-            System.out.print("\nIngresa las horas trabajadas en la semana: ");
-            double horastrabajadas = scanner.nextDouble();
-            salario(horastrabajadas);
+                case 8:
+                    System.out.print("\nIngresa las horas trabajadas en la semana: ");
+                    double horastrabajadas = scanner.nextDouble();
+                    salario(horastrabajadas);
 
-            /*Actividad 9*/
-            System.out.print("\nIngresa el radio del cono: ");
-            double radio= scanner.nextDouble();
-            System.out.print("Ingresa la altura del cono: ");
-            altura= scanner.nextDouble();
-            volcono(radio, altura);
+                case 9:
+                    System.out.print("\nIngresa el radio del cono: ");
+                    double radio= scanner.nextDouble();
+                    System.out.print("Ingresa la altura del cono: ");
+                    altura= scanner.nextDouble();
+                    volcono(radio, altura);
 
-            /*Actividad 10*/
-            System.out.print("\nIngresa los Mb a traspasar: ");
-            double Mb = scanner.nextDouble();
-            pasoKb(Mb);
+                case 10:
+                    System.out.print("\nIngresa los Mb a traspasar: ");
+                    double Mb = scanner.nextDouble();
+                    pasoKb(Mb);
 
-            /*Actividad 11*/
-            System.out.print("\nIngresa los Kb a traspasar: ");
-            double Kb = scanner.nextDouble();
-            pasoMb(Kb);
+                case 11:
+                    System.out.print("\nIngresa los Kb a traspasar: ");
+                    double Kb = scanner.nextDouble();
+                    pasoMb(Kb);
 
-            /*Actividad 12*/
-            System.out.print("\nIntroduzca la base imponible: ");
-            baseimponible = scanner.nextDouble();
-            System.out.print("Introduzca el tipo de IVA (general, reducido o superreducido): ");
-            String IVA = scanner.next().toLowerCase();
-            System.out.print("Introduzca el código promocional (nopro, mitad, meno5 o 5porc): ");
-            String desc = scanner.next().toLowerCase();
-            CalcularPrecio(baseimponible,IVA,desc);
+                case 12:
+                    System.out.print("\nIntroduzca la base imponible: ");
+                    baseimponible = scanner.nextDouble();
+                    System.out.print("Introduzca el tipo de IVA (general, reducido o superreducido): ");
+                    String IVA = scanner.next().toLowerCase();
+                    System.out.print("Introduzca el código promocional (nopro, mitad, meno5 o 5porc): ");
+                    String desc = scanner.next().toLowerCase();
+                    CalcularPrecio(baseimponible,IVA,desc);
 
-            /*Actividad 13*/
-            System.out.print("\nIntroduce la nota del primer examen: ");
-            double examen = scanner.nextDouble();
-            System.out.print("¿Qué nota quieres sacar en el trimestre? ");
-            double trimestre = scanner.nextDouble();
-            notamed(examen, trimestre);
+                case 13:
+                    System.out.print("\nIntroduce la nota del primer examen: ");
+                    double examen = scanner.nextDouble();
+                    System.out.print("¿Qué nota quieres sacar en el trimestre? ");
+                    double trimestre = scanner.nextDouble();
+                    notamed(examen, trimestre);
+            }
         }
     }
 }

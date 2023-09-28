@@ -423,181 +423,377 @@ public class actividad02 {
         }
     }
 
+    /*Escribe un programa que diga cuál es la última cifra de un número entero introducido por teclado. */
+    public static void ultimaCifra(int numero) {
+        int ultimaCifra = numero % 10;
+        System.out.println("La última cifra del número " + numero + " es: " + ultimaCifra);
+    }
+
+    /*Escribe un programa que diga cuál es la última cifra de un número entero introducido por teclado. Máximo 5 cifras*/
+    public static void ultimaCifraMax5(int numero) {
+        if (numero >= -99999 && numero <= 99999) {
+            int ultimaCifra = Math.abs(numero) % 10;
+            System.out.println("La última cifra del número " + numero + " es: " + ultimaCifra);
+        } else {
+            System.out.println("El número ingresado no tiene un máximo de 5 cifras.");
+        }
+    }
+
+    /*Realiza un programa que diga si un número entero positivo introducido por teclado es capicúa. Se
+    permiten números de hasta 5 cifras */
+    public static void capicua(int numero) {
+        if (numero >= -99999 && numero <= 99999) {
+            int numeroInvertido = 0;
+            while (numero > 0) {
+                int digito = numero % 10;
+                numeroInvertido = numeroInvertido * 10 + digito;
+                numero /= 10;
+            }
+            if (numero == numeroInvertido) {
+                System.out.println("El número " + numero + " es capicúa.");
+            } else {
+                System.out.println("El número " + numero + " no es capicúa.");
+            }
+        } else {
+            System.out.println("El número ingresado no tiene un máximo de 5 cifras.");
+        }
+    }
+
+    /*Calcula la nota de un trimestre de la asignatura Programación. El programa pedirá las dos notas
+    que ha sacado el alumno en los dos primeros controles. Si la media de los dos controles da un
+    número mayor o igual a 5, el alumno está aprobado y se mostrará la media. En caso de que la media
+    sea un número menor que 5, el alumno habrá tenido que hacer el examen de recuperación que se
+    califica como apto o no apto, por tanto se debe preguntar al usuario ¿Cuál ha sido el resultado de
+    la recuperación? (apto/no apto). Si el resultado de la recuperación es apto, la nota será un 5; en
+    caso contrario, se mantiene la nota media anterior. Ejemplo 1: Nota del primer control: 7 Nota del
+    segundo control: 10 Tu nota de Programación es 8.5 Ejemplo 2: Nota del primer control: 6 Nota
+    del segundo control: 3 ¿Cuál ha sido el resultado de la recuperación? (apto/no apto): apto Tu nota
+    de Programación es 5 Ejemplo 3: Nota del primer control: 6 Nota del segundo control: 3 ¿Cuál ha
+    sido el resultado de la recuperación? (apto/no apto): no apto Tu nota de Programación es 4.5 */
+    public static void curso(double nota1, double nota2) {
+        double media = (nota1 + nota2) / 2;
+
+        if (media >= 5.0) {
+            System.out.println("Tu nota de Programación es " + media);
+        } else {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("¿Cuál ha sido el resultado de la recuperación? (apto/no apto): ");
+            String resultadoRecuperacion = scanner.nextLine();
+            scanner.close();
+
+            if (resultadoRecuperacion.toLowerCase() == "apto") {
+                System.out.println("Tu nota de Programación es 5.0");
+            } else {
+                System.out.println("Tu nota de Programación es " + media);
+            }
+        }
+    }
+
+    /*Realiza un programa que, dado un día de la semana (de lunes a viernes) y una hora (horas y
+    minutos), calcule cuántos minutos faltan para el fin de semana. Se considerará que el fin de semana
+    comienza el viernes a las 15:00h. Se da por hecho que el usuario introducirá un día y hora correctos,
+    anterior al viernes a las 15:00h. */
+    private static void calcFinsemana(int diaSemana, int hora, int minutos) {
+        int minutosTotales = 0;
+        if (diaSemana == 5) {
+            minutosTotales = (15 - hora) * 60 - minutos;
+        } else if (diaSemana == 6 || diaSemana == 7) {
+            System.out.println("Ya estas en el fin de semana");
+        } else if (diaSemana >= 8) {
+            System.out.println("Número inválido.");
+        }else {
+            minutosTotales = (4 - diaSemana) * 24 * 60;
+            minutosTotales += (24 - hora) * 60 - minutos;
+        }
+
+        System.out.println("Minutos restantes para el fin de semana: " + minutosTotales);
+    }
+
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
-            /*Actividad 1*/
-            System.out.print("Ingresa el dia de la semana: ");
-            String dia = scanner.nextLine();
+            System.out.print("\nSeleccione la actividad a ejecutar: ");
+            int actividad = scanner.nextInt();
+            switch(actividad){
+                case 0:
+                    System.out.println("Dejando las actividades del pdf 02.");
+                    break;
+                case 1:
+                    System.out.print("Ingresa el dia de la semana: ");
+                    String dia = scanner.nextLine();
 
-            horario(dia);
+                    horario(dia);
 
-            /*Actividad 2*/
-            System.out.print("Ingrese la hora (solo la hora, sin minutos): ");
-            int hora = scanner.nextInt();
+                case 2:
+                    System.out.print("Ingrese la hora (solo la hora, sin minutos): ");
+                    int hora = scanner.nextInt();
 
-            saludo(hora);
+                    saludo(hora);
 
-            /*Actividad 3*/
-            System.out.print("Ingrese un número del 1 al 7: ");
-            int numeroDia = scanner.nextInt();
+                case 3:
+                    System.out.print("Ingrese un número del 1 al 7: ");
+                    int numeroDia = scanner.nextInt();
 
-            semana(numeroDia);
+                    semana(numeroDia);
 
-            /*Actividad 4*/
-            System.out.print("\nIngresa el primer numero a multriplicar: ");
-            int horas = scanner.nextInt();
+                case 4:
+                    System.out.print("\nIngresa el primer numero a multriplicar: ");
+                    int horas = scanner.nextInt();
 
-            salario(horas);
+                    salario(horas);
 
-            /*Actividad 5*/
-            System.out.print("Ingrese el valor de a: ");
-            double a = scanner.nextDouble();
-            System.out.print("Ingrese el valor de b: ");
-            double b = scanner.nextDouble();
+                case 5:
+                    System.out.print("Ingrese el valor de a: ");
+                    double a = scanner.nextDouble();
+                    System.out.print("Ingrese el valor de b: ");
+                    double b = scanner.nextDouble();
 
-            ecuacion1º(a, b);
+                    ecuacion1º(a, b);
 
-            /*Actividad 6*/
-            System.out.print("\nIngresa la altura del objeto: ");
-            double altura = scanner.nextDouble();
+                case 6:
+                    System.out.print("\nIngresa la altura del objeto: ");
+                    double altura = scanner.nextDouble();
 
-            tiempocaida(altura);
+                    tiempocaida(altura);
 
-            /*Actividad 7*/
-            System.out.print("Ingrese la primera nota: ");
-            double nota1 = scanner.nextDouble();
-            System.out.print("Ingrese la segunda nota: ");
-            double nota2 = scanner.nextDouble();
-            System.out.print("Ingrese la tercera nota: ");
-            double nota3 = scanner.nextDouble();
+                case 7:
+                    System.out.print("Ingrese la primera nota: ");
+                    double nota1 = scanner.nextDouble();
+                    System.out.print("Ingrese la segunda nota: ");
+                    double nota2 = scanner.nextDouble();
+                    System.out.print("Ingrese la tercera nota: ");
+                    double nota3 = scanner.nextDouble();
 
-            medianotas(nota1, nota2, nota3);
+                    medianotas(nota1, nota2, nota3);
 
-            /*Actividad 8*/
-            System.out.print("Ingrese la primera nota: ");
-            nota1 = scanner.nextDouble();
-            System.out.print("Ingrese la segunda nota: ");
-            nota2 = scanner.nextDouble();
-            System.out.print("Ingrese la tercera nota: ");
-            nota3 = scanner.nextDouble();
+                case 8:
+                    System.out.print("Ingrese la primera nota: ");
+                    nota1 = scanner.nextDouble();
+                    System.out.print("Ingrese la segunda nota: ");
+                    nota2 = scanner.nextDouble();
+                    System.out.print("Ingrese la tercera nota: ");
+                    nota3 = scanner.nextDouble();
 
-            medianotasyboletin(nota1, nota2, nota3);
+                    medianotasyboletin(nota1, nota2, nota3);
 
-            /*Actividad 9*/
-            System.out.print("Ingrese el valor de a: ");
-            a = scanner.nextDouble();
-            System.out.print("Ingrese el valor de b: ");
-            b = scanner.nextDouble();
-            System.out.print("Ingrese el valor de c: ");
-            double c = scanner.nextDouble();
+                case 9:
+                    System.out.print("Ingrese el valor de a: ");
+                    a = scanner.nextDouble();
+                    System.out.print("Ingrese el valor de b: ");
+                    b = scanner.nextDouble();
+                    System.out.print("Ingrese el valor de c: ");
+                    double c = scanner.nextDouble();
 
-            ecuacion2º(a, b, c);
+                    ecuacion2º(a, b, c);
 
-            /*Actividad 10*/
-            System.out.print("\nIngrese el dia: ");
-            int numdia = scanner.nextInt();
-            System.out.print("\nIngrese el mes: ");
-            int nummes = scanner.nextInt();
+                case 10:
+                    System.out.print("\nIngrese el dia: ");
+                    int numdia = scanner.nextInt();
+                    System.out.print("\nIngrese el mes: ");
+                    int nummes = scanner.nextInt();
 
-            horoscopo(numdia, nummes);
+                    horoscopo(numdia, nummes);
 
-            /*Actividad 11*/
-            System.out.print("Ingrese la hora (0-23): ");
-            hora = scanner.nextInt();
-            System.out.print("Ingrese los minutos (0-59): ");
-            int minutos = scanner.nextInt();
+                case 11:
+                    System.out.print("Ingrese la hora (0-23): ");
+                    hora = scanner.nextInt();
+                    System.out.print("Ingrese los minutos (0-59): ");
+                    int minutos = scanner.nextInt();
 
-            medianoche(hora, minutos);
+                    medianoche(hora, minutos);
 
-            /*Actividad 12*/
-            /*Realiza un minicuestionario con 3 preguntas tipo test sobre las asignaturas que se imparten en
-            el curso. Cada pregunta acertada sumará un punto. El programa mostrará al final la calificación
-            obtenida. Pásale el minicuestionario a tus compañeros y pídeles que lo hagan para ver qué tal
-            andan de conocimientos en las diferentes asignaturas del curso.*/
-            System.out.println("Cuestionario de Desarrollo Web en Entorno Servidor");
-            System.out.println("Responde a las siguientes preguntas (A, B, C o D).");
+                case 12:
+                    /*Realiza un minicuestionario con 3 preguntas tipo test sobre las asignaturas que se imparten en
+                    el curso. Cada pregunta acertada sumará un punto. El programa mostrará al final la calificación
+                    obtenida. Pásale el minicuestionario a tus compañeros y pídeles que lo hagan para ver qué tal
+                    andan de conocimientos en las diferentes asignaturas del curso.*/
+                    System.out.println("Cuestionario de Desarrollo Web en Entorno Servidor");
+                    System.out.println("Responde a las siguientes preguntas (A, B, C o D).");
 
-            int calificacion = 0;
+                    int calificacion = 0;
 
-            System.out.println("\nPregunta 1: ¿Qué significa PHP en el contexto del desarrollo web?");
-            System.out.println("A) Personal Hypertext Processor");
-            System.out.println("B) Preprocessed Hypertext Pages");
-            System.out.println("C) Private Home Page");
-            System.out.println("D) Public HTML Page");
-            System.out.print("Respuesta: ");
-            char respuesta1 = Character.toUpperCase(scanner.next().charAt(0));
-            if (respuesta1 == 'A') {
-                calificacion++;
+                    System.out.println("\nPregunta 1: ¿Qué significa PHP en el contexto del desarrollo web?");
+                    System.out.println("A) Personal Hypertext Processor");
+                    System.out.println("B) Preprocessed Hypertext Pages");
+                    System.out.println("C) Private Home Page");
+                    System.out.println("D) Public HTML Page");
+                    System.out.print("Respuesta: ");
+                    char respuesta1 = Character.toUpperCase(scanner.next().charAt(0));
+                    if (respuesta1 == 'A') {
+                        calificacion++;
+                    }
+
+                    System.out.println("\nPregunta 2: ¿Cuál de las siguientes no es una base de datos relacional?");
+                    System.out.println("A) MySQL");
+                    System.out.println("B) MongoDB");
+                    System.out.println("C) PostgreSQL");
+                    System.out.println("D) Oracle");
+                    System.out.print("Respuesta: ");
+                    char respuesta2 = Character.toUpperCase(scanner.next().charAt(0));
+                    if (respuesta2 == 'B') {
+                        calificacion++;
+                    }
+
+                    System.out.println("\nPregunta 3: ¿Qué lenguaje de marcado se utiliza para estructurar el contenido web?");
+                    System.out.println("A) CSS");
+                    System.out.println("B) JavaScript");
+                    System.out.println("C) HTML");
+                    System.out.println("D) PHP");
+                    System.out.print("Respuesta: ");
+                    char respuesta3 = Character.toUpperCase(scanner.next().charAt(0));
+                    if (respuesta3 == 'C') {
+                        calificacion++;
+                    }
+
+                    System.out.println("\nCuestionario completado. Tu calificación es: " + calificacion + "/3");
+
+                case 13:
+                    System.out.println("Ingrese tres números enteros:");
+                    System.out.print("Número 1: ");
+                    int numero1 = scanner.nextInt();
+                    System.out.print("Número 2: ");
+                    int numero2 = scanner.nextInt();
+                    System.out.print("Número 3: ");
+                    int numero3 = scanner.nextInt();
+
+                    ordenarNumeros(numero1, numero2, numero3);
+
+                case 14:
+                    System.out.print("Ingrese un número entero: ");
+                    int numero = scanner.nextInt();
+
+                    analisis(numero);
+
+                case 15:
+                    System.out.print("Ingrese el carácter para rellenar la pirámide: ");
+                    char caracter = scanner.nextLine().charAt(0);
+                    System.out.println("Seleccione la dirección del vértice de la pirámide:");
+                    System.out.println("1. Arriba");
+                    System.out.println("2. Abajo");
+                    System.out.println("3. Izquierda");
+                    System.out.println("4. Derecha");
+                    System.out.print("Opción: ");
+                    int opcion = scanner.nextInt();
+                    System.out.print("\nIngresa la altura de la piramide: ");
+                    int alturaP = scanner.nextInt();
+
+                    piramide(caracter, opcion, alturaP);
+
+                case 16:
+                    /*Realiza un programa que nos diga si hay probabilidad de que
+                    nuestra pareja nos está siendo infiel. El programa irá haciendo
+                    preguntas que el usuario contestará con una v (verdadero) o una
+                    f (falso). Cada pregunta contestada con v sumará 3 puntos.
+                    Las preguntas contestadas con f no suman puntos. Utiliza el
+                    fichero test_infidelidad.txt para obtener las preguntas y las
+                    conclusiones del programa. */
+
+                    String respuesta;
+                    int puntos = 0;
+                    System.out.println("TEST DE FIDELIDAD");
+                    System.out.println("Este programa te dirá si hay probabilidad de que tu pareja está siendo infiel.\n");
+
+                    System.out.print("1. Tu pareja parece estar más inquieta de lo normal sin ningún motivo aparente.\n(v)erdadero o (f)also: ");
+                    respuesta = scanner.nextLine();
+                    if ( respuesta.toLowerCase().equals("v") ) {
+                        puntos += 3;
+                    }
+                    System.out.print("2. Ha aumentado sus gastos de vestuario.\n(v)erdadero o (f)also: ");
+                    respuesta = scanner.nextLine();
+                    if ( respuesta.toLowerCase().equals("v") ) {
+                        puntos += 3;
+                    }
+                    System.out.print("3. Ha perdido el interés que mostraba anteriormente por ti.\n(v)erdadero o (f)also: ");
+                    respuesta = scanner.nextLine();
+                    if ( respuesta.toLowerCase().equals("v") ) {
+                        puntos += 3;
+                    }
+                    System.out.print("4. Ahora se afeita y se asea con más frecuencia (si es hombre) o ahora se arregla el pelo y se asea con más frecuencia (si es mujer).\n(v)erdadero o (f)also: ");
+                    respuesta = scanner.nextLine();
+                    if ( respuesta.toLowerCase().equals("v") ) {
+                        puntos += 3;
+                    }
+                    System.out.print("5. No te deja que mires la agenda de su teléfono móvil.\n(v)erdadero o (f)also: ");
+                    respuesta = scanner.nextLine();
+                    if ( respuesta.toLowerCase().equals("v") ) {
+                        puntos += 3;
+                    }
+                    System.out.print("6. A veces tiene llamadas que dice no querer contestar cuando estás tú delante.\n(v)erdadero o (f)also: ");
+                    respuesta = scanner.nextLine();
+                    if ( respuesta.toLowerCase().equals("v") ) {
+                        puntos += 3;
+                    }
+                    System.out.print("7. Últimamente se preocupa más en cuidar la línea y/o estar bronceado/a.\n(v)erdadero o (f)also: ");
+                    respuesta = scanner.nextLine();
+                    if ( respuesta.toLowerCase().equals("v") ) {
+                        puntos += 3;
+                    }
+                    System.out.print("8. Muchos días viene tarde después de trabajar porque dice tener mucho más trabajo.\n(v)erdadero o (f)also: ");
+                    respuesta = scanner.nextLine();
+                    if ( respuesta.toLowerCase().equals("v") ) {
+                        puntos += 3;
+                    }
+                    System.out.print("9. Has notado que últimamente se perfuma más.\n(v)erdadero o (f)also: ");
+                    respuesta = scanner.nextLine();
+                    if ( respuesta.toLowerCase().equals("v") ) {
+                        puntos += 3;
+                    }
+                    System.out.print("10. Se confunde y te dice que ha estado en sitios donde no ha ido contigo.\n(v)erdadero o (f)also: ");
+                    respuesta = scanner.nextLine();
+                    if ( respuesta.toLowerCase().equals("v") ) {
+                        puntos += 3;
+                    }
+                    
+                    if ( puntos <= 10 ) {
+                        System.out.print("\n¡Enhorabuena! tu pareja parece ser totalmente fiel.");
+                    }else if ( (puntos > 11 ) && (puntos <= 22) ) {
+                        System.out.print("\nQuizás exista el peligro de otra persona en su vida o en su mente, aunque seguramente será algo sin importancia. No bajes la guardia.");    
+                    }
+                    else {
+                        System.out.print("\nTu pareja tiene todos los ingredientes para estar viviendo un romance con otra persona. Te aconsejamos que indagues un poco más y averigües qué es lo que está pasando por su cabeza.");
+                    }
+
+                case 17:
+                    System.out.print("Ingrese un número entero: ");
+                    numero = scanner.nextInt();
+
+                    ultimaCifra(numero);
+
+                case 18:
+                    System.out.print("Ingrese un número entero (máximo 5 cifras): ");
+                    numero = scanner.nextInt();
+
+                    ultimaCifraMax5(numero);
+
+                case 19:
+                    System.out.print("Ingrese un número entero (máximo 5 cifras): ");
+                    numero = scanner.nextInt();
+
+                    ultimaCifraMax5(numero);
+
+                case 20:
+                    System.out.print("Ingrese un número entero (máximo 5 cifras): ");
+                    numero = scanner.nextInt();
+
+                    capicua(numero);
+
+                case 21:
+                    System.out.print("Ingrese la primera nota: ");
+                    nota1 = scanner.nextDouble();
+                    System.out.print("Ingrese la segunda nota: ");
+                    nota2 = scanner.nextDouble();
+
+                    curso(nota1, nota2);
+
+                case 22:
+                    System.out.print("Ingrese el día de la semana (1 = lunes, 2 = martes, ..., 5 = viernes): ");
+                    int diaSemana = scanner.nextInt();
+                    System.out.print("Ingrese la hora (0-23): ");
+                    hora = scanner.nextInt();
+                    System.out.print("Ingrese los minutos (0-59): ");
+                    minutos = scanner.nextInt();
+
+                    calcFinsemana(diaSemana, hora, minutos);
             }
-
-            System.out.println("\nPregunta 2: ¿Cuál de las siguientes no es una base de datos relacional?");
-            System.out.println("A) MySQL");
-            System.out.println("B) MongoDB");
-            System.out.println("C) PostgreSQL");
-            System.out.println("D) Oracle");
-            System.out.print("Respuesta: ");
-            char respuesta2 = Character.toUpperCase(scanner.next().charAt(0));
-            if (respuesta2 == 'B') {
-                calificacion++;
-            }
-
-            System.out.println("\nPregunta 3: ¿Qué lenguaje de marcado se utiliza para estructurar el contenido web?");
-            System.out.println("A) CSS");
-            System.out.println("B) JavaScript");
-            System.out.println("C) HTML");
-            System.out.println("D) PHP");
-            System.out.print("Respuesta: ");
-            char respuesta3 = Character.toUpperCase(scanner.next().charAt(0));
-            if (respuesta3 == 'C') {
-                calificacion++;
-            }
-
-            System.out.println("\nCuestionario completado. Tu calificación es: " + calificacion + "/3");
-
-            /*Actividad 13*/
-            System.out.println("Ingrese tres números enteros:");
-            System.out.print("Número 1: ");
-            int numero1 = scanner.nextInt();
-            System.out.print("Número 2: ");
-            int numero2 = scanner.nextInt();
-            System.out.print("Número 3: ");
-            int numero3 = scanner.nextInt();
-
-            ordenarNumeros(numero1, numero2, numero3);
-
-            /*Actividad 14*/
-            System.out.print("Ingrese un número entero: ");
-            int numero = scanner.nextInt();
-
-            analisis(numero);
-
-            /*Actividad 15*/
-            System.out.print("Ingrese el carácter para rellenar la pirámide: ");
-            char caracter = scanner.nextLine().charAt(0);
-            System.out.println("Seleccione la dirección del vértice de la pirámide:");
-            System.out.println("1. Arriba");
-            System.out.println("2. Abajo");
-            System.out.println("3. Izquierda");
-            System.out.println("4. Derecha");
-            System.out.print("Opción: ");
-            int opcion = scanner.nextInt();
-            System.out.print("\nIngresa la altura de la piramide: ");
-            int alturaP = scanner.nextInt();
-            piramide(caracter, opcion, alturaP);
-
-            /*Actividad 16*/
-
-            /*Actividad 17*/
-
-            /*Actividad 18*/
-
-            /*Actividad 19*/
-
-            /*Actividad 20*/
-
-            /*Actividad 21*/
-
-            /*Actividad 22*/
         }
     }
 }
