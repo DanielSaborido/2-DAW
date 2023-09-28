@@ -14,9 +14,6 @@ public class actividad02 {
             case "miercoles":
                 System.out.println("Los miercoles a primera hay Desarrollo web en entorno cliente.");
                 break;
-            case "miércoles":
-                System.out.println("Los miércoles a primera hay Desarrollo web en entorno cliente.");
-                break;
             case "jueves":
                 System.out.println("Los jueves a primera hay Emprese e iniciativa emprendedora.");
                 break;
@@ -24,9 +21,6 @@ public class actividad02 {
                 System.out.println("Los viernes a primera hay Desarrollo web en entorno cliente.");
                 break;
             case "sabado":
-                System.out.println("No hay clases en este día de la semana");
-                break;
-            case "sábado":
                 System.out.println("No hay clases en este día de la semana");
                 break;
             case "domingo":
@@ -139,14 +133,11 @@ public class actividad02 {
     /*Realiza un programa que calcule el tiempo que tardará en caer un objeto desde una altura h.
     Aplica la fórmula t = √2h/g siendo g = 9.81m/s*/
     public static void tiempocaida(double altura) {
-        double tiempoDeCaida = Math.sqrt((2 * altura) / 9.81);
-        switch (tiempoDeCaida) {
-            case 0.0:
-                System.out.println("La altura debe ser mayor que cero.");
-                break;
-            default:
-                System.out.println("El tiempo que tardará en caer el objeto es de " + tiempoDeCaida + " segundos.");
-                break;
+        if (altura <= 0) {
+            System.out.println("La altura debe ser mayor que cero.");
+        } else {
+            double tiempoDeCaida = Math.sqrt((2 * altura) / 9.81);
+            System.out.println("El tiempo que tardará en caer el objeto es de " + tiempoDeCaida + " segundos.");
         }
     }
 
@@ -521,26 +512,26 @@ public class actividad02 {
                     System.out.print("Ingresa el dia de la semana: ");
                     String dia = scanner.nextLine();
 
-                    horario(dia);
-
+                    horario(dia.toLowerCase());
+                    break;
                 case 2:
                     System.out.print("Ingrese la hora (solo la hora, sin minutos): ");
                     int hora = scanner.nextInt();
 
                     saludo(hora);
-
+                    break;
                 case 3:
                     System.out.print("Ingrese un número del 1 al 7: ");
                     int numeroDia = scanner.nextInt();
 
                     semana(numeroDia);
-
+                    break;
                 case 4:
                     System.out.print("\nIngresa el primer numero a multriplicar: ");
                     int horas = scanner.nextInt();
 
                     salario(horas);
-
+                    break;
                 case 5:
                     System.out.print("Ingrese el valor de a: ");
                     double a = scanner.nextDouble();
@@ -548,13 +539,13 @@ public class actividad02 {
                     double b = scanner.nextDouble();
 
                     ecuacion1º(a, b);
-
+                    break;
                 case 6:
                     System.out.print("\nIngresa la altura del objeto: ");
                     double altura = scanner.nextDouble();
 
                     tiempocaida(altura);
-
+                    break;
                 case 7:
                     System.out.print("Ingrese la primera nota: ");
                     double nota1 = scanner.nextDouble();
@@ -564,7 +555,7 @@ public class actividad02 {
                     double nota3 = scanner.nextDouble();
 
                     medianotas(nota1, nota2, nota3);
-
+                    break;
                 case 8:
                     System.out.print("Ingrese la primera nota: ");
                     nota1 = scanner.nextDouble();
@@ -574,7 +565,7 @@ public class actividad02 {
                     nota3 = scanner.nextDouble();
 
                     medianotasyboletin(nota1, nota2, nota3);
-
+                    break;
                 case 9:
                     System.out.print("Ingrese el valor de a: ");
                     a = scanner.nextDouble();
@@ -584,7 +575,7 @@ public class actividad02 {
                     double c = scanner.nextDouble();
 
                     ecuacion2º(a, b, c);
-
+                    break;
                 case 10:
                     System.out.print("\nIngrese el dia: ");
                     int numdia = scanner.nextInt();
@@ -592,7 +583,7 @@ public class actividad02 {
                     int nummes = scanner.nextInt();
 
                     horoscopo(numdia, nummes);
-
+                    break;
                 case 11:
                     System.out.print("Ingrese la hora (0-23): ");
                     hora = scanner.nextInt();
@@ -600,7 +591,7 @@ public class actividad02 {
                     int minutos = scanner.nextInt();
 
                     medianoche(hora, minutos);
-
+                    break;
                 case 12:
                     /*Realiza un minicuestionario con 3 preguntas tipo test sobre las asignaturas que se imparten en
                     el curso. Cada pregunta acertada sumará un punto. El programa mostrará al final la calificación
@@ -645,7 +636,7 @@ public class actividad02 {
                     }
 
                     System.out.println("\nCuestionario completado. Tu calificación es: " + calificacion + "/3");
-
+                    break;
                 case 13:
                     System.out.println("Ingrese tres números enteros:");
                     System.out.print("Número 1: ");
@@ -656,13 +647,13 @@ public class actividad02 {
                     int numero3 = scanner.nextInt();
 
                     ordenarNumeros(numero1, numero2, numero3);
-
+                    break;
                 case 14:
                     System.out.print("Ingrese un número entero: ");
                     int numero = scanner.nextInt();
 
                     analisis(numero);
-
+                    break;
                 case 15:
                     System.out.print("Ingrese el carácter para rellenar la pirámide: ");
                     char caracter = scanner.nextLine().charAt(0);
@@ -677,7 +668,7 @@ public class actividad02 {
                     int alturaP = scanner.nextInt();
 
                     piramide(caracter, opcion, alturaP);
-
+                    break;
                 case 16:
                     /*Realiza un programa que nos diga si hay probabilidad de que
                     nuestra pareja nos está siendo infiel. El programa irá haciendo
@@ -752,30 +743,31 @@ public class actividad02 {
                         System.out.print("\nTu pareja tiene todos los ingredientes para estar viviendo un romance con otra persona. Te aconsejamos que indagues un poco más y averigües qué es lo que está pasando por su cabeza.");
                     }
 
+                    break;
                 case 17:
                     System.out.print("Ingrese un número entero: ");
                     numero = scanner.nextInt();
 
                     ultimaCifra(numero);
-
+                    break;
                 case 18:
                     System.out.print("Ingrese un número entero (máximo 5 cifras): ");
                     numero = scanner.nextInt();
 
                     ultimaCifraMax5(numero);
-
+                    break;
                 case 19:
                     System.out.print("Ingrese un número entero (máximo 5 cifras): ");
                     numero = scanner.nextInt();
 
                     ultimaCifraMax5(numero);
-
+                    break;
                 case 20:
                     System.out.print("Ingrese un número entero (máximo 5 cifras): ");
                     numero = scanner.nextInt();
 
                     capicua(numero);
-
+                    break;
                 case 21:
                     System.out.print("Ingrese la primera nota: ");
                     nota1 = scanner.nextDouble();
@@ -783,7 +775,7 @@ public class actividad02 {
                     nota2 = scanner.nextDouble();
 
                     curso(nota1, nota2);
-
+                    break;
                 case 22:
                     System.out.print("Ingrese el día de la semana (1 = lunes, 2 = martes, ..., 5 = viernes): ");
                     int diaSemana = scanner.nextInt();
@@ -793,6 +785,7 @@ public class actividad02 {
                     minutos = scanner.nextInt();
 
                     calcFinsemana(diaSemana, hora, minutos);
+                    break;
             }
         }
     }

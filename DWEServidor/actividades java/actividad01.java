@@ -133,16 +133,19 @@ public class actividad01 {
                     double y = scanner.nextDouble();
                     multriplicacion(x,y);
 
+                    break;
                 case 2:
                     System.out.print("\nIngresa la cantidad en euros: ");
                     double euros = scanner.nextDouble();
                     pasapesetas(euros);
 
+                    break;
                 case 3:
                     System.out.print("\nIngresa la cantidad en pesetas: ");
                     double pesetas = scanner.nextDouble();
                     pasaeuros(pesetas);
 
+                    break;
                 case 4:
                     System.out.print("\nIngresa el primer numero a multriplicar: ");
                     x = scanner.nextDouble();
@@ -153,6 +156,7 @@ public class actividad01 {
                     multriplicacion(x,y);
                     division(x,y);
 
+                    break;
                 case 5:
                     System.out.print("\nIngresa la base del rectángulo: ");
                     double base= scanner.nextDouble();
@@ -160,6 +164,7 @@ public class actividad01 {
                     double altura= scanner.nextDouble();
                     arectangulo(base, altura);
 
+                    break;
                 case 6:
                     System.out.print("\nIngresa la base del triangulo: ");
                     base= scanner.nextDouble();
@@ -167,16 +172,19 @@ public class actividad01 {
                     altura= scanner.nextDouble();
                     atriangulo(base, altura);
 
+                    break;
                 case 7:
                     System.out.print("\nIngresa la base imponible (IVA 21%): ");
                     double baseimponible = scanner.nextDouble();
                     factura(baseimponible);
 
+                    break;
                 case 8:
                     System.out.print("\nIngresa las horas trabajadas en la semana: ");
                     double horastrabajadas = scanner.nextDouble();
                     salario(horastrabajadas);
 
+                    break;
                 case 9:
                     System.out.print("\nIngresa el radio del cono: ");
                     double radio= scanner.nextDouble();
@@ -184,16 +192,19 @@ public class actividad01 {
                     altura= scanner.nextDouble();
                     volcono(radio, altura);
 
+                    break;
                 case 10:
                     System.out.print("\nIngresa los Mb a traspasar: ");
                     double Mb = scanner.nextDouble();
                     pasoKb(Mb);
 
+                    break;
                 case 11:
                     System.out.print("\nIngresa los Kb a traspasar: ");
                     double Kb = scanner.nextDouble();
                     pasoMb(Kb);
 
+                    break;
                 case 12:
                     System.out.print("\nIntroduzca la base imponible: ");
                     baseimponible = scanner.nextDouble();
@@ -203,12 +214,15 @@ public class actividad01 {
                     String desc = scanner.next().toLowerCase();
                     CalcularPrecio(baseimponible,IVA,desc);
 
+                    break;
                 case 13:
                     System.out.print("\nIntroduce la nota del primer examen: ");
                     double examen = scanner.nextDouble();
                     System.out.print("¿Qué nota quieres sacar en el trimestre? ");
                     double trimestre = scanner.nextDouble();
                     notamed(examen, trimestre);
+
+                    break;
             }
         }
     }
