@@ -324,6 +324,7 @@ public class actividad03 {
         System.out.println(resultado);
     }
 
+
     public static <Int> void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
             int actividad = 1;
