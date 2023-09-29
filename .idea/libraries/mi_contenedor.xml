@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="mi-contenedor">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/DWEServidor/Actividad CGI/mi-contenedor.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
