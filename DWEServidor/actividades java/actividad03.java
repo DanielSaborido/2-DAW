@@ -164,6 +164,20 @@ public class actividad03 {
         System.out.println("La cadena de la espiral hasta el numero introducido es: "+resultado);
     }
 
+    /*Escribe un programa que lea una lista de diez números y determine cuántos son positivos, y cuántos son negativos. */
+    public static void listaNumeros(int[] numeros){
+        String positivos = "Los numeros positivos de la lista son: "
+        String negativos = "Los numeros negativos de la lista son: "
+        for (int numero = 0; numero < numeros.length; numero++){
+            if (numero >= 0){
+                positivos += numero + ", ";
+            }else{
+                negativos += numero + ", ";
+            }
+        }
+        System.out.println(positivos + "\n" + negativos);
+    }
+
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
             int actividad = 1;
