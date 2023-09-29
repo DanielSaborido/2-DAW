@@ -222,20 +222,86 @@ public class actividad03 {
 
    /* Realiza un programa que sume los 100 números siguientes a un número entero y positivo introducido por teclado.
     Se debe comprobar que el dato introducido es correcto (que es un número positivo).*/
+    public static void suma100(int numero){
+        int resultado = numero;
+        for (int i = 1; i < 100; i++) {
+            resultado += (numero+i);
+        }
+        System.out.println("La sumatoria de los 100 numeros siguientes es: "+resultado);
+    }
 
    /*Escribe un programa que obtenga los números enteros comprendidos entre dos números intro-
     ducidos por teclado y validados como distintos, el programa debe empezar por el menor de los
     enteros introducidos e ir incrementando de 7 en 7.*/
+   public static void numerosComprendidos(int numero1, int numero2){
+       if ((numero2 - numero1) % 7 != 0) {
+            System.out.println("La diferencia entre ambos numeros no es un múltiplo de 7.");
+       } else {
+           StringBuilder resultado = new StringBuilder("Los numeros comprendidos entre "+numero1+" y "+numero2+" de 7 en 7 son: ");
+           for (int i = numero1; i < numero2; i+=7) {
+               resultado.append(i).append(", ");
+           }
+           System.out.println(resultado);
+       }
+   }
 
    /*Realiza un programa que pinte una pirámide por pantalla. La altura se debe pedir por teclado. El
     carácter con el que se pinta la pirámide también se debe pedir por teclado.*/
+   public static void piramide(String caracter, int altura) {
+       for (int i = 1; i <= altura; i++) {
+           for (int j = 1; j <= altura - i; j++) {
+               System.out.print(" ");
+           }
+           for (int k = 1; k <= 2 * i - 1; k++) {
+               System.out.print(caracter);
+           }
+           System.out.println();
+       }
+   }
 
     /*Igual que el ejercicio anterior pero esta vez se debe pintar una pirámide hueca.*/
+    public static void piramideHueca(String caracter, int altura) {
+        for (int i = 1; i <= altura; i++) {
+            for (int j = 1; j <= altura - i; j++) {
+                System.out.print(" ");
+            }
+            for (int k = 1; k <= 2 * i - 1; k++) {
+                if (k == 1 || k == 2 * i - 1){
+                    System.out.print(caracter);
+                } else{
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
+    }
 
     /*Realiza un programa que vaya pidiendo números hasta que se introduzca un numero negativo y
     nos diga cuantos números se han introducido, la media de los impares y el mayor de los pares. El
     número negativo sólo se utiliza para indicar el final de la introducción de datos pero no se incluye
     en el cómputo.*/
+    private static void datosPositivos() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Introduzca un número positivo (para finalizar introduzca uno negativo): ");
+        System.out.print("Introduzca un números: ");
+        int numero = scanner.nextInt();
+        int cumuloImpar = 0;
+        int mayorPar = 0;
+        int conteo = 0;
+        while (numero >= 0) {
+            if (numero%2!=0){
+                cumuloImpar+=numero;
+                conteo++;
+            } else if (numero % 2 == 0 && numero > mayorPar){
+                mayorPar = numero;
+            }
+            System.out.print("Introduzca un número positivo (para finalizar introduzca uno negativo): ");
+            numero = scanner.nextInt();
+        }
+        System.out.println("Se han introducidos: " + conteo + " números.");
+        System.out.println("La media de los números impares introducidos es: " + cumuloImpar/conteo);
+        System.out.println("El mayor número par es: " + mayorPar);
+    }
 
     /*Muestra por pantalla todos los números primos entre 2 y 100, ambos incluidos*/
     public static void primos(){
@@ -344,19 +410,33 @@ public class actividad03 {
                         confirmarPrimo(numero);
                         break;
                     case 17:
-                        
+                        System.out.print("Introduce un número entero: ");
+                        numero = scanner.nextInt();
+                        suma100(numero);
                         break;
                     case 18:
-                        
+                        System.out.print("Introduce un número entero: ");
+                        int numero1 = scanner.nextInt();
+                        System.out.print("Introduce un número entero: ");
+                        int numero2 = scanner.nextInt();
+                        numerosComprendidos(numero1, numero2);
                         break;
                     case 19:
-                        
+                        System.out.print("Ingrese el carácter para rellenar la pirámide: ");
+                        String caracter = scanner.next();
+                        System.out.print("Ingresa la altura de la piramide: ");
+                        int altura = scanner.nextInt();
+                        piramide(caracter,  altura);
                         break;
                     case 20:
-                        
+                        System.out.print("Ingrese el carácter para rellenar la pirámide: ");
+                        caracter = scanner.next();
+                        System.out.print("Ingresa la altura de la piramide: ");
+                        altura = scanner.nextInt();
+                        piramideHueca(caracter,  altura);
                         break;
                     case 21:
-                        
+                        datosPositivos();
                         break;
                     case 22:
                         primos();
