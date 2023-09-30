@@ -169,8 +169,8 @@ public class actividad03 {
 
     /*Escribe un programa que lea una lista de diez números y determine cuántos son positivos, y cuántos son negativos. */
     public static void listaNumeros(List<Integer> numeros){
-        StringBuilder positivos = new StringBuilder("Los numeros positivos de la lista son: ");
-        StringBuilder negativos = new StringBuilder("Los numeros negativos de la lista son: ");
+        StringBuilder positivos = new StringBuilder("Los tabla positivos de la lista son: ");
+        StringBuilder negativos = new StringBuilder("Los tabla negativos de la lista son: ");
         for (int i : numeros) {
             if (i >= 0) {
                 positivos.append(i).append(", ");
@@ -227,7 +227,7 @@ public class actividad03 {
         for (int i = 1; i < 100; i++) {
             resultado += (numero+i);
         }
-        System.out.println("La sumatoria de los 100 numeros siguientes es: "+resultado);
+        System.out.println("La sumatoria de los 100 tabla siguientes es: "+resultado);
     }
 
    /*Escribe un programa que obtenga los números enteros comprendidos entre dos números intro-
@@ -235,9 +235,9 @@ public class actividad03 {
     enteros introducidos e ir incrementando de 7 en 7.*/
    public static void numerosComprendidos(int numero1, int numero2){
        if ((numero2 - numero1) % 7 != 0) {
-            System.out.println("La diferencia entre ambos numeros no es un múltiplo de 7.");
+            System.out.println("La diferencia entre ambos tabla no es un múltiplo de 7.");
        } else {
-           StringBuilder resultado = new StringBuilder("Los numeros comprendidos entre "+numero1+" y "+numero2+" de 7 en 7 son: ");
+           StringBuilder resultado = new StringBuilder("Los tabla comprendidos entre "+numero1+" y "+numero2+" de 7 en 7 son: ");
            for (int i = numero1; i < numero2; i+=7) {
                resultado.append(i).append(", ");
            }
