@@ -63,6 +63,240 @@ public class actividad05 {
         }
     }
 
+    /*scribe un programa que pida 10 números por teclado y que luego muestre los números introducidos junto con
+    las palabras “máximo” y “mínimo” al lado del máximo y del mínimo respectivamente*/
+    public static void maxminArrayManual(){
+        int[] numeros = new int[10];
+
+        for (int i = 0; i < 10; i++) {
+            System.out.print("Introduce un número: ");
+            int opcion = scanner.nextInt();
+            numeros[i] = opcion;
+        }
+        for (int numero : numeros) {
+            System.out.print(numero+" ");
+        }
+        int max = Arrays.stream(numeros).max().getAsInt();
+        for (int numero : numeros) {
+            if (numero == max){
+                System.out.print("Máimo: "+numero+" ");
+            }else {
+                System.out.print(numero+" ");
+            }
+        }
+        int min = Arrays.stream(numeros).min().getAsInt();
+        for (int numero : numeros) {
+            if (numero == min){
+                System.out.print("Mínimo: "+numero+"** ");
+            }else {
+                System.out.print(numero+" ");
+            }
+        }
+    }
+
+    /*Escribe un programa que lea 15 números por teclado y que los almacene en un array. Rota los
+    elementos de ese array, es decir, el elemento de la posición 0 debe pasar a la posición 1, el de la 1 a
+    la 2, etc. El número que se encuentra en la última posición debe pasar a la posición 0. Finalmente,
+    muestra el contenido del array*/
+    public static void rotacion(){
+        int[] numeros = new int[15];
+        int[] rotado = new int[15];
+
+        for (int i = 0; i < 15; i++) {
+            System.out.print("Introduce un número: ");
+            int opcion = scanner.nextInt();
+            numeros[i] = opcion;
+        }
+        rotado[0] = numeros[14];
+        System.arraycopy(numeros, 0, rotado, 1, 14);
+
+        System.out.print(Arrays.toString(numeros));
+        System.out.print(Arrays.toString(rotado));
+    }
+
+    /*Escribe un programa que genere 100 números aleatorios del 0 al 20 y que los muestre por pantalla
+    separados por espacios. El programa pedirá entonces por teclado dos valores y a continuación
+    cambiará todas las ocurrencias del primer valor por el segundo en la lista generada anteriormente.
+    Los números que se han cambiado deben aparecer entrecomillados*/
+    public static void intercambio(){
+        int[] numeros = new int[100];
+
+        for (int i = 0; i < 100; i++) {
+            numeros[i] = random.nextInt(21);
+        }
+        for (int numero : numeros) {
+            System.out.print(numero+" ");
+        }
+        System.out.print("\nIntroduce el numero que quieres cambiar: ");
+        int opcion = scanner.nextInt();
+        System.out.print("\nIntroduce el numero por el que vas a cambiar: ");
+        int cambio = scanner.nextInt();
+        for (int numero : numeros) {
+            if (numero == opcion){
+                System.out.print("\""+cambio+"\" ");
+            }else {
+                System.out.print(numero+" ");
+            }
+        }
+    }
+
+    /*Realiza un programa que pida la temperatura media que ha hecho en cada mes de un determinado
+    año y que muestre a continuación un diagrama de barras horizontales con esos datos. Las barras
+    del diagrama se pueden dibujar a base de asteriscos o cualquier otro carácter.*/
+    public static void clima(){
+        int[] temperaturas = new int[12];
+        String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+
+        for (int i = 0; i < 12; i++) {
+            System.out.print("Ingrese la temperatura media del " + meses[i] + ": ");
+            temperaturas[i] = scanner.nextInt();
+        }
+
+        System.out.println("Diagrama de Barras:");
+
+        for (int i = 0; i < 12; i++) {
+            System.out.printf("%12s: ", meses[i]);
+            for (int j = 0; j < temperaturas[i]; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+    }
+
+    /*Realiza un programa que pida 8 números enteros y que luego muestre esos números junto con la
+    palabra “par” o “impar” según proceda*/
+    public static void parImparManual(){
+        int[] numeros = new int[8];
+
+        for (int i = 0; i < 8; i++) {
+            System.out.print("Introduce un número: ");
+            int opcion = scanner.nextInt();
+            numeros[i] = opcion;
+        }
+        for (int numero : numeros) {
+            if (numero % 2 == 0){
+                System.out.print("Par: "+numero+" ");
+            }else {
+                System.out.print("Impar: "+numero+" ");
+            }
+        }
+    }
+
+    /*Escribe un programa que genere 20 números enteros aleatorios entre 0 y 100 y que los almacene en
+    un array. El programa debe ser capaz de pasar todos los números pares a las primeras posiciones
+    del array (del 0 en adelante) y todos los números impares a las celdas restantes. Utiliza arrays
+    auxiliares si es necesario.*/
+    public static void parImpar(){
+        int[] numeros = new int[20];
+        int[] par = new int[20];
+        int[] impar = new int[20];
+        int indicePar = 0;
+        int indiceImpar = 0;
+
+        for (int i = 0; i < 20; i++) {
+            int numero = random.nextInt(101);
+            if (numero % 2 == 0){
+                par[indicePar] = numero;
+                indicePar++;
+            }else {
+                System.out.print("Impar: "+numero+" ");
+                impar[indiceImpar] = numero;
+                indiceImpar++;
+            }
+        }
+        System.arraycopy(par, 0, numeros, 0, indicePar);
+        System.arraycopy(impar, 0, numeros, indicePar, indiceImpar);
+        System.out.println(Arrays.toString(numeros));
+    }
+
+    /*Realiza un programa que pida 10 números por teclado y que los almacene en un array. A continuación se mostrará el contenido de ese array junto al índice (0 – 9) utilizando para ello una tabla.
+    Seguidamente el programa pasará los primos a las primeras posiciones, desplazando el resto de
+    números (los que no son primos) de tal forma que no se pierda ninguno. Al final se debe mostrar
+    el array resultante*/
+    public static void primos(){
+        int[] numeros = new int[10];
+
+        for (int i = 0; i < 10; i++) {
+            System.out.print("Ingrese un número: ");
+            numeros[i] = scanner.nextInt();
+        }
+
+        System.out.println("Contenido del array original:");
+        System.out.println("Índice\tNúmero");
+        for (int i = 0; i < 10; i++) {
+            System.out.println(i + "\t" + numeros[i]);
+        }
+
+        int[] resultado = new int[10];
+        int primerIndice = 0;
+        int ultimoIndice = 9;
+
+        for (int i = 0; i < 10; i++) {
+            boolean primo = numeros[i] > 1;
+            for (int j = 2; i * j <= numeros[i]; j++) {
+                if (numeros[i] % j == 0) {
+                    primo = false;
+                    break;
+                }
+            }
+            if (primo) {
+                resultado[primerIndice] = numeros[i];
+                primerIndice++;
+            } else {
+                resultado[ultimoIndice] = numeros[i];
+                ultimoIndice--;
+            }
+        }
+
+        System.out.println("Contenido del array resultante:");
+        System.out.println("Índice\tNúmero");
+        for (int i = 0; i < 10; i++) {
+            System.out.println(i + "\t" + resultado[i]);
+        }
+    }
+
+    /*Realiza un programa que pida 10 números por teclado y que los almacene en un array. A continuación se mostrará el contenido de ese array junto al índice (0 – 9).
+    Seguidamente el programapedirá dos posiciones a las que llamaremos “inicial” y “final”. Se debe comprobar que inicial es
+    menor que final y que ambos números están entre 0 y 9. El programa deberá colocar el número de
+    la posición inicial en la posición final, rotando el resto de números para que no se pierda ninguno.
+    Al final se debe mostrar el array resultante.*/
+    public static void cadena(){
+        int[] numeros = new int[10];
+
+        for (int i = 0; i < 10; i++) {
+            System.out.print("Ingrese un número: ");
+            numeros[i] = scanner.nextInt();
+        }
+
+        System.out.println("Contenido del array original:");
+        System.out.println("Índice\tNúmero");
+        for (int i = 0; i < 10; i++) {
+            System.out.println(i + "\t" + numeros[i]);
+        }
+
+        int inicial, finalPos;
+        do {
+            System.out.print("Ingrese la posición inicial (0-9): ");
+            inicial = scanner.nextInt();
+            System.out.print("Ingrese la posición final (0-9): ");
+            finalPos = scanner.nextInt();
+        } while (!(inicial >= 0 && finalPos >= 0 && finalPos <= 9 && inicial < finalPos));
+
+        // Realizar la rotación de elementos en el array
+        int temp = numeros[inicial];
+        for (int i = inicial; i < finalPos; i++) {
+            numeros[i] = numeros[i + 1];
+        }
+        numeros[finalPos] = temp;
+
+        System.out.println("Contenido del array resultante:");
+        System.out.println("Índice\tNúmero");
+        for (int i = 0; i < 10; i++) {
+            System.out.println(i + "\t" + numeros[i]);
+        }
+    }
+
     /*Escribe un programa que rellene un array de 100 elementos con números enteros aleatorios comprendidos entre 0 y 500 (ambos incluidos).
     A continuación el programa mostrará el array y preguntará si el usuario quiere destacar el máximo o el mínimo. Seguidamente se volverá a mostrar
     el array escribiendo el número destacado entre dobles asteriscos.*/
@@ -254,15 +488,39 @@ public class actividad05 {
                         numerosCuadradoCubo();
                         break;
                     case 5:
-                        maxminArray();
+                        maxminArrayManual();
                         break;
                     case 6:
-                        ordenarCadena();
+                        rotacion();
                         break;
                     case 7:
-                        restaurante();
+                        intercambio();
                         break;
                     case 8:
+                        clima();
+                        break;
+                    case 9:
+                        parImparManual();
+                        break;
+                    case 10:
+                        parImpar();
+                        break;
+                    case 11:
+                        primos();
+                        break;
+                    case 12:
+                        cadena();
+                        break;
+                    case 13:
+                        maxminArray();
+                        break;
+                    case 14:
+                        ordenarCadena();
+                        break;
+                    case 15:
+                        restaurante();
+                        break;
+                    case 16:
                         multiploArray();
                         break;
                 }
