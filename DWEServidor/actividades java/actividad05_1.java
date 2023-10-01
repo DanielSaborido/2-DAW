@@ -1,5 +1,7 @@
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 import java.util.Scanner;
 
 public class actividad05_1 {
@@ -155,120 +157,242 @@ public class actividad05_1 {
         System.out.println(resultadoMax+"\n"+resultadoMin);
     }
 
-    /*Escribe un programa que lea 15 números por teclado y que los almacene en un array. Rota los
-    elementos de ese array, es decir, el elemento de la posición 0 debe pasar a la posición 1, el de la 1 a
-    la 2, etc. El número que se encuentra en la última posición debe pasar a la posición 0. Finalmente,
-    muestra el contenido del array*/
-    public static void rotacion(){
-        int[] numeros = new int[15];
-        int[] rotado = new int[15];
+    /*Modifica el programa anterior de tal forma que no se repita ningún número en el array.*/
+    public static void maxminTablaSinRepetir(){
+        int[][] tabla = new int[6][10];
+        Set<Integer> numerosGenerados = new HashSet<>();
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 10; j++) {
+                int numero;
+                do {
+                    numero = random.nextInt(1001);
+                } while (numerosGenerados.contains(numero));
 
-        for (int i = 0; i < 15; i++) {
-            System.out.print("Introduce un número: ");
-            int opcion = scanner.nextInt();
-            numeros[i] = opcion;
+                numerosGenerados.add(numero);
+                tabla[i][j] = numero;
+            }
         }
-        rotado[0] = numeros[14];
-        System.arraycopy(numeros, 0, rotado, 1, 14);
+        int max = Arrays.stream(tabla).flatMapToInt(Arrays::stream).max().getAsInt();
+        int min = Arrays.stream(tabla).flatMapToInt(Arrays::stream).min().getAsInt();
+        StringBuilder resultadoMax = new StringBuilder("El número maximo está en la posición: ");
+        StringBuilder resultadoMin = new StringBuilder("El número mínimo está en la posición: ");
 
-        System.out.print(Arrays.toString(numeros));
-        System.out.print(Arrays.toString(rotado));
+        for (int[] fila : tabla) {
+            for (int numero : fila) {
+                System.out.print(numero+"\t\t|");
+            }
+            System.out.println();
+        }
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 6;j++){
+                if (tabla[i][j] == max){
+                    resultadoMax.append("{").append(i).append(", ").append(j).append("} ");
+                }
+                if (tabla[i][j] == min){
+                    resultadoMin.append("{").append(i).append(", ").append(j).append("} ");
+                }
+            }
+        }
+
+        System.out.println(resultadoMax+"\n"+resultadoMin);
     }
 
-    /*Escribe un programa que genere 100 números aleatorios del 0 al 20 y que los muestre por pantalla
-    separados por espacios. El programa pedirá entonces por teclado dos valores y a continuación
-    cambiará todas las ocurrencias del primer valor por el segundo en la lista generada anteriormente.
-    Los números que se han cambiado deben aparecer entrecomillados*/
-    public static void intercambio(){
-        int[] numeros = new int[100];
+    /*mejora el juego “Busca el tesoro” de tal forma que si hay una mina a una casilla de distancia, el
+    programa avise diciendo ¡Cuidado! ¡Hay una mina cerca!*/
+    public static void tesoro(){
+        int[][] tablero = new int[5][5];
+        int tesoroX = random.nextInt(5);
+        int tesoroY = random.nextInt(5);
+        tablero[tesoroX][tesoroY] = 1;
 
-        for (int i = 0; i < 100; i++) {
-            numeros[i] = random.nextInt(21);
+        for (int i = 0; i < 3; i++) {
+            int minaX, minaY;
+            do {
+                minaX = random.nextInt(5);
+                minaY = random.nextInt(5);
+            } while (tablero[minaX][minaY] == 1 || tablero[minaX][minaY] == 2);
+            tablero[minaX][minaY] = 2;
         }
-        for (int numero : numeros) {
-            System.out.print(numero+" ");
-        }
-        System.out.print("\nIntroduce el numero que quieres cambiar: ");
-        int opcion = scanner.nextInt();
-        System.out.print("\nIntroduce el numero por el que vas a cambiar: ");
-        int cambio = scanner.nextInt();
-        for (int numero : numeros) {
-            if (numero == opcion){
-                System.out.print("\""+cambio+"\" ");
-            }else {
-                System.out.print(numero+" ");
+
+        boolean encontrado = false;
+        int intentos = 0;
+        while (!encontrado) {
+            System.out.println("Busca el tesoro. Ingresa la coordenada X (0-4):");
+            int x = scanner.nextInt();
+            System.out.println("Ingresa la coordenada Y (0-4):");
+            int y = scanner.nextInt();
+            boolean mina=false;
+
+            if (x < 0 || x > 4 || y < 0 || y > 4) {
+                System.out.println("Coordenadas fuera del rango. Debes ingresar valores entre 0 y 4.");
+            } else {
+                intentos++;
+                if (tablero[x][y] == 1) {
+                    System.out.println("¡Encontraste el tesoro en " + intentos + " intentos!");
+                    encontrado = true;
+                }
+                for (int i = x - 1; i <= x + 1; i++) {
+                    for (int j = y - 1; j <= y + 1; j++) {
+                        if (i >= 0 && i < 5 && j >= 0 && j < 5 && tablero[i][j] == 2) {
+                            mina = true;
+                            break;
+                        }
+                    }
+                }
+                if (mina){
+                    System.out.println("¡Cuidado! ¡Hay una mina cerca!");
+                } else {
+                    System.out.println("No hay nada aquí. Sigue buscando.");
+                }
             }
         }
     }
 
-    /*Realiza un programa que pida la temperatura media que ha hecho en cada mes de un determinado
-    año y que muestre a continuación un diagrama de barras horizontales con esos datos. Las barras
-    del diagrama se pueden dibujar a base de asteriscos o cualquier otro carácter.*/
-    public static void clima(){
-        int[] temperaturas = new int[12];
-        String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-                "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+    /*Escribe un programa que, dada una posición en un tablero de ajedrez, nos diga a qué casillas
+    podría saltar un alfil que se encuentra en esa posición. Como se indica en la figura, el alfil se
+    mueve siempre en diagonal. El tablero cuenta con 64 casillas. Las columnas se indican con las
+    letras de la “a” a la “h” y las filas se indican del 1 al 8.*/
+    public static void alfil(){
+        System.out.print("Ingrese la posición del alfil (por ejemplo, 'c4'): ");
+        String posicion = scanner.next();
 
-        for (int i = 0; i < 12; i++) {
-            System.out.print("Ingrese la temperatura media del " + meses[i] + ": ");
-            temperaturas[i] = scanner.nextInt();
+        if (posicion.length() != 2 || !Character.isLetter(posicion.charAt(0)) || !Character.isDigit(posicion.charAt(1))) {
+            System.out.println("Entrada no válida. Debe ingresar una posición válida, por ejemplo, 'c4'.");
+            scanner.close();
+            return;
         }
 
-        System.out.println("Diagrama de Barras:");
+        int fila = 8 - Character.getNumericValue(posicion.charAt(1));
+        int columna = posicion.charAt(0) - 'a';
+        System.out.println("El alfil en " + posicion + " podría saltar a las siguientes casillas:");
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (Math.abs(fila - i) == Math.abs(columna - j) && (fila != i || columna != j)) {
+                    char columnaSalto = (char) (j + 'a');
+                    int filaSalto = 8 - i;
+                    System.out.print(columnaSalto + "" + filaSalto + " ");
+                }
+            }
+        }
+    }
+
+    /*Realiza un programa que sea capaz de rotar todos los elementos de una matriz cuadrada una
+    posición en el sentido de las agujas del reloj. La matriz debe tener 12 filas por 12 columnas y debe
+    contener números generados al azar entre 0 y 100. Se debe mostrar tanto la matriz original como
+    la matriz resultado, ambas con los números convenientemente alineados.*/
+    public static void reloj(){
+        int[][] matrizOriginal = new int[12][12];
+        int[][] matrizResultado = new int[12][12];
 
         for (int i = 0; i < 12; i++) {
-            System.out.printf("%12s: ", meses[i]);
-            for (int j = 0; j < temperaturas[i]; j++) {
-                System.out.print("*");
+            for (int j = 0; j < 12; j++) {
+                matrizOriginal[i][j] = random.nextInt(101); // Números entre 0 y 100
+            }
+        }
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 12; j++) {
+                matrizResultado[j][11 - i] = matrizOriginal[i][j];
+            }
+        }
+
+        System.out.println("Matriz Original:");
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 12; j++) {
+                System.out.printf("%3d ", matrizOriginal[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println("\nMatriz Rotada:");
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 12; j++) {
+                System.out.printf("%3d ", matrizResultado[i][j]);
             }
             System.out.println();
         }
     }
 
-    /*Realiza un programa que pida 8 números enteros y que luego muestre esos números junto con la
-    palabra “par” o “impar” según proceda*/
-    public static void parImparManual(){
-        int[] numeros = new int[8];
+    /*Realiza el juego de las tres en raya.*/
+    public static void tresRayas(){
+        char[][] tablero = {
+                {' ', ' ', ' '},
+                {' ', ' ', ' '},
+                {' ', ' ', ' '}
+        };
+        char jugadorActual = 'X';
+        boolean juegoTerminado = false;
+        int movimientos = 0;
+        System.out.println("¡Bienvenido al juego de Tres en Línea!");
 
-        for (int i = 0; i < 8; i++) {
-            System.out.print("Introduce un número: ");
-            int opcion = scanner.nextInt();
-            numeros[i] = opcion;
-        }
-        for (int numero : numeros) {
-            if (numero % 2 == 0){
-                System.out.print("Par: "+numero+" ");
-            }else {
-                System.out.print("Impar: "+numero+" ");
+        while (!juegoTerminado && movimientos < 9) {
+            System.out.println("-------------");
+            for (int i = 0; i < 3; i++) {
+                System.out.print("| ");
+                for (int j = 0; j < 3; j++) {
+                    System.out.print(tablero[i][j] + " | ");
+                }
+                System.out.println("\n-------------");
+            }
+            int fila, columna;
+            boolean victoria = false;
+            boolean valido = true;
+
+            do {
+                System.out.print("Jugador " + jugadorActual + ", ingresa fila (0-2): ");
+                fila = scanner.nextInt();
+                System.out.print("Jugador " + jugadorActual + ", ingresa columna (0-2): ");
+                columna = scanner.nextInt();
+                if (fila < 0 || fila >= 3 || columna < 0 || columna >= 3 || tablero[fila][columna] != ' ') {
+                    System.out.println("Movimiento inválido. Inténtalo de nuevo.");
+                    valido = false;
+                }
+            } while (!valido);
+            tablero[fila][columna] = jugadorActual;
+            movimientos++;
+            for (int i = 0; i < 3; i++) {
+                if (tablero[i][0] == jugadorActual && tablero[i][1] == jugadorActual && tablero[i][2] == jugadorActual) {
+                    victoria = true;
+                    break;
+                }
+            }
+            for (int j = 0; j < 3; j++) {
+                if (tablero[0][j] == jugadorActual && tablero[1][j] == jugadorActual && tablero[2][j] == jugadorActual) {
+                    victoria = true;
+                    break;
+                }
+            }
+            if (tablero[0][0] == jugadorActual && tablero[1][1] == jugadorActual && tablero[2][2] == jugadorActual) {
+                victoria = true;
+            }
+            if (tablero[0][2] == jugadorActual && tablero[1][1] == jugadorActual && tablero[2][0] == jugadorActual) {
+                victoria = true;
+            }
+            if (victoria) {
+                System.out.println("-------------");
+                for (int i = 0; i < 3; i++) {
+                    System.out.print("| ");
+                    for (int j = 0; j < 3; j++) {
+                        System.out.print(tablero[i][j] + " | ");
+                    }
+                    System.out.println("\n-------------");
+                }
+                System.out.println("¡El jugador " + jugadorActual + " ha ganado!");
+                juegoTerminado = true;
+            } else {
+                jugadorActual = (jugadorActual == 'X') ? 'O' : 'X';
             }
         }
-    }
-
-    /*Escribe un programa que genere 20 números enteros aleatorios entre 0 y 100 y que los almacene en
-    un array. El programa debe ser capaz de pasar todos los números pares a las primeras posiciones
-    del array (del 0 en adelante) y todos los números impares a las celdas restantes. Utiliza arrays
-    auxiliares si es necesario.*/
-    public static void parImpar(){
-        int[] numeros = new int[20];
-        int[] par = new int[20];
-        int[] impar = new int[20];
-        int indicePar = 0;
-        int indiceImpar = 0;
-
-        for (int i = 0; i < 20; i++) {
-            int numero = random.nextInt(101);
-            if (numero % 2 == 0){
-                par[indicePar] = numero;
-                indicePar++;
-            }else {
-                System.out.print("Impar: "+numero+" ");
-                impar[indiceImpar] = numero;
-                indiceImpar++;
+        if (!juegoTerminado) {
+            System.out.println("-------------");
+            for (int i = 0; i < 3; i++) {
+                System.out.print("| ");
+                for (int j = 0; j < 3; j++) {
+                    System.out.print(tablero[i][j] + " | ");
+                }
+                System.out.println("\n-------------");
             }
+            System.out.println("¡Empate! El juego ha terminado en empate.");
         }
-        System.arraycopy(par, 0, numeros, 0, indicePar);
-        System.arraycopy(impar, 0, numeros, indicePar, indiceImpar);
-        System.out.println(Arrays.toString(numeros));
     }
 
     public static void main(String[] args) {
@@ -297,19 +421,19 @@ public class actividad05_1 {
                         maxminTabla();
                         break;
                     case 6:
-                        rotacion();
+                        maxminTablaSinRepetir();
                         break;
                     case 7:
-                        intercambio();
+                        tesoro();
                         break;
                     case 8:
-                        clima();
+                        alfil();
                         break;
                     case 9:
-                        parImparManual();
+                        reloj();
                         break;
                     case 10:
-                        parImpar();
+                        tresRayas();
                         break;
                 }
             }
