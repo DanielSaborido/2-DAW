@@ -335,9 +335,10 @@ public class actividad05_1 {
             }
             int fila, columna;
             boolean victoria = false;
-            boolean valido = true;
+            boolean valido;
 
             do {
+                valido = true;
                 System.out.print("Jugador " + jugadorActual + ", ingresa fila (0-2): ");
                 fila = scanner.nextInt();
                 System.out.print("Jugador " + jugadorActual + ", ingresa columna (0-2): ");
