@@ -365,11 +365,117 @@ public class actividad06 {
         }
     }
 
+    /*Crea una biblioteca de funciones para arrays bidimensionales (de dos dimen- siones) de números
+    enteros que contenga las siguientes funciones:
+    1. generaArrayBiInt: Genera un array de tamaño n x m con números
+    2. aleatorios cuyo intervalo (mínimo y máximo) se indica como parámetro.
+    1. filaDeArrayBiInt: Devuelve la fila i-ésima del array que se pasa como
+    parámetro.
+    1. columnaDeArrayBiInt: Devuelve la columna j-ésima del array que se
+    pasa como parámetro.
+    1. coordenadasEnArrayBiInt: Devuelve la fila y la columna (en un array
+    con dos elementos) de la primera ocurrencia de un número dentro de un array bidimensional. Si
+    el número no se encuentra en el array, la función devuelve el array {-1, -1}.
+    1. esPuntoDeSilla: Dice si un número es o no punto de silla, es decir,
+    mínimo en su fila y máximo en su columna.
+    1. diagonal: Devuelve un array que contiene una de las diagonales del
+    array bidimensional que se pasa como parámetro. Se pasan como parámetros fila, columna y
+    dirección. La fila y la columna determinan el número que marcará las dos posibles diagonales
+    dentro del array. La dirección es una cadena de caracteres que puede ser “nose” o “neso”. La
+    cadena “nose” indica que se elige la diagonal que va del noroeste hacia el sureste, mientras que la
+    cadena “neso” indica que se elige la diagonal que va del noreste hacia el suroeste*/
+    public static int[][] generaArrayBiInt(int n, int m, int min, int max) {
+        int[][] array = new int[n][m];
+        Random rand = new Random();
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                array[i][j] = rand.nextInt((max - min) + 1) + min;
+            }
+        }
+
+        return array;
+    }
+    public static int[] filaDeArrayBiInt(int[][] array, int i) {
+        return array[i];
+    }
+    public static int[] columnaDeArrayBiInt(int[][] array, int j) {
+        int n = array.length;
+        int[] columna = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            columna[i] = array[i][j];
+        }
+
+        return columna;
+    }
+    public static int[] coordenadasEnArrayBiInt(int[][] array, int num) {
+        int[] coordenadas = {-1, -1};
+        int n = array.length;
+        int m = array[0].length;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (array[i][j] == num) {
+                    coordenadas[0] = i;
+                    coordenadas[1] = j;
+                    return coordenadas;
+                }
+            }
+        }
+
+        return coordenadas;
+    }
+    public static boolean esPuntoDeSilla(int[][] array, int num) {
+        int n = array.length;
+        int m = array[0].length;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (array[i][j] == num) {
+                    int filaMin = minimoArrayInt(filaDeArrayBiInt(array, i));
+                    int columnaMax = maximoArrayInt(columnaDeArrayBiInt(array, j));
+                    if (filaMin == num && columnaMax == num) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+    public static int[] diagonal(int[][] array, int fila, int columna, String direccion) {
+        int n = array.length;
+        int m = array[0].length;
+
+        int[] diagonal = new int[n];
+
+        if (direccion.equals("nose")) {
+            int i = fila;
+            int j = columna;
+            while (i < n && j < m) {
+                diagonal[i - fila] = array[i][j];
+                i++;
+                j++;
+            }
+        } else if (direccion.equals("neso")) {
+            int i = fila;
+            int j = columna;
+            while (i < n && j >= 0) {
+                diagonal[i - fila] = array[i][j];
+                i++;
+                j--;
+            }
+        }
+
+        return diagonal;
+    }
 
     public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
             int actividad = 1;
             while (actividad > 0){
+                int numero;
                 System.out.print("\nSeleccione la actividad a ejecutar: ");
                 actividad = scanner.nextInt();
                 switch(actividad){
@@ -378,7 +484,7 @@ public class actividad06 {
                         break;
                     case 1:
                         System.out.print("Introduzca un número base: ");
-                        int numero = scanner.nextInt();
+                        numero = scanner.nextInt();
                         System.out.println("Es capicúa: " + esCapicua(numero));
                         System.out.println("Es primo: " + esPrimo(numero));
                         System.out.println("Siguiente primo: " + siguientePrimo(numero));
@@ -435,6 +541,29 @@ public class actividad06 {
                         for (int j : nuevoArray) {
                             System.out.print(j + " ");
                         }
+                        System.out.print("Introduzca cuantos números rotar: ");
+                        numero = scanner.nextInt();
+                        rotaDerechaArrayInt(array,numero);
+                        System.out.println("La array rotada a la derecha queda: ");
+                        for (int j : array) {
+                            System.out.print(j + " ");
+                        }
+                        rotaIzquierdaArrayInt(array,numero);
+                        System.out.println("La array rotada a la izquierda queda: ");
+                        for (int j : array) {
+                            System.out.print(j + " ");
+                        }
+                        break;
+                    case 8:
+                        System.out.print("Introduzca tamaño del array base: ");
+                        int tamanoB = scanner.nextInt();
+                        System.out.print("Introduzca tamaño de los array internos: ");
+                        int tamanoI = scanner.nextInt();
+                        System.out.print("Introduzca número mínimo de los array: ");
+                        int min = scanner.nextInt();
+                        System.out.print("Introduzca número máximo de los array: ");
+                        int max = scanner.nextInt();
+                        generaArrayBiInt(tamanoB,tamanoI,min,max);
                         break;
                 }
             }
