@@ -563,7 +563,7 @@ public class actividad06 {
                         int min = scanner.nextInt();
                         System.out.print("Introduzca número máximo de los array: ");
                         int max = scanner.nextInt();
-                        generaArrayBiInt(tamanoB,tamanoI,min,max);
+                        int[][] biArray = generaArrayBiInt(tamanoB,tamanoI,min,max);
                         break;
                 }
             }
