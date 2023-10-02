@@ -564,6 +564,25 @@ public class actividad06 {
                         System.out.print("Introduzca número máximo de los array: ");
                         int max = scanner.nextInt();
                         int[][] biArray = generaArrayBiInt(tamanoB,tamanoI,min,max);
+                        System.out.print("Introduzca un número para mostrar fila en el array: ");
+                        numero = scanner.nextInt();
+                        System.out.println(Arrays.toString(filaDeArrayBiInt(biArray, numero)));
+                        System.out.print("Introduzca un número para mostrar columna en el array: ");
+                        numero = scanner.nextInt();
+                        System.out.println(Arrays.toString(columnaDeArrayBiInt(biArray, numero)));
+                        System.out.print("Introduzca un número para mostrar coordenada en el array: ");
+                        numero = scanner.nextInt();
+                        System.out.println(Arrays.toString(coordenadasEnArrayBiInt(biArray, numero)));
+                        System.out.print("Introduzca un número ver si es punto de silla en el array: ");
+                        numero = scanner.nextInt();
+                        System.out.println(esPuntoDeSilla(biArray, numero));
+                        System.out.print("Introduzca fila del array: ");
+                        int fila = scanner.nextInt();
+                        System.out.print("Introduzca columna del array: ");
+                        int columna = scanner.nextInt();
+                        System.out.print("Introduzca direccion del array (nose/neso): ");
+                        String direccion = scanner.next();
+                        System.out.println(Arrays.toString(diagonal(biArray, fila, columna, direccion)));
                         break;
                 }
             }
