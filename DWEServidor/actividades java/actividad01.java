@@ -92,18 +92,12 @@ public class actividad01 {
         }
         double precioConIva = baseimponible * (1 + tasaIva);
 
-        double descuento = 0.0;
-        switch (desc) {
-            case "mitad":
-                descuento = precioConIva / 2;
-                break;
-            case "meno5":
-                descuento = 5.0;
-                break;
-            case "5porc":
-                descuento = precioConIva * 0.05;
-                break;
-        }
+        double descuento = switch (desc) {
+            case "mitad" -> precioConIva / 2;
+            case "meno5" -> 5.0;
+            case "5porc" -> precioConIva * 0.05;
+            default -> 0.0;
+        };
         double precioFinal = precioConIva - descuento;
 
         System.out.println("Base imponible:\n" + baseimponible + "\nIVA (" + (tasaIva * 100) + "%):\n" 
@@ -122,15 +116,20 @@ public class actividad01 {
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.print("\nSeleccione la actividad a ejecutar: ");
             int actividad = scanner.nextInt();
+            double x;
+            double y;
+            double base;
+            double altura;
+            double baseimponible;
             switch(actividad){
                 case 0:
                     System.out.println("Dejando las actividades del pdf 02.");
                     break;
                 case 1:
                     System.out.print("Ingresa el primer numero a multriplicar: ");
-                    double x = scanner.nextDouble();
+                    x = scanner.nextDouble();
                     System.out.print("Ingresa el segundo numero a multriplicar: ");
-                    double y = scanner.nextDouble();
+                    y = scanner.nextDouble();
                     multriplicacion(x,y);
 
                     break;
@@ -159,9 +158,9 @@ public class actividad01 {
                     break;
                 case 5:
                     System.out.print("\nIngresa la base del rectángulo: ");
-                    double base= scanner.nextDouble();
+                    base= scanner.nextDouble();
                     System.out.print("Ingresa la altura del rectángulo: ");
-                    double altura= scanner.nextDouble();
+                    altura= scanner.nextDouble();
                     arectangulo(base, altura);
 
                     break;
@@ -175,7 +174,7 @@ public class actividad01 {
                     break;
                 case 7:
                     System.out.print("\nIngresa la base imponible (IVA 21%): ");
-                    double baseimponible = scanner.nextDouble();
+                    baseimponible = scanner.nextDouble();
                     factura(baseimponible);
 
                     break;

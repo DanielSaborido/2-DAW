@@ -187,6 +187,7 @@ public class actividad03 {
         int resultado = 1;
         do{
             resultado *= base;
+            conteo++;
         }while (conteo < exponente);
         System.out.println(base + " exponenete "+ exponente + " = " + resultado);
     }
@@ -292,7 +293,7 @@ public class actividad03 {
             if (numero%2!=0){
                 cumuloImpar+=numero;
                 conteo++;
-            } else if (numero % 2 == 0 && numero > mayorPar){
+            } else if (numero > mayorPar){
                 mayorPar = numero;
             }
             System.out.print("Introduzca un número positivo (para finalizar introduzca uno negativo): ");
@@ -306,7 +307,7 @@ public class actividad03 {
     /*Muestra por pantalla todos los números primos entre 2 y 100, ambos incluidos*/
     public static void primos(){
         System.out.println("Números primos entre 2 y 100:");
-        boolean esPrimo = true;
+        boolean esPrimo;
         StringBuilder resultado = new StringBuilder("Los números primos son:  ");
 
         for (int numero = 2; numero <= 100;numero++) {
@@ -325,13 +326,16 @@ public class actividad03 {
     }
 
 
-    public static <Int> void main(String[] args) {
+    public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
             int actividad = 1;
             while (actividad > 0){
                 System.out.print("Seleccione la actividad a ejecutar: ");
                 actividad = scanner.nextInt();
                 int numero;
+                int exponente;
+                int altura;
+                String caracter;
                 switch(actividad){
                     case 0:
                         System.out.println("Dejando las actividades del pdf 03.");
@@ -395,7 +399,7 @@ public class actividad03 {
                         System.out.print("Introduce un número entero: ");
                         numero = scanner.nextInt();
                         System.out.print("Introduce su exponente: ");
-                        int exponente = scanner.nextInt();
+                        exponente = scanner.nextInt();
                         potencia(numero, exponente);
                         break;
                     case 15:
@@ -424,9 +428,9 @@ public class actividad03 {
                         break;
                     case 19:
                         System.out.print("Ingrese el carácter para rellenar la pirámide: ");
-                        String caracter = scanner.next();
+                        caracter = scanner.next();
                         System.out.print("Ingresa la altura de la piramide: ");
-                        int altura = scanner.nextInt();
+                        altura = scanner.nextInt();
                         piramide(caracter,  altura);
                         break;
                     case 20:

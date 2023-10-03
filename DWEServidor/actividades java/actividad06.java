@@ -1,7 +1,6 @@
 import java.util.*;
 
 public class actividad06 {
-    static Random random = new Random();
     static Scanner scanner = new Scanner(System.in);
     /*Crea una biblioteca de funciones matemáticas que contenga las siguientes funciones. Recuerda
     que puedes usar unas dentro de otras si es necesario.
@@ -105,11 +104,9 @@ public class actividad06 {
         return numero1 * (int) potencia(10, digitos(numero2)) + numero2;
     }
 
-
     /*Muestra los números primos que hay entre 1 y 1000.*/
     public static void primos(){
         System.out.println("Números primos entre 1 y 1000:");
-
         for (int i = 1; i <= 1000; i++) {
             if (esPrimo(i)) {
                 System.out.print(i + " ");
@@ -120,7 +117,6 @@ public class actividad06 {
     /*Muestra los números capicúa que hay entre 1 y 99999*/
     public static void capicua(){
         System.out.println("Números capicúa entre 1 y 99999:");
-
         for (int i = 1; i <= 99999; i++) {
             if (esCapicua(i)) {
                 System.out.print(i + " ");
@@ -134,7 +130,6 @@ public class actividad06 {
         String binario = scanner.next();
         int longitud = binario.length();
         int decimal = 0;
-
         for (int i = 0; i < longitud; i++) {
             char digito = binario.charAt(i);
             int valor = Character.getNumericValue(digito);
@@ -142,7 +137,6 @@ public class actividad06 {
                 System.out.println("Número binario no válido.");
                 return;
             }
-
             decimal += (int) (valor * Math.pow(2, longitud - 1 - i));
         }
         System.out.println("El número en decimal es: "+decimal);
@@ -152,7 +146,6 @@ public class actividad06 {
     public static void decimalBinario(){
         System.out.print("Introduzca un número decimal: ");
         int decimal = scanner.nextInt();
-
         if (decimal < 0) {
             System.out.println("Número decimal no válido. Debe ser un número no negativo.");
             return;
@@ -167,7 +160,6 @@ public class actividad06 {
                 decimal = decimal / 2;
             }
         }
-
         System.out.println("El número en binario es: " + binario);
     }
 
@@ -186,7 +178,6 @@ public class actividad06 {
             System.out.println("6. Octal a Decimal");
             System.out.print("Ingrese el número de la opción: ");
             opcion = scanner.nextInt();
-
             switch (opcion) {
                 case 0:
                     System.out.println("Saliendo de la actividad.");
@@ -274,11 +265,9 @@ public class actividad06 {
         int max = scanner.nextInt();
         int[] array = new int[n];
         Random rand = new Random();
-
         for (int i = 0; i < n; i++) {
             array[i] = rand.nextInt((max - min) + 1) + min;
         }
-
         return array;
     }
     public static int minimoArrayInt(int[] array) {
@@ -325,12 +314,10 @@ public class actividad06 {
     public static int[] volteaArrayInt(int[] array) {
         int left = 0;
         int right = array.length - 1;
-
         while (left < right) {
             int temp = array[left];
             array[left] = array[right];
             array[right] = temp;
-
             left++;
             right--;
         }
@@ -339,30 +326,20 @@ public class actividad06 {
     public static void rotaDerechaArrayInt(int[] array, int n) {
         int len = array.length;
         n = n % len;
-
         int[] temp = new int[len];
-
         for (int i = 0; i < len; i++) {
             temp[(i + n) % len] = array[i];
         }
-
-        for (int i = 0; i < len; i++) {
-            array[i] = temp[i];
-        }
+        System.arraycopy(temp, 0, array, 0, len);
     }
     public static void rotaIzquierdaArrayInt(int[] array, int n) {
         int len = array.length;
         n = n % len;
-
         int[] temp = new int[len];
-
         for (int i = 0; i < len; i++) {
             temp[i] = array[(i + n) % len];
         }
-
-        for (int i = 0; i < len; i++) {
-            array[i] = temp[i];
-        }
+        System.arraycopy(temp, 0, array, 0, len);
     }
 
     /*Crea una biblioteca de funciones para arrays bidimensionales (de dos dimen- siones) de números
@@ -387,13 +364,11 @@ public class actividad06 {
     public static int[][] generaArrayBiInt(int n, int m, int min, int max) {
         int[][] array = new int[n][m];
         Random rand = new Random();
-
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 array[i][j] = rand.nextInt((max - min) + 1) + min;
             }
         }
-
         return array;
     }
     public static int[] filaDeArrayBiInt(int[][] array, int i) {
@@ -402,18 +377,15 @@ public class actividad06 {
     public static int[] columnaDeArrayBiInt(int[][] array, int j) {
         int n = array.length;
         int[] columna = new int[n];
-
         for (int i = 0; i < n; i++) {
             columna[i] = array[i][j];
         }
-
         return columna;
     }
     public static int[] coordenadasEnArrayBiInt(int[][] array, int num) {
         int[] coordenadas = {-1, -1};
         int n = array.length;
         int m = array[0].length;
-
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (array[i][j] == num) {
@@ -423,13 +395,11 @@ public class actividad06 {
                 }
             }
         }
-
         return coordenadas;
     }
     public static boolean esPuntoDeSilla(int[][] array, int num) {
         int n = array.length;
         int m = array[0].length;
-
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (array[i][j] == num) {
@@ -441,7 +411,6 @@ public class actividad06 {
                 }
             }
         }
-
         return false;
     }
     public static int[] diagonal(int[][] array, int fila, int columna, String direccion) {

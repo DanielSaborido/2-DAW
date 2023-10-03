@@ -37,53 +37,28 @@ public class actividad02 {
     5. respectivamente. Sólo se tienen en cuenta las horas, los minutos no se deben introducir por
     teclado.*/
     public static void saludo(int hora) {
-        String saludo;
-        switch (hora) {
-            case 11:
-                saludo = "Buenos días";
-                break;
-            case 20:
-                saludo = "Buenas tardes";
-                break;
-            default:
-                saludo = "Buenas noches";
-                break;
-        }
+        String saludo = switch (hora) {
+            case 11 -> "Buenos días";
+            case 20 -> "Buenas tardes";
+            default -> "Buenas noches";
+        };
         System.out.println(saludo);
     }
 
     /*Escribe un programa en que dado un número del 1 a 7 escriba el correspondiente nombre del día
     de la semana.*/
     public static void semana(int numeroDia) {
-        String nombreDia;
-        
-        switch (numeroDia) {
-            case 1:
-                nombreDia = "Lunes";
-                break;
-            case 2:
-                nombreDia = "Martes";
-                break;
-            case 3:
-                nombreDia = "Miércoles";
-                break;
-            case 4:
-                nombreDia = "Jueves";
-                break;
-            case 5:
-                nombreDia = "Viernes";
-                break;
-            case 6:
-                nombreDia = "Sábado";
-                break;
-            case 7:
-                nombreDia = "Domingo";
-                break;
-            default:
-                nombreDia = "Número fuera de rango";
-                break;
-        }
-        
+        String nombreDia = switch (numeroDia) {
+            case 1 -> "Lunes";
+            case 2 -> "Martes";
+            case 3 -> "Miércoles";
+            case 4 -> "Jueves";
+            case 5 -> "Viernes";
+            case 6 -> "Sábado";
+            case 7 -> "Domingo";
+            default -> "Número fuera de rango";
+        };
+
         System.out.println("El día correspondiente es: " + nombreDia);
     }
 
@@ -115,18 +90,15 @@ public class actividad02 {
     public static void ecuacion1º(double a, double b) {
         double x;
 
-        switch ((int) a) {
-            case 0:
-                if (b == 0) {
-                    System.out.println("La ecuación tiene infinitas soluciones.");
-                } else {
-                    System.out.println("La ecuación no tiene solución.");
-                }
-                break;
-            default:
-                x = -b / a;
-                System.out.println("La solución de la ecuación es x = " + x);
-                break;
+        if ((int) a == 0) {
+            if (b == 0) {
+                System.out.println("La ecuación tiene infinitas soluciones.");
+            } else {
+                System.out.println("La ecuación no tiene solución.");
+            }
+        } else {
+            x = -b / a;
+            System.out.println("La solución de la ecuación es x = " + x);
         }
     }
 
@@ -179,21 +151,19 @@ public class actividad02 {
     /*Realiza un programa que resuelva una ecuación de segundo grado (del tipo ax 2 + bx + c = 0)*/
     public static void ecuacion2º(double a, double b, double c) {
         double raiz = b * b - 4 * a * c;
-        switch((int) a) {
-            case 0:
-                System.out.println("La ecuación tiene infinitas soluciones.");
-                break;
-            default:
-                if (raiz > 0) {
-                    double x1 = (-b + Math.sqrt(raiz)) / (2 * a);
-                    double x2 = (-b - Math.sqrt(raiz)) / (2 * a);
-                    System.out.println("Las soluciones son x1 = " + x1 + " y x2 = " + x2);
-                } else if (raiz == 0) {
-                    double x = -b / (2 * a);
-                    System.out.println("La solución única es x = " + x);
-                } else {
-                    System.out.println("La ecuación no tiene soluciones reales.");
-                }
+        if ((int) a == 0) {
+            System.out.println("La ecuación tiene infinitas soluciones.");
+        } else {
+            if (raiz > 0) {
+                double x1 = (-b + Math.sqrt(raiz)) / (2 * a);
+                double x2 = (-b - Math.sqrt(raiz)) / (2 * a);
+                System.out.println("Las soluciones son x1 = " + x1 + " y x2 = " + x2);
+            } else if (raiz == 0) {
+                double x = -b / (2 * a);
+                System.out.println("La solución única es x = " + x);
+            } else {
+                System.out.println("La ecuación no tiene soluciones reales.");
+            }
         }
     }
 
@@ -472,7 +442,7 @@ public class actividad02 {
             String resultadoRecuperacion = scanner.nextLine();
             scanner.close();
 
-            if (resultadoRecuperacion.toLowerCase() == "apto") {
+            if (resultadoRecuperacion.equalsIgnoreCase("apto")) {
                 System.out.println("Tu nota de Programación es 5.0");
             } else {
                 System.out.println("Tu nota de Programación es " + media);
@@ -504,6 +474,14 @@ public class actividad02 {
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.print("\nSeleccione la actividad a ejecutar: ");
             int actividad = scanner.nextInt();
+            int hora;
+            double a;
+            double b;
+            double nota1;
+            double nota2;
+            double nota3;
+            int minutos;
+            int numero;
             switch(actividad){
                 case 0:
                     System.out.println("Dejando las actividades del pdf 02.");
@@ -516,7 +494,7 @@ public class actividad02 {
                     break;
                 case 2:
                     System.out.print("Ingrese la hora (solo la hora, sin minutos): ");
-                    int hora = scanner.nextInt();
+                    hora = scanner.nextInt();
 
                     saludo(hora);
                     break;
@@ -534,9 +512,9 @@ public class actividad02 {
                     break;
                 case 5:
                     System.out.print("Ingrese el valor de a: ");
-                    double a = scanner.nextDouble();
+                    a = scanner.nextDouble();
                     System.out.print("Ingrese el valor de b: ");
-                    double b = scanner.nextDouble();
+                    b = scanner.nextDouble();
 
                     ecuacion1º(a, b);
                     break;
@@ -548,11 +526,11 @@ public class actividad02 {
                     break;
                 case 7:
                     System.out.print("Ingrese la primera nota: ");
-                    double nota1 = scanner.nextDouble();
+                    nota1 = scanner.nextDouble();
                     System.out.print("Ingrese la segunda nota: ");
-                    double nota2 = scanner.nextDouble();
+                    nota2 = scanner.nextDouble();
                     System.out.print("Ingrese la tercera nota: ");
-                    double nota3 = scanner.nextDouble();
+                    nota3 = scanner.nextDouble();
 
                     medianotas(nota1, nota2, nota3);
                     break;
@@ -588,7 +566,7 @@ public class actividad02 {
                     System.out.print("Ingrese la hora (0-23): ");
                     hora = scanner.nextInt();
                     System.out.print("Ingrese los minutos (0-59): ");
-                    int minutos = scanner.nextInt();
+                    minutos = scanner.nextInt();
 
                     medianoche(hora, minutos);
                     break;
@@ -650,7 +628,7 @@ public class actividad02 {
                     break;
                 case 14:
                     System.out.print("Ingrese un número entero: ");
-                    int numero = scanner.nextInt();
+                    numero = scanner.nextInt();
 
                     analisis(numero);
                     break;
@@ -685,52 +663,52 @@ public class actividad02 {
 
                     System.out.print("1. Tu pareja parece estar más inquieta de lo normal sin ningún motivo aparente.\n(v)erdadero o (f)also: ");
                     respuesta = scanner.nextLine();
-                    if ( respuesta.toLowerCase().equals("v") ) {
+                    if ( respuesta.equalsIgnoreCase("v") ) {
                         puntos += 3;
                     }
                     System.out.print("2. Ha aumentado sus gastos de vestuario.\n(v)erdadero o (f)also: ");
                     respuesta = scanner.nextLine();
-                    if ( respuesta.toLowerCase().equals("v") ) {
+                    if ( respuesta.equalsIgnoreCase("v") ) {
                         puntos += 3;
                     }
                     System.out.print("3. Ha perdido el interés que mostraba anteriormente por ti.\n(v)erdadero o (f)also: ");
                     respuesta = scanner.nextLine();
-                    if ( respuesta.toLowerCase().equals("v") ) {
+                    if ( respuesta.equalsIgnoreCase("v") ) {
                         puntos += 3;
                     }
                     System.out.print("4. Ahora se afeita y se asea con más frecuencia (si es hombre) o ahora se arregla el pelo y se asea con más frecuencia (si es mujer).\n(v)erdadero o (f)also: ");
                     respuesta = scanner.nextLine();
-                    if ( respuesta.toLowerCase().equals("v") ) {
+                    if ( respuesta.equalsIgnoreCase("v") ) {
                         puntos += 3;
                     }
                     System.out.print("5. No te deja que mires la agenda de su teléfono móvil.\n(v)erdadero o (f)also: ");
                     respuesta = scanner.nextLine();
-                    if ( respuesta.toLowerCase().equals("v") ) {
+                    if ( respuesta.equalsIgnoreCase("v") ) {
                         puntos += 3;
                     }
                     System.out.print("6. A veces tiene llamadas que dice no querer contestar cuando estás tú delante.\n(v)erdadero o (f)also: ");
                     respuesta = scanner.nextLine();
-                    if ( respuesta.toLowerCase().equals("v") ) {
+                    if ( respuesta.equalsIgnoreCase("v") ) {
                         puntos += 3;
                     }
                     System.out.print("7. Últimamente se preocupa más en cuidar la línea y/o estar bronceado/a.\n(v)erdadero o (f)also: ");
                     respuesta = scanner.nextLine();
-                    if ( respuesta.toLowerCase().equals("v") ) {
+                    if ( respuesta.equalsIgnoreCase("v") ) {
                         puntos += 3;
                     }
                     System.out.print("8. Muchos días viene tarde después de trabajar porque dice tener mucho más trabajo.\n(v)erdadero o (f)also: ");
                     respuesta = scanner.nextLine();
-                    if ( respuesta.toLowerCase().equals("v") ) {
+                    if ( respuesta.equalsIgnoreCase("v") ) {
                         puntos += 3;
                     }
                     System.out.print("9. Has notado que últimamente se perfuma más.\n(v)erdadero o (f)also: ");
                     respuesta = scanner.nextLine();
-                    if ( respuesta.toLowerCase().equals("v") ) {
+                    if ( respuesta.equalsIgnoreCase("v") ) {
                         puntos += 3;
                     }
                     System.out.print("10. Se confunde y te dice que ha estado en sitios donde no ha ido contigo.\n(v)erdadero o (f)also: ");
                     respuesta = scanner.nextLine();
-                    if ( respuesta.toLowerCase().equals("v") ) {
+                    if ( respuesta.equalsIgnoreCase("v") ) {
                         puntos += 3;
                     }
                     
