@@ -27,7 +27,7 @@ function filtrado(resultados){
         }
     }
     for (const numero in conteo) {
-        contenidoHTML += `Número ${numero}: ${conteo[numero]} veces<br>`;
+        contenidoHTML += "Número ${numero}: ${conteo[numero]} veces<br>";
     }
 
     return contenidoHTML;

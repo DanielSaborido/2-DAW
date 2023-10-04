@@ -8,13 +8,14 @@
 </head>
 <body>
     <h2>Actividad 8</h2>
-    <p>Escribir un script que determine si una cadena de texto es un palíndromo, es decir,
-     si se lee de la misma forma desde la izquierda y desde la derecha. Ejemplo de palíndromo complejo: "La ruta nos aporto otro paso natural".</p>
-    <label for="cadena">Introduce una cadena de texto:</label>
-    <input type="text" id="cadena">
-    <button onclick="verificarPalindromo()">Verificar</button>
-
-    <p id="resultado"></p>
+    <p>Vas a hacer un viaje con un grupo de 7 amigos y decidís que uno de vosotros se encargará de gestionar el monedero de cada uno. Eres el encargado de gestionar este dinero, así que para facilitar esta gestión decides hacer una pequeña aplicación para ello:</p>
+    <ul>
+        <li>Primero, decides crear una clase Monedero en Javascript con el número de billetes que tiene cada integrante del grupo, necesitarás almacenar el nombre de la persona (suponemos que será un nombre único), el número de billetes de 5€, el número de billetes de 10€ y el número de billetes de 20€. Para simplificar el ejercicio, no tenemos en cuenta el resto de billetes de valor superior.</li>
+        <li>Necesitarás crear los getters y los setters correspondientes a cada atributo almacenado, al igual que un método que calcule el total de dinero que hay en cada monedero.</li>
+        <li>Por último, por seguridad, no llevarás todos los monederos a la vez, sino que acordais que cada día se seleccionará el monedero que más dinero tenga en ese momento, así que necesitarás una función que calcule el dinero que tiene cada monedero y seleccione aquel que tenga el máximo valor. Si en un momento dado todos los monederos tienen la misma cantidad de dinero, la función indicará “Cualquiera”.</li>
+    </ul>
+    <p>Crear los objetos y casos de prueba necesarios para comprobar el correcto funcionamiento de la jerarquía.</p>
+    <p id="Result"></p>
 </body>
     <script src="../java/ejercicio8.js"></script>
 </html>
