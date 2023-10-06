@@ -4,6 +4,7 @@ let width = 400;
 let height = 400;
 let shrinking = true;
 let intervalIniciado = false;
+let abrirVentanas = 1;
 
 function abrirVentana() {
     ventanas.forEach((ventana) => {
@@ -33,8 +34,15 @@ function abrirVentana() {
 
         intervalIniciado = true;
     }
-    const left = Math.floor(Math.random() * (window.innerWidth - width));
-    const top = Math.floor(Math.random() * (window.innerHeight - height));
-    ventana = window.open('', '', `width=${width}, height=${height}, left=${left}, top=${top}`);
-    ventanas.push(ventana);
+    for (let i = 0; i < abrirVentanas; i++){
+        const left = Math.floor(Math.random() * (window.innerWidth - width));
+        const top = Math.floor(Math.random() * (window.innerHeight - height));
+        ventana = window.open('', '', `width=${width}, height=${height}, left=${left}, top=${top}`);
+        /*ventana.onbeforeunload = () => {
+            abrirVentana();  //parte graciosa del codigo
+            //intervalIniciado = false;  //descomentar para habilitar el caos total
+        };*/
+        ventanas.push(ventana);
+    }
+    abrirVentanas++;
 }
