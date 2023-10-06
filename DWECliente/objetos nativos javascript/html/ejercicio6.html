@@ -5,6 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 6</title>
+    <style>
+        table {
+            width: 60%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
     <h2>Actividad 6</h2>
@@ -12,7 +26,24 @@
     Diseña también un formulario desde el que puedas introducir los datos del Equipo y los Puntos que le corresponden, con un botón de “Enviar”. Cuando sea pulsado, se añadirá una nueva fila en la posición que le corresponda en función de los puntos que tenga en ese momento. Por ejemplo, si introducimos los valores Equipo=Betis y Puntos=18, la tabla deberá transformarse en:<br>
     Colocando al equipo Betis en la tercera posición.<br>
     Además, tendrás que controlar que, si un equipo que se introduzca ya está en la tabla, tan solo habrá que actualizar los puntos, recolocando a éste equipo en la posición que le corresponda.</p>
-    <p id="Result"></p>
+    <form id="equipoForm">
+        <label for="equipo">Equipo:</label>
+        <input type="text" id="equipo" required>
+        <label for="puntos">Puntos:</label>
+        <input type="number" id="puntos" required>
+        <button type="button" onclick="agregarEquipo()">Enviar</button>
+    </form>
+    <table id="tablaEquipos">
+        <thead>
+        <tr>
+            <th>Posición</th>
+            <th>Equipo</th>
+            <th>Puntos</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 </body>
     <script src="../java/ejercicio6.js"></script>
 </html>
