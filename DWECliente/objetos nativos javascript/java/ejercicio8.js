@@ -3,7 +3,6 @@ function setCookie(nombre, valor, expiracion) {
     dia.setTime(dia.getTime() + (expiracion * 24 * 60 * 60 * 1000));
     let expires = "expires="+dia.toUTCString();
     document.cookie = nombre + "=" + valor + ";" + expires + ";path=/";
-    console.log(document.cookie)
 }
 
 function getCookie(nombre) {
@@ -23,22 +22,30 @@ function checkCookie() {
     const direccion = getCookie("Direccion");
     const edad = getCookie("Edad");
     const profesion = getCookie("Profesion");
+    let dato;
 
-    if (nombre !== "") {
+    if (nombre !== "" && direccion !== "" && edad !== "" && profesion !== "") {
         alert("Nombre: " + nombre + "\nDirección: " + direccion + "\nEdad: " + edad + "\nProfesión: " + profesion);
-    } else {
-        let dato = prompt("Ponga su Nombre", "");
+    }
+    if (nombre === ""){
+        dato = prompt("Ponga su Nombre", "");
         if (dato !== "" && dato != null) {
             setCookie("Nombre", dato, 365);
         }
+    }
+    if (direccion === ""){
         dato = prompt("Ponga su Dirección", "");
         if (dato !== "" && dato != null) {
             setCookie("Direccion", dato, 365);
         }
+    }
+    if (edad === ""){
         dato = prompt("Ponga su Edad", "");
-        if (dato !== "" && dato != null) {
+        if (dato !== "" && dato != null && parseInt(dato)) {
             setCookie("Edad", dato, 365);
         }
+    }
+    if (profesion === ""){
         dato = prompt("Ponga su Profesión", "");
         if (dato !== "" && dato != null) {
             setCookie("Profesion", dato, 365);
