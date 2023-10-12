@@ -16,6 +16,7 @@ import java.util.Scanner;
  de un rango de entradas aleatorias, para verificar que vos Savant tenía razón.*/
 public class Main {
     static Random random = new Random();
+    
     public static int sinCambio(int intentos){
         int aciertos = 0;
 
@@ -29,6 +30,7 @@ public class Main {
 
         return aciertos;
     }
+
     public static int cambio(int intentos){
         int aciertos = 0;
 
@@ -51,17 +53,22 @@ public class Main {
 
         return aciertos;
     }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
         System.out.print("Ingrese cuantos intentos hará el jugador: ");
         int intentos = scanner.nextInt();
         int resultSinCambio = sinCambio(intentos);
         float division1 = (float) resultSinCambio/intentos;
         int resultConCambio = cambio(intentos);
         float division2 = (float) resultConCambio/intentos;
+
         System.out.println("El jugador ha obtenido el premio sin cambiar de puerta "+resultSinCambio+" veces de "+intentos+" intentos.");
         System.out.println("Su porcentaje en este caso es de "+division1);
         System.out.println("El jugador ha obtenido el premio cambiando de puerta "+resultConCambio+" veces de "+intentos+" intentos.");
         System.out.println("Su porcentaje en este caso es de "+division2);
+
+        scanner.close();
     }
 }
