@@ -16,7 +16,7 @@ import java.util.Scanner;
  de un rango de entradas aleatorias, para verificar que vos Savant tenía razón.*/
 public class Main {
     static Random random = new Random();
-    
+
     public static int concurso(int intentos, boolean cambiar){
         int aciertos = 0;
 
