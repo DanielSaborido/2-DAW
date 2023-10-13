@@ -17,36 +17,24 @@ import java.util.Scanner;
 public class Main {
     static Random random = new Random();
     
-    public static int sinCambio(int intentos){
+    public static int concurso(int intentos, boolean cambiar){
         int aciertos = 0;
 
         for (int i = 0; i < intentos; i++) {
             int eleccion = random.nextInt(3) + 1;
             int premio = random.nextInt(3) + 1;
-            if (eleccion == premio){
-                aciertos++;
+            if (cambiar){
+                int apertura;
+                do {
+                    apertura = random.nextInt(3) + 1;
+                } while (apertura == eleccion || apertura == premio);
+                int nuevaEleccion;
+                do {
+                    nuevaEleccion = random.nextInt(3) + 1;
+                } while (nuevaEleccion == apertura || nuevaEleccion == eleccion);
+                eleccion = nuevaEleccion;
             }
-        }
-
-        return aciertos;
-    }
-
-    public static int cambio(int intentos){
-        int aciertos = 0;
-
-        for (int i = 0; i < intentos; i++) {
-            int eleccion = random.nextInt(3) + 1;
-            int premio = random.nextInt(3) + 1;
-            int apertura;
-
-            do {
-                apertura = random.nextInt(3) + 1;
-            } while (apertura == eleccion || apertura == premio);
-            int nuevaEleccion;
-            do {
-                nuevaEleccion = random.nextInt(3) + 1;
-            } while (nuevaEleccion == apertura || nuevaEleccion == eleccion);
-            if (nuevaEleccion == premio){
+            if (eleccion == premio){
                 aciertos++;
             }
         }
@@ -59,15 +47,15 @@ public class Main {
 
         System.out.print("Ingrese cuantos intentos hará el jugador: ");
         int intentos = scanner.nextInt();
-        int resultSinCambio = sinCambio(intentos);
-        float division1 = (float) resultSinCambio/intentos;
-        int resultConCambio = cambio(intentos);
-        float division2 = (float) resultConCambio/intentos;
+        int resultSinCambio = concurso(intentos,false);
+        double division1 = (double) resultSinCambio/intentos;
+        int resultConCambio = concurso(intentos,true);
+        double division2 = (double) resultConCambio/intentos;
 
         System.out.println("El jugador ha obtenido el premio sin cambiar de puerta "+resultSinCambio+" veces de "+intentos+" intentos.");
-        System.out.println("Su porcentaje en este caso es de "+division1);
+        System.out.println("Su porcentaje en este caso es de "+String.format("%.2f", division1));
         System.out.println("El jugador ha obtenido el premio cambiando de puerta "+resultConCambio+" veces de "+intentos+" intentos.");
-        System.out.println("Su porcentaje en este caso es de "+division2);
+        System.out.println("Su porcentaje en este caso es de "+String.format("%.2f", division2));
 
         scanner.close();
     }
