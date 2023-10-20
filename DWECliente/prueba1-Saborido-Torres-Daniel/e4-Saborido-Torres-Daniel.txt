@@ -1,0 +1,1 @@
+Para la codificación de los ejercicios he usado unicamente Visual Studio Code y para la ejecución de este he usado el navegador Firefox ya que en el caso que hubiera pedido cookies o algo similar es el mejor capacitado para usarse.
