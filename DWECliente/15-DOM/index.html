@@ -26,7 +26,7 @@
         </header>
 
         <div  class="contenido-hero contenedor">
-            <h1 id="formulario">Encuentra <span> hospedaje  </span>para tus próximas vacaciones</h1>
+            <h1 id="formulario1">Encuentra <span> hospedaje  </span>para tus próximas vacaciones</h1>
 
             <form action="/buscador" method="POST" class="formulario formulario-buscar" id="formulario" >
                 <input type="text" name="busqueda" class="busqueda" placeholder="New York, Londres, Roma, Guadalajara">
@@ -36,7 +36,7 @@
     </div> <!--.hero-->
 
     <main class="contenido contenedor">
-        <section  id="formulario" class="hacer">
+        <section  id="formulario2" class="hacer">
             <h2>Que Hacer</h2>
             <div class="contenedor-cards">
                     <div class="card">
@@ -72,6 +72,7 @@
                         </div>
                     </div> <!--.card-->
             </div> <!--.columnas4 cuadros-->
+            <button onclick="anadirDato(hacer)">Añadir evento</button>
         </section>
 
 
@@ -113,6 +114,7 @@
                         </div>
                     </div> <!--.card-->
             </div> <!--.columnas4 cuadros-->
+            <button onclick="anadirDato(hospedaje)">Añadir hospedaje</button>
         </section>
 
         <section class="destinos">
@@ -238,6 +240,6 @@
     </footer>
     <a href="#footer" class="btn-flotante">Más información</a>
 
-    <!-- <script src="js/01-scripts.js"></script> -->
+    <script src="js/01-scripts.js"></script>
 </body>
 </html>
