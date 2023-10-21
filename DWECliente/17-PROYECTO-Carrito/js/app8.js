@@ -1,5 +1,6 @@
 //selectores
 
+const submenu = document.querySelector('.submenu')
 const carrito = document.querySelector('#carrito')
 const vaciarCarrito = document.querySelector("#vaciar-carrito")
 const listaCarrito = document.querySelector("#lista-carrito tbody")
@@ -37,13 +38,21 @@ function listeners() {
     vaciarCarrito.addEventListener('click', () => {
         articulosCarrito = []
         carritoHTML(articulosCarrito)
-        listaCarrito.lastChild.remove()
+        deshabilitarHover()
     })   
 }
 
 listeners()
 
 //funciones
+function deshabilitarHover() {
+    submenu.classList.remove("activo")
+}
+  
+function habilitarHover() {
+    submenu.classList.add("activo")
+}
+
 function anadirCurso(e){
     e.preventDefault()
     if (e.target.classList.contains("agregar-carrito")){
@@ -51,6 +60,7 @@ function anadirCurso(e){
         const curso = e.target.parentElement.parentElement
         console.log(curso)
         leerDatosCurso(curso)
+        habilitarHover()
     }
 }
 
@@ -69,7 +79,7 @@ function eliminarCurso(e) {
         carritoHTML(articulosCarrito)
     }
     if (articulosCarrito.length === 0){
-        listaCarrito.lastChild.remove()
+        deshabilitarHover()
     }
 }
 
