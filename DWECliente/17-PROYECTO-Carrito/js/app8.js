@@ -12,6 +12,7 @@ let articulosCarrito = []
 function listeners() {
     listaCursos.addEventListener('click', anadirCurso)
     carrito.addEventListener('click', eliminarCurso)
+    carrito.addEventListener('click', quitarCurso)
     vaciarCarrito.addEventListener('click', () => {
         limpiarHTML;
         articulosCarrito = []
@@ -42,6 +43,24 @@ function eliminarCurso(e) {
         articulosCarrito = articulosCarrito.filter((curso)=> 
             curso.id !== cursoID 
         )
+        console.log(articulosCarrito)
+        carritoHTML(articulosCarrito)
+    }
+}
+
+function quitarCurso(e) {
+    e.preventDefault()
+    console.log(e.target)
+    if (e.target.classList.contains("quitar-curso")){
+        console.log("Quitando un curso...")
+        const cursoID = e.target.getAttribute("data-id")
+        console.log(cursoID)
+
+        articulosCarrito.map((curso) => {
+            if (curso.id === cursoID){
+                curso.cantidad--
+            }
+        })
         console.log(articulosCarrito)
         carritoHTML(articulosCarrito)
     }
@@ -94,6 +113,13 @@ function carritoHTML(){
             <a herf="#" class="borrar-curso" data-id="${id}">X</a>
         </td>
         `
+        if (cantidad > 1) {
+            row.innerHTML += `
+            <td>
+                <a herf="#" class="quitar-curso" data-id="${id}">-</a>
+            </td>
+            `
+        }
 
         listaCarrito.appendChild(row)
     })
