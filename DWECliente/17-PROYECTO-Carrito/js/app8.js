@@ -12,11 +12,32 @@ let articulosCarrito = []
 function listeners() {
     listaCursos.addEventListener('click', anadirCurso)
     carrito.addEventListener('click', eliminarCurso)
-    carrito.addEventListener('click', quitarCurso)
-    carrito.addEventListener('click', sumarCurso)
+    carrito.addEventListener('mousedown', (e) => {
+        if (e.target.classList.contains("quitar-curso")) {
+            quitarCurso(e);
+            const interval = setInterval(() => {
+                quitarCurso(e);
+            }, 250);
+            carrito.addEventListener('mouseup', () => {
+                clearInterval(interval);
+            });
+        }
+    });
+    carrito.addEventListener('mousedown', (e) => {
+        if (e.target.classList.contains("añadir-curso")) {
+            sumarCurso(e);
+            const interval = setInterval(() => {
+                sumarCurso(e);
+            }, 250);
+            carrito.addEventListener('mouseup', () => {
+                clearInterval(interval);
+            });
+        }
+    });
     vaciarCarrito.addEventListener('click', () => {
-        limpiarHTML;
         articulosCarrito = []
+        carritoHTML(articulosCarrito)
+        listaCarrito.lastChild.remove()
     })   
 }
 
@@ -47,6 +68,9 @@ function eliminarCurso(e) {
         console.log(articulosCarrito)
         carritoHTML(articulosCarrito)
     }
+    if (articulosCarrito.length === 0){
+        listaCarrito.lastChild.remove()
+    }
 }
 
 function quitarCurso(e) {
@@ -58,7 +82,7 @@ function quitarCurso(e) {
         console.log(cursoID)
 
         articulosCarrito.map((curso) => {
-            if (curso.id === cursoID){
+            if (curso.id === cursoID && curso.cantidad > 1){
                 curso.cantidad--
             }
         })
@@ -90,7 +114,7 @@ function leerDatosCurso(curso){
     const infoCurso = {
         imagen: curso.querySelector("img").src,
         titulo: curso.querySelector("h4").textContent,
-        precio: curso.querySelector(".precio span").textContent,
+        precio: obtenerPrecioNumerico(curso.querySelector(".precio span").textContent),
         id: curso.querySelector("a").getAttribute("data-id"),
         cantidad: 1
     }
@@ -113,8 +137,14 @@ function leerDatosCurso(curso){
     carritoHTML(articulosCarrito)
 }
 
+function obtenerPrecioNumerico(precioTexto) {
+    const numeros = precioTexto.match(/\d+/);
+    return numeros ? parseFloat(numeros[0]) : 0;
+  }
+
 function carritoHTML(){
     limpiarHTML()
+    let precioTotal = 0;
 
     articulosCarrito.forEach((curso)=> {
         const {imagen, titulo, precio, cantidad, id} = curso
@@ -126,7 +156,7 @@ function carritoHTML(){
             <img src="${imagen}" width="300">
         </td>
         <td>${titulo}</td>
-        <td>${precio}</td>
+        <td>${precio}€</td>
         <td>${cantidad}</td>
         <td>
             <a herf="#" class="añadir-curso" data-id="${id}">+</a>
@@ -134,17 +164,19 @@ function carritoHTML(){
         <td>
             <a herf="#" class="borrar-curso" data-id="${id}">X</a>
         </td>
+        <td>
+            <a herf="#" class="quitar-curso" data-id="${id}">-</a>
+        </td>
         `
-        if (cantidad > 1) {
-            row.innerHTML += `
-            <td>
-                <a herf="#" class="quitar-curso" data-id="${id}">-</a>
-            </td>
-            `
-        }
-
+        precioTotal += precio*cantidad
         listaCarrito.appendChild(row)
     })
+    const sumatoria = document.createElement("tr")
+    sumatoria.innerHTML = `
+    <td>Precio total: </td>
+    <td>${precioTotal}€</td>
+    `
+    listaCarrito.appendChild(sumatoria)
 }
 
 function limpiarHTML() {
