@@ -11,8 +11,11 @@ let articulosCarrito = []
 //listeners
 function listeners() {
     listaCursos.addEventListener('click', anadirCurso)
-    carrito.addEventListener('click', ()=>{eliminarCurso(); articulosCarrito = []})
-    vaciarCarrito.addEventListener('click', limpiarHTML)//hacer que vacie la lista
+    carrito.addEventListener('click', eliminarCurso)
+    vaciarCarrito.addEventListener('click', () => {
+        limpiarHTML;
+        articulosCarrito = []
+    })   
 }
 
 listeners()
@@ -29,10 +32,12 @@ function anadirCurso(e){
 }
 
 function eliminarCurso(e) {
+    e.preventDefault()
     console.log(e.target)
     if (e.target.classList.contains("borrar-curso")){
         console.log("Borando...")
         const cursoID = e.target.getAttribute("data-id")
+        console.log(cursoID)
 
         articulosCarrito = articulosCarrito.filter((curso)=> 
             curso.id !== cursoID 
