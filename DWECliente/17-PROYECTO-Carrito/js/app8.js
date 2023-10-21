@@ -13,6 +13,7 @@ function listeners() {
     listaCursos.addEventListener('click', anadirCurso)
     carrito.addEventListener('click', eliminarCurso)
     carrito.addEventListener('click', quitarCurso)
+    carrito.addEventListener('click', sumarCurso)
     vaciarCarrito.addEventListener('click', () => {
         limpiarHTML;
         articulosCarrito = []
@@ -66,6 +67,24 @@ function quitarCurso(e) {
     }
 }
 
+function sumarCurso(e) {
+    e.preventDefault()
+    console.log(e.target)
+    if (e.target.classList.contains("añadir-curso")){
+        console.log("Quitando un curso...")
+        const cursoID = e.target.getAttribute("data-id")
+        console.log(cursoID)
+
+        articulosCarrito.map((curso) => {
+            if (curso.id === cursoID){
+                curso.cantidad++
+            }
+        })
+        console.log(articulosCarrito)
+        carritoHTML(articulosCarrito)
+    }
+}
+
 function leerDatosCurso(curso){
     console.log(curso)
     const infoCurso = {
@@ -109,6 +128,9 @@ function carritoHTML(){
         <td>${titulo}</td>
         <td>${precio}</td>
         <td>${cantidad}</td>
+        <td>
+            <a herf="#" class="añadir-curso" data-id="${id}">+</a>
+        </td>
         <td>
             <a herf="#" class="borrar-curso" data-id="${id}">X</a>
         </td>
