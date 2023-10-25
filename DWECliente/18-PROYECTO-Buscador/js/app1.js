@@ -96,7 +96,22 @@ function filtrarCoches() {
     .filter(filtrarPuertas)
     .filter(filtrarTrasmision)
     .filter(filtrarColor)
-    mostrarCoches(resultado)
+
+    if (resultado.length){
+        mostrarCoches(resultado)
+    } else{
+        noResultado()
+    }
+
+    
+}
+
+function noResultado(){
+    limpiarHTML()
+    const anuncio = document.createElement('div')
+    anuncio.classList.add("alerta", "error")
+    anuncio.textContent= "No hay resultados"
+    contenedor.appendChild(anuncio)
 }
 
 function filtrarMarca(coche){
