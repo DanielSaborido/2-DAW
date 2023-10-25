@@ -11,6 +11,14 @@ let articulosCarrito = []
 
 //listeners
 function listeners() {
+    document.addEventListener("DOMContentLoaded", () => {
+        const productos = JSON.parse(localStorage.getItem("productos"))
+        if (productos.length){
+            submenu.classList.add("activo")
+            articulosCarrito = productos
+            carritoHTML(productos)
+        }
+    })
     listaCursos.addEventListener('click', anadirCurso)
     carrito.addEventListener('click', eliminarCurso)
     carrito.addEventListener('mousedown', (e) => {
@@ -37,22 +45,14 @@ function listeners() {
     });
     vaciarCarrito.addEventListener('click', () => {
         articulosCarrito = []
-        carritoHTML(articulosCarrito)
-        deshabilitarHover()
+        almacenLocal(articulosCarrito)
+        submenu.classList.remove("activo")
     })   
 }
 
 listeners()
 
 //funciones
-function deshabilitarHover() {
-    submenu.classList.remove("activo")
-}
-  
-function habilitarHover() {
-    submenu.classList.add("activo")
-}
-
 function anadirCurso(e){
     e.preventDefault()
     if (e.target.classList.contains("agregar-carrito")){
@@ -60,7 +60,7 @@ function anadirCurso(e){
         const curso = e.target.parentElement.parentElement
         console.log(curso)
         leerDatosCurso(curso)
-        habilitarHover()
+        submenu.classList.add("activo")
     }
 }
 
@@ -76,10 +76,10 @@ function eliminarCurso(e) {
             curso.id !== cursoID 
         )
         console.log(articulosCarrito)
-        carritoHTML(articulosCarrito)
+        almacenLocal(articulosCarrito)
     }
     if (articulosCarrito.length === 0){
-        deshabilitarHover()
+        submenu.classList.remove("activo")
     }
 }
 
@@ -97,7 +97,7 @@ function quitarCurso(e) {
             }
         })
         console.log(articulosCarrito)
-        carritoHTML(articulosCarrito)
+        almacenLocal(articulosCarrito)
     }
 }
 
@@ -115,7 +115,7 @@ function sumarCurso(e) {
             }
         })
         console.log(articulosCarrito)
-        carritoHTML(articulosCarrito)
+        almacenLocal(articulosCarrito)
     }
 }
 
@@ -144,7 +144,7 @@ function leerDatosCurso(curso){
         console.log(articulosCarrito)
     }
 
-    carritoHTML(articulosCarrito)
+    almacenLocal(articulosCarrito)
 }
 
 function obtenerPrecioNumerico(precioTexto) {
@@ -152,11 +152,11 @@ function obtenerPrecioNumerico(precioTexto) {
     return numeros ? parseFloat(numeros[0]) : 0;
   }
 
-function carritoHTML(){
+function carritoHTML(productos){
     limpiarHTML()
     let precioTotal = 0;
 
-    articulosCarrito.forEach((curso)=> {
+    productos.forEach((curso)=> {
         const {imagen, titulo, precio, cantidad, id} = curso
         console.log(curso.titulo)
         const row = document.createElement("tr")
@@ -195,4 +195,9 @@ function limpiarHTML() {
     while (listaCarrito.firstChild){ //forma rapida, destruccion por nodos
         listaCarrito.firstChild.remove()
     }
+}
+
+function almacenLocal(lista){
+    localStorage.setItem("productos", JSON.stringify(lista))
+    carritoHTML(JSON.parse(localStorage.getItem("productos")))
 }
