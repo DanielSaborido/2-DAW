@@ -15,10 +15,12 @@ function listeners() {
             mostrarMensajes(mensajes);
         }
     });
-    mensajeTextarea.addEventListener('keydown', function(event) {
-        if (event.ctrlKey && event.key === "Enter") {
+    mensajeTextarea.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.key === "Enter") {
             if (!enviar.classList.contains("bloqueo")){
-                anadirMensaje(event)
+                anadirMensaje(e)
+            } else {
+                editarMensaje(e)
             }
         }
     });
@@ -40,7 +42,6 @@ function anadirMensaje(e) {
     const mensaje = mensajeTextarea.value;
     coleccionMensajes.push(mensaje);
     almacenLocal(coleccionMensajes);
-    mensajeTextarea.value = "";
 }
 
 function almacenLocal(lista) {
@@ -75,6 +76,7 @@ function mostrarMensajes(mensajes) {
         listaMensajes.appendChild(contenedor);
         index++;
     });
+    mensajeTextarea.focus();
 }
 
 function eliminarMensaje(e) {
@@ -93,11 +95,21 @@ function editarMensaje(e) {
     if (e.target.classList.contains("editar-mensaje")){
         editar.classList.remove("bloqueo")
         enviar.classList.add("bloqueo")
-        const id = e.target.getAttribute("data-id");
+        const mensajeID = e.target.getAttribute("data-id");
+        mensajeTextarea.focus();
         editar.addEventListener('click', function(event) {
-            guardarCambio(event, id);
+            guardarCambio(event, mensajeID);
             enviar.classList.remove("bloqueo");
             editar.classList.add("bloqueo");
+        });
+        mensajeTextarea.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.key === "Enter") {
+                if (!editar.classList.contains("bloqueo")){
+                    guardarCambio(event, mensajeID);
+                    enviar.classList.remove("bloqueo");
+                    editar.classList.add("bloqueo");
+                }
+            }
         });
     }
 }
@@ -110,11 +122,12 @@ function guardarCambio(e, id){
     coleccionMensajes[id] = mensaje;
     console.log(coleccionMensajes[id])
     almacenLocal(coleccionMensajes)
-    mensajeTextarea.value = "";
+    window.location.reload();
 }
 
 function limpiarHTML() {
     while (listaMensajes.firstChild) {
         listaMensajes.firstChild.remove();
     }
+    mensajeTextarea.value = "";
 }
