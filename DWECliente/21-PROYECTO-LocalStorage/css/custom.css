@@ -24,8 +24,11 @@ h1, h2 {
     grid-template-columns: 70% auto auto; 
 }
 
-.bloqueo {
+.button.u-full-width.button-primary.bloqueo,
+.button.u-full-width.button-primary.bloqueo:hover {
+    background-color: red;
     pointer-events: none;
+    cursor: not-allowed;
 }
 
 .error {
