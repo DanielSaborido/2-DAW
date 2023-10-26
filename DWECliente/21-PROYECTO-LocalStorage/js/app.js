@@ -13,12 +13,15 @@ function listeners() {
             mostrarMensajes(mensajes);
         }
     });
-
+    mensajeTextarea.addEventListener('keydown', function(event) {
+        if (event.ctrlKey && event.key === "Enter") {
+            anadirMensaje(event)
+        }
+    });
     enviar.addEventListener('click', anadirMensaje);
     vaciar.addEventListener('click', eliminarDatos);
     listaMensajes.addEventListener('click', eliminarMensaje);
 }
-
 listeners();
 
 function eliminarDatos(e) {
@@ -30,7 +33,6 @@ function eliminarDatos(e) {
 function anadirMensaje(e) {
     e.preventDefault();
     const mensaje = mensajeTextarea.value;
-    console.log("Agregando...", mensaje);
     coleccionMensajes.push(mensaje);
     almacenLocal(coleccionMensajes);
     mensajeTextarea.value = "";
@@ -45,31 +47,32 @@ function mostrarMensajes(mensajes) {
     limpiarHTML();
     let index = 0;
     mensajes.forEach((mensaje) => {
+        const contenedor = document.createElement("div");
+        contenedor.classList.add("mensaje");
+        
         const texto = document.createElement("p");
         texto.textContent = `Mensaje ${index + 1}: ${mensaje}`;
+        
         const borrado = document.createElement("a");
         borrado.classList.add("borrar-mensaje");
         borrado.setAttribute("data-id", index);
         borrado.textContent = "X";
-        listaMensajes.appendChild(texto);
-        listaMensajes.appendChild(borrado);
+        
+        contenedor.appendChild(texto);
+        contenedor.appendChild(borrado);
+        
+        listaMensajes.appendChild(contenedor);
         index++;
     });
 }
 
 function eliminarMensaje(e) {
     e.preventDefault()
-    console.log(e.target)
-    console.log(e.target.classList.contains("borrar-mensaje"))
     if (e.target.classList.contains("borrar-mensaje")){
-        console.log("Borando...")
         const mensajeID = e.target.getAttribute("data-id")
-        console.log(mensajeID)
-
         coleccionMensajes = coleccionMensajes.filter((mensaje, index)=> 
             index !== parseInt(mensajeID )
         )
-        console.log(coleccionMensajes)
         almacenLocal(coleccionMensajes)
     }
 }
