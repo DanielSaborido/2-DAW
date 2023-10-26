@@ -12,10 +12,20 @@ h1, h2 {
     color: red;
     font-weight: bold;
 }
+.editar-mensaje,
+.editar-mensaje:hover {
+    float: right;
+    cursor: pointer;
+    font-weight: bold;
+}
 
 .mensaje{
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 70% auto auto; 
+}
+
+.bloqueo {
+    pointer-events: none;
 }
 
 .error {
