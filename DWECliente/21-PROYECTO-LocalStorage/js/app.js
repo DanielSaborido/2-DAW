@@ -116,11 +116,8 @@ function editarMensaje(e) {
 
 function guardarCambio(e, id){
     e.preventDefault();
-    console.log(id)
     const mensaje = mensajeTextarea.value;
-    console.log(coleccionMensajes[id])
     coleccionMensajes[id] = mensaje;
-    console.log(coleccionMensajes[id])
     almacenLocal(coleccionMensajes)
     window.location.reload();
 }
