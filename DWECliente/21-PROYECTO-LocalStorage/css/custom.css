@@ -13,6 +13,11 @@ h1, h2 {
     font-weight: bold;
 }
 
+.mensaje{
+    display: flex;
+    justify-content: space-between;
+}
+
 .error {
     background-color: red;
     text-align: center;
