@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     reset.addEventListener('click', (e) => {
         e.preventDefault()
+        window.location.reload();
         resetForm()
     });
 
