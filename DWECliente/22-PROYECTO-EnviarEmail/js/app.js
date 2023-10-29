@@ -17,26 +17,49 @@ document.addEventListener("DOMContentLoaded", () => {
     email.addEventListener("blur", validar);    
     asunto.addEventListener("blur", validar);  
     mensaje.addEventListener("blur", validar);
+    email.addEventListener("keyup", validar);    
+    asunto.addEventListener("keyup", validar);  
+    mensaje.addEventListener("keyup", validar);
     sent.addEventListener("click", (e) => {
         e.preventDefault()
+        activarSpiner()
+    });
+
+    reset.addEventListener('click', (e) => {
+        e.preventDefault()
+        resetForm()
+        window.location.reload();
+    });
+
+    email.addEventListener('keydown', function(e) {
+        if (e.key === "Enter") {
+            asunto.focus();
+        }
+    });
+    asunto.addEventListener('keydown', function(e) {
+        if (e.key === "Enter") {
+            mensaje.focus();
+        }
+    });
+    mensaje.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.key === "Enter" && !sent.classList.contains("opacity-50")) {
+            mensaje.blur();
+            activarSpiner()
+        }
+    });
+
+    function activarSpiner(){
         spiner.classList.remove("hidden")
         setTimeout(() => {
             spiner.classList.add("hidden")
             resetForm()
-
             const alerta = document.createElement("p")
             alerta.classList.add("bg-green-500", "text-center", "text-white", "rounded-lg", "mt-10", "text-sm")
             alerta.textContent = "Mensaje enviado con exito"
             formulario.appendChild(alerta)
             setTimeout(() =>{formulario.lastChild.remove()},3000)
         },3000)
-    });
-
-    reset.addEventListener('click', (e) => {
-        e.preventDefault()
-        window.location.reload();
-        resetForm()
-    });
+    }
 
     function resetForm(){
         emailOBJ.email=""
@@ -67,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function validarEmail(email){
-        rexg =/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        rexg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         resultado = rexg.test(email)
         return resultado
     }
