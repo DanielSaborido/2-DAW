@@ -7,12 +7,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const sent = document.querySelector("#formulario input[type='submit']");
 
-    const emailOBJ = {
+    const clienteOBJ = {
         nombre:"",
         email:"",
         telefono:"",
         empresa:""
     }
+    resetForm()
   
     nombre.addEventListener("blur", validar); 
     email.addEventListener("blur", validar);   
@@ -26,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     sent.addEventListener("click", (e) => {
         e.preventDefault()
+        console.log(clienteOBJ)
         comprobarFormulario()
     });
 
@@ -52,10 +54,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function resetForm(){
-        emailOBJ.nombre=""
-        emailOBJ.email=""
-        emailOBJ.telefono=""
-        emailOBJ.empresa=""
+        clienteOBJ.nombre=""
+        clienteOBJ.email=""
+        clienteOBJ.telefono=""
+        clienteOBJ.empresa=""
         formulario.reset()
     }
 
@@ -63,31 +65,31 @@ document.addEventListener("DOMContentLoaded", () => {
         const elemento = e.target
         if (elemento.value.trim() === ""){
             mostrarAlerta(`El campo ${elemento.id} esta vacio`, elemento.parentElement)
-            emailOBJ[elemento.name] = ""
+            clienteOBJ[elemento.name] = ""
             return
         }
         if (elemento.id === "nombre" && !validarNombre(elemento.value)){
             mostrarAlerta(`El ${elemento.id} no es valido`, elemento.parentElement)
-            emailOBJ[elemento.name] = ""
+            clienteOBJ[elemento.name] = ""
             return
         }
         if (elemento.id === "email" && !validarEmail(elemento.value)){
             mostrarAlerta(`El ${elemento.id} no es valido`, elemento.parentElement)
-            emailOBJ[elemento.name] = ""
+            clienteOBJ[elemento.name] = ""
             return
         }
         if (elemento.id === "telefono" && !validarTelefono(elemento.value)){
             mostrarAlerta(`El ${elemento.id} no es valido`, elemento.parentElement)
-            emailOBJ[elemento.name] = ""
+            clienteOBJ[elemento.name] = ""
             return
         }
         limpiarAlerta(elemento.parentElement)
 
-        emailOBJ[elemento.name] = elemento.value.trim().toLowerCase()
+        clienteOBJ[elemento.name] = elemento.value.trim().toLowerCase()
     }
 
     function validarNombre(nombre){
-        rexg = /^[A-Za-z]+( [A-Za-z]+)*$/;
+        rexg = /^(?=.{1,40}$)[a-zA-ZáéíóúüñÁÉÍÓÚÑ]+(?:[\s][a-zA-ZáéíóúüñÁÉÍÓÚÑ]+)*$/;
         if (nombre.split(' ').some(a => a.length < 3)){
             return false
         }
@@ -124,12 +126,52 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function comprobarFormulario(){
-        const values = Object.values(emailOBJ)
+        const values = Object.values(clienteOBJ)
         if (values.includes("")){
-            console.log("Formulario no enviado")
             return
         }
-        resetForm()
+        crearDB()
         console.log("Formulario enviado")
+        window.location.reload();
+    }
+
+    function crearDB(){
+        let request = indexedDB.open("CRM", 1);
+
+        request.onerror = function() {
+            console.error("Error", openRequest.error);
+        };
+        request.onsuccess = function(event) {
+            const db = event.target.result;
+
+            insertarCliente(db, clienteOBJ);
+        };
+        
+        request.onupgradeneeded = (event) => {
+            let db = event.target.result;
+            let store = db.createObjectStore('Clientes', {
+                autoIncrement: true
+            });
+            let index = store.createIndex('email', 'email', {
+                unique: true
+            });
+        };
+    }
+    function insertarCliente(db, cliente) {
+        const txn = db.transaction('Clientes', 'readwrite');
+        const store = txn.objectStore('Clientes');
+        let query = store.put(cliente);
+    
+        query.onsuccess = function (event) {
+            console.log(event);
+        };
+    
+        query.onerror = function (event) {
+            console.log(event.target.errorCode);
+        }
+    
+        txn.oncomplete = function () {
+            db.close();
+        };
     }
 })
