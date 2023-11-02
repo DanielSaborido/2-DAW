@@ -111,18 +111,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function mostrarAlerta(mensaje, referencia){
         limpiarAlerta(referencia)
-
         const error = document.createElement("p")
         error.textContent = mensaje
         error.classList.add("bg-red-600", "text-center", "text-white", "p-2")
         referencia.appendChild(error)
-    }
-
-    function limpiarAlerta(referencia){
-        const alerta = referencia.querySelector(".bg-red-600")
-        if (alerta){
-            alerta.remove()
-        }
     }
 
     function comprobarFormulario(){
@@ -135,18 +127,23 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.reload();
     }
 
+    function limpiarAlerta(referencia){
+        const alerta = referencia.querySelector(".bg-red-600")
+        if (alerta){
+            alerta.remove()
+        }
+    }
+
     function crearDB(clienteOBJ){
         let request = indexedDB.open("CRM", 1);
-
+    
         request.onerror = function() {
             console.error("Error", openRequest.error);
         };
         request.onsuccess = function(event) {
             const db = event.target.result;
-
             insertarCliente(db, clienteOBJ);
         };
-        
         request.onupgradeneeded = (event) => {
             let db = event.target.result;
             let store = db.createObjectStore('Clientes', {
@@ -157,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         };
     }
-
+    
     function insertarCliente(db, cliente) {
         const txn = db.transaction('Clientes', 'readwrite');
         const store = txn.objectStore('Clientes');
