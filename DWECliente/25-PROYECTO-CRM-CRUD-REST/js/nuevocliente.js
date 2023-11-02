@@ -130,12 +130,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (values.includes("")){
             return
         }
-        crearDB()
+        crearDB(clienteOBJ)
         console.log("Formulario enviado")
         window.location.reload();
     }
 
-    function crearDB(){
+    function crearDB(clienteOBJ){
         let request = indexedDB.open("CRM", 1);
 
         request.onerror = function() {
@@ -157,6 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         };
     }
+
     function insertarCliente(db, cliente) {
         const txn = db.transaction('Clientes', 'readwrite');
         const store = txn.objectStore('Clientes');
