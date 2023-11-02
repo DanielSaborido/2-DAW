@@ -149,9 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
             let store = db.createObjectStore('Clientes', {
                 autoIncrement: true
             });
-            let index = store.createIndex('email', 'email', {
-                unique: true
-            });
         };
     }
     

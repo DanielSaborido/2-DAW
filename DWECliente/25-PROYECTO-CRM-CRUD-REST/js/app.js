@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const tablaClientes = document.querySelector("tbody")
+
     let request = indexedDB.open("CRM", 1);
     request.onerror = function () {
         console.error("Error al abrir la base de datos");
@@ -13,14 +15,19 @@ document.addEventListener("DOMContentLoaded", () => {
         cursorRequest.onsuccess = (event) => {
             let cursor = event.target.result;
             if (cursor) {
+                let id = cursor.key;
                 let cliente = cursor.value;
-                agregarClienteTabla(db, cliente);
+                agregarClienteTabla(id, cliente);
                 cursor.continue();
             }
         };
+
+        tablaClientes.addEventListener("click", (e) => {
+            eliminarCliente(e, db)
+        });
     };
 
-    function agregarClienteTabla(db, cliente) {
+    function agregarClienteTabla(id, cliente) {
         const listadoClientes = document.querySelector("#listado-clientes");
         const row = document.createElement("tr");
         row.innerHTML = `
@@ -28,10 +35,10 @@ document.addEventListener("DOMContentLoaded", () => {
           <td class="px-6 py-4 whitespace-no-wrap">${cliente.telefono}</td>
           <td class="px-6 py-4 whitespace-no-wrap">${cliente.empresa}</td>
           <td class="px-6 py-4 whitespace-no-wrap">
-              <a class="bg-red-500 text-white py-2 px-3 rounded hover:bg-red-600 edit-button" data-id="${cliente.id}">
+              <a class="bg-red-500 text-white py-2 px-3 rounded hover:bg-red-600 edit-button" data-id="${id}">
                   Editar
               </a>
-              <a class="bg-red-500 text-white py-2 px-3 rounded hover:bg-red-600 delete-button" data-id="${cliente.id}">
+              <a class="bg-red-500 text-white py-2 px-3 rounded hover:bg-red-600 delete-button" data-id="${id}">
                   Borrar
               </a>
           </td>
@@ -40,37 +47,29 @@ document.addEventListener("DOMContentLoaded", () => {
         listadoClientes.appendChild(row);
 
         const editButtons = row.querySelector(".edit-button");
-        const deleteButtons = row.querySelector(".delete-button");
       
         editButtons.addEventListener("click", (e) => {
             e.preventDefault()
-            const clientId = e.target.getAttribute("data-id");
+            const clientId = parseInt(e.target.getAttribute("data-id"), 10)
             window.location.href = `editar-cliente.html?id=${clientId}`;
         });
-        deleteButtons.addEventListener("click", (e) => {
-            e.preventDefault()
-            const clientId = e.target.getAttribute("data-id");
-            eliminarCliente(db, clientId);
-        });
-    }
-      
-    function eliminarCliente(db, id) {
-        const txn = db.transaction('Clientes', 'readwrite');
-        const store = txn.objectStore('Clientes');
-        let query = store.delete(id);
+    }    
 
-        query.onsuccess = function (event) {
-            eliminarFilaCliente(id)
-        };
-        query.onerror = function (event) {
-            console.log(event.target.errorCode);
-        }
-    }
+    function eliminarCliente(e, db) {
+        e.preventDefault()
+        if (e.target.classList.contains("delete-button")){
+            const clienteID = parseInt(e.target.getAttribute("data-id"), 10)
+            const txn = db.transaction('Clientes', 'readwrite');
+            const store = txn.objectStore('Clientes');
+            let query = store.delete(clienteID);
 
-    function eliminarFilaCliente(id) {
-        const row = document.querySelector(`tr[data-id="${id}"]`);
-        if (row) {
-            row.remove();
+            query.onsuccess = function (event) {
+                const cliente = e.target.parentElement.parentElement
+                cliente.remove()
+            };
+            query.onerror = function (event) {
+                console.log(event.target.errorCode);
+            }
         }
     }
 });
