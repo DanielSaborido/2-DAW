@@ -89,23 +89,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function validarNombre(nombre){
-        rexg = /^(?=.{1,40}$)[a-zA-ZáéíóúüñÁÉÍÓÚÑ]+(?:[\s][a-zA-ZáéíóúüñÁÉÍÓÚÑ]+)*$/;
+        const rexg = /^(?=.{1,40}$)[a-zA-ZáéíóúüñÁÉÍÓÚÑ]+(?:[\s][a-zA-ZáéíóúüñÁÉÍÓÚÑ]+)*$/;
         if (nombre.split(' ').some(a => a.length < 3)){
             return false
         }
-        resultado = rexg.test(nombre)
+        const resultado = rexg.test(nombre)
         return resultado
     }
 
     function validarEmail(email){
-        rexg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        resultado = rexg.test(email)
+        const rexg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const resultado = rexg.test(email)
         return resultado
     }
 
     function validarTelefono(telefono){
-        rexg = /^(\+34|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}$/;
-        resultado = rexg.test(telefono)
+        const rexg = /^(\+34|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}$/;
+        const resultado = rexg.test(telefono)
         return resultado
     }
 

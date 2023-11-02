@@ -25,6 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
         tablaClientes.addEventListener("click", (e) => {
             eliminarCliente(e, db)
         });
+
+        tablaClientes.addEventListener("click", (e) => {
+            modificarCliente(e)
+        });
     };
 
     function agregarClienteTabla(id, cliente) {
@@ -45,14 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
       
         listadoClientes.appendChild(row);
-
-        const editButtons = row.querySelector(".edit-button");
-      
-        editButtons.addEventListener("click", (e) => {
-            e.preventDefault()
-            const clientId = parseInt(e.target.getAttribute("data-id"), 10)
-            window.location.href = `editar-cliente.html?id=${clientId}`;
-        });
     }    
 
     function eliminarCliente(e, db) {
@@ -70,6 +66,14 @@ document.addEventListener("DOMContentLoaded", () => {
             query.onerror = function (event) {
                 console.log(event.target.errorCode);
             }
+        }
+    }
+
+    function modificarCliente(e) {
+        e.preventDefault()
+        if (e.target.classList.contains("edit-button")){
+            const clientId = parseInt(e.target.getAttribute("data-id"), 10)
+            window.location.href = `editar-cliente.html?id=${clientId}`;
         }
     }
 });
