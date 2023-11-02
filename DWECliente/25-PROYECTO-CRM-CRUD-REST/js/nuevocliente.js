@@ -3,26 +3,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const email = document.querySelector("#email");
     const telefono = document.querySelector("#telefono");
     const empresa = document.querySelector("#empresa");
+    const formulario = document.querySelector("#formulario");
 
-    const sent = document.querySelector("#formulario button[type='submit']");
+    const sent = document.querySelector("#formulario input[type='submit']");
 
     const emailOBJ = {
-        email:"",
         nombre:"",
+        email:"",
         telefono:"",
         empresa:""
     }
-
-    email.addEventListener("blur", validar);    
-    nombre.addEventListener("blur", validar);  
+  
+    nombre.addEventListener("blur", validar); 
+    email.addEventListener("blur", validar);   
     telefono.addEventListener("blur", validar);
-    empresa.addEventListener("blur", validar); 
-    email.addEventListener("keyup", validar);    
-    nombre.addEventListener("keyup", validar);  
+    empresa.addEventListener("blur", validar);
+  
+    nombre.addEventListener("keyup", validar); 
+    email.addEventListener("keyup", validar);   
     telefono.addEventListener("keyup", validar);
-    empresa.addEventListener("keyup", validar);  
+    empresa.addEventListener("keyup", validar); 
+
     sent.addEventListener("click", (e) => {
         e.preventDefault()
+        comprobarFormulario()
     });
 
     nombre.addEventListener('keydown', function(e) {
@@ -43,27 +47,52 @@ document.addEventListener("DOMContentLoaded", () => {
     empresa.addEventListener('keydown', function(e) {
         if (e.key === "Enter") {
             empresa.blur();
+            comprobarFormulario()
         }
     });
+
+    function resetForm(){
+        emailOBJ.nombre=""
+        emailOBJ.email=""
+        emailOBJ.telefono=""
+        emailOBJ.empresa=""
+        formulario.reset()
+    }
 
     function validar(e){
         const elemento = e.target
         if (elemento.value.trim() === ""){
             mostrarAlerta(`El campo ${elemento.id} esta vacio`, elemento.parentElement)
             emailOBJ[elemento.name] = ""
-            comprobarFormulario()
+            return
+        }
+        if (elemento.id === "nombre" && !validarNombre(elemento.value)){
+            mostrarAlerta(`El ${elemento.id} no es valido`, elemento.parentElement)
+            emailOBJ[elemento.name] = ""
             return
         }
         if (elemento.id === "email" && !validarEmail(elemento.value)){
             mostrarAlerta(`El ${elemento.id} no es valido`, elemento.parentElement)
             emailOBJ[elemento.name] = ""
-            comprobarFormulario()
+            return
+        }
+        if (elemento.id === "telefono" && !validarTelefono(elemento.value)){
+            mostrarAlerta(`El ${elemento.id} no es valido`, elemento.parentElement)
+            emailOBJ[elemento.name] = ""
             return
         }
         limpiarAlerta(elemento.parentElement)
 
         emailOBJ[elemento.name] = elemento.value.trim().toLowerCase()
-        comprobarFormulario(emailOBJ)
+    }
+
+    function validarNombre(nombre){
+        rexg = /^[A-Za-z]+( [A-Za-z]+)*$/;
+        if (nombre.split(' ').some(a => a.length < 3)){
+            return false
+        }
+        resultado = rexg.test(nombre)
+        return resultado
     }
 
     function validarEmail(email){
@@ -72,11 +101,17 @@ document.addEventListener("DOMContentLoaded", () => {
         return resultado
     }
 
-    function mostrarAlerta(telefono, referencia){
+    function validarTelefono(telefono){
+        rexg = /^(\+34|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}$/;
+        resultado = rexg.test(telefono)
+        return resultado
+    }
+
+    function mostrarAlerta(mensaje, referencia){
         limpiarAlerta(referencia)
 
         const error = document.createElement("p")
-        error.textContent = telefono
+        error.textContent = mensaje
         error.classList.add("bg-red-600", "text-center", "text-white", "p-2")
         referencia.appendChild(error)
     }
@@ -91,11 +126,10 @@ document.addEventListener("DOMContentLoaded", () => {
     function comprobarFormulario(){
         const values = Object.values(emailOBJ)
         if (values.includes("")){
-            sent.disabled = true;
-            sent.classList.add("opacity-50")
+            console.log("Formulario no enviado")
             return
         }
-        sent.disabled = false;
-        sent.classList.remove("opacity-50")
+        resetForm()
+        console.log("Formulario enviado")
     }
 })
