@@ -1,35 +1,54 @@
 document.addEventListener("DOMContentLoaded", () => {
     const tablaClientes = document.querySelector("tbody")
 
-    let request = indexedDB.open("CRM", 1);
-    request.onerror = function () {
-        console.error("Error al abrir la base de datos");
-    };
+    function comprobarDB(nombreDB){
+        return indexedDB.databases()
+            .then(databases => {
+            return databases.find(db => db.name === nombreDB) !== undefined;
+            });
+    }
 
-    request.onsuccess = function (event) {
-        const db = event.target.result;
-        const txn = db.transaction("Clientes", "readonly");
-        const objectStore = txn.objectStore("Clientes");
-        const cursorRequest = objectStore.openCursor();
-
-        cursorRequest.onsuccess = (event) => {
-            let cursor = event.target.result;
-            if (cursor) {
-                let id = cursor.key;
-                let cliente = cursor.value;
-                agregarClienteTabla(id, cliente);
-                cursor.continue();
+    comprobarDB("CRM")
+        .then(databaseExists => {
+            if (databaseExists) {
+                mostrarDB()
+            } else {
+                console.log("todavia no mostrar");
             }
+        });
+    
+    function mostrarDB(){
+        let request = indexedDB.open("CRM", 1);
+        request.onerror = function () {
+            console.error("Error al abrir la base de datos");
         };
 
-        tablaClientes.addEventListener("click", (e) => {
-            eliminarCliente(e, db)
-        });
+        request.onsuccess = function (event) {
+            const db = event.target.result;
+            const txn = db.transaction("Clientes", "readonly");
+            const objectStore = txn.objectStore("Clientes");
+            const cursorRequest = objectStore.openCursor();
 
-        tablaClientes.addEventListener("click", (e) => {
-            modificarCliente(e)
-        });
-    };
+            cursorRequest.onsuccess = (event) => {
+                let cursor = event.target.result;
+                if (cursor) {
+                    let id = cursor.key;
+                    let cliente = cursor.value;
+                    agregarClienteTabla(id, cliente);
+                    cursor.continue();
+                }
+            };
+
+            tablaClientes.addEventListener("click", (e) => {
+                eliminarCliente(e, db)
+            });
+
+            tablaClientes.addEventListener("click", (e) => {
+                modificarCliente(e)
+            });
+        };
+    }
+    
 
     function agregarClienteTabla(id, cliente) {
         const listadoClientes = document.querySelector("#listado-clientes");
