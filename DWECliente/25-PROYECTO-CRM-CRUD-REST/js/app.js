@@ -1,11 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     const tablaClientes = document.querySelector("tbody")
 
-    function comprobarDB(nombreDB){
-        return indexedDB.databases()
-            .then(databases => {
-            return databases.find(db => db.name === nombreDB) !== undefined;
-            });
+    async function comprobarDB(nombreDB){
+        const databases = await indexedDB.databases();
+        return databases.find(db => db.name === nombreDB) !== undefined;
     }
 
     comprobarDB("CRM")
