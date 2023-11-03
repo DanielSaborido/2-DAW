@@ -122,9 +122,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (values.includes("")){
             return
         }
-        crearDB(clienteOBJ)
+        insertarCliente()
         console.log("Formulario enviado")
-        window.location.reload();
+        //window.location.reload();
     }
 
     function limpiarAlerta(referencia){
@@ -134,39 +134,50 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function crearDB(clienteOBJ){
+    function crearDB() {
         let request = indexedDB.open("CRM", 1);
     
         request.onerror = function() {
-            console.error("Error", openRequest.error);
+            console.error("Error", request.error);
         };
+    
         request.onsuccess = function(event) {
             const db = event.target.result;
-            insertarCliente(db, clienteOBJ);
         };
-        request.onupgradeneeded = (event) => {
+    
+        request.onupgradeneeded = function(event) {
             let db = event.target.result;
-            let store = db.createObjectStore('Clientes', {
-                autoIncrement: true
-            });
+            if (!db.objectStoreNames.contains("Clientes")) {
+                db.createObjectStore("Clientes", { autoIncrement: true });
+            }
         };
     }
     
-    function insertarCliente(db, cliente) {
-        const txn = db.transaction('Clientes', 'readwrite');
-        const store = txn.objectStore('Clientes');
-        let query = store.put(cliente);
-    
-        query.onsuccess = function (event) {
-            console.log(event);
+    function insertarCliente() {
+        const request = indexedDB.open('CRM', 1);
+
+        request.onerror = (event) => {
+            console.error(`Database error: ${event.target.errorCode}`);
         };
-    
-        query.onerror = function (event) {
-            console.log(event.target.errorCode);
-        }
-    
-        txn.oncomplete = function () {
-            db.close();
+
+        request.onsuccess = (event) => {
+            let db = event.target.result;
+            const txn = db.transaction("Clientes", "readwrite");
+            const store = txn.objectStore("Clientes");
+            let query = store.put(clienteOBJ);
+        
+            query.onsuccess = function (event) {
+                console.log(event);
+            };
+        
+            query.onerror = function (event) {
+                console.log(event.target.errorCode);
+            }
+        
+            txn.oncomplete = function () {
+                console.log("la puta")
+            };
         };
     }
+    crearDB() 
 })
