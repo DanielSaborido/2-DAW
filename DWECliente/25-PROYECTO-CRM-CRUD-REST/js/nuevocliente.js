@@ -20,10 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
     telefono.addEventListener("blur", validar);
     empresa.addEventListener("blur", validar);
   
-    nombre.addEventListener("keyup", validar); 
-    email.addEventListener("keyup", validar);   
-    telefono.addEventListener("keyup", validar);
-    empresa.addEventListener("keyup", validar); 
+    nombre.addEventListener("input", validar); 
+    email.addEventListener("input", validar);
+    telefono.addEventListener("input", validar);
 
     sent.addEventListener("click", (e) => {
         e.preventDefault()
@@ -84,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         limpiarAlerta(elemento.parentElement)
 
-        clienteOBJ[elemento.name] = elemento.value.trim().toLowerCase()
+        clienteOBJ[elemento.name] = elemento.value.trim()
     }
 
     function validarNombre(nombre){
@@ -103,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function validarTelefono(telefono){
-        const rexg = /^(\+34|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}$/;
+        const rexg = /^(\+34|34)?[ -]*(6|7|9)[ -]*([0-9][ -]*){8}$/;
         const resultado = rexg.test(telefono)
         return resultado
     }
@@ -122,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return
         }
         crearDB()
-        setTimeout(() =>{window.location.reload();},500)
+        setTimeout(() =>{resetForm();},500)
     }
 
     function limpiarAlerta(referencia){
@@ -158,11 +157,9 @@ document.addEventListener("DOMContentLoaded", () => {
         query.onsuccess = function (event) {
             console.log(event);
         };
-    
         query.onerror = function (event) {
             console.log(event.target.errorCode);
         }
-    
         txn.oncomplete = function () {
             db.close();
         };

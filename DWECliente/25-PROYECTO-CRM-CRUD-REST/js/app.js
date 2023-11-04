@@ -40,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
             tablaClientes.addEventListener("click", (e) => {
                 eliminarCliente(e, db)
             });
-
             tablaClientes.addEventListener("click", (e) => {
                 modificarCliente(e)
             });
@@ -56,12 +55,12 @@ document.addEventListener("DOMContentLoaded", () => {
           <td class="px-6 py-4 whitespace-no-wrap">${cliente.telefono}</td>
           <td class="px-6 py-4 whitespace-no-wrap">${cliente.empresa}</td>
           <td class="px-6 py-4 whitespace-no-wrap">
-              <a class="bg-red-500 text-white py-2 px-3 rounded hover:bg-red-600 edit-button" data-id="${id}">
+              <button class="bg-green-500 text-white py-2 px-3 rounded hover:bg-green-600 edit-button" data-id="${id}">
                   Editar
-              </a>
-              <a class="bg-red-500 text-white py-2 px-3 rounded hover:bg-red-600 delete-button" data-id="${id}">
+              </button>
+              <button class="bg-red-500 text-white py-2 px-3 rounded hover:bg-red-600 delete-button" data-id="${id}">
                   Borrar
-              </a>
+              </button>
           </td>
         `;
       
@@ -69,20 +68,33 @@ document.addEventListener("DOMContentLoaded", () => {
     }    
 
     function eliminarCliente(e, db) {
-        e.preventDefault()
-        if (e.target.classList.contains("delete-button")){
-            const clienteID = parseInt(e.target.getAttribute("data-id"), 10)
-            const txn = db.transaction('Clientes', 'readwrite');
+        e.preventDefault();
+        if (e.target.classList.contains("delete-button")) {
+            const clienteID = parseInt(e.target.getAttribute("data-id"), 10);
+            const txn = db.transaction('Clientes', 'readonly');
             const store = txn.objectStore('Clientes');
-            let query = store.delete(clienteID);
-
-            query.onsuccess = function (event) {
-                const cliente = e.target.parentElement.parentElement
-                cliente.remove()
+            const getRecordsRequest = store.getAll();
+    
+            getRecordsRequest.onsuccess = function (event) {
+                const records = event.target.result;
+    
+                if (records.length === 0) {
+                    db.close();
+                    indexedDB.deleteDatabase(db.name);
+                } else {
+                    const txnDelete = db.transaction('Clientes', 'readwrite');
+                    const storeDelete = txnDelete.objectStore('Clientes');
+                    let query = storeDelete.delete(clienteID);
+    
+                    query.onsuccess = function (event) {
+                        const cliente = e.target.parentElement.parentElement;
+                        cliente.remove();
+                    };
+                    query.onerror = function (event) {
+                        console.log(event.target.errorCode);
+                    }
+                }
             };
-            query.onerror = function (event) {
-                console.log(event.target.errorCode);
-            }
         }
     }
 
