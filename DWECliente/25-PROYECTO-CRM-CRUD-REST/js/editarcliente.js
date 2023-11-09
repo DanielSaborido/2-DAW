@@ -1,4 +1,4 @@
-import { validar } from "./funciones.js";
+import { validar, modificarCliente } from "./funciones.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const nombre = document.querySelector("#nombre");
@@ -15,44 +15,43 @@ document.addEventListener("DOMContentLoaded", () => {
         empresa:""
     }
     
-    function listeners(){
-        nombre.addEventListener("blur", validar); 
-        email.addEventListener("blur", validar);   
-        telefono.addEventListener("blur", validar);
-        empresa.addEventListener("blur", validar);
-    
-        nombre.addEventListener("input", validar); 
-        email.addEventListener("input", validar);
-        telefono.addEventListener("input", validar);
+    function listeners() {
+        nombre.addEventListener("blur", (e) => validar(clienteOBJ, e));
+        email.addEventListener("blur", (e) => validar(clienteOBJ, e));
+        telefono.addEventListener("blur", (e) => validar(clienteOBJ, e));
+        empresa.addEventListener("blur", (e) => validar(clienteOBJ, e));
+
+        nombre.addEventListener("input", (e) => validar(clienteOBJ, e));
+        email.addEventListener("input", (e) => validar(clienteOBJ, e));
+        telefono.addEventListener("input", (e) => validar(clienteOBJ, e));
 
         sent.addEventListener("click", (e) => {
             e.preventDefault()
             comprobarFormulario()
         });
 
-        nombre.addEventListener('keydown', function(e) {
+        nombre.addEventListener('keydown', function (e) {
             if (e.key === "Enter") {
                 email.focus();
             }
         });
-        email.addEventListener('keydown', function(e) {
+        email.addEventListener('keydown', function (e) {
             if (e.key === "Enter") {
                 telefono.focus();
             }
         });
-        telefono.addEventListener('keydown', function(e) {
+        telefono.addEventListener('keydown', function (e) {
             if (e.key === "Enter") {
                 empresa.focus();
             }
         });
-        empresa.addEventListener('keydown', function(e) {
+        empresa.addEventListener('keydown', function (e) {
             if (e.key === "Enter") {
                 empresa.blur();
                 comprobarFormulario()
             }
         });
     }
-    
     listeners()
 
     function comprobarFormulario(){
@@ -60,35 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (values.includes("")){
             return
         }
-        modificarCliente()
+        modificarCliente(clienteOBJ)
         setTimeout(() =>{window.location.href = `index.html`;},500)
     }
-
-    function modificarCliente() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const clientId = parseInt(urlParams.get("id"), 10);
-        let request = indexedDB.open("CRM", 1);
-        request.onerror = function () {
-            console.error("Error al abrir la base de datos");
-        };
-
-        request.onsuccess = function (event) {
-            const db = event.target.result;
-            const txn = db.transaction("Clientes", "readwrite");
-            const store = txn.objectStore("Clientes");
-            let query = store.get(clientId);
-
-            query.onsuccess = (event) => {
-                store.put(clienteOBJ, clientId);
-            };
-
-            query.onerror = (event) => {
-                console.log(event.target.errorCode);
-            }
-
-            txn.oncomplete = function () {
-                db.close();
-            };
-        };
-    };
 })

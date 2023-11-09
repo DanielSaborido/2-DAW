@@ -1,4 +1,4 @@
-import { validar, resetForm } from "./funciones.js";
+import { validar, resetForm, crearDB } from "./funciones.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const nombre = document.querySelector("#nombre");
@@ -9,43 +9,43 @@ document.addEventListener("DOMContentLoaded", () => {
     const sent = document.querySelector("#formulario input[type='submit']");
 
     const clienteOBJ = {
-        nombre:"",
-        email:"",
-        telefono:"",
-        empresa:""
+        nombre: "",
+        email: "",
+        telefono: "",
+        empresa: ""
     }
-  
-    function listeners(){
-        nombre.addEventListener("blur", validar); 
-        email.addEventListener("blur", validar);   
-        telefono.addEventListener("blur", validar);
-        empresa.addEventListener("blur", validar);
-    
-        nombre.addEventListener("input", validar); 
-        email.addEventListener("input", validar);
-        telefono.addEventListener("input", validar);
+
+    function listeners() {
+        nombre.addEventListener("blur", (e) => validar(clienteOBJ, e));
+        email.addEventListener("blur", (e) => validar(clienteOBJ, e));
+        telefono.addEventListener("blur", (e) => validar(clienteOBJ, e));
+        empresa.addEventListener("blur", (e) => validar(clienteOBJ, e));
+
+        nombre.addEventListener("input", (e) => validar(clienteOBJ, e));
+        email.addEventListener("input", (e) => validar(clienteOBJ, e));
+        telefono.addEventListener("input", (e) => validar(clienteOBJ, e));
 
         sent.addEventListener("click", (e) => {
             e.preventDefault()
             comprobarFormulario()
         });
 
-        nombre.addEventListener('keydown', function(e) {
+        nombre.addEventListener('keydown', function (e) {
             if (e.key === "Enter") {
                 email.focus();
             }
         });
-        email.addEventListener('keydown', function(e) {
+        email.addEventListener('keydown', function (e) {
             if (e.key === "Enter") {
                 telefono.focus();
             }
         });
-        telefono.addEventListener('keydown', function(e) {
+        telefono.addEventListener('keydown', function (e) {
             if (e.key === "Enter") {
                 empresa.focus();
             }
         });
-        empresa.addEventListener('keydown', function(e) {
+        empresa.addEventListener('keydown', function (e) {
             if (e.key === "Enter") {
                 empresa.blur();
                 comprobarFormulario()
@@ -54,46 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     listeners()
 
-    function comprobarFormulario(){
+    function comprobarFormulario() {
         const values = Object.values(clienteOBJ)
-        if (values.includes("")){
+        if (values.includes("")) {
             return
         }
-        crearDB()
-        setTimeout(() =>{resetForm();},500)
+        crearDB(clienteOBJ);
+        setTimeout(() => { resetForm(clienteOBJ); }, 500)
     }
-
-    function crearDB(){
-        let request = indexedDB.open("CRM", 1);
-    
-        request.onerror = function() {
-            console.error("Error", openRequest.error);
-        };
-        request.onsuccess = function(event) {
-            const db = event.target.result;
-            insertarCliente(db);
-        };
-        request.onupgradeneeded = (event) => {
-            let db = event.target.result;
-            let store = db.createObjectStore('Clientes', {
-                autoIncrement: true
-            });
-        };
-    }
-    
-    function insertarCliente(db) {
-        const txn = db.transaction('Clientes', 'readwrite');
-        const store = txn.objectStore('Clientes');
-        let query = store.put(clienteOBJ);
-    
-        query.onsuccess = function (event) {
-            console.log(event);
-        };
-        query.onerror = function (event) {
-            console.log(event.target.errorCode);
-        }
-        txn.oncomplete = function () {
-            db.close();
-        };
-    }
-})
+});
