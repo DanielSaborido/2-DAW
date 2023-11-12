@@ -1,4 +1,5 @@
-import { validar, modificarCliente } from "./funciones.js";
+import { validar } from "./funciones.js";
+import { modificarCliente } from "./indexedDB.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const nombre = document.querySelector("#nombre");

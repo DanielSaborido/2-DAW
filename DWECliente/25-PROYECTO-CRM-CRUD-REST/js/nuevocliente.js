@@ -1,4 +1,5 @@
-import { validar, resetForm, crearDB } from "./funciones.js";
+import { validar, resetForm } from "./funciones.js";
+import { crearDB } from "./indexedDB.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const nombre = document.querySelector("#nombre");
