@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "nombre": "Manuel",
+    "empresa": "Junta de Andalucía",
+    "trabajo": "De lo que puedo"
+  },
+  {
+    "id": 2,
+    "nombre": "Jose",
+    "empresa": "Junta de Andalucía",
+    "trabajo": "Montaje"
+  },
+  {
+    "id": 3,
+    "nombre": "Pedro",
+    "empresa": "Desarrolladores.com",
+    "trabajo": "Aplicaciones Móviles"
+  }
+]
