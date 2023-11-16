@@ -14,6 +14,7 @@ function buscarClima(e) {
     console.log('Clima')
     ciudad = document.querySelector('#ciudad').value
     pais = document.querySelector('#pais').value;
+    formulario.reset()
     
     if (ciudad === "" || pais === ""){
         mostrarError("Ambos campos son obligatorios")
