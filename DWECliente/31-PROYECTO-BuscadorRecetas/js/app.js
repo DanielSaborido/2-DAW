@@ -113,9 +113,18 @@ function mostrarRecetaModal(receta){
             listGroup.appendChild(ingredientLi)
         }
     }
-
-    
-
     modalBody.appendChild(listGroup)
+
+    const modalFooter = document.querySelector(".modal .modal-footer")
+    const btnFavoritos = document.createElement("button")
+    btnFavoritos.classList.add("btn", "btn-danger", "col")
+    btnFavoritos.textContent = "Guardar Favoritos"
+    const btnCerrar = document.createElement("button")
+    btnCerrar.classList.add("btn", "btn-secondary", "col")
+    btnCerrar.textContent = "Cerrar"
+    modalFooter.appendChild(btnFavoritos)
+    modalFooter.appendChild(btnCerrar)
+
+
     modal.show()
 }
