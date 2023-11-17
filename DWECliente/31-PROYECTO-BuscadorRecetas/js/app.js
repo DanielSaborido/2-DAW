@@ -5,8 +5,17 @@
 
 const selectCategorias = document.querySelector("#categorias")
 const resultado = document.querySelector("#resultado")
-document.addEventListener("DOMContentLoaded", iniciarApp)
-selectCategorias.addEventListener("change",obtenerRecetas)
+document.addEventListener("DOMContentLoaded", function() { 
+    if (document.body.getAttribute("data-id") == "index"){
+        iniciarApp()
+        selectCategorias.addEventListener("change",obtenerRecetas)
+    } else {
+        let favoritos = JSON.parse(localStorage.getItem('favoritos')) || []
+        const informacion = almacenFavoritos(favoritos)
+        console.log(informacion)
+        //mostrarRecetas(informacion)
+    }
+})
 const modal = new bootstrap.Modal("#modal", {})
 
 function iniciarApp(){
@@ -38,8 +47,10 @@ function obtenerRecetas(e){
 
 function mostrarRecetas(recetas = []){
     limpiarHTML(resultado)
+    console.log(recetas)
     recetas.forEach(receta => {
         const {idMeal, strMeal, strMealThumb} = receta
+        console.log(receta)
 
         const divReceta = document.createElement("div")
         divReceta.classList.add("col-md-4")
@@ -100,7 +111,6 @@ function mostrarRecetaModal(receta){
       <p>${strInstructions}</p>`
     const listGroup = document.createElement("ul")
     listGroup.classList.add("list-group")
-
     for (let i = 1; i <=20 ; i++) {
         if (receta[`strIngredient${i}`]){
             const ingrediente = receta[`strIngredient${i}`]
@@ -116,15 +126,70 @@ function mostrarRecetaModal(receta){
     modalBody.appendChild(listGroup)
 
     const modalFooter = document.querySelector(".modal .modal-footer")
+    modalFooter.innerHTML = ''
+
     const btnFavoritos = document.createElement("button")
-    btnFavoritos.classList.add("btn", "btn-danger", "col")
-    btnFavoritos.textContent = "Guardar Favoritos"
+    btnFavoritos.classList.add("btn", "col")
+    const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+    if (favoritos.includes(idMeal)) {
+        btnFavoritos.classList.add("btn-success");
+        btnFavoritos.textContent = "Guardado en Favoritos";
+    } else {
+        btnFavoritos.classList.add("btn-danger");
+        btnFavoritos.textContent = "Guardar Favoritos"
+    }
+
     const btnCerrar = document.createElement("button")
     btnCerrar.classList.add("btn", "btn-secondary", "col")
     btnCerrar.textContent = "Cerrar"
+
     modalFooter.appendChild(btnFavoritos)
     modalFooter.appendChild(btnCerrar)
-
+    modalFooter.addEventListener('click', function(event){
+        if(event.target === btnFavoritos){
+            if (favoritos.includes(idMeal)) {
+                removerFavorito(idMeal);
+                btnFavoritos.classList.remove("btn-success");
+                btnFavoritos.classList.add("btn-danger");
+                btnFavoritos.textContent = "Guardar Favoritos";
+            } else {
+                guardarFavorito(idMeal);
+                btnFavoritos.classList.remove("btn-danger");
+                btnFavoritos.classList.add("btn-success");
+                btnFavoritos.textContent = "Guardado en Favoritos";
+            }
+        }
+        if(event.target === btnCerrar){
+            modal.hide()
+        }
+    });
 
     modal.show()
+}
+
+function guardarFavorito(id){
+    const favoritos = localStorage.getItem('favoritos') ? JSON.parse(localStorage.getItem('favoritos')) : [];
+    if (!favoritos.includes(id)) {
+        favoritos.push(id);
+    }
+    localStorage.setItem('favoritos', JSON.stringify(favoritos));
+}
+
+function removerFavorito(id){
+    let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+    favoritos = favoritos.filter(fav => fav !== id);
+    localStorage.setItem('favoritos', JSON.stringify(favoritos));
+}
+
+function almacenFavoritos(ids = []){
+    let listaDatos = []
+    ids.forEach(id => {
+        url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+        fetch(url)
+            .then((res) => res.json())
+            .then((data) => {
+                listaDatos.push(data.meals[0]);
+            });
+    })
+    return listaDatos
 }
