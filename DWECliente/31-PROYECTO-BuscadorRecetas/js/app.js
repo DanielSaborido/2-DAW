@@ -4,11 +4,11 @@
 //https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}
 
 const selectCategorias = document.querySelector("#categorias")
+const bodyId = document.body.getAttribute("data-id")
 const resultado = document.querySelector("#resultado")
 const modal = new bootstrap.Modal("#modal", {})
 
 document.addEventListener("DOMContentLoaded", () => {
-    const bodyId = document.body.getAttribute("data-id")
     if (bodyId === "index") {
         iniciarApp()
         selectCategorias.addEventListener("change", obtenerRecetas)
@@ -155,8 +155,10 @@ function mostrarRecetaModal(receta){
 
     modalFooter.appendChild(btnFavoritos)
     modalFooter.appendChild(btnCerrar)
-    modalFooter.addEventListener('click', function(event){
-        if(event.target === btnFavoritos){
+
+    modalContent.addEventListener('click', function(event) {
+        console.log(event.target.classList)
+        if(event.target.classList.contains("btn-danger") || event.target.classList.contains("btn-success")){
             if (favoritos.includes(idMeal)) {
                 removerFavorito(idMeal)
                 btnFavoritos.classList.remove("btn-success")
@@ -172,9 +174,6 @@ function mostrarRecetaModal(receta){
         if(event.target === btnCerrar){
             modal.hide()
         }
-    })
-
-    modalContent.addEventListener('click', function(event) {
         if (!modalTitle.contains(event.target) && !modalBody.contains(event.target) && !modalFooter.contains(event.target)) {
             modal.hide()
         }
