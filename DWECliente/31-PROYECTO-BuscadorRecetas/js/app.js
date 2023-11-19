@@ -1,7 +1,7 @@
 //www.themealdb.com
 //https://www.themealdb.com/api/json/v1/1/categories.php
 //https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoria}
-//https://www.themealdb.com/api/json/v1/1/lookup.php?i=52772
+//https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}
 
 const selectCategorias = document.querySelector("#categorias")
 const resultado = document.querySelector("#resultado")
@@ -12,8 +12,14 @@ document.addEventListener("DOMContentLoaded", function() {
     } else {
         let favoritos = JSON.parse(localStorage.getItem('favoritos')) || []
         const informacion = almacenFavoritos(favoritos)
-        console.log(informacion)
-        //mostrarRecetas(informacion)
+        mostrarRecetas(informacion)
+        const eliminarFavBtn = document.createElement("button")
+        eliminarFavBtn.classList.add("btn", "btn-danger", "w-100")
+        eliminarFavBtn.textContent = "Eliminar favoritos"
+        eliminarFavBtn.onclick = function(){
+            localStorage.clear()
+        }
+        resultado.appendChild(eliminarFavBtn)
     }
 })
 const modal = new bootstrap.Modal("#modal", {})
@@ -47,6 +53,7 @@ function obtenerRecetas(e){
 
 function mostrarRecetas(recetas = []){
     limpiarHTML(resultado)
+    console.log(typeof recetas)
     console.log(recetas)
     recetas.forEach(receta => {
         const {idMeal, strMeal, strMealThumb} = receta
