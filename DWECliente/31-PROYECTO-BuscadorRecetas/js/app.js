@@ -110,6 +110,7 @@ function seleccionarReceta(id) {
 
 function mostrarRecetaModal(receta){
     const {idMeal, strInstructions, strMeal, strMealThumb} = receta
+    const modalContent = document.querySelector(".modal")
     const modalTitle = document.querySelector(".modal .modal-title")
     modalTitle.textContent = strMeal
 
@@ -170,6 +171,12 @@ function mostrarRecetaModal(receta){
         }
         if(event.target === btnCerrar){
             modal.hide()
+        }
+    });
+
+    modalContent.addEventListener('click', function(event) {
+        if (!modalTitle.contains(event.target) && !modalBody.contains(event.target) && !modalFooter.contains(event.target)) {
+            modal.hide();
         }
     });
 
