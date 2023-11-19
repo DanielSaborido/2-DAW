@@ -5,59 +5,60 @@
 
 const selectCategorias = document.querySelector("#categorias")
 const resultado = document.querySelector("#resultado")
-document.addEventListener("DOMContentLoaded", function() { 
-    if (document.body.getAttribute("data-id") == "index"){
-        iniciarApp()
-        selectCategorias.addEventListener("change",obtenerRecetas)
-    } else {
-        let favoritos = JSON.parse(localStorage.getItem('favoritos')) || []
-        const informacion = almacenFavoritos(favoritos)
-        mostrarRecetas(informacion)
-        const eliminarFavBtn = document.createElement("button")
-        eliminarFavBtn.classList.add("btn", "btn-danger", "w-100")
-        eliminarFavBtn.textContent = "Eliminar favoritos"
-        eliminarFavBtn.onclick = function(){
-            localStorage.clear()
-        }
-        resultado.appendChild(eliminarFavBtn)
-    }
-})
-const modal = new bootstrap.Modal("#modal", {})
+const modal = new bootstrap.Modal("#modal", {});
 
-function iniciarApp(){
-    obtenerCategorias()
-    function obtenerCategorias(){
-        url = "https://www.themealdb.com/api/json/v1/1/categories.php"
-        fetch(url)
-            .then((res) => res.json())
-            .then((data) => mostrarCategorias(data.categories))
+document.addEventListener("DOMContentLoaded", () => {
+    const bodyId = document.body.getAttribute("data-id");
+    if (bodyId === "index") {
+        iniciarApp();
+        selectCategorias.addEventListener("change", obtenerRecetas);
+    } else {
+        const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+        almacenFavoritos(favoritos)
+            .then(recetas => {
+                mostrarRecetas(recetas);
+                if (recetas.length > 0) {
+                    eliminarFavoritosBtn();
+                }
+            })
+            .catch(error => console.error(error));
     }
+});
+
+function iniciarApp() {
+    obtenerCategorias();
 }
 
-function mostrarCategorias(categorias){
+function obtenerCategorias() {
+    const url = "https://www.themealdb.com/api/json/v1/1/categories.php";
+    fetch(url)
+        .then((res) => res.json())
+        .then((data) => mostrarCategorias(data.categories))
+        .catch(error => console.error(error));
+}
+
+function mostrarCategorias(categorias) {
     categorias.forEach(categoria => {
-        const option = document.createElement("option")
-        option.value = categoria.strCategory
-        option.textContent = categoria.strCategory
-        selectCategorias.appendChild(option)
+        const option = document.createElement("option");
+        option.value = categoria.strCategory;
+        option.textContent = categoria.strCategory;
+        selectCategorias.appendChild(option);
     });
 }
 
-function obtenerRecetas(e){
-    const categoria = e.target.value
-    url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoria}`
+function obtenerRecetas(e) {
+    const categoria = e.target.value;
+    const url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoria}`;
     fetch(url)
         .then((res) => res.json())
         .then((data) => mostrarRecetas(data.meals))
+        .catch(error => console.error(error));
 }
 
 function mostrarRecetas(recetas = []){
-    limpiarHTML(resultado)
-    console.log(typeof recetas)
-    console.log(recetas)
+    limpiarHTML(resultado);
     recetas.forEach(receta => {
-        const {idMeal, strMeal, strMealThumb} = receta
-        console.log(receta)
+        const { idMeal, strMeal, strMealThumb } = receta;
 
         const divReceta = document.createElement("div")
         divReceta.classList.add("col-md-4")
@@ -93,17 +94,18 @@ function mostrarRecetas(recetas = []){
     });
 }
 
-function limpiarHTML(selector){
-    while(selector.firstChild){
+function limpiarHTML(selector) {
+    while (selector.firstChild) {
         selector.firstChild.remove();
     }
 }
 
-function seleccionarReceta(id){
-    url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+function seleccionarReceta(id) {
+    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
     fetch(url)
         .then((res) => res.json())
         .then((data) => mostrarRecetaModal(data.meals[0]))
+        .catch(error => console.error(error));
 }
 
 function mostrarRecetaModal(receta){
@@ -174,29 +176,43 @@ function mostrarRecetaModal(receta){
     modal.show()
 }
 
-function guardarFavorito(id){
-    const favoritos = localStorage.getItem('favoritos') ? JSON.parse(localStorage.getItem('favoritos')) : [];
+function guardarFavorito(id) {
+    const favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
     if (!favoritos.includes(id)) {
         favoritos.push(id);
     }
     localStorage.setItem('favoritos', JSON.stringify(favoritos));
 }
 
-function removerFavorito(id){
+function removerFavorito(id) {
     let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
     favoritos = favoritos.filter(fav => fav !== id);
     localStorage.setItem('favoritos', JSON.stringify(favoritos));
 }
 
-function almacenFavoritos(ids = []){
-    let listaDatos = []
-    ids.forEach(id => {
-        url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-        fetch(url)
-            .then((res) => res.json())
-            .then((data) => {
-                listaDatos.push(data.meals[0]);
+function almacenFavoritos(ids = []) {
+    const promesasRecetas = ids.map(id => {
+        const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+        return fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                const { idMeal, strMeal, strMealThumb } = data.meals[0];
+                return {
+                    idMeal,
+                    strMeal,
+                    strMealThumb
+                };
             });
-    })
-    return listaDatos
+    });
+    return Promise.all(promesasRecetas);
+}
+
+function eliminarFavoritosBtn() {
+    const eliminarFavBtn = document.createElement("button");
+    eliminarFavBtn.classList.add("btn", "btn-danger", "w-100");
+    eliminarFavBtn.textContent = "Eliminar favoritos";
+    eliminarFavBtn.onclick = () => {
+        localStorage.clear();
+    };
+    resultado.appendChild(eliminarFavBtn);
 }
