@@ -12,16 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (bodyId === "index") {
         iniciarApp()
         selectCategorias.addEventListener("change", obtenerRecetas)
-    } else {
-        const favoritos = JSON.parse(localStorage.getItem('favoritos')) || []
-        almacenFavoritos(favoritos)
-            .then(recetas => {
-                mostrarRecetas(recetas)
-                if (recetas.length > 0) {
-                    eliminarFavoritosBtn()
-                }
-            })
-            .catch(error => console.error(error))
+    } 
+    if (bodyId === "favoritos") {
+        mostrarFavoritos()
     }
 })
 
@@ -125,10 +118,15 @@ function mostrarRecetaModal(receta){
         if (receta[`strIngredient${i}`]){
             const ingrediente = receta[`strIngredient${i}`]
             const cantidad = receta[`strMeasure${i}`]
+            console.log(cantidad)
 
             const ingredientLi = document.createElement("li")
             ingredientLi.classList.add("list-group-item")
-            ingredientLi.textContent = `${ingrediente} - ${cantidad}`
+            if (cantidad !== null && cantidad.trim() !== "") {
+                ingredientLi.textContent = `${ingrediente} - ${cantidad}`
+            } else {
+                ingredientLi.textContent = `${ingrediente}`
+            }
 
             listGroup.appendChild(ingredientLi)
         }
@@ -136,7 +134,7 @@ function mostrarRecetaModal(receta){
     modalBody.appendChild(listGroup)
 
     const modalFooter = document.querySelector(".modal .modal-footer")
-    modalFooter.innerHTML = ''
+    //modalFooter.innerHTML = ''
 
     const btnFavoritos = document.createElement("button")
     btnFavoritos.classList.add("btn", "col")
@@ -157,10 +155,16 @@ function mostrarRecetaModal(receta){
     modalFooter.appendChild(btnCerrar)
 
     modalContent.addEventListener('click', function(event) {
-        console.log(event.target.classList)
-        if(event.target.classList.contains("btn-danger") || event.target.classList.contains("btn-success")){
+        const cursor = event.target
+        console.log(cursor)
+        if(cursor.classList.contains("btn-danger") || cursor.classList.contains("btn-success")){
             if (favoritos.includes(idMeal)) {
                 removerFavorito(idMeal)
+                if (bodyId === "favoritos") {
+                    modal.hide()
+                    mostrarFavoritos()
+                    return
+                }
                 btnFavoritos.classList.remove("btn-success")
                 btnFavoritos.classList.add("btn-danger")
                 btnFavoritos.textContent = "Guardar Favoritos"
@@ -171,14 +175,13 @@ function mostrarRecetaModal(receta){
                 btnFavoritos.textContent = "Guardado en Favoritos"
             }
         }
-        if(event.target === btnCerrar){
+        if(cursor === btnCerrar){
             modal.hide()
         }
-        if (!modalTitle.contains(event.target) && !modalBody.contains(event.target) && !modalFooter.contains(event.target)) {
+        if (!modalTitle.contains(cursor) && !modalBody.contains(cursor) && !modalFooter.contains(cursor)) {
             modal.hide()
         }
     })
-
     modal.show()
 }
 
@@ -209,6 +212,18 @@ function almacenFavoritos(ids = []) {
         }
     })
     return Promise.all(promesasRecetas)
+}
+
+function mostrarFavoritos(){
+    const favoritos = JSON.parse(localStorage.getItem('favoritos')) || []
+        almacenFavoritos(favoritos)
+            .then(recetas => {
+                mostrarRecetas(recetas)
+                if (recetas.length > 0) {
+                    eliminarFavoritosBtn()
+                }
+            })
+            .catch(error => console.error(error))
 }
 
 function eliminarFavoritosBtn() {
