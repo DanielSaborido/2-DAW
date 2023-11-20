@@ -118,7 +118,6 @@ function mostrarRecetaModal(receta){
         if (receta[`strIngredient${i}`]){
             const ingrediente = receta[`strIngredient${i}`]
             const cantidad = receta[`strMeasure${i}`]
-            console.log(cantidad)
 
             const ingredientLi = document.createElement("li")
             ingredientLi.classList.add("list-group-item")
@@ -134,7 +133,7 @@ function mostrarRecetaModal(receta){
     modalBody.appendChild(listGroup)
 
     const modalFooter = document.querySelector(".modal .modal-footer")
-    //modalFooter.innerHTML = ''
+    modalFooter.innerHTML = ''
 
     const btnFavoritos = document.createElement("button")
     btnFavoritos.classList.add("btn", "col")
@@ -156,8 +155,7 @@ function mostrarRecetaModal(receta){
 
     modalContent.addEventListener('click', function(event) {
         const cursor = event.target
-        console.log(cursor)
-        if(cursor.classList.contains("btn-danger") || cursor.classList.contains("btn-success")){
+        if(cursor === btnFavoritos){
             if (favoritos.includes(idMeal)) {
                 removerFavorito(idMeal)
                 if (bodyId === "favoritos") {
