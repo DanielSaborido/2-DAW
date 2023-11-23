@@ -87,7 +87,6 @@ function quitarCurso(e) {
         articulosCarrito.map((curso) => {
             if (curso.id === cursoID && curso.cantidad > 1){
                 curso.cantidad--
-                mostrarToast("Reduciendo curso")
             }
         })
         almacenLocal(articulosCarrito)
@@ -101,7 +100,6 @@ function sumarCurso(e) {
         articulosCarrito.map((curso) => {
             if (curso.id === cursoID){
                 curso.cantidad++
-                mostrarToast("Sumando curso")
             }
         })
         almacenLocal(articulosCarrito)
