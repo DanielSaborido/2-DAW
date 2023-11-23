@@ -6,6 +6,8 @@ const vaciarCarrito = document.querySelector("#vaciar-carrito")
 const listaCarrito = document.querySelector("#lista-carrito tbody")
 const listaCursos = document.querySelector("#lista-cursos")
 const buscador = document.querySelector('#buscador')
+const formulario = document.getElementById('cursoForm')
+
 
 //variables
 let articulosCarrito = []
@@ -41,6 +43,7 @@ function listeners() {
             });
         }
     });
+
     carrito.addEventListener('mousedown', (e) => {
         if (e.target.classList.contains("añadir-curso")) {
             sumarCurso(e);
@@ -52,9 +55,23 @@ function listeners() {
             });
         }
     });
+
     buscador.addEventListener('keyup', () => {
         obtenerDatosArrayJSON()
     })
+
+    formulario.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var nombreCurso = document.getElementById('nombreCurso').value;
+        var autor = document.getElementById('autor').value;
+        var precio = document.getElementById('precio').value;
+        var imagen = document.getElementById('imagen').files[0];
+        console.log('Nombre del curso:', nombreCurso);
+        console.log('Autor:', autor);
+        console.log('Precio:', precio);
+        console.log('Imagen:', imagen);
+        formulario.reset()
+    });
 }
 
 listeners()
