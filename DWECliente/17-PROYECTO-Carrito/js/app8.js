@@ -6,7 +6,7 @@ const vaciarCarrito = document.querySelector("#vaciar-carrito")
 const listaCarrito = document.querySelector("#lista-carrito tbody")
 const listaCursos = document.querySelector("#lista-cursos")
 const buscador = document.querySelector('#buscador')
-const formulario = document.getElementById('cursoForm')
+const formulario = document.querySelector('#formulario')
 
 
 //variables
