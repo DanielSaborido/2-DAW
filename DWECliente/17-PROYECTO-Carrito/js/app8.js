@@ -12,6 +12,7 @@ let articulosCarrito = []
 //listeners
 function listeners() {
     document.addEventListener("DOMContentLoaded", () => {
+        obtenerDatosArrayJSON()
         const productos = JSON.parse(localStorage.getItem("productos"))
         if (productos.length){
             submenu.classList.add("activo")
@@ -86,6 +87,7 @@ function quitarCurso(e) {
         articulosCarrito.map((curso) => {
             if (curso.id === cursoID && curso.cantidad > 1){
                 curso.cantidad--
+                mostrarToast("Reduciendo curso")
             }
         })
         almacenLocal(articulosCarrito)
@@ -99,6 +101,7 @@ function sumarCurso(e) {
         articulosCarrito.map((curso) => {
             if (curso.id === cursoID){
                 curso.cantidad++
+                mostrarToast("Sumando curso")
             }
         })
         almacenLocal(articulosCarrito)
@@ -121,7 +124,7 @@ function leerDatosCurso(curso){
                 curso.cantidad++
             }
         })
-        mostrarToast("Agregando un curso más")
+        mostrarToast("Sumando curso")
     } else {
         mostrarToast("Curso agregado correctamente")
         articulosCarrito = [...articulosCarrito, infoCurso]
@@ -136,7 +139,7 @@ function obtenerPrecioNumerico(precioTexto) {
 }
 
 function carritoHTML(productos){
-    limpiarHTML()
+    limpiarHTML(listaCarrito)
     let precioTotal = 0;
 
     productos.forEach((curso)=> {
@@ -171,9 +174,9 @@ function carritoHTML(productos){
     listaCarrito.appendChild(sumatoria)
 }
 
-function limpiarHTML() {
-    while (listaCarrito.firstChild){
-        listaCarrito.firstChild.remove()
+function limpiarHTML(selector) {
+    while (selector.firstChild) {
+        selector.firstChild.remove()
     }
 }
 
@@ -188,4 +191,71 @@ function mostrarToast(mensaje){
     const toast = new bootstrap.Toast(toastDiv)
     toastDivBody.textContent = mensaje
     toast.show()
+}
+
+function obtenerDatosArrayJSON(){
+    url = "data/cursos.json"
+    fetch(url)
+        /*.then((respuesta) => {
+            console.log(respuesta)
+            console.log(respuesta.status)
+            console.log(respuesta.url)
+            console.log(respuesta.statusText)
+            console.log(respuesta.json())
+        })*/
+        .then(res => res.json())
+        .then(data => mostrarArrayHTML(data))
+        .catch(err => console.log(err))
+}
+
+function mostrarArrayHTML(cursos){
+    limpiarHTML(listaCursos)
+    cursos.forEach(curso => {
+        const { id, imagen, nombreCurso, autor, puntuacion, precio} = curso
+        const columna = document.createElement("div")
+        const contenedorCurso = document.createElement("div")
+        contenedorCurso.classList.add('card')
+
+        const imagenCurso = document.createElement("img")
+        imagenCurso.classList.add('imagen-curso', 'u-full-width')
+        imagenCurso.alt = `Imagen del curso ${nombreCurso}`
+        imagenCurso.src = imagen
+
+        const infoContainer = document.createElement("div")
+        infoContainer.classList.add('info-card')
+
+        const nombre = document.createElement("h4")
+        nombre.textContent = nombreCurso
+
+        const creador = document.createElement("p")
+        creador.textContent = autor
+
+        const puntos = document.createElement("img")
+        puntos.alt = `Puntuación del curso ${nombreCurso}`
+        puntos.src = puntuacion
+
+        const coste = document.createElement("p")
+        coste.classList.add('precio')
+        coste.textContent = precio + '€'
+        const descuento = document.createElement("span")
+        descuento.classList.add('u-pull-right')
+        descuento.textContent = 1 + '€'
+        
+        const comprarCurso = document.createElement("a")
+        comprarCurso.href = "#"
+        comprarCurso.classList.add('u-full-width', 'button-primary', 'button', 'input', 'agregar-carrito')
+        comprarCurso.setAttribute("data-id", id);
+        comprarCurso.textContent = 'Añadir al carrito'
+        
+        coste.appendChild(descuento)
+        infoContainer.appendChild(nombre)
+        infoContainer.appendChild(creador)
+        infoContainer.appendChild(puntos)
+        infoContainer.appendChild(coste)
+        infoContainer.appendChild(comprarCurso)
+        contenedorCurso.appendChild(imagenCurso)
+        contenedorCurso.appendChild(infoContainer)
+        columna.appendChild(contenedorCurso)
+        listaCursos.appendChild(columna)
+    });
 }

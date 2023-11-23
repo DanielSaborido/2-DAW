@@ -147,8 +147,12 @@ ul {
     background-image: url(../img/icono3.png);
 }
 
-#lista-cursos .row {
-    margin-bottom:20px;
+#lista-cursos {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 5%;
+    grid-row-gap: 10px;
 }
 .agregar-carrito {
     margin:10px 0;

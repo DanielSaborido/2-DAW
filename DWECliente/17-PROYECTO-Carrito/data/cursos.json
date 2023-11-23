@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "imagen": "img/curso1.jpg",
+        "nombreCurso": "JavaScript",
+        "autor": "Manuel R.",
+        "puntuacion": "img/estrellas.png",
+        "precio": 300
+    },
+    {
+        "id": 2,
+        "imagen": "img/curso2.jpg",
+        "nombreCurso": "HTML5, CSS3",
+        "autor": "Alejandro C.",
+        "puntuacion": "img/estrellas.png",
+        "precio": 250
+    },
+    {
+        "id": 3,
+        "imagen": "img/curso3.jpg",
+        "nombreCurso": "PHP",
+        "autor": "Javier O.",
+        "puntuacion": "img/estrellas.png",
+        "precio": 275
+    },
+    {
+        "id": 4,
+        "imagen": "img/curso4.jpg",
+        "nombreCurso": "Docker",
+        "autor": "Javier G.",
+        "puntuacion": "img/estrellas.png",
+        "precio": 200
+    },
+    {
+        "id": 5,
+        "imagen": "img/curso5.jpg",
+        "nombreCurso": "Hacking Ético",
+        "autor": "Manuel R.",
+        "puntuacion": "img/estrellas.png",
+        "precio": 500
+    },
+    {
+        "id": 6,
+        "imagen": "img/curso6.jpg",
+        "nombreCurso": "Puesta en Producción Segura",
+        "autor": "Alejandro C.",
+        "puntuacion": "img/estrellas.png",
+        "precio": 450
+    },
+    {
+        "id": 7,
+        "imagen": "img/curso7.jpg",
+        "nombreCurso": "Incidentes de Ciberseguridad",
+        "autor": "Eduardo F.",
+        "puntuacion": "img/estrellas.png",
+        "precio": 200
+    },
+    {
+        "id": 8,
+        "imagen": "img/curso8.jpg",
+        "nombreCurso": "Bastionado de Sistemas y Redes",
+        "autor": "David R.",
+        "puntuacion": "img/estrellas.png",
+        "precio": 750
+    },
+    {
+        "id": 9,
+        "imagen": "img/curso9.jpg",
+        "nombreCurso": "Análisis forense Informático",
+        "autor": "Manuel R.",
+        "puntuacion": "img/estrellas.png",
+        "precio": 200
+    }
+]
