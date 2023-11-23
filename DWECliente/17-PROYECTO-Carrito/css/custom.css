@@ -98,6 +98,7 @@ ul {
 .contenido-hero form #buscador {
     height: 50px;
     margin-bottom: 0;
+    color: black;
 }
 .contenido-hero form .submit-buscador {
     position: absolute;
