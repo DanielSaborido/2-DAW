@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Carrito</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/skeleton.css">
     <link rel="stylesheet" href="css/custom.css">
@@ -198,7 +199,25 @@
                     </div> <!--.card-->
                 </div>
         </div> <!--.row-->
-    </div>  
+    </div> 
+    <div class="toast-container position-fixed top-0 end-0 p-100">
+        <div
+          id="toast"
+          class="toast"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true">
+          <div class="toast-header bg-danger text-white">
+            <strong class="me-auto text-white">App Carrito</strong>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="toast"
+              aria-label="Close"></button>
+          </div>
+          <div class="toast-body"></div>
+        </div>
+      </div> 
 
     <footer id="footer" class="footer">
         <div class="container">
@@ -219,6 +238,7 @@
             </div>
         </div>
     </footer>
+    <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/app8.js"></script>
 </body>
 </html>

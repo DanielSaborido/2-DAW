@@ -71,6 +71,7 @@ function eliminarCurso(e) {
         articulosCarrito = articulosCarrito.filter((curso)=> 
             curso.id !== cursoID 
         )
+        mostrarToast("Curso eliminado con exito")
         almacenLocal(articulosCarrito)
     }
     if (articulosCarrito.length === 0){
@@ -120,7 +121,9 @@ function leerDatosCurso(curso){
                 curso.cantidad++
             }
         })
+        mostrarToast("Agregando un curso más")
     } else {
+        mostrarToast("Curso agregado correctamente")
         articulosCarrito = [...articulosCarrito, infoCurso]
     }
 
@@ -177,4 +180,12 @@ function limpiarHTML() {
 function almacenLocal(lista){
     localStorage.setItem("productos", JSON.stringify(lista))
     carritoHTML(JSON.parse(localStorage.getItem("productos")))
+}
+
+function mostrarToast(mensaje){
+    const toastDiv = document.querySelector('.toast')
+    const toastDivBody = document.querySelector('.toast-body')
+    const toast = new bootstrap.Toast(toastDiv)
+    toastDivBody.textContent = mensaje
+    toast.show()
 }
