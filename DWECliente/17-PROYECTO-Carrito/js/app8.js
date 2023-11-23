@@ -210,6 +210,12 @@ function obtenerDatosArrayJSON(){
 
 function mostrarArrayHTML(cursos){
     limpiarHTML(listaCursos)
+    const titulo = document.createElement('h1')
+    titulo.classList.add('encabezado')
+    titulo.id = 'encabezado'
+    titulo.textContent = 'Ofertas Black Friday'
+    listaCursos.appendChild(titulo)
+
     cursos.forEach(curso => {
         const { id, imagen, nombreCurso, autor, puntuacion, precio} = curso
         const columna = document.createElement("div")

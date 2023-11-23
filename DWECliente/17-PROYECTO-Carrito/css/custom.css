@@ -59,6 +59,7 @@ ul {
 }
 #encabezado {
     margin: 30px 0;
+    grid-column: 1 / 4;
 }
 .submenu {
     position: relative;
