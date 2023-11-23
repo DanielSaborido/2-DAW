@@ -62,14 +62,13 @@ function listeners() {
 
     formulario.addEventListener('submit', function(e) {
         e.preventDefault();
-        var nombreCurso = document.getElementById('nombreCurso').value;
-        var autor = document.getElementById('autor').value;
-        var precio = document.getElementById('precio').value;
-        var imagen = document.getElementById('imagen').files[0];
-        console.log('Nombre del curso:', nombreCurso);
-        console.log('Autor:', autor);
-        console.log('Precio:', precio);
-        console.log('Imagen:', imagen);
+        const cursoOBJ = {
+            imagen: document.getElementById('imagen').files[0],
+            nombreCurso: document.getElementById('nombreCurso').value,
+            autor: document.getElementById('autor').value,
+            precio: document.getElementById('precio').value
+        }
+        crearDB(cursoOBJ)
         formulario.reset()
     });
 }
@@ -219,6 +218,7 @@ function obtenerDatosArrayJSON(){
     fetch(url)
         .then(res => res.json())
         .then(data => {
+            data.forEach(info => {crearDB(info)})
             if (buscador.value.trim() !== ""){
                 const busqueda = buscador.value.toLowerCase()
                 const filtro = data.filter(clase => clase.nombreCurso.toLowerCase().includes(busqueda) || clase.autor.toLowerCase().includes(busqueda))
@@ -284,4 +284,38 @@ function mostrarArrayHTML(cursos){
         contenedorCurso.appendChild(infoContainer)
         listaCursos.appendChild(contenedorCurso)
     });
+}
+
+function crearDB(cursoOBJ) {
+    let request = indexedDB.open("CRM", 1);
+
+    request.onerror = function () {
+        console.error("Error", openRequest.error);
+    };
+    request.onsuccess = function (event) {
+        const db = event.target.result;
+        insertarCurso(cursoOBJ, db);
+    };
+    request.onupgradeneeded = (event) => {
+        let db = event.target.result;
+        let store = db.createObjectStore('cursos', {
+            autoIncrement: true
+        });
+    };
+}
+
+function insertarCurso(cursoOBJ, db) {
+    const txn = db.transaction('cursos', 'readwrite');
+    const store = txn.objectStore('cursos');
+    let query = store.put(cursoOBJ);
+
+    query.onsuccess = function (event) {
+        console.log(event);
+    };
+    query.onerror = function (event) {
+        console.log(event.target.errorCode);
+    }
+    txn.oncomplete = function () {
+        db.close();
+    };
 }
