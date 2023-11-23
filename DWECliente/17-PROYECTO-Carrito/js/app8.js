@@ -223,7 +223,6 @@ function mostrarArrayHTML(cursos){
 
     cursos.forEach(curso => {
         const { id, imagen, nombreCurso, autor, puntuacion, precio} = curso
-        const columna = document.createElement("div")
         const contenedorCurso = document.createElement("div")
         contenedorCurso.classList.add('card')
 
@@ -266,7 +265,6 @@ function mostrarArrayHTML(cursos){
         infoContainer.appendChild(comprarCurso)
         contenedorCurso.appendChild(imagenCurso)
         contenedorCurso.appendChild(infoContainer)
-        columna.appendChild(contenedorCurso)
-        listaCursos.appendChild(columna)
+        listaCursos.appendChild(contenedorCurso)
     });
 }

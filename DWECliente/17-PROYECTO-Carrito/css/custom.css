@@ -29,6 +29,7 @@ header {
     border-radius: 50%;
     padding: 5px 10px;
     text-decoration: none;
+    cursor: pointer;
     color: white;
     font-weight: bold;
 }
@@ -37,6 +38,7 @@ header {
     border-radius: 50%;
     padding: 5px 10px;
     text-decoration: none;
+    cursor: pointer;
     color: white;
     font-weight: bold;
 }
@@ -45,6 +47,7 @@ header {
     border-radius: 50%;
     padding: 5px 10px;
     text-decoration: none;
+    cursor: pointer;
     color: white;
     font-weight: bold;
 }
@@ -152,7 +155,7 @@ ul {
 #lista-cursos {
     margin-top: 10px;
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 33.33% 33.34% 33.33%;
     grid-column-gap: 5%;
     grid-row-gap: 10px;
 }
@@ -168,7 +171,6 @@ ul {
 @media (min-width: 550px) {
     .card {
         text-align: left;
-        grid-column: 1;
     }
 }
 .info-card  {
