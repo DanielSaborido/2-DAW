@@ -5,6 +5,7 @@ const carrito = document.querySelector('#carrito')
 const vaciarCarrito = document.querySelector("#vaciar-carrito")
 const listaCarrito = document.querySelector("#lista-carrito tbody")
 const listaCursos = document.querySelector("#lista-cursos")
+const buscador = document.querySelector('#buscador')
 
 //variables
 let articulosCarrito = []
@@ -28,7 +29,7 @@ function listeners() {
         submenu.classList.remove("activo")
     })
     
-    // adicion para añadir cursos desde el carrito
+    // Añadido de nuevos listeners al proyecto
     carrito.addEventListener('mousedown', (e) => {
         if (e.target.classList.contains("quitar-curso")) {
             quitarCurso(e);
@@ -51,6 +52,9 @@ function listeners() {
             });
         }
     });
+    buscador.addEventListener('keyup', () => {
+        obtenerDatosArrayJSON()
+    })
 }
 
 listeners()
@@ -77,32 +81,6 @@ function eliminarCurso(e) {
     }
     if (articulosCarrito.length === 0){
         submenu.classList.remove("activo")
-    }
-}
-
-function quitarCurso(e) {
-    e.preventDefault()
-    if (e.target.classList.contains("quitar-curso")){
-        const cursoID = e.target.getAttribute("data-id")
-        articulosCarrito.map((curso) => {
-            if (curso.id === cursoID && curso.cantidad > 1){
-                curso.cantidad--
-            }
-        })
-        almacenLocal(articulosCarrito)
-    }
-}
-
-function sumarCurso(e) {
-    e.preventDefault()
-    if (e.target.classList.contains("añadir-curso")){
-        const cursoID = e.target.getAttribute("data-id")
-        articulosCarrito.map((curso) => {
-            if (curso.id === cursoID){
-                curso.cantidad++
-            }
-        })
-        almacenLocal(articulosCarrito)
     }
 }
 
@@ -183,6 +161,34 @@ function almacenLocal(lista){
     carritoHTML(JSON.parse(localStorage.getItem("productos")))
 }
 
+// Nuevas funcionalidades
+
+function quitarCurso(e) {
+    e.preventDefault()
+    if (e.target.classList.contains("quitar-curso")){
+        const cursoID = e.target.getAttribute("data-id")
+        articulosCarrito.map((curso) => {
+            if (curso.id === cursoID && curso.cantidad > 1){
+                curso.cantidad--
+            }
+        })
+        almacenLocal(articulosCarrito)
+    }
+}
+
+function sumarCurso(e) {
+    e.preventDefault()
+    if (e.target.classList.contains("añadir-curso")){
+        const cursoID = e.target.getAttribute("data-id")
+        articulosCarrito.map((curso) => {
+            if (curso.id === cursoID){
+                curso.cantidad++
+            }
+        })
+        almacenLocal(articulosCarrito)
+    }
+}
+
 function mostrarToast(mensaje){
     const toastDiv = document.querySelector('.toast')
     const toastDivBody = document.querySelector('.toast-body')
@@ -194,15 +200,16 @@ function mostrarToast(mensaje){
 function obtenerDatosArrayJSON(){
     url = "data/cursos.json"
     fetch(url)
-        /*.then((respuesta) => {
-            console.log(respuesta)
-            console.log(respuesta.status)
-            console.log(respuesta.url)
-            console.log(respuesta.statusText)
-            console.log(respuesta.json())
-        })*/
         .then(res => res.json())
-        .then(data => mostrarArrayHTML(data))
+        .then(data => {
+            if (buscador.value.trim() !== ""){
+                const busqueda = buscador.value.toLowerCase()
+                const filtro = data.filter(clase => clase.nombreCurso.toLowerCase().includes(busqueda) || clase.autor.toLowerCase().includes(busqueda))
+                mostrarArrayHTML(filtro)
+            }else {
+                mostrarArrayHTML(data)
+            }
+        })
         .catch(err => console.log(err))
 }
 

@@ -168,6 +168,7 @@ ul {
 @media (min-width: 550px) {
     .card {
         text-align: left;
+        grid-column: 1;
     }
 }
 .info-card  {
