@@ -1,11 +1,12 @@
 //selectores
 
-const submenu = document.querySelector('.submenu') // modificacion para que solo salga el carrito si tienes algo en él
+const submenu = document.querySelector('.submenu')
 const carrito = document.querySelector('#carrito')
 const vaciarCarrito = document.querySelector("#vaciar-carrito")
 const listaCarrito = document.querySelector("#lista-carrito tbody")
 const listaCursos = document.querySelector("#lista-cursos")
 const buscador = document.querySelector('#buscador')
+const submitBuscador = document.querySelector('#submit-buscador')
 const formulario = document.querySelector('#formulario')
 
 //variables
@@ -34,44 +35,48 @@ function listeners() {
     // Añadido de nuevos listeners al proyecto
     carrito.addEventListener('mousedown', (e) => {
         if (e.target.classList.contains("quitar-curso")) {
-            quitarCurso(e);
+            quitarCurso(e)
             const interval = setInterval(() => {
-                quitarCurso(e);
-            }, 250);
+                quitarCurso(e)
+            }, 250)
             carrito.addEventListener('mouseup', () => {
-                clearInterval(interval);
-            });
+                clearInterval(interval)
+            })
         }
-    });
+    })
 
     carrito.addEventListener('mousedown', (e) => {
         if (e.target.classList.contains("añadir-curso")) {
-            sumarCurso(e);
+            sumarCurso(e)
             const interval = setInterval(() => {
-                sumarCurso(e);
-            }, 250);
+                sumarCurso(e)
+            }, 250)
             carrito.addEventListener('mouseup', () => {
-                clearInterval(interval);
-            });
+                clearInterval(interval)
+            })
         }
-    });
+    })
 
-    buscador.addEventListener('keyup', () => {
+    buscador.addEventListener('keydown', () => {
         obtenerDB()
+    })
+    submitBuscador.addEventListener('click', function(e) {
+        e.preventDefault()
     })
 
     formulario.addEventListener('submit', function(e) {
-        e.preventDefault();
+        e.preventDefault()
         const cursoOBJ = {
-            imagen: document.getElementById('imagen').files[0],
-            nombreCurso: document.getElementById('nombreCurso').value,
-            autor: document.getElementById('autor').value,
+            imagen: "img/" + document.querySelector('#imagen').files[0].name,
+            nombreCurso: document.querySelector('#nombreCurso').value,
+            autor: document.querySelector('#autor').value,
             puntuacion: "img/estrellas.png",
-            precio: document.getElementById('precio').value
+            precio: document.querySelector('#precio').value
         }
-        crearDB(cursoOBJ)
+        insertarCurso(cursoOBJ)
+        obtenerDB()
         formulario.reset()
-    });
+    })
 }
 
 listeners()
@@ -127,13 +132,13 @@ function leerDatosCurso(curso){
 }
 
 function obtenerPrecioNumerico(precioTexto) {
-    const numeros = precioTexto.match(/\d+/);
-    return numeros ? parseFloat(numeros[0]) : 0;
+    const numeros = precioTexto.match(/\d+/)
+    return numeros ? parseFloat(numeros[0]) : 0
 }
 
 function carritoHTML(productos){
     limpiarHTML(listaCarrito)
-    let precioTotal = 0;
+    let precioTotal = 0
 
     productos.forEach((curso)=> {
         const {imagen, titulo, precio, cantidad, id} = curso
@@ -216,58 +221,65 @@ function mostrarToast(mensaje){
 
 function mostrarArrayHTML(cursos){
     limpiarHTML(listaCursos)
-    const titulo = document.createElement('h1')
-    titulo.classList.add('encabezado')
-    titulo.id = 'encabezado'
-    titulo.textContent = 'Ofertas Black Friday'
-    listaCursos.appendChild(titulo)
+    if (cursos.length === 0){
+        const anuncio = document.createElement('h1')
+        anuncio.classList.add('encabezado')
+        anuncio.id = 'encabezado'
+        anuncio.textContent = 'No hay resultados'
+        listaCursos.appendChild(anuncio)
+    } else {
+        const titulo = document.createElement('h1')
+        titulo.classList.add('encabezado')
+        titulo.id = 'encabezado'
+        titulo.textContent = 'Ofertas Black Friday'
+        listaCursos.appendChild(titulo)
+        cursos.forEach(curso => {
+            const { id, curso: { imagen, nombreCurso, autor, puntuacion, precio } } = curso
+            const contenedorCurso = document.createElement("div")
+            contenedorCurso.classList.add('card')
 
-    cursos.forEach(curso => {
-        const { id, curso: { imagen, nombreCurso, autor, puntuacion, precio } } = curso
-        const contenedorCurso = document.createElement("div")
-        contenedorCurso.classList.add('card')
+            const imagenCurso = document.createElement("img")
+            imagenCurso.classList.add('imagen-curso', 'u-full-width')
+            imagenCurso.alt = `Imagen del curso ${nombreCurso}`
+            imagenCurso.src = imagen
 
-        const imagenCurso = document.createElement("img")
-        imagenCurso.classList.add('imagen-curso', 'u-full-width')
-        imagenCurso.alt = `Imagen del curso ${nombreCurso}`
-        imagenCurso.src = imagen
+            const infoContainer = document.createElement("div")
+            infoContainer.classList.add('info-card')
 
-        const infoContainer = document.createElement("div")
-        infoContainer.classList.add('info-card')
+            const nombre = document.createElement("h4")
+            nombre.textContent = nombreCurso
 
-        const nombre = document.createElement("h4")
-        nombre.textContent = nombreCurso
+            const creador = document.createElement("p")
+            creador.textContent = autor
 
-        const creador = document.createElement("p")
-        creador.textContent = autor
+            const puntos = document.createElement("img")
+            puntos.alt = `Puntuación del curso ${nombreCurso}`
+            puntos.src = puntuacion
 
-        const puntos = document.createElement("img")
-        puntos.alt = `Puntuación del curso ${nombreCurso}`
-        puntos.src = puntuacion
-
-        const coste = document.createElement("p")
-        coste.classList.add('precio')
-        coste.textContent = precio + '€'
-        const descuento = document.createElement("span")
-        descuento.classList.add('u-pull-right')
-        descuento.textContent = 1 + '€'
-        
-        const comprarCurso = document.createElement("a")
-        comprarCurso.href = "#"
-        comprarCurso.classList.add('u-full-width', 'button-primary', 'button', 'input', 'agregar-carrito')
-        comprarCurso.setAttribute("data-id", id);
-        comprarCurso.textContent = 'Añadir al carrito'
-        
-        coste.appendChild(descuento)
-        infoContainer.appendChild(nombre)
-        infoContainer.appendChild(creador)
-        infoContainer.appendChild(puntos)
-        infoContainer.appendChild(coste)
-        infoContainer.appendChild(comprarCurso)
-        contenedorCurso.appendChild(imagenCurso)
-        contenedorCurso.appendChild(infoContainer)
-        listaCursos.appendChild(contenedorCurso)
-    });
+            const coste = document.createElement("p")
+            coste.classList.add('precio')
+            coste.textContent = precio + '€'
+            const descuento = document.createElement("span")
+            descuento.classList.add('u-pull-right')
+            descuento.textContent = 1 + '€'
+            
+            const comprarCurso = document.createElement("a")
+            comprarCurso.href = "#"
+            comprarCurso.classList.add('u-full-width', 'button-primary', 'button', 'input', 'agregar-carrito')
+            comprarCurso.setAttribute("data-id", id)
+            comprarCurso.textContent = 'Añadir al carrito'
+            
+            coste.appendChild(descuento)
+            infoContainer.appendChild(nombre)
+            infoContainer.appendChild(creador)
+            infoContainer.appendChild(puntos)
+            infoContainer.appendChild(coste)
+            infoContainer.appendChild(comprarCurso)
+            contenedorCurso.appendChild(imagenCurso)
+            contenedorCurso.appendChild(infoContainer)
+            listaCursos.appendChild(contenedorCurso)
+        })
+    }
 }
 
 function obtenerDatosArrayJSON(){
@@ -276,89 +288,90 @@ function obtenerDatosArrayJSON(){
         .then(res => res.json())
         .then(data => {
             data.forEach(info => {insertarCurso(info)})
+            obtenerDB()
         })
         .catch(err => console.log(err))
 }
 
 function crearDB() {
-    let request = indexedDB.open("CRM", 1);
+    let request = indexedDB.open("CRM", 1)
 
     request.onerror = function () {
-        console.error("Error", openRequest.error);
-    };
+        console.error("Error", openRequest.error)
+    }
     request.onsuccess = function (event) {
-        const db = event.target.result;
-        console.log("Database connected successfully:", db);
-        db.close();
-    };
+        const db = event.target.result
+        console.log("Database connected successfully:", db)
+        db.close()
+    }
     request.onupgradeneeded = (event) => {
-        let db = event.target.result;
+        let db = event.target.result
         let store = db.createObjectStore('cursos', {
             autoIncrement: true
-        });
-    };
+        })
+    }
 }
 
 function insertarCurso(cursoOBJ) {
-    let request = indexedDB.open("CRM", 1);
+    let request = indexedDB.open("CRM", 1)
 
     request.onerror = function () {
-        console.error("Error", openRequest.error);
-    };
+        console.error("Error", openRequest.error)
+    }
     request.onsuccess = function (event) {   
-        const db = event.target.result; 
-        const txn = db.transaction('cursos', 'readwrite');
-        const store = txn.objectStore('cursos');
-        let query = store.put(cursoOBJ);
+        const db = event.target.result 
+        const txn = db.transaction('cursos', 'readwrite')
+        const store = txn.objectStore('cursos')
+        let query = store.put(cursoOBJ)
 
         query.onsuccess = function (event) {
-            console.log(event);
-        };
+            console.log(event)
+        }
         query.onerror = function (event) {
-            console.log(event.target.errorCode);
+            console.log(event.target.errorCode)
         }
         txn.oncomplete = function () {
-            db.close();
-        };
+            db.close()
+        }
     }
 }
 
 function obtenerDB(){
-    let request = indexedDB.open("CRM", 1);
+    let request = indexedDB.open("CRM", 1)
     request.onerror = function () {
-        console.error("Error al abrir la base de datos");
-    };
+        console.error("Error al abrir la base de datos")
+    }
 
     request.onsuccess = function (event) {
-        const db = event.target.result;
-        const txn = db.transaction("cursos", "readonly");
-        const objectStore = txn.objectStore("cursos");
-        const cursorRequest = objectStore.openCursor();
+        const db = event.target.result
+        const txn = db.transaction("cursos", "readonly")
+        const objectStore = txn.objectStore("cursos")
+        const cursorRequest = objectStore.openCursor()
         let cursos = []
 
         cursorRequest.onsuccess = (event) => {
-            let cursor = event.target.result;
+            let cursor = event.target.result
             if (cursor) {
-                let id = cursor.key;
-                let curso = cursor.value;
-                cursos.push({ id, curso });
-                cursor.continue();
+                let id = cursor.key
+                let curso = cursor.value
+                cursos.push({ id, curso })
+                cursor.continue()
             } else {
-                db.close();
+                db.close()
                 if (cursos.length === 0) {
                     obtenerDatosArrayJSON()
                 } else {
                     if (buscador.value.trim() !== ""){
                         const busqueda = buscador.value.toLowerCase()
                         const filtro = cursos.filter(curso => {
-                            return curso.curso.nombreCurso.toLowerCase().includes(busqueda) || curso.curso.autor.toLowerCase().includes(busqueda);
-                        });
-                        mostrarArrayHTML(filtro);
+                            return curso.curso.nombreCurso.toLowerCase().includes(busqueda) || curso.curso.autor.toLowerCase().includes(busqueda)
+                        })
+                        mostrarArrayHTML(filtro)
                     } else {
-                        mostrarArrayHTML(cursos);
+                        mostrarArrayHTML(cursos)
                     }
                 }
             }
-        };
-    };
+        }
+    }
 }
