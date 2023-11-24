@@ -301,7 +301,6 @@ function crearDB() {
     }
     request.onsuccess = function (event) {
         const db = event.target.result
-        console.log("Database connected successfully:", db)
         db.close()
     }
     request.onupgradeneeded = (event) => {
@@ -324,11 +323,11 @@ function insertarCurso(cursoOBJ) {
         const store = txn.objectStore('cursos')
         let query = store.put(cursoOBJ)
 
-        query.onsuccess = function (event) {
-            console.log(event)
+        query.onsuccess = function () {
+            console.log("Curso insertado")
         }
-        query.onerror = function (event) {
-            console.log(event.target.errorCode)
+        query.onerror = function () {
+            console.error("Error", openRequest.error)
         }
         txn.oncomplete = function () {
             db.close()
@@ -339,7 +338,7 @@ function insertarCurso(cursoOBJ) {
 function obtenerDB(){
     let request = indexedDB.open("CRM", 1)
     request.onerror = function () {
-        console.error("Error al abrir la base de datos")
+        console.error("Error", openRequest.error)
     }
 
     request.onsuccess = function (event) {
@@ -349,6 +348,9 @@ function obtenerDB(){
         const cursorRequest = objectStore.openCursor()
         let cursos = []
 
+        cursorRequest.onerror = function () {
+            console.error("Error", openRequest.error)
+        }
         cursorRequest.onsuccess = (event) => {
             let cursor = event.target.result
             if (cursor) {
