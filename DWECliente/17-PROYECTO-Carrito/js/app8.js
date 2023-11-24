@@ -8,14 +8,14 @@ const listaCursos = document.querySelector("#lista-cursos")
 const buscador = document.querySelector('#buscador')
 const formulario = document.querySelector('#formulario')
 
-
 //variables
 let articulosCarrito = []
 
 //listeners
 function listeners() {
     document.addEventListener("DOMContentLoaded", () => {
-        obtenerDatosArrayJSON()
+        crearDB()
+        obtenerDB()
         const productos = JSON.parse(localStorage.getItem("productos"))
         if (productos.length){
             submenu.classList.add("activo")
@@ -57,7 +57,7 @@ function listeners() {
     });
 
     buscador.addEventListener('keyup', () => {
-        obtenerDatosArrayJSON()
+        obtenerDB()
     })
 
     formulario.addEventListener('submit', function(e) {
@@ -66,6 +66,7 @@ function listeners() {
             imagen: document.getElementById('imagen').files[0],
             nombreCurso: document.getElementById('nombreCurso').value,
             autor: document.getElementById('autor').value,
+            puntuacion: "img/estrellas.png",
             precio: document.getElementById('precio').value
         }
         crearDB(cursoOBJ)
@@ -213,23 +214,6 @@ function mostrarToast(mensaje){
     toast.show()
 }
 
-function obtenerDatosArrayJSON(){
-    url = "data/cursos.json"
-    fetch(url)
-        .then(res => res.json())
-        .then(data => {
-            data.forEach(info => {crearDB(info)})
-            if (buscador.value.trim() !== ""){
-                const busqueda = buscador.value.toLowerCase()
-                const filtro = data.filter(clase => clase.nombreCurso.toLowerCase().includes(busqueda) || clase.autor.toLowerCase().includes(busqueda))
-                mostrarArrayHTML(filtro)
-            }else {
-                mostrarArrayHTML(data)
-            }
-        })
-        .catch(err => console.log(err))
-}
-
 function mostrarArrayHTML(cursos){
     limpiarHTML(listaCursos)
     const titulo = document.createElement('h1')
@@ -239,7 +223,7 @@ function mostrarArrayHTML(cursos){
     listaCursos.appendChild(titulo)
 
     cursos.forEach(curso => {
-        const { id, imagen, nombreCurso, autor, puntuacion, precio} = curso
+        const { id, curso: { imagen, nombreCurso, autor, puntuacion, precio } } = curso
         const contenedorCurso = document.createElement("div")
         contenedorCurso.classList.add('card')
 
@@ -286,7 +270,17 @@ function mostrarArrayHTML(cursos){
     });
 }
 
-function crearDB(cursoOBJ) {
+function obtenerDatosArrayJSON(){
+    url = "data/cursos.json"
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(info => {insertarCurso(info)})
+        })
+        .catch(err => console.log(err))
+}
+
+function crearDB() {
     let request = indexedDB.open("CRM", 1);
 
     request.onerror = function () {
@@ -294,7 +288,8 @@ function crearDB(cursoOBJ) {
     };
     request.onsuccess = function (event) {
         const db = event.target.result;
-        insertarCurso(cursoOBJ, db);
+        console.log("Database connected successfully:", db);
+        db.close();
     };
     request.onupgradeneeded = (event) => {
         let db = event.target.result;
@@ -304,18 +299,66 @@ function crearDB(cursoOBJ) {
     };
 }
 
-function insertarCurso(cursoOBJ, db) {
-    const txn = db.transaction('cursos', 'readwrite');
-    const store = txn.objectStore('cursos');
-    let query = store.put(cursoOBJ);
+function insertarCurso(cursoOBJ) {
+    let request = indexedDB.open("CRM", 1);
 
-    query.onsuccess = function (event) {
-        console.log(event);
+    request.onerror = function () {
+        console.error("Error", openRequest.error);
     };
-    query.onerror = function (event) {
-        console.log(event.target.errorCode);
+    request.onsuccess = function (event) {   
+        const db = event.target.result; 
+        const txn = db.transaction('cursos', 'readwrite');
+        const store = txn.objectStore('cursos');
+        let query = store.put(cursoOBJ);
+
+        query.onsuccess = function (event) {
+            console.log(event);
+        };
+        query.onerror = function (event) {
+            console.log(event.target.errorCode);
+        }
+        txn.oncomplete = function () {
+            db.close();
+        };
     }
-    txn.oncomplete = function () {
-        db.close();
+}
+
+function obtenerDB(){
+    let request = indexedDB.open("CRM", 1);
+    request.onerror = function () {
+        console.error("Error al abrir la base de datos");
+    };
+
+    request.onsuccess = function (event) {
+        const db = event.target.result;
+        const txn = db.transaction("cursos", "readonly");
+        const objectStore = txn.objectStore("cursos");
+        const cursorRequest = objectStore.openCursor();
+        let cursos = []
+
+        cursorRequest.onsuccess = (event) => {
+            let cursor = event.target.result;
+            if (cursor) {
+                let id = cursor.key;
+                let curso = cursor.value;
+                cursos.push({ id, curso });
+                cursor.continue();
+            } else {
+                db.close();
+                if (cursos.length === 0) {
+                    obtenerDatosArrayJSON()
+                } else {
+                    if (buscador.value.trim() !== ""){
+                        const busqueda = buscador.value.toLowerCase()
+                        const filtro = cursos.filter(curso => {
+                            return curso.curso.nombreCurso.toLowerCase().includes(busqueda) || curso.curso.autor.toLowerCase().includes(busqueda);
+                        });
+                        mostrarArrayHTML(filtro);
+                    } else {
+                        mostrarArrayHTML(cursos);
+                    }
+                }
+            }
+        };
     };
 }
