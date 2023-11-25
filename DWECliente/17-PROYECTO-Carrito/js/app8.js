@@ -6,7 +6,8 @@ const vaciarCarrito = document.querySelector("#vaciar-carrito")
 const listaCarrito = document.querySelector("#lista-carrito tbody")
 const listaCursos = document.querySelector("#lista-cursos")
 const buscador = document.querySelector('#buscador')
-const submitBuscador = document.querySelector('#submit-buscador')
+const select = document.querySelector('#select')
+const busqueda = document.querySelector('#busqueda')
 const formulario = document.querySelector('#formulario')
 
 //variables
@@ -60,8 +61,11 @@ function listeners() {
     buscador.addEventListener('keydown', () => {
         obtenerDB()
     })
-    submitBuscador.addEventListener('click', function(e) {
+    busqueda.addEventListener('click', function(e) {
         e.preventDefault()
+    })
+    select.addEventListener('input', () => {
+        obtenerDB()
     })
 
     formulario.addEventListener('submit', function(e) {
@@ -219,8 +223,21 @@ function mostrarToast(mensaje){
     toast.show()
 }
 
-function mostrarArrayHTML(cursos){
+function mostrarHTML(cursos){
     limpiarHTML(listaCursos)
+    crearSelectAutores(cursos)
+    if (buscador.value.trim() !== ""){
+        const busqueda = buscador.value.toLowerCase()
+        cursos = cursos.filter(curso => {
+            return curso.curso.nombreCurso.toLowerCase().includes(busqueda) || curso.curso.autor.toLowerCase().includes(busqueda)
+        })
+    }
+    if (select.value.trim() !== ""){
+        const busqueda = select.value.toLowerCase()
+        cursos = cursos.filter(curso => {
+            return curso.curso.autor.toLowerCase().includes(busqueda)
+        })
+    }
     if (cursos.length === 0){
         const anuncio = document.createElement('h1')
         anuncio.classList.add('encabezado')
@@ -280,6 +297,30 @@ function mostrarArrayHTML(cursos){
             listaCursos.appendChild(contenedorCurso)
         })
     }
+}
+
+function obtenerAutores(cursos) {
+    const autoresSet = new Set();
+    cursos.forEach(curso => {
+        autoresSet.add(curso.curso.autor);
+    });
+    return Array.from(autoresSet);
+}
+
+function crearSelectAutores(cursos) {
+    const autores = obtenerAutores(cursos);
+    const opciones = Array.from(select.querySelectorAll('option'));
+
+    autores.forEach(autor => {
+        const existe = opciones.some(opcion => opcion.value === autor);
+        if (!existe) {
+            const option = document.createElement("option");
+            option.classList.add('text-gray-700');
+            option.textContent = autor;
+            option.value = autor;
+            select.appendChild(option);
+        }
+    });
 }
 
 function obtenerDatosArrayJSON(){
@@ -363,15 +404,7 @@ function obtenerDB(){
                 if (cursos.length === 0) {
                     obtenerDatosArrayJSON()
                 } else {
-                    if (buscador.value.trim() !== ""){
-                        const busqueda = buscador.value.toLowerCase()
-                        const filtro = cursos.filter(curso => {
-                            return curso.curso.nombreCurso.toLowerCase().includes(busqueda) || curso.curso.autor.toLowerCase().includes(busqueda)
-                        })
-                        mostrarArrayHTML(filtro)
-                    } else {
-                        mostrarArrayHTML(cursos)
-                    }
+                    mostrarHTML(cursos)
                 }
             }
         }
