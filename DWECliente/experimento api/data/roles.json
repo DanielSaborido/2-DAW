@@ -1,0 +1,93 @@
+[
+    {
+        "imagen": "img/alquimico.png",
+        "nombreRol": "Alquimico",
+        "senda": "Senda de la Sombra",
+        "habilidades": [],
+        "razas": []
+    },
+    {
+        "imagen": "img/arquero.png",
+        "nombreRol": "Arquero",
+        "senda": ["Senda de la Fuerza","Senda de la Sombra"],
+        "habilidades": [],
+        "razas": []
+    },
+    {
+        "imagen": "img/asesino.png",
+        "nombreRol": "Asesino",
+        "senda": "Senda de la Sombra",
+        "habilidades": [],
+        "razas": []
+    },
+    {
+        "imagen": "img/barbaro.png",
+        "nombreRol": "Barbaro",
+        "senda": "Senda de la Fuerza",
+        "habilidades": [],
+        "razas": []
+    },
+    {
+        "imagen": "img/guerrero.png",
+        "nombreRol": "Guerrero",
+        "senda": "Senda de la Fuerza",
+        "habilidades": [],
+        "razas": []
+    },
+    {
+        "imagen": "img/ilusion.png",
+        "nombreRol": "Ilusionista",
+        "senda": ["Senda de la Magia","Senda de la Sombra"],
+        "habilidades": [],
+        "razas": []
+    },
+    {
+        "imagen": "img/ladron.png",
+        "nombreRol": "Ladron",
+        "senda": "Senda de la Sombra",
+        "habilidades": [],
+        "razas": []
+    },
+    {
+        "imagen": "img/licantropo.png",
+        "nombreRol": "Licantropo",
+        "senda": "Senda de la Fuerza",
+        "habilidades": [],
+        "razas": []
+    },
+    {
+        "imagen": "img/mago.png",
+        "nombreRol": "Mago Puro",
+        "senda": "Senda de la Magia",
+        "habilidades": [],
+        "razas": []
+    },
+    {
+        "imagen": "img/nigromante.png",
+        "nombreRol": "Nigromante",
+        "senda": "Senda de la Magia",
+        "habilidades": [],
+        "razas": []
+    },
+    {
+        "imagen": "img/paladin.png",
+        "nombreRol": "Paladin",
+        "senda": "Senda de la Fuerza",
+        "habilidades": [],
+        "razas": []
+    },
+    {
+        "imagen": "img/sanador.png",
+        "nombreRol": "Sanador",
+        "senda": "Senda de la Magia",
+        "habilidades": [],
+        "razas": []
+    },
+    {
+        "imagen": "img/vampiro.png",
+        "nombreRol": "Vampiro",
+        "senda": "Senda de la Magia",
+        "habilidades": [],
+        "razas": []
+    }
+]
