@@ -3,91 +3,91 @@
         "imagen": "img/alquimico.png",
         "nombreRol": "Alquimico",
         "senda": "Senda de la Sombra",
-        "habilidades": [],
-        "razas": []
+        "habilidades": ["Alquimia", "Elocuencia", "Discreción", "Robo", "Una mano", "Arquería"],
+        "razas": ["Kajita", "Elfo del Bosque"]
     },
     {
         "imagen": "img/arquero.png",
         "nombreRol": "Arquero",
-        "senda": ["Senda de la Fuerza","Senda de la Sombra"],
-        "habilidades": [],
-        "razas": []
+        "senda": ["Senda de la Fuerza", "Senda de la Sombra"],
+        "habilidades": ["Arquería", "Discreción", "Armadura ligera", "Elocuencia", "Alquimia"],
+        "razas": ["Elfo del Bosque"]
     },
     {
         "imagen": "img/asesino.png",
         "nombreRol": "Asesino",
         "senda": "Senda de la Sombra",
-        "habilidades": [],
-        "razas": []
+        "habilidades": ["Armadura ligera", "Una mano", "Elocuencia", "Discreción", "Alquimia", "Ilusión"],
+        "razas": ["Kajita"]
     },
     {
         "imagen": "img/barbaro.png",
         "nombreRol": "Barbaro",
         "senda": "Senda de la Fuerza",
-        "habilidades": [],
-        "razas": []
+        "habilidades": ["Una mano" , "Armadura ligera", "Arquería", "Destrucción"],
+        "razas": ["Nordico", "Orco"]
     },
     {
         "imagen": "img/guerrero.png",
         "nombreRol": "Guerrero",
         "senda": "Senda de la Fuerza",
-        "habilidades": [],
-        "razas": []
+        "habilidades": ["Una mano", "Bloqueo", "Armadura pesada", "Dos manos"],
+        "razas": ["Nordico", "Imperial", "Guardia Rojo"]
     },
     {
         "imagen": "img/ilusion.png",
         "nombreRol": "Ilusionista",
-        "senda": ["Senda de la Magia","Senda de la Sombra"],
-        "habilidades": [],
-        "razas": []
+        "senda": ["Senda de la Magia", "Senda de la Sombra"],
+        "habilidades": ["Ilusión", "Discreción", "Elocuencia", "Encantamiento", "Una mano"],
+        "razas": ["Alto Elfo"]
     },
     {
         "imagen": "img/ladron.png",
         "nombreRol": "Ladron",
         "senda": "Senda de la Sombra",
-        "habilidades": [],
-        "razas": []
+        "habilidades": ["Discreción", "Robo", "Elocuencia", "Alquimia", "Armadura ligera", "Ilusión"],
+        "razas": ["Kajita", "Elfo del Bosque", "Alto Elfo"]
     },
     {
         "imagen": "img/licantropo.png",
         "nombreRol": "Licantropo",
         "senda": "Senda de la Fuerza",
-        "habilidades": [],
-        "razas": []
+        "habilidades": ["Rama del Licantropo"],
+        "razas": ["Nordico", "Orco", "Imperial", "Guardia Rojo"]
     },
     {
         "imagen": "img/mago.png",
         "nombreRol": "Mago Puro",
         "senda": "Senda de la Magia",
-        "habilidades": [],
-        "razas": []
+        "habilidades": ["Destrucción", "Conjuración", "Ilusión", "Restauración", "Alteración", "Encantamiento"],
+        "razas": ["Alto Elfo", "Elfo Oscuro", "Bretón"]
     },
     {
         "imagen": "img/nigromante.png",
         "nombreRol": "Nigromante",
         "senda": "Senda de la Magia",
-        "habilidades": [],
-        "razas": []
+        "habilidades": ["Conjuración", "Discreción", "Una mano", "Armadura ligera", "Encantamiento", "Arquería"],
+        "razas": ["Bretón", "Elfo Oscuro"]
     },
     {
         "imagen": "img/paladin.png",
         "nombreRol": "Paladin",
         "senda": "Senda de la Fuerza",
-        "habilidades": [],
-        "razas": []
+        "habilidades": ["Armadura pesada", "Una mano", "Bloqueo", "Restauración", "Elocuencia"],
+        "razas": ["Nordico", "Bretón"]
     },
     {
         "imagen": "img/sanador.png",
         "nombreRol": "Sanador",
         "senda": "Senda de la Magia",
-        "habilidades": [],
-        "razas": []
+        "habilidades": ["Restauración", "Alteración", "Encantamiento", "Alquimia", "Elocuencia"],
+        "razas": ["Bretón", "Argoniano"]
     },
     {
         "imagen": "img/vampiro.png",
-        "nombreRol": "Vampiro",
+        "nombreRol": "Lord Vampiro",
         "senda": "Senda de la Magia",
-        "habilidades": [],
-        "razas": []
+        "habilidades": ["Rama del Lord Vampiro"],
+        "razas": ["Alto Elfo", "Elfo Oscuro", "Bretón", "Argoniano"]
     }
 ]
