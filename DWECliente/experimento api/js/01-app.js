@@ -3,13 +3,7 @@ function listeners() {
         crearDB()
         obtenerDB()
     })
-
-    buscador.addEventListener('keydown', () => {
-        obtenerDB()
-    })
-    busqueda.addEventListener('click', function(e) {
-        e.preventDefault()
-    })
+    
     select.addEventListener('input', () => {
         obtenerDB()
     })

@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="css/tailwind.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/custom.css">
   </head>
   <body>
     <div class="contenido">
@@ -25,7 +30,88 @@
     </form>
       <div id="contenido"></div>
     </div>
+    <div id="lista-cursos" class="container"></div>
+    <div
+      class="modal fade"
+      id="modal"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1
+              class="modal-title fs-3 font-bold"
+              id="staticBackdropLabel">Formulario de Curso</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="formulario" class="bg-white p-3" method="POST">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="imagen">Imagen:</label>
+                    <input 
+                        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="file" id="imagen" name="imagen" accept="image/*" required
+                    />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="nombreCurso">Nombre del Curso:</label>
+                    <input 
+                        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="text" id="nombreCurso" name="nombreCurso" placeholder="Nombre del curso" required
+                    />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="autor">Autor:</label>
+                    <input 
+                        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="text" id="autor" name="autor" placeholder="Autor" required
+                    />
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="precio">Precio:</label>
+                    <input 
+                        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="precio" name="precio" type="number" placeholder="Precio del curso" required
+                    />
+                </div>
+                
+                <input
+                    type="submit"
+                    class="w-full capitalize font-bold"
+                    value="Crear curso"
+                />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  <footer id="footer" class="footer">
+      <div class="container">
+          <div class="row">
+              <div class="four columns">
+                  <nav id="principal" class="menu">
+                      <a class="enlace" href="https://iesrafaelalberti.es/">IES Rafael Alberti</a>
+                      <a class="enlace" href="#">C/ Amiel, s/n – 11012, Cádiz (Cádiz)</a>
+                      <a class="enlace" href="#">Tel: (+34) 956 24 33 17</a>
+                  </nav>
+              </div>
+              <div class="four columns">
+                  <nav id="secundaria" class="menu">
+                      <a class="enlace" href="https://fpcibersec.github.io/">C.E. Ciberseguridad TIC (Info)</a>
+                      <a class="enlace" href="https://fpcibersec.github.io/informacion/presentacion//">C.E. Ciberseguridad TIC (Presentación)</a>
+                      <a class="enlace" href="#" data-bs-toggle="modal" data-bs-target="#modal">Crear clase</a>
+                  </nav>
+              </div>
+          </div>
+      </div>
+  </footer>
 
-    <script src="js/01-app.js"></script>
+  <script src="js/01-app.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
