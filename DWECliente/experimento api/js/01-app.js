@@ -1,10 +1,21 @@
+const senda = document.querySelector('#senda')
+const habilidades = document.querySelector('#habilidad')
+const razas = document.querySelector('#raza')
+const contenido = document.querySelector("#contenido")
+
 function listeners() {
     document.addEventListener("DOMContentLoaded", () => {
         crearDB()
         obtenerDB()
     })
-    
-    select.addEventListener('input', () => {
+
+    senda.addEventListener('input', () => {
+        obtenerDB()
+    })
+    habilidades.addEventListener('input', () => {
+        obtenerDB()
+    })
+    razas.addEventListener('input', () => {
         obtenerDB()
     })
 
@@ -25,63 +36,87 @@ function listeners() {
 
 listeners()
 
-function obtenerDatosApi(){
-    url = "data/roles.json"
-    fetch(url)
-        .then(res => res.json())
-        .then(data => {
-            data.forEach(info => {insertarCurso(info)})
-            obtenerDB()
+function mostrarHTML(roles){
+    limpiarHTML(contenido)
+    crearSelects(roles, senda)
+    crearSelects(roles, habilidades)
+    crearSelects(roles, razas)
+    if (senda.value.trim() !== ""){
+        const busqueda = senda.value.toLowerCase()
+        roles = roles.filter(rol => {
+            return rol.dataRol.senda.toLowerCase().includes(busqueda)
         })
-        .catch(err => console.log(err))
+    }
+    if (habilidades.value.trim() !== ""){
+        const busqueda = habilidades.value.toLowerCase()
+        roles = roles.filter(rol => {
+            return rol.dataRol.habilidades.toLowerCase().includes(busqueda)
+        })
+    }
+    if (razas.value.trim() !== ""){
+        const busqueda = razas.value.toLowerCase()
+        roles = roles.filter(rol => {
+            return rol.dataRol.razas.toLowerCase().includes(busqueda)
+        })
+    }
+    if (roles.length === 0){
+        const anuncio = document.createElement('h1')
+        anuncio.classList.add('encabezado')
+        anuncio.id = 'encabezado'
+        anuncio.textContent = 'No hay resultados'
+        contenido.appendChild(anuncio)
+    } else {
+        roles.forEach(rol => {
+            const { id, dataRol : {imagen, nombreRol, senda, habilidades, razas} } = rol
+                const contenedorRol = document.createElement("div")
+
+                const imagenRol = document.createElement("img")
+                imagenRol.alt = `Imagen del Rol ${nombreRol}`
+                imagenRol.src = imagen
+
+                const infoContainer = document.createElement("div")
+
+                const nombre = document.createElement("h4")
+                nombre.textContent = nombreRol
+
+                const creador = document.createElement("p")
+                creador.textContent = senda
+
+                const tituloHabilidad = document.createElement("h5")
+                tituloHabilidad.textContent = "Habilidades"
+                const listaHabilidades = document.createElement("ul")
+                habilidades.forEach(habilidad =>{
+                    const elemento = document.createElement("li")
+                    elemento.textContent = habilidad
+                    listaHabilidades.appendChild(elemento)
+                })
+
+                const tituloRazas = document.createElement("h5")
+                tituloRazas.textContent = "Razas"
+                const listaRazas = document.createElement("ul")
+                razas.forEach(raza =>{
+                    const elemento = document.createElement("li")
+                    elemento.textContent = raza
+                    listaRazas.appendChild(elemento)
+                })
+                
+                infoContainer.appendChild(nombre)
+                infoContainer.appendChild(creador)
+                infoContainer.appendChild(tituloHabilidad)
+                infoContainer.appendChild(listaHabilidades)
+                infoContainer.appendChild(tituloRazas)
+                infoContainer.appendChild(listaRazas)
+                contenedorRol.appendChild(imagenRol)
+                contenedorRol.appendChild(infoContainer)
+                contenido.appendChild(contenedorRol)
+        });
+    }
 }
 
-function mostrarHTML(arrayApi){
-    const contenido =document.querySelector("#contenido")
-    arrayApi.forEach(rol => {
-        const { id, dataRol : {imagen, nombreRol, senda, habilidades, razas} } = rol
-            const contenedorCurso = document.createElement("div")
-
-            const imagenCurso = document.createElement("img")
-            imagenCurso.alt = `Imagen del curso ${nombreRol}`
-            imagenCurso.src = imagen
-
-            const infoContainer = document.createElement("div")
-
-            const nombre = document.createElement("h4")
-            nombre.textContent = nombreRol
-
-            const creador = document.createElement("p")
-            creador.textContent = senda
-
-            const tituloHabilidad = document.createElement("h5")
-            tituloHabilidad.textContent = "Habilidades"
-            const listaHabilidades = document.createElement("ul")
-            habilidades.forEach(habilidad =>{
-                const elemento = document.createElement("li")
-                elemento.textContent = habilidad
-                listaHabilidades.appendChild(elemento)
-            })
-
-            const tituloRazas = document.createElement("h5")
-            tituloRazas.textContent = "Razas"
-            const listaRazas = document.createElement("ul")
-            razas.forEach(raza =>{
-                const elemento = document.createElement("li")
-                elemento.textContent = raza
-                listaRazas.appendChild(elemento)
-            })
-            
-            infoContainer.appendChild(nombre)
-            infoContainer.appendChild(creador)
-            infoContainer.appendChild(tituloHabilidad)
-            infoContainer.appendChild(listaHabilidades)
-            infoContainer.appendChild(tituloRazas)
-            infoContainer.appendChild(listaRazas)
-            contenedorCurso.appendChild(imagenCurso)
-            contenedorCurso.appendChild(infoContainer)
-            contenido.appendChild(contenedorCurso)
-    });
+function limpiarHTML(selector) {
+    while (selector.firstChild) {
+        selector.firstChild.remove()
+    }
 }
 
 function obtenerSelect(roles, info) {
@@ -92,48 +127,31 @@ function obtenerSelect(roles, info) {
     return Array.from(selectSet);
 }
 
-function crearSelects(roles) {
-    const selectSenda = obtenerSelect(roles, "senda");
-    let opciones = Array.from(selectSenda.querySelectorAll('option'));
+function crearSelects(roles, info) {
+    const select = obtenerSelect(roles, info);
+    let opciones = Array.from(info.querySelectorAll('option'));
 
-    selectSenda.forEach(senda => {
-        const existe = opciones.some(opcion => opcion.value === senda);
+    select.forEach(data => {
+        const existe = opciones.some(opcion => opcion.value === data);
         if (!existe) {
             const option = document.createElement("option");
             option.classList.add('text-gray-700');
-            option.textContent = senda;
-            option.value = senda;
-            select.appendChild(option);
+            option.textContent = data;
+            option.value = data;
+            info.appendChild(option);
         }
     });
+}
 
-    const selectHabilidad = obtenerSelect(roles, "habilidades");
-    opciones = Array.from(selectHabilidad.querySelectorAll('option'));
-
-    selectHabilidad.forEach(habilidad => {
-        const existe = opciones.some(opcion => opcion.value === habilidad);
-        if (!existe) {
-            const option = document.createElement("option");
-            option.classList.add('text-gray-700');
-            option.textContent = habilidad;
-            option.value = habilidad;
-            select.appendChild(option);
-        }
-    });
-
-    const selectRaza = obtenerSelect(roles);
-    opciones = Array.from(selectRaza.querySelectorAll('option'));
-
-    selectRaza.forEach(raza => {
-        const existe = opciones.some(opcion => opcion.value === raza);
-        if (!existe) {
-            const option = document.createElement("option");
-            option.classList.add('text-gray-700');
-            option.textContent = raza;
-            option.value = raza;
-            select.appendChild(option);
-        }
-    });
+function obtenerDatosApi(){
+    url = "data/roles.json"
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            data.forEach(info => {insertarRol(info)})
+            obtenerDB()
+        })
+        .catch(err => console.log(err))
 }
 
 function crearDB() {
@@ -204,7 +222,7 @@ function obtenerDB(){
             } else {
                 db.close()
                 if (roles.length === 0) {
-                    obtenerDatosArrayJSON()
+                    obtenerDatosApi()
                 } else {
                     mostrarHTML(roles)
                 }

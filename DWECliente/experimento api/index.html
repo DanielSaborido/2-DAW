@@ -11,23 +11,21 @@
     <link rel="stylesheet" href="css/custom.css">
   </head>
   <body>
-    <div class="contenido">
-      <h1>JavaScript Moderno</h1>
-      <p>Fetch API</p>
-
-      <button type="button" id="cargarAPI">Cargar API</button>
-      
+    <div class="contenido">      
       <form action="#" id="filtros" method="post" class="formulario">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="sendas">sendas:</label>
         <select class="u-full-width text-gray-700" id="senda">
             <option class="text-gray-700" value="" selected>-- Sendas disponibles --</option>
         </select>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="habilidades">habilidades:</label>
         <select class="u-full-width text-gray-700" id="habilidad">
             <option class="text-gray-700" value="" selected>-- Habilidades --</option>
         </select>
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="razas">razas:</label>
         <select class="u-full-width text-gray-700" id="raza">
             <option class="text-gray-700" value="" selected>-- Razas del juego --</option>
         </select>
-    </form>
+      </form>
       <div id="contenido"></div>
     </div>
     <div id="lista-cursos" class="container"></div>
