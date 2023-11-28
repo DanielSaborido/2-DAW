@@ -38,25 +38,22 @@ listeners()
 
 function mostrarHTML(roles){
     limpiarHTML(contenido)
-    crearSelects(roles, senda)
-    crearSelects(roles, habilidades)
-    crearSelects(roles, razas)
-    if (senda.value.trim() !== ""){
-        const busqueda = senda.value.toLowerCase()
+    if (senda.value !== ""){
+        const busqueda = senda.value
         roles = roles.filter(rol => {
-            return rol.dataRol.senda.toLowerCase().includes(busqueda)
+            return rol.dataRol.senda.toString().includes(busqueda)
         })
     }
-    if (habilidades.value.trim() !== ""){
-        const busqueda = habilidades.value.toLowerCase()
+    if (habilidades.value !== ""){
+        const busqueda = habilidades.value
         roles = roles.filter(rol => {
-            return rol.dataRol.habilidades.toLowerCase().includes(busqueda)
+            return rol.dataRol.habilidades.toString().includes(busqueda)
         })
     }
-    if (razas.value.trim() !== ""){
-        const busqueda = razas.value.toLowerCase()
+    if (razas.value !== ""){
+        const busqueda = razas.value
         roles = roles.filter(rol => {
-            return rol.dataRol.razas.toLowerCase().includes(busqueda)
+            return rol.dataRol.razas.toString().includes(busqueda)
         })
     }
     if (roles.length === 0){
@@ -66,23 +63,37 @@ function mostrarHTML(roles){
         anuncio.textContent = 'No hay resultados'
         contenido.appendChild(anuncio)
     } else {
+        const titulo = document.createElement('h1')
+        titulo.classList.add('encabezado')
+        titulo.id = 'encabezado'
+        titulo.textContent = 'Roles de Skyrim'
+        contenido.appendChild(titulo)
         roles.forEach(rol => {
             const { id, dataRol : {imagen, nombreRol, senda, habilidades, razas} } = rol
                 const contenedorRol = document.createElement("div")
+                contenedorRol.classList.add('card')
 
                 const imagenRol = document.createElement("img")
+                imagenRol.classList.add('imagen-curso', 'u-full-width')
                 imagenRol.alt = `Imagen del Rol ${nombreRol}`
                 imagenRol.src = imagen
 
                 const infoContainer = document.createElement("div")
+                infoContainer.classList.add('info-card')
 
                 const nombre = document.createElement("h4")
                 nombre.textContent = nombreRol
 
-                const creador = document.createElement("p")
-                creador.textContent = senda
+                const tituloSenda = document.createElement("h4")
+                tituloSenda.textContent = "Senda"
+                const listaSendas = document.createElement("ul")
+                senda.forEach(senda =>{
+                    const elemento = document.createElement("li")
+                    elemento.textContent = senda
+                    listaSendas.appendChild(elemento)
+                })
 
-                const tituloHabilidad = document.createElement("h5")
+                const tituloHabilidad = document.createElement("h4")
                 tituloHabilidad.textContent = "Habilidades"
                 const listaHabilidades = document.createElement("ul")
                 habilidades.forEach(habilidad =>{
@@ -91,7 +102,7 @@ function mostrarHTML(roles){
                     listaHabilidades.appendChild(elemento)
                 })
 
-                const tituloRazas = document.createElement("h5")
+                const tituloRazas = document.createElement("h4")
                 tituloRazas.textContent = "Razas"
                 const listaRazas = document.createElement("ul")
                 razas.forEach(raza =>{
@@ -101,7 +112,8 @@ function mostrarHTML(roles){
                 })
                 
                 infoContainer.appendChild(nombre)
-                infoContainer.appendChild(creador)
+                infoContainer.appendChild(tituloSenda)
+                infoContainer.appendChild(listaSendas)
                 infoContainer.appendChild(tituloHabilidad)
                 infoContainer.appendChild(listaHabilidades)
                 infoContainer.appendChild(tituloRazas)
@@ -117,30 +129,6 @@ function limpiarHTML(selector) {
     while (selector.firstChild) {
         selector.firstChild.remove()
     }
-}
-
-function obtenerSelect(roles, info) {
-    const selectSet = new Set();
-    roles.forEach(rol => {
-        selectSet.add(rol.dataRol[info]);
-    });
-    return Array.from(selectSet);
-}
-
-function crearSelects(roles, info) {
-    const select = obtenerSelect(roles, info);
-    let opciones = Array.from(info.querySelectorAll('option'));
-
-    select.forEach(data => {
-        const existe = opciones.some(opcion => opcion.value === data);
-        if (!existe) {
-            const option = document.createElement("option");
-            option.classList.add('text-gray-700');
-            option.textContent = data;
-            option.value = data;
-            info.appendChild(option);
-        }
-    });
 }
 
 function obtenerDatosApi(){
