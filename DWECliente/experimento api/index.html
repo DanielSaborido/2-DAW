@@ -12,61 +12,87 @@
   </head>
   <body>
     <div class="container">
-          <form action="#" id="filtros" method="post" class="formulario">
-            <div class="four columns">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="sendas">sendas:</label>
-              <select class="u-full-width text-gray-700" id="senda">
-                <option class="text-gray-700" value="" selected>-- Sendas disponibles --</option>
-                <option class="text-gray-700" value="Senda de la Fuerza" >Senda de la Fuerza</option>
-                <option class="text-gray-700" value="Senda de la Sombra" >Senda de la Sombra</option>
-                <option class="text-gray-700" value="Senda de la Magia" >Senda de la Magia</option>
-              </select>
-            </div>
-            <div class="four columns">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="habilidades">habilidades:</label>
-              <select class="u-full-width text-gray-700" id="habilidad">
-                  <option class="text-gray-700" value="" selected>-- Habilidades --</option>
-                  <option class="text-gray-700" value="Una mano" >Una mano</option>
-                  <option class="text-gray-700" value="Bloqueo" >Bloqueo</option>
-                  <option class="text-gray-700" value="Dos manos" >Dos manos</option>
-                  <option class="text-gray-700" value="Armadura pesada" >Armadura pesada</option>
-                  <option class="text-gray-700" value="Herrería" >Herrería</option>
-                  <option class="text-gray-700" value="Elocuencia" >Elocuencia</option>
-                  <option class="text-gray-700" value="Armadura ligera" >Armadura ligera</option>
-                  <option class="text-gray-700" value="Arquería" >Arquería</option>
-                  <option class="text-gray-700" value="Discreción" >Discreción</option>
-                  <option class="text-gray-700" value="Abrir cerraduras" >Abrir cerraduras</option>
-                  <option class="text-gray-700" value="Robo" >Robo</option>
-                  <option class="text-gray-700" value="Alquimia" >Alquimia</option>
-                  <option class="text-gray-700" value="Ilusión" >Ilusión</option>
-                  <option class="text-gray-700" value="Destrucción" >Destrucción</option>
-                  <option class="text-gray-700" value="Conjuración" >Conjuración</option>
-                  <option class="text-gray-700" value="Alteración" >Alteración</option>
-                  <option class="text-gray-700" value="Restauración" >Restauración</option>
-                  <option class="text-gray-700" value="Encantamiento" >Encantamiento</option>
-              </select>
-            </div>
-            <div class="four columns">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="razas">razas:</label>
-              <select class="u-full-width text-gray-700" id="raza">
-                  <option class="text-gray-700" value="" selected>-- Razas del juego --</option>
-                  <option class="text-gray-700" value="Nordico" >Nordico</option>
-                  <option class="text-gray-700" value="Imperial" >Imperial</option>
-                  <option class="text-gray-700" value="Guardia Rojo" >Guardia Rojo</option>
-                  <option class="text-gray-700" value="Bretón" >Bretón</option>
-                  <option class="text-gray-700" value="Alto Elfo" >Alto Elfo</option>
-                  <option class="text-gray-700" value="Elfo Oscuro" >Elfo Oscuro</option>
-                  <option class="text-gray-700" value="Elfo del Bosque" >Elfo del Bosque</option>
-                  <option class="text-gray-700" value="Orco" >Orco</option>
-                  <option class="text-gray-700" value="Kajita" >Kajita</option>
-                  <option class="text-gray-700" value="Argoniano" >Argoniano</option>
-              </select>
-            </div>
-          </form>
+      <form action="#" id="filtros" method="post" class="formulario">
+        <div class="four columns">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="sendas">Sendas:</label>
+          <select class="u-full-width text-gray-700" id="senda">
+            <option class="text-gray-700" value="" selected>-- Sendas disponibles --</option>
+            <option class="text-gray-700" value="Senda de la Fuerza" >Senda de la Fuerza</option>
+            <option class="text-gray-700" value="Senda de la Sombra" >Senda de la Sombra</option>
+            <option class="text-gray-700" value="Senda de la Magia" >Senda de la Magia</option>
+          </select>
+        </div>
+        <div class="four columns">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="habilidades">Habilidades:</label>
+          <select class="u-full-width text-gray-700" id="habilidad">
+              <option class="text-gray-700" value="" selected>-- Habilidades --</option>
+              <option class="text-gray-700" value="Una mano" >Una mano</option>
+              <option class="text-gray-700" value="Bloqueo" >Bloqueo</option>
+              <option class="text-gray-700" value="Dos manos" >Dos manos</option>
+              <option class="text-gray-700" value="Armadura pesada" >Armadura pesada</option>
+              <option class="text-gray-700" value="Herrería" >Herrería</option>
+              <option class="text-gray-700" value="Elocuencia" >Elocuencia</option>
+              <option class="text-gray-700" value="Armadura ligera" >Armadura ligera</option>
+              <option class="text-gray-700" value="Arquería" >Arquería</option>
+              <option class="text-gray-700" value="Discreción" >Discreción</option>
+              <option class="text-gray-700" value="Abrir cerraduras" >Abrir cerraduras</option>
+              <option class="text-gray-700" value="Robo" >Robo</option>
+              <option class="text-gray-700" value="Alquimia" >Alquimia</option>
+              <option class="text-gray-700" value="Ilusión" >Ilusión</option>
+              <option class="text-gray-700" value="Destrucción" >Destrucción</option>
+              <option class="text-gray-700" value="Conjuración" >Conjuración</option>
+              <option class="text-gray-700" value="Alteración" >Alteración</option>
+              <option class="text-gray-700" value="Restauración" >Restauración</option>
+              <option class="text-gray-700" value="Encantamiento" >Encantamiento</option>
+          </select>
+        </div>
+        <div class="four columns">
+          <label class="block text-gray-700 text-sm font-bold" for="razas">Razas:</label>
+          <select class="u-full-width text-gray-700" id="raza">
+              <option class="text-gray-700" value="" selected>-- Razas del juego --</option>
+              <option class="text-gray-700" value="Nordico" >Nordico</option>
+              <option class="text-gray-700" value="Imperial" >Imperial</option>
+              <option class="text-gray-700" value="Guardia Rojo" >Guardia Rojo</option>
+              <option class="text-gray-700" value="Bretón" >Bretón</option>
+              <option class="text-gray-700" value="Alto Elfo" >Alto Elfo</option>
+              <option class="text-gray-700" value="Elfo Oscuro" >Elfo Oscuro</option>
+              <option class="text-gray-700" value="Elfo del Bosque" >Elfo del Bosque</option>
+              <option class="text-gray-700" value="Orco" >Orco</option>
+              <option class="text-gray-700" value="Kajita" >Kajita</option>
+              <option class="text-gray-700" value="Argoniano" >Argoniano</option>
+          </select>
+        </div>
+        <input class="u-full-width text-gray-700" type="reset" value="Reiniciar formulario">
+      </form>
     </div>
 
     <div id="contenido" class="container"></div>
-    
+
+    <div
+      class="modal fade"
+      id="modalROL"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1
+              class="modal-title fs-3 font-bold"
+              id="staticBackdropLabel"></h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer flex justify-content-between"></div>
+        </div>
+      </div>
+    </div>
+
     <div
       class="modal fade"
       id="modal"
@@ -147,7 +173,7 @@
       </div>
   </footer>
 
-  <script src="js/01-app.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/01-app.js"></script>
   </body>
 </html>
