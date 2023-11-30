@@ -49,7 +49,7 @@ const FormNoControlado = () => {
                 </select>
                 <button type="submit" className="btn btn-primary">Añadir</button>
             </form>
-            <p>{mensaje}</p>
+            <h3>{mensaje}</h3>
         </>
     )
 }
