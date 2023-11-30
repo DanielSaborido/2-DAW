@@ -1,3 +1,7 @@
+import Button from './Button.jsx'
+import Parrafo from './Parrafo.jsx'
+import FormNoControlado from './formulario.jsx'
+
 function LoginPanel(){
   return(
     <>
@@ -32,6 +36,11 @@ function App() {
       <ul>
         {array.map(mostrarArray)}
       </ul>
+      <Button />
+      <Parrafo text = "Hola"/>
+      <div className='container'>
+        <FormNoControlado />
+      </div>
     </>
   )
 }
