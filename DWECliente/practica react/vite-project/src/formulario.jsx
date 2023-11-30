@@ -51,6 +51,7 @@ const FormNoControlado = () => {
                 <p>{descripcion}</p>
                 <select name="Estado"  className="form-control mb-2" defaultValue="Pendiente">
                     <option value="Pendiente">Pendiente</option>
+                    <option value="Procesando">Procesando</option>
                     <option value="Completado">Completado</option>
                 </select>
                 <p>{estado}</p>
