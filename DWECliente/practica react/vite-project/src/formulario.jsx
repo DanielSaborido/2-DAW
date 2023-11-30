@@ -29,8 +29,8 @@ const FormNoControlado = () => {
             return
         }
         !Nombre.trim()? (setNombre("[Error] El campo nombre está vacio")) : setNombre("")
-        !Descripcion.trim()? (setDescripcion("[Error] El campo nombre está vacio")) : setDescripcion("")
-        Estado === "Pendiente"? (setEstado("[Error] El campo nombre está vacio")) : setEstado("")
+        !Descripcion.trim()? (setDescripcion("[Error] El campo descipción está vacio")) : setDescripcion("")
+        Estado === "Pendiente"? (setEstado("[Error] El campo estado está en pendiente")) : setEstado("")
         if (!Nombre.trim() || !Descripcion.trim() || Estado === "Pendiente"){
             setMensaje("")
             return
