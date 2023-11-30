@@ -39,6 +39,7 @@ const FormNoControlado = () => {
 
     return(
         <>
+            <h1>Formulario con React</h1>
             <form onSubmit={handleSubmit} ref={formulario}>
                 <input name="Nombre" placeholder="Nombre tarea" type="text" className="form-control mb-2"/>
                 <textarea name="Descripcion" placeholder="Descripcion tarea"  className="form-control mb-2"/>
