@@ -1,11 +1,15 @@
-// api key 37dea5560e494058945502465024de6a
-// url https://api.rawg.io/api/games?key={api key}
-// url https://api.rawg.io/api/tags?key={api key}
+// api_key 37dea5560e494058945502465024de6a
+// url https://api.rawg.io/api/games?key=${api_key}
+// url https://api.rawg.io/api/genres?key=${api_key}
+// url https://api.rawg.io/api/tags?key=${api_key}
+// url https://api.rawg.io/api/platforms/lists/parents?key=${api_key}
 
 const selectCategorias = document.querySelector('#categorias')
+const selectPlataformas = document.querySelector('#plataformas')
 const bodyId = document.body.getAttribute('data-id')
 const resultado = document.querySelector('#resultado')
 const modal = new bootstrap.Modal('#modal', {})
+const api_key = "37dea5560e494058945502465024de6a"
 
 document.addEventListener('DOMContentLoaded', () => {
     if (bodyId === 'index') {
@@ -19,10 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function iniciarApp() {
     obtenerGeneros()
+    obtenerPlataformas()
 }
 
 function obtenerGeneros() {
-    const url = 'https://api.rawg.io/api/genres?key=37dea5560e494058945502465024de6a'
+    const url = `https://api.rawg.io/api/genres?key=${api_key}`
     fetch(url)
         .then((res) => res.json())
         .then((data) => mostrarGeneros(data.results))
@@ -36,6 +41,24 @@ function mostrarGeneros(generos) {
         option.value = genero.slug
         option.textContent = genero.name
         selectCategorias.appendChild(option)
+    })
+}
+
+function obtenerPlataformas() {
+    const url = `https://api.rawg.io/api/platforms/lists/parents?key=${api_key}`
+    fetch(url)
+        .then((res) => res.json())
+        .then((data) => mostrarPlataformas(data.results))
+        .catch(error => console.error(error))
+}
+
+function mostrarPlataformas(plataformas) {
+    plataformas.sort((a, b) => a.name.localeCompare(b.name))
+    plataformas.forEach(plataforma => {
+        const option = document.createElement('option')
+        option.value = plataforma.slug
+        option.textContent = plataforma.name
+        selectPlataformas.appendChild(option)
     })
 }
 /*
