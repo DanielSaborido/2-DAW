@@ -23,7 +23,8 @@ function LoginPanel(){
       )
     }*/
 
-import FormNoControlado from './formulario.jsx'
+import FormControlado from './formulario controlado.jsx'
+import Actividades from './actividades.jsx'
 
 function App() {
   /*let userLogged = true
@@ -40,8 +41,9 @@ function App() {
       <Button />
       <Parrafo text = "Hola"/>*/}
       <div className='container'>
-        <FormNoControlado />
+        <FormControlado />
       </div>
+      <Actividades />
     </>
   )
 }
