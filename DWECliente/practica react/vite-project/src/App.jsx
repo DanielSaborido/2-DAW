@@ -24,7 +24,6 @@ function LoginPanel(){
     }*/
 
 import FormControlado from './formulario controlado.jsx'
-import Actividades from './actividades.jsx'
 
 function App() {
   /*let userLogged = true
@@ -43,7 +42,6 @@ function App() {
       <div className='container'>
         <FormControlado />
       </div>
-      <Actividades />
     </>
   )
 }

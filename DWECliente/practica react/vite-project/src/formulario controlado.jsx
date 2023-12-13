@@ -1,23 +1,31 @@
 import { useState } from "react"
-import Actividades from './actividades.jsx'
 
 let listaActividades = []
 document.addEventListener("DOMContentLoaded", () => {
     const actividades = JSON.parse(localStorage.getItem("Actividades"));
     if (actividades && actividades.length) {
         listaActividades = actividades;
-        Actividades(actividades);
+        mostrarActividades(listaActividades)
     }
 });
 
 function almacenLocal(actividad) {
     localStorage.setItem("Actividades", JSON.stringify(actividad))
-    Actividades(listaActividades)
+}
+function mostrarActividades(actividades){
+    return actividades.map(actividad => (
+        <div key={actividad.id}>
+            <h3>{actividad.nombre}</h3>
+            <p>{actividad.descripcion}  {actividad.estado}   {actividad.prioridad ? 'Prioridad máxima' : 'No es prioritario'}</p>
+            <a data-id={actividad.id}>X</a>
+        </div>
+    ));
 }
 
 const FormControlado = () => {
     
     const [todo, setTodo] = useState({
+            id:"",
             nombre: "",
             descripcion: "",
             estado: "Pendiente",
@@ -26,6 +34,10 @@ const FormControlado = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
+        setTodo({
+            ...todo,
+            id: Date.now()
+        })
         listaActividades.push(todo);
         almacenLocal(listaActividades)
     }
@@ -71,6 +83,8 @@ const FormControlado = () => {
                 
                 <button type="submit" className="btn btn-primary">Añadir</button>
             </form>
+            <h2>Actividades guardadas</h2>
+            {mostrarActividades(listaActividades)}
         </>
     )
 }
