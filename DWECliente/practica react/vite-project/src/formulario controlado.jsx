@@ -1,29 +1,11 @@
 import { useState } from "react"
 
-let listaActividades = []
-document.addEventListener("DOMContentLoaded", () => {
-    const actividades = JSON.parse(localStorage.getItem("Actividades"));
-    if (actividades && actividades.length) {
-        listaActividades = actividades;
-        mostrarActividades(listaActividades)
-    }
-});
-
 function almacenLocal(actividad) {
     localStorage.setItem("Actividades", JSON.stringify(actividad))
 }
-function mostrarActividades(actividades){
-    return actividades.map(actividad => (
-        <div key={actividad.id}>
-            <h3>{actividad.nombre}</h3>
-            <p>{actividad.descripcion}  {actividad.estado}   {actividad.prioridad ? 'Prioridad máxima' : 'No es prioritario'}</p>
-            <a data-id={actividad.id}>X</a>
-        </div>
-    ));
-}
 
 const FormControlado = () => {
-    
+    const [listaActividades, setListaActividades] = useState([])
     const [todo, setTodo] = useState({
             id:"",
             nombre: "",
@@ -31,6 +13,12 @@ const FormControlado = () => {
             estado: "Pendiente",
             prioridad: false
         })
+    const [actualizarActividades, setActualizarActividades] = useState(false)
+
+    useEffect(() => {
+        const actividades = JSON.parse(localStorage.getItem("Actividades")) || [];
+        setListaActividades(actividades);
+    }, [])
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -38,8 +26,9 @@ const FormControlado = () => {
             ...todo,
             id: Date.now()
         })
-        listaActividades.push(todo);
-        almacenLocal(listaActividades)
+        setListaActividades([...listaActividades, todo])
+        almacenLocal([...listaActividades, todo])
+        setActualizarActividades(true)
     }
 
     const handleChange = e => {
@@ -49,6 +38,24 @@ const FormControlado = () => {
             [name]: type === "checkbox"? (checked) : value
         })
     }
+
+    const eliminarActividad = (id) => {
+        const actividades = listaActividades.filter((actividad) => actividad.id !== id);
+        setListaActividades(actividades);
+        almacenLocal(actividades);
+        setActualizarActividades(true)
+    };
+
+    const handleClickEliminar = (e) => {
+        const id = parseInt(e.target.dataset.id)
+        eliminarActividad(id);
+    };
+
+    useEffect(() => {
+        if (actualizarActividades) {
+            setActualizarActividades(false)
+        }
+    }, [actualizarActividades])
 
     return(
         <>
@@ -83,8 +90,22 @@ const FormControlado = () => {
                 
                 <button type="submit" className="btn btn-primary">Añadir</button>
             </form>
-            <h2>Actividades guardadas</h2>
-            {mostrarActividades(listaActividades)}
+            {actualizarActividades && (
+                <>
+                {listaActividades.length > 0 ? (
+                    <>
+                        <h2>Actividades guardadas</h2>
+                        {listaActividades.map((actividad) => (
+                            <div key={actividad.id}>
+                                <h3>{actividad.nombre}</h3>
+                                <p>{actividad.descripcion}  {actividad.estado}   {actividad.prioridad ? 'Prioridad máxima' : 'No es prioritario'}</p>
+                                <a data-id={actividad.id} onClick={handleClickEliminar}>X</a>
+                            </div>
+                        ))}
+                    </>
+                ) : (<h2>No hay actividades</h2>)}
+                </>
+            )}
         </>
     )
 }
