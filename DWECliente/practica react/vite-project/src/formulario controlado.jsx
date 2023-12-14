@@ -75,7 +75,7 @@ const FormControlado = ({addTarea, tareaEditando, actualizarTareaEditada}) => {
                     <label htmlFor="prioridad" className="form-checked-label">Prioridad</label>
                 </div>
                 
-                <button type="submit" className="btn btn-primary">Añadir</button>
+                <button type="submit" className={tareaEditando ? 'btn btn-warning' : 'btn btn-primary'}>{tareaEditando? "Guardar" : "Añadir"}</button>
             </form>
         </>
     )
