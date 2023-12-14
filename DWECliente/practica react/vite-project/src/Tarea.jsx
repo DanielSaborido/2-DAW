@@ -1,4 +1,4 @@
-const Tarea = ({actividad, deleteTarea, updateTarea}) =>{
+const Tarea = ({actividad, deleteTarea, updateTarea, editTarea}) =>{
     const {id, nombre, descripcion, prioridad, estado} = actividad
 
     return (
@@ -10,11 +10,11 @@ const Tarea = ({actividad, deleteTarea, updateTarea}) =>{
                     <p>{estado}</p>
                     <div className="d-flex">
                         <button className="btn btn-sm btn-danger mr-2" onClick={() => deleteTarea(id)}>Eliminar</button>
-                        <button className="btn btn-sm btn-warning mr-2">Editar</button>
+                        <button className="btn btn-sm btn-primary mr-2" onClick={() => editTarea(id)}>Editar</button>
                         <button className="btn btn-sm btn-primary" onClick={() => updateTarea(id)}>Actualizar</button>
                     </div>
                 </div>
-                <span className="badge badge-success">{prioridad ? 'Prioridad máxima' : 'No es prioritario'}</span>
+                <span className={prioridad ? 'badge badge-success' : 'badge badge-warning'}>{prioridad ? 'Prioridad máxima' : 'No es prioritario'}</span>
             </div>
         </li>
     )
