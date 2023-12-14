@@ -1,16 +1,16 @@
-const Actividades = (actividades) =>{
+import Tarea from './Tarea.jsx'
+
+const Actividades = ({actividades, deleteTarea, updateTarea}) =>{
     return(
         <>
-            <h2>Actividades guardadas</h2>
-            {actividades.forEach(actividad => 
-                <div key={actividad.id}>
-                    <h3>{actividad.nombre}</h3>
-                    <p>{actividad.descripcion}</p>
-                    <p>{actividad.estado}</p>
-                    <p>{actividad.prioridad}</p>
-                    <a data-id={actividad.id}>X</a>
-                </div>
-            )}
+            {actividades.length > 0 ? (
+                <>
+                    <h2 className="mt-2 text-center">Actividades guardadas</h2>
+                    {actividades.map((actividad) => (
+                        <Tarea key={actividad.id} actividad={actividad} eliminar={deleteTarea} actualizar={updateTarea}/>
+                    ))}
+                </>
+            ) : (<h2 className="mt-2 text-center">No hay actividades</h2>)}
         </>
     )
 }

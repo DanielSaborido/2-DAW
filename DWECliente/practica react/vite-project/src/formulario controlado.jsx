@@ -1,11 +1,6 @@
 import { useState } from "react"
 
-function almacenLocal(actividad) {
-    localStorage.setItem("Actividades", JSON.stringify(actividad))
-}
-
-const FormControlado = () => {
-    const [listaActividades, setListaActividades] = useState([])
+const FormControlado = ({addTarea}) => {
     const [todo, setTodo] = useState({
             id:"",
             nombre: "",
@@ -13,22 +8,19 @@ const FormControlado = () => {
             estado: "Pendiente",
             prioridad: false
         })
-    const [actualizarActividades, setActualizarActividades] = useState(false)
 
-    useEffect(() => {
-        const actividades = JSON.parse(localStorage.getItem("Actividades")) || [];
-        setListaActividades(actividades);
-    }, [])
+    const {id, nombre, descripcion, estado, prioridad} = todo
 
     const handleSubmit = e => {
         e.preventDefault()
-        setTodo({
+        if (nombre.trim() === "" || descripcion.trim() === "") {
+            return
+        }
+        addTarea({
             ...todo,
-            id: Date.now()
+            id: Date.now(),
+            estado: estado==="Completado"
         })
-        setListaActividades([...listaActividades, todo])
-        almacenLocal([...listaActividades, todo])
-        setActualizarActividades(true)
     }
 
     const handleChange = e => {
@@ -39,24 +31,6 @@ const FormControlado = () => {
         })
     }
 
-    const eliminarActividad = (id) => {
-        const actividades = listaActividades.filter((actividad) => actividad.id !== id);
-        setListaActividades(actividades);
-        almacenLocal(actividades);
-        setActualizarActividades(true)
-    };
-
-    const handleClickEliminar = (e) => {
-        const id = parseInt(e.target.dataset.id)
-        eliminarActividad(id);
-    };
-
-    useEffect(() => {
-        if (actualizarActividades) {
-            setActualizarActividades(false)
-        }
-    }, [actualizarActividades])
-
     return(
         <>
             <h1>Formulario con React</h1>
@@ -64,16 +38,16 @@ const FormControlado = () => {
                 <input name="nombre" 
                     placeholder="Nombre tarea" 
                     type="text" className="form-control mb-2" 
-                    value={todo.nombre} 
+                    value={nombre} 
                     onChange={handleChange}/>
                 <textarea name="descripcion" 
                     placeholder="Descripcion tarea"  
                     className="form-control mb-2" 
-                    value={todo.descripcion} 
+                    value={descripcion} 
                     onChange={handleChange}/>
                 <select name="estado"  
                     className="form-control mb-2" 
-                    value={todo.estado} 
+                    value={estado} 
                     onChange={handleChange}>
                     <option value="Pendiente">Pendiente</option>
                     <option value="Procesando">Procesando</option>
@@ -83,29 +57,13 @@ const FormControlado = () => {
                     <input type="checkbox" 
                     id = "prioridad"
                     name="prioridad" 
-                    value={todo.prioridad} 
+                    value={prioridad} 
                     onChange={handleChange}/>
                     <label htmlFor="prioridad" className="form-checked-label">Prioridad</label>
                 </div>
                 
                 <button type="submit" className="btn btn-primary">Añadir</button>
             </form>
-            {actualizarActividades && (
-                <>
-                {listaActividades.length > 0 ? (
-                    <>
-                        <h2>Actividades guardadas</h2>
-                        {listaActividades.map((actividad) => (
-                            <div key={actividad.id}>
-                                <h3>{actividad.nombre}</h3>
-                                <p>{actividad.descripcion}  {actividad.estado}   {actividad.prioridad ? 'Prioridad máxima' : 'No es prioritario'}</p>
-                                <a data-id={actividad.id} onClick={handleClickEliminar}>X</a>
-                            </div>
-                        ))}
-                    </>
-                ) : (<h2>No hay actividades</h2>)}
-                </>
-            )}
         </>
     )
 }
