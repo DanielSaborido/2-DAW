@@ -1,7 +1,6 @@
 import { useState,useEffect } from "react"
-import Swal from "sweetalert2"
 
-const FormControlado = ({addTarea, tareaEditando, actualizarTareaEditada}) => {
+const FormControlado = ({tareas, tareaEditando, actualizarTareaEditada}) => {
     const [todo, setTodo] = useState({
             nombre: "",
             descripcion: "",
@@ -19,21 +18,21 @@ const FormControlado = ({addTarea, tareaEditando, actualizarTareaEditada}) => {
     const handleSubmit = e => {
         e.preventDefault()
         if (nombre.trim() === "" || descripcion.trim() === "") {
-            return Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Algo va mal...!",
-              });
+            return
         }
-        if (tareaEditando) {
-            actualizarTareaEditada(todo.id, todo)
-          } else {
-            addTarea({
-              ...todo,
-              id: Date.now(),
-              estado: estado === "Completado"
-            });
-          }
+        
+        tareaEditando ? actualizarTareaEditada(todo.id, todo) :
+            tareas({
+                ...todo,
+                id: Date.now()
+            })
+
+        setTodo({
+        nombre: "",
+        descripcion: "",
+        estado: "Pendiente",
+        prioridad: false
+        })
     }
 
     const handleChange = e => {

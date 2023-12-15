@@ -44,7 +44,7 @@ const ejemplos = [{
   id:3,
   nombre: "bbbbb",
   descripcion: "aaaaaa",
-  estado: "Pendiente",
+  estado: "Procesando",
   prioridad: true
 }]
 
@@ -66,7 +66,7 @@ function App() {
   const updateTarea = id =>{
     const newArray = listaActividades.map((todo) => {
       if (todo.id == id){
-        todo.estado = !todo.estado
+        todo.estado === "Pendiente" ? todo.estado = "Procesando" :  todo.estado === "Completado" ? todo.estado = "Procesando" : todo.estado = "Completado"
       }
       return todo
     })
