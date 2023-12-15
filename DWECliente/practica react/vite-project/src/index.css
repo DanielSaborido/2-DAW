@@ -68,3 +68,7 @@ button:focus-visible {
 .text-center{
   text-align: center;
 }
+
+.completada {
+  text-decoration:line-through;
+}

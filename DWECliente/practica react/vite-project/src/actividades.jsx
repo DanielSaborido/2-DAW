@@ -1,6 +1,6 @@
 import Tarea from './Tarea.jsx'
 
-const Actividades = ({actividades, eliminar, actualizar, editar}) =>{
+const Actividades = ({actividades, eliminar, actualizar, editar, changePrioridad, eliminarCompletados}) =>{
     const ordenarTareas = (a, b) => {
         if (a.prioridad !== b.prioridad) {
             return b.prioridad - a.prioridad
@@ -24,9 +24,12 @@ const Actividades = ({actividades, eliminar, actualizar, editar}) =>{
                         <h2 className="mt-2 text-center">Actividades guardadas</h2>
                         <ul>
                             {tareasOrdenadas.map((actividad) => (
-                                <Tarea key={actividad.id} actividad={actividad} eliminar={eliminar} actualizar={actualizar} editar={editar}/>
+                                <Tarea key={actividad.id} actividad={actividad} eliminar={eliminar} actualizar={actualizar} editar={editar} changePrioridad={changePrioridad}/>
                             ))}
                         </ul>
+                        <div className="d-flex justify-content-center">
+                            <button className="btn btn-sm btn-danger mr-2" onClick={() => eliminarCompletados()}>Eliminar Tareas completadas</button>
+                        </div>
                     </>
                 ) : (<h2 className="mt-2 text-center">No hay actividades</h2>)}
             </div>

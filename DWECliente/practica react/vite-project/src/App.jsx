@@ -63,10 +63,25 @@ function App() {
     setListaActividades(newArray);
   }
 
+  const deleteCompletados = () =>{
+    const newArray = listaActividades.filter((todo) => todo.estado !== "Completado")
+    setListaActividades(newArray);
+  }
+
   const updateTarea = id =>{
     const newArray = listaActividades.map((todo) => {
       if (todo.id == id){
         todo.estado === "Pendiente" ? todo.estado = "Procesando" :  todo.estado === "Completado" ? todo.estado = "Procesando" : todo.estado = "Completado"
+      }
+      return todo
+    })
+    setListaActividades(newArray);
+  }
+
+  const changePrioridad = id =>{
+    const newArray = listaActividades.map((todo) => {
+      if (todo.id == id){
+        todo.prioridad = !todo.prioridad
       }
       return todo
     })
@@ -101,7 +116,7 @@ function App() {
       <Parrafo text = "Hola"/>*/}
       <div className='container'>
         <FormControlado tareas={addTarea} tareaEditando={tareaEditando} actualizarTareaEditada={actualizarTareaEditada}/>
-        <Actividades actividades={listaActividades} eliminar={deleteTarea} actualizar={updateTarea} editar={editTarea}/>
+        <Actividades actividades={listaActividades} eliminar={deleteTarea} actualizar={updateTarea} editar={editTarea} changePrioridad={changePrioridad} eliminarCompletados={deleteCompletados}/>
       </div>
     </>
   )
