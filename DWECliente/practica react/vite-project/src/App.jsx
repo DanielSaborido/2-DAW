@@ -25,34 +25,18 @@ function LoginPanel(){
 
 import Actividades from './actividades.jsx'
 import FormControlado from './formulario controlado.jsx'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-/* const actividades = JSON.parse(localStorage.getItem("Actividades")) || [] */
-const ejemplos = [{
-  id:1,
-  nombre: "aaaaaaaa",
-  descripcion: "aaaaaa",
-  estado: "Pendiente",
-  prioridad: false
-},{
-  id:2,
-  nombre: "ccc",
-  descripcion: "aaaaaa",
-  estado: "Completado",
-  prioridad: false
-},{
-  id:3,
-  nombre: "bbbbb",
-  descripcion: "aaaaaa",
-  estado: "Procesando",
-  prioridad: true
-}]
-
+const actividades = JSON.parse(localStorage.getItem("Actividades")) || []
 function App() {
   /*let userLogged = true
   const array = [1,2,3,4,5,6,7,8,9]*/
-  const [listaActividades, setListaActividades] = useState(ejemplos)
+  const [listaActividades, setListaActividades] = useState(actividades)
   const [tareaEditando, setTareaEditando] = useState(null)
+
+  useEffect(() => {
+    localStorage.setItem("Actividades", JSON.stringify(listaActividades))
+  })
 
   const addTarea = todo =>{
     setListaActividades([...listaActividades, todo]);
