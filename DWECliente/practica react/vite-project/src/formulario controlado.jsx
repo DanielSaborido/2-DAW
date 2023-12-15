@@ -69,8 +69,9 @@ const FormControlado = ({tareas, tareaEditando, actualizarTareaEditada}) => {
                     <input type="checkbox" 
                     id = "prioridad"
                     name="prioridad" 
-                    value={prioridad} 
-                    onChange={handleChange}/>
+                    value={prioridad}
+                    onChange={handleChange}
+                    checked = {prioridad? "true" : ""}/>
                     <label htmlFor="prioridad" className="form-checked-label">Prioridad</label>
                 </div>
                 
