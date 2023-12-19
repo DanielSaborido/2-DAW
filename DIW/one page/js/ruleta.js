@@ -339,12 +339,6 @@ function progresojuego() {
     if (progreso.value == 18) {
         document.getElementById("recompensa").innerHTML = "¡Felicidades! Lograste alganzar el rango de Heraldo, la senda del guerrero fue completada.";
         dinero = 0
-        setTimeout(function() {
-            document.getElementById("recompensa").innerHTML = "Vas a salir de la senda en breve";
-            setTimeout(function() {
-                window.close();
-            }, 3000);
-        }, 4000);
     }
     if (progreso.value != 18 && dinero < 25){
         document.getElementById("recompensa").innerHTML = "Derrota, te quedaste sin fondos.";
