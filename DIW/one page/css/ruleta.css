@@ -1,0 +1,176 @@
+@font-face {
+    font-family: 'fuenteskyrim';
+    src: url("../fuentes/skyrim.ttf");
+}
+
+@font-face {
+    font-family: 'godofwar';
+    src: url("../fuentes/GODOFWAR.TTF");
+}
+
+#fondo {
+    background: url("../img/fondos/fondo.jpg");
+    background-size: cover;
+    padding: 30;
+}
+
+h1 {
+    font-size: 80px;
+    text-align: center;
+    font-family: 'fuenteskyrim';
+}
+
+
+.premios {
+    width: 20%;
+    height: 50%;
+    background-color: #b1a7a7a8;
+    padding: 10px;
+    overflow: auto;
+    border: 1px solid black;
+    float: left;
+}
+
+.premios > img{
+    width: 60px;
+    height: 60px;
+    margin: 8px;
+    border: 1px solid black;
+}
+
+.contenedor {
+    margin: auto;
+    width: 50%;
+}
+
+.anuncios {
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    font-size: 50px;
+    font-family: 'godofwar';
+    height: 30%;
+    width: 50%;
+    border: 1px solid black;
+    background-color: #b1a7a7a8;
+}
+
+.imagenes {
+    padding: 10px;
+    border: 1px solid black;
+    /* Bordes redondeados. */
+    border-radius: 30px;
+    width: auto;
+    text-align: center;
+    /* Sombra. */
+    /*box-shadow: 2px 2px 5px #66CCFF inset;*/
+}
+
+img[alt="logo"]{
+    height: 10%;
+    float: left;
+}
+
+img[alt="juego"] {
+    width: 125px;
+    height: 125px;
+    margin: 8px;
+    border: 1px solid black;
+    /* Sombra. */
+    box-shadow: 2px 2px 5px #66CCFF;
+}
+
+.botones {
+    width: 100%;
+    text-align: center;
+}
+
+.boton {
+    /* Para que los bloques no ocupen todo el ancho. */
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 10px;
+    /* Usamos la fuente cargada de google fonts. */
+    background-color: #c5bbbb8f;
+    font-family: 'fuenteskyrim', cursive;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 20%;
+    box-shadow: 2px 2px 5px #999;
+}
+
+.boton:hover {
+    /* Al pasar por encima del bot�n cambia el color de la sombra. */
+    box-shadow: 2px 2px 5px #333;    
+}
+
+.equipamientos {
+    width: 20%;
+    height: 783px;
+    background-color: #b1a7a7a8;
+    padding: 20;
+    border: 1px solid black;
+    float: right;
+}
+
+img[alt="armas"]{
+    height: 250px;
+    width: 35%;
+    float: right;
+    margin: 10;
+}
+
+img[alt="armaduras"]{
+    height: 250px;
+    width: 35%;
+    margin: 10;
+}
+
+img[alt="escudos"]{
+    height: 250px;
+    width: 35%;
+    margin: 10;
+}
+
+.compra {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+#titulo {
+    grid-column-start: span 2;
+}
+
+.compra > div {
+    width: 100%;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.progreso{
+    width: auto;
+    height: auto;
+    background-color: #b1a7a7a8;
+    padding: 10px;
+    border: 1px solid black;
+    float: left;
+}
+
+.hechizos{
+    height: 25%;
+    border: 1px solid black;
+    overflow: auto;
+}
+
+.gritos{
+    height: 25%;
+    border: 1px solid black;
+    overflow: auto;
+}
+
+progress {
+    width: 100%;
+    accent-color: hsl(0, 100%, 50%);
+}
