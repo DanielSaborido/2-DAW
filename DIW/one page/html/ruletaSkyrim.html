@@ -5,84 +5,96 @@
         <title>Ruleta de Skyrim</title>
         <link href='../css/ruleta.css' rel='stylesheet' type='text/css'>
     </head>
-    <header>
-        <img src="../img/logo/milogo.png" alt="logo">
-        <h1>Ruleta de Skyrim</h1>
-    </header>
     <body onload="cambiaSombras();">
-        <div class="premios">
-            <h2>Mejora de armadura</h2>
-            <img src="../img/premios/armadura.png">
-            <img src="../img/premios/armadura.png">
-            <img src="../img/premios/armadura.png">
-            <img src="../img/premios/armadura.png">
-            <h2>Mejora del arma</h2>
-            <img src="../img/premios/espadas.png">
-            <img src="../img/premios/espadas.png">
-            <img src="../img/premios/espadas.png">
-            <img src="../img/premios/espadas.png">
-            <h2>Mejora del escudo</h2>
-            <img src="../img/premios/acero.png">
-            <img src="../img/premios/acero.png">
-            <img src="../img/premios/acero.png">
-            <img src="../img/premios/acero.png">
-            <h2>Grito nuevo</h2>
-            <img src="../img/premios/grito.png">
-            <img src="../img/premios/grito.png">
-            <img src="../img/premios/grito.png">
-            <img src="../img/premios/grito.png">
-            <h2>250 septim</h2>
-            <img src="../img/premios/moneda.png">
-            <h2>500 septims</h2>
-            <img src="../img/premios/moneda.png">
-            <img src="../img/premios/moneda.png">
-            <h2>750 septims</h2>
-            <img src="../img/premios/moneda.png">
-            <img src="../img/premios/moneda.png">
-            <img src="../img/premios/moneda.png">
-            <h2>1000 septims</h2>
-            <img src="../img/premios/moneda.png">
-            <img src="../img/premios/moneda.png">
-            <img src="../img/premios/moneda.png">
-            <img src="../img/premios/moneda.png">
-        </div>
-        <div class="progreso">
-            <p id="dinero"></p>
-            <progress id="barpro" value="0" max="18"></progress>
-            <div class="compra">
-                <div id="titulo">Comprar equipamiento (1000 septims por objeto)</div>
-                <div id="carma" onclick="carma()">Comprar Arma</div>
-                <div id="carmadura" onclick="carmadura()">Comprar Armadura</div>
-                <div id="cescudo" onclick="cescudo()">Comprar Escudo</div>
-                <div id="cgrito" onclick="cgrito()">Comprar Grito</div>
+        <header>
+            <img src="../img/logo/milogo.png" alt="logo">
+            <h1>Ruleta de Skyrim</h1>
+        </header>
+        <main>
+            <div>
+                <section class="premios">
+                    <h2>Mejora de armadura</h2>
+                    <img src="../img/premios/armadura.png">
+                    <img src="../img/premios/armadura.png">
+                    <img src="../img/premios/armadura.png">
+                    <img src="../img/premios/armadura.png">
+                    <h2>Mejora del arma</h2>
+                    <img src="../img/premios/espadas.png">
+                    <img src="../img/premios/espadas.png">
+                    <img src="../img/premios/espadas.png">
+                    <img src="../img/premios/espadas.png">
+                    <h2>Mejora del escudo</h2>
+                    <img src="../img/premios/acero.png">
+                    <img src="../img/premios/acero.png">
+                    <img src="../img/premios/acero.png">
+                    <img src="../img/premios/acero.png">
+                    <h2>Grito nuevo</h2>
+                    <img src="../img/premios/grito.png">
+                    <img src="../img/premios/grito.png">
+                    <img src="../img/premios/grito.png">
+                    <img src="../img/premios/grito.png">
+                    <h2>250 septim</h2>
+                    <img src="../img/premios/moneda.png">
+                    <h2>500 septims</h2>
+                    <img src="../img/premios/moneda.png">
+                    <img src="../img/premios/moneda.png">
+                    <h2>750 septims</h2>
+                    <img src="../img/premios/moneda.png">
+                    <img src="../img/premios/moneda.png">
+                    <img src="../img/premios/moneda.png">
+                    <h2>1000 septims</h2>
+                    <img src="../img/premios/moneda.png">
+                    <img src="../img/premios/moneda.png">
+                    <img src="../img/premios/moneda.png">
+                    <img src="../img/premios/moneda.png">
+                </section>
+                <section class="progreso">
+                    <p id="dinero"></p>
+                    <progress id="barpro" value="0" max="18"></progress>
+                    <table>
+                        <thead>
+                            <th colspan="2">Comprar equipamiento (1000 septims por objeto)</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="carma" onclick="carma()">Comprar Arma</td>
+                                <td id="carmadura" onclick="carmadura()">Comprar Armadura</td>
+                            </tr>
+                            <tr>
+                                <td id="cescudo" onclick="cescudo()">Comprar Escudo</td>
+                                <td id="cgrito" onclick="cgrito()">Comprar Grito</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
             </div>
-        </div>
-        <div class="contenedor">
-            <div class="imagenes">
-                <img id="imag3" src="../img/premios/moneda.png" alt="juego">
-                <img id="imag2" src="../img/premios/moneda.png" alt="juego">
-                <img id="imag1" src="../img/premios/moneda.png" alt="juego">
-                <img id="imag0" src="../img/premios/moneda.png" alt="juego">
+            <div>
+                <section class="imagenes">
+                    <img id="imag3" src="../img/premios/moneda.png" alt="juego">
+                    <img id="imag2" src="../img/premios/moneda.png" alt="juego">
+                    <img id="imag1" src="../img/premios/moneda.png" alt="juego">
+                    <img id="imag0" src="../img/premios/moneda.png" alt="juego">
+                </section>
+                <section class="botones">
+                    <button id="iniciar" onclick="jugar()">Iniciar</button>
+                    <button id="parar" onclick="paraRuleta(1)">Parar</button>
+                    <button id="parar" onclick="paraRuleta(2)">Parar 2</button>
+                    <button id="parar" onclick="paraRuleta(4)">Parar Todos</button>
+                </section>
+                <p id="recompensa" class="anuncios"></p>
             </div>
-            <div class="botones">
-                <div class="boton" id="iniciar" onclick="jugar()">Iniciar</div>
-                <div class="boton" id="parar" onclick="paraRuleta(1)">Parar</div>
-                <div class="boton" id="parar" onclick="paraRuleta(2)">Parar 2</div>
-                <div class="boton" id="parar" onclick="paraRuleta(4)">Parar Todos</div>
-            </div>
-        </div>
-        <div class="anuncios">
-            <p id="recompensa"></p>
-        </div>
-        <div class="equipamientos">
-            <img src="../img/personaje/desnudo.png" id="armadura" alt="armaduras">
-            <img src="" id="arma" alt="armas">
-            <img src="" id="escudo" alt="escudos">
-            <div class="gritos">
-                <h2>Gritos desbloqueados</h2>
-                <ul id="gritos"></ul>
-            </div>
-        </div>
+            <div>
+                <section class="equipamientos">
+                    <img src="../img/personaje/desnudo.png" id="armadura" alt="armaduras">
+                    <img src="" id="arma" alt="armas">
+                    <img src="" id="escudo" alt="escudos">
+                    <div class="gritos">
+                        <h2>Gritos desbloqueados</h2>
+                        <ul id="gritos"></ul>
+                    </div>
+                </section>
+            </div>            
+        </main>
     </body>
     <script src="../js/ruleta.js"></script>
 </html>
