@@ -46,13 +46,15 @@
             <img src="../img/premios/moneda.png">
             <img src="../img/premios/moneda.png">
         </div>
-        <div class="equipamientos">
-            <img src="../img/personaje/desnudo.png" id="armadura" alt="armaduras">
-            <img src="" id="arma" alt="armas">
-            <img src="" id="escudo" alt="escudos">
-            <div class="gritos">
-                <h2>Gritos desbloqueados</h2>
-                <ul id="gritos"></ul>
+        <div class="progreso">
+            <p id="dinero"></p>
+            <progress id="barpro" value="0" max="18"></progress>
+            <div class="compra">
+                <div id="titulo">Comprar equipamiento (1000 septims por objeto)</div>
+                <div id="carma" onclick="carma()">Comprar Arma</div>
+                <div id="carmadura" onclick="carmadura()">Comprar Armadura</div>
+                <div id="cescudo" onclick="cescudo()">Comprar Escudo</div>
+                <div id="cgrito" onclick="cgrito()">Comprar Grito</div>
             </div>
         </div>
         <div class="contenedor">
@@ -72,15 +74,13 @@
         <div class="anuncios">
             <p id="recompensa"></p>
         </div>
-        <div class="progreso">
-            <p id="dinero"></p>
-            <progress id="barpro" value="0" max="18"></progress>
-            <div class="compra">
-                <div id="titulo">Comprar equipamiento (1000 septims por objeto)</div>
-                <div id="carma" onclick="carma()">Comprar Arma</div>
-                <div id="carmadura" onclick="carmadura()">Comprar Armadura</div>
-                <div id="cescudo" onclick="cescudo()">Comprar Escudo</div>
-                <div id="cgrito" onclick="cgrito()">Comprar Grito</div>
+        <div class="equipamientos">
+            <img src="../img/personaje/desnudo.png" id="armadura" alt="armaduras">
+            <img src="" id="arma" alt="armas">
+            <img src="" id="escudo" alt="escudos">
+            <div class="gritos">
+                <h2>Gritos desbloqueados</h2>
+                <ul id="gritos"></ul>
             </div>
         </div>
     </body>
