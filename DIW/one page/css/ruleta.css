@@ -10,12 +10,11 @@
 
 #fondo {
     background: url("../img/fondos/fondo.jpg");
-    background-size: cover;
-    padding: 30;
+    padding: 10px 30px;
 }
 
 h1 {
-    font-size: 80px;
+    font-size: 70px;
     text-align: center;
     display: inline-block;
     font-family: 'fuenteskyrim';
@@ -36,15 +35,17 @@ main {
     column-gap: 20px;
 }
 
+/*Primera columna para listar premios y comprar*/
 .premios {
     display: grid;
     border-radius: 25px;
     grid-template-columns: repeat(4, auto);
     justify-content: center;
-    height: 75%;
+    height: 475px;
     background-color: #b1a7a7a8;
     overflow: auto;
     border: 1px solid black;
+    margin-bottom: 32px;
 }
 
 .premios > img {
@@ -59,30 +60,41 @@ main {
     text-align: center;
 }
 
-.contenedor {
-    margin: auto;
-}
-
-.anuncios {
-    align-items: center;
-    text-align: center;
-    height: 50%;
-    font-size: 50px;
-    border-radius: 50px;
-    font-family: 'godofwar';
-    border: 1px solid black;
-    background-color: #b1a7a7a8;
-}
-
-.imagenes {
-    padding: 10px;
-    border: 1px solid black;
-    border-radius: 30px;
+.progreso{
     width: auto;
-    text-align: center;
+    height: auto;
+    background-color: #b1a7a7a8;
+    padding: 10px;
+    border-radius: 25px;
+    border: 1px solid black;
 }
 
-img[alt="juego"] {
+progress {
+    width: 100%;
+    accent-color: hsl(0, 100%, 50%);
+}
+
+table, th, td {
+    width: 100%;
+    text-align: center;
+    border: 1px solid black;
+}
+
+td {
+    width: 50%;
+}
+
+/*Segunda columna para jugar y anunciar resultado*/
+.imagenes {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.imagenes > img {
     width: 125px;
     height: 125px;
     margin: 8px;
@@ -91,6 +103,9 @@ img[alt="juego"] {
 }
 
 .botones {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     width: 100%;
     text-align: center;
 }
@@ -113,49 +128,38 @@ button:hover {
     box-shadow: 2px 2px 5px #333;    
 }
 
+.anuncios {
+    align-items: center;
+    text-align: center;
+    margin-top: 50px;
+    height: 50%;
+    font-size: 50px;
+    border-radius: 50px;
+    font-family: 'godofwar';
+    border: 1px solid black;
+    background-color: #b1a7a7a8;
+}
+
+/*Tercera columna para la mejora del personaje*/
 .equipamientos {
     grid-template-columns: repeat(2, 50%);
     justify-content: space-evenly;
     background-color: #b1a7a7a8;
-    padding: 20;
+    padding: 20px;
     border: 1px solid black;
     border-radius: 25px;
 }
 
 .equipamientos > img{
     height: 250px;
-    width: 45%;
-    margin: 5;
+    width: 47.5%;
     border: 1px solid black;
+    display: inline-block;
 }
 
 .gritos{
-    height: 25%;
+    width: 100%;
     border: 1px solid black;
     grid-column-start: span 2;
     overflow: auto;
-}
-
-table, th, td {
-    width: 100%;
-    text-align: center;
-    border: 1px solid black;
-}
-
-td {
-    width: 50%;
-}
-
-.progreso{
-    width: auto;
-    height: auto;
-    background-color: #b1a7a7a8;
-    padding: 10px;
-    border-radius: 25px;
-    border: 1px solid black;
-}
-
-progress {
-    width: 100%;
-    accent-color: hsl(0, 100%, 50%);
 }
