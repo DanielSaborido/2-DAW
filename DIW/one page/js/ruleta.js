@@ -25,6 +25,27 @@ var intervaloSombras;
 var posicionSombras = [[2,2], [-2,2], [-2,-2], [2,-2]];
 var posicionActualSombra = 0;
 
+document.getElementById("compra").addEventListener("click", function(e) {
+    const elementoClicado = e.target.id;
+    switch (elementoClicado) {
+        case "carma":
+            comprarElemento(1000, "arma", armas);
+            break;
+        case "carmadura":
+            comprarElemento(1000, "armadura", armaduras);
+            break;
+        case "cescudo":
+            comprarElemento(1000, "escudo", escudos);
+            break;
+        case "cgrito":
+            comprarElemento(1000, "grito");
+            break;
+        default:
+            break;
+    }
+});
+
+
 // Función que inicia la ruleta.
 function ruleta() {
     // Solo actua cuando estan los tres recuadros parados.
@@ -95,40 +116,6 @@ function paraRuleta(paradas) {
     }
 }
 
-function analisis() {
-    const src1 = imagen1.getAttribute("src");
-    const src2 = imagen2.getAttribute("src");
-    const src3 = imagen3.getAttribute("src");
-    const src4 = imagen4.getAttribute("src");
-    lista.push(src1);
-    lista.push(src2);
-    lista.push(src3);
-    lista.push(src4);
-    document.getElementById("recompensa").innerHTML = "Analizando premio";
-    setTimeout(function() {
-        if (lista[0] === lista[1] && lista[2] === lista[3] && lista[0] === lista[3] && lista[0] === opciones[0]){
-            cambiarArma();
-            lista = [];
-        }
-        if (lista[0] === lista[1] && lista[2] === lista[3] && lista[0] === lista[3] && lista[0] === opciones[1]){
-            masgrito();
-            lista = [];
-        }
-        if (lista[0] === lista[1] && lista[2] === lista[3] && lista[0] === lista[3] && lista[0] === opciones[3]){
-            cambiarArmadura();
-            lista = [];
-        }
-        if (lista[0] === lista[1] && lista[2] === lista[3] && lista[0] === lista[3] && lista[0] === opciones[4]){
-            cambiarescudo();
-            lista = [];
-        }
-        else{
-            dineropremio();
-            lista = [];
-        }
-    }, 2000);
-}
-
 // Funcion que activa el cambio de las sombras.
 function cambiaSombras() {
     // Define el intervalo de cambio de las sombras.
@@ -149,6 +136,87 @@ function circulaSombras() {
         document.getElementById("imag1").style['boxShadow']=estilo;
         document.getElementById("imag2").style['boxShadow']=estilo;
         document.getElementById("imag3").style['boxShadow']=estilo;
+}
+
+function analisis() {
+    const src1 = imagen1.getAttribute("src");
+    const src2 = imagen2.getAttribute("src");
+    const src3 = imagen3.getAttribute("src");
+    const src4 = imagen4.getAttribute("src");
+    lista.push(src1);
+    lista.push(src2);
+    lista.push(src3);
+    lista.push(src4);
+    document.getElementById("recompensa").innerHTML = "Analizando premio";
+    setTimeout(function() {
+        if (lista[0] === lista[1] && lista[2] === lista[3] && lista[0] === lista[3] && lista[0] === opciones[0]){
+            mejorarEquipo("arma", armas);
+            lista = [];
+        }
+        if (lista[0] === lista[1] && lista[2] === lista[3] && lista[0] === lista[3] && lista[0] === opciones[1]){
+            aprenderGrito();
+            lista = [];
+        }
+        if (lista[0] === lista[1] && lista[2] === lista[3] && lista[0] === lista[3] && lista[0] === opciones[3]){
+            mejorarEquipo("armadura", armaduras);
+            lista = [];
+        }
+        if (lista[0] === lista[1] && lista[2] === lista[3] && lista[0] === lista[3] && lista[0] === opciones[4]){
+            mejorarEquipo("escudo", escudos);
+            lista = [];
+        }
+        else{
+            dineropremio();
+            lista = [];
+        }
+    }, 2000);
+}
+
+function mejorarEquipo(elemento, listaItems) {
+    if (listaItems.length === 0){
+        dinero += 1000;
+        document.getElementById("recompensa").innerHTML = `No hay mejor ${elemento}. Se ha vendido por 1000 septims.`;
+        setTimeout(function() {
+            document.getElementById("recompensa").innerHTML = "";
+            document.getElementById("dinero").innerHTML = "Dinero disponible: " + dinero + " septim(s)";
+            progresojuego(); 
+        }, 2000);
+        progresojuego();
+    }
+    else {
+        document.getElementById(elemento).src = listaItems[0];
+        document.getElementById("recompensa").innerHTML = `Mejorando ${elemento}.`;
+        setTimeout(function() {
+            document.getElementById("recompensa").innerHTML = "";
+            progresojuego();
+        }, 2000);
+        progreso.value += 1;
+        listaItems.shift();
+    }
+}
+
+function aprenderGrito() {
+    if (gritos.length==0){
+        document.getElementById("recompensa").innerHTML = "Ya has aprendido todos los gritos existentes.";
+        setTimeout(function() {
+            document.getElementById("recompensa").innerHTML = "";
+        }, 2000);
+        progresojuego();
+    }
+    else {
+        var anadirgrito = document.getElementById("gritos");
+        var li = document.createElement("li"); 
+        var tipogrito = document.createTextNode(gritos[0]); // Creamos un nodo de texto con el valor del elemento del array
+        li.appendChild(tipogrito); // Agregamos el nodo de texto al elemento LI
+        anadirgrito.appendChild(li); // Agregamos el elemento LI al elemento UL
+        document.getElementById("recompensa").innerHTML = "Nuevo grito aprendido.";
+        setTimeout(function() {
+            document.getElementById("recompensa").innerHTML = "";
+            progresojuego();
+        }, 2000);
+        progreso.value +=1;
+        gritos.shift();
+    }
 }
 
 function dineropremio(){
@@ -175,159 +243,18 @@ function dineropremio(){
     }
 }
 
-function cambiarArmadura() {
-    if (armaduras.length==0){
-        dinero+=1000;
-        document.getElementById("recompensa").innerHTML = "Ya tienes la mejor armadura. Vendiendo la nueva armadura por 1000 septims.";
-        setTimeout(function() {
-            document.getElementById("recompensa").innerHTML = "";
-            document.getElementById("dinero").innerHTML = "Dinero disponible: "+dinero+" septim(s)";
-            progresojuego(); 
-        }, 2000);
-        progresojuego();
-    }
-    else {
-        document.getElementById("armadura").src = armaduras[0];
-        document.getElementById("recompensa").innerHTML = "Armadura mejorada.";
-        setTimeout(function() {
-            document.getElementById("recompensa").innerHTML = "";
-            progresojuego();
-        }, 2000);
-        progreso.value +=1;
-        armaduras.shift();
-    }
-}
-
-function cambiarArma() {
-    if (armas.length==0){
-        dinero+=1000;
-        document.getElementById("recompensa").innerHTML = "Ya tienes la mejor arma. Vendiendo la nueva arma por 1000 septims.";
-        setTimeout(function() {
-            document.getElementById("recompensa").innerHTML = "";
-            document.getElementById("dinero").innerHTML = "Dinero disponible: "+dinero+" septim(s)";
-            progresojuego(); 
-        }, 2000);
-        progresojuego();
-    }
-    else {
-        document.getElementById("arma").src = armas[0];
-        document.getElementById("recompensa").innerHTML = "Arma mejorada.";
-        setTimeout(function() {
-            document.getElementById("recompensa").innerHTML = "";
-            progresojuego();
-        }, 2000);
-        progreso.value +=1;
-        armas.shift();
-    }
-}
-
-function cambiarescudo() {
-    if (escudos.length==0){
-        dinero+=1000;
-        document.getElementById("recompensa").innerHTML = "Ya tienes todos los escudos disponibles. Vendiendo el escudo por 1000 septims.";
-        setTimeout(function() {
-            document.getElementById("recompensa").innerHTML = "";
-            document.getElementById("dinero").innerHTML = "Dinero disponible: "+dinero+" septim(s)";
-            progresojuego(); 
-        }, 2000);
-        progresojuego();
-    }
-    else {
-        document.getElementById("escudo").src = escudos[0];
-        document.getElementById("recompensa").innerHTML = "Escudo mejorado.";
-        setTimeout(function() {
-            document.getElementById("recompensa").innerHTML = "";
-            progresojuego();
-        }, 2000);
-        progreso.value +=1;
-        escudos.shift();
-    }
-}
-
-function masgrito() {
-    if (gritos.length==0){
-        dinero+=1000;
-        document.getElementById("recompensa").innerHTML = "Ya tienes todos los gritos disponibles. Vendiendo el grito por 1000 septims.";
-        setTimeout(function() {
-            document.getElementById("recompensa").innerHTML = "";
-            document.getElementById("dinero").innerHTML = "Dinero disponible: "+dinero+" septim(s)";
-            progresojuego(); 
-        }, 2000);
-        progresojuego();
-    }
-    else {
-        var anadirgrito = document.getElementById("gritos");
-        var li = document.createElement("li"); 
-        var tipogrito = document.createTextNode(gritos[0]); // Creamos un nodo de texto con el valor del elemento del array
-        li.appendChild(tipogrito); // Agregamos el nodo de texto al elemento LI
-        anadirgrito.appendChild(li); // Agregamos el elemento LI al elemento UL
-        document.getElementById("recompensa").innerHTML = "Nuevo grito aprendido.";
-        setTimeout(function() {
-            document.getElementById("recompensa").innerHTML = "";
-            progresojuego();
-        }, 2000);
-        progreso.value +=1;
-        gritos.shift();
-    }
-}
-
-function carma() {
-    if (dinero>=1000){ 
-        dinero-=1000;
-        document.getElementById("dinero").innerHTML = "Dinero disponible: "+dinero+" septim(s)";
-        cambiarArma();
-    } 
-    else {
-        document.getElementById("recompensa").innerHTML ="Saldo insuficiente.";
-        setTimeout(function() {
-            document.getElementById("recompensa").innerHTML = "";
-            progresojuego(); 
-        }, 2000);
-        progresojuego();
-    }
-}
-
-function carmadura() {
-    if (dinero>=1000){ 
-        dinero-=1000;
-        document.getElementById("dinero").innerHTML = "Dinero disponible: "+dinero+" septim(s)";
-        cambiarArmadura();
-    } 
-    else {
-        document.getElementById("recompensa").innerHTML ="Saldo insuficiente.";
-        setTimeout(function() {
-            document.getElementById("recompensa").innerHTML = "";
-            progresojuego(); 
-        }, 2000);
-        progresojuego();
-    }
-}
-
-function cescudo() {
-    if (dinero>=1000){ 
-        dinero-=1000;
-        document.getElementById("dinero").innerHTML = "Dinero disponible: "+dinero+" septim(s)";
-        cambiarescudo();
-    } 
-    else {
-        document.getElementById("recompensa").innerHTML ="Saldo insuficiente.";
-        setTimeout(function() {
-            document.getElementById("recompensa").innerHTML = "";
-            progresojuego();
-        }, 2000);
-        progresojuego();
-    }
-}
-
-function cgrito() {
-    if (dinero>=1000){ 
-        dinero-=1000;
-        document.getElementById("dinero").innerHTML = "Dinero disponible: "+dinero+" septim(s)";
-        masgrito();
-    } 
-    else {
-        document.getElementById("recompensa").innerHTML ="Saldo insuficiente.";
-        setTimeout(function() {
+function comprarElemento(costo, tipo, lista) {
+    if (dinero >= costo) {
+        dinero -= costo;
+        document.getElementById("dinero").innerHTML = "Dinero disponible: " + dinero + " septim(s)";
+        if (tipo === "grito") {
+            aprenderGrito();
+        } else {
+            mejorarEquipo(tipo, lista);
+        }
+    } else {
+        document.getElementById("recompensa").innerHTML = "Saldo insuficiente.";
+        setTimeout(function () {
             document.getElementById("recompensa").innerHTML = "";
             progresojuego();
         }, 2000);
@@ -337,7 +264,7 @@ function cgrito() {
 
 function progresojuego() {
     if (progreso.value == 18) {
-        document.getElementById("recompensa").innerHTML = "¡Felicidades! Lograste alganzar el rango de Heraldo, la senda del guerrero fue completada.";
+        document.getElementById("recompensa").innerHTML = "¡Felicidades! Te convertiste en el Heraldo de los compañeros.";
         dinero = 0
     }
     if (progreso.value != 18 && dinero < 25){
