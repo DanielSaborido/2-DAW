@@ -1,10 +1,12 @@
 import { createBrowserRouter } from "react-router-dom"
-import Home from "../pages/Home.jsx"
-import About from "../pages/About.jsx"
-import Blog, { loaderBlogs } from "../pages/Blog.jsx"
+import Home, { loaderGames } from "../pages/Home.jsx"
+import Contact from "../pages/Contact.jsx"
+import Games, { loaderGames } from "../pages/Games.jsx"
 import NotFound from "../pages/NotFound.jsx"
 import LayoutPublic from "../layouts/LayoutPublic.jsx"
-import Post, { loaderPosts } from "../pages/Post.jsx"
+import Game, { loaderGame } from "../pages/Game.jsx"
+
+const api_key = "37dea5560e494058945502465024de6a"
 
 export const router = createBrowserRouter([
     {
@@ -17,21 +19,22 @@ export const router = createBrowserRouter([
                 children:[
                     {
                         path:"/",
-                        element: <Home />
+                        element: <Home />,
+                        loader: loaderGames({ api_key })
                     },
                     {
-                        path:"/about",
-                        element: <About />
+                        path:"/games",
+                        element: <Games />,
+                        loader: loaderGames({ api_key })
                     },
                     {
-                        path:"/blog",
-                        element: <Blog />,
-                        loader: loaderBlogs
+                        path:"/games/:id",
+                        element: <Game />,
+                        loader: loaderGame({ api_key })
                     },
                     {
-                        path:"/blog/:id",
-                        element: <Post />,
-                        loader: loaderPosts
+                        path:"/contact",
+                        element: <Contact />
                     }]
             }]
     }
