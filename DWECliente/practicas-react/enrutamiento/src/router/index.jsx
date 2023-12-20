@@ -12,23 +12,27 @@ export const router = createBrowserRouter([
         element: <LayoutPublic />,
         errorElement: <NotFound />,
         children: [
-            {
-                path:"/",
-                element: <Home />
-            },
-            {
-                path:"/about",
-                element: <About />
-            },
-            {
-                path:"/blog",
-                element: <Blog />,
-                loader: loaderBlogs
-            },
-            {
-                path:"/blog/:id",
-                element: <Post />,
-                loader: loaderPosts
+            { /// esta forma es propuesta por react pero no le gusta al profesor
+                errorElement: <NotFound />,
+                children:[
+                    {
+                        path:"/",
+                        element: <Home />
+                    },
+                    {
+                        path:"/about",
+                        element: <About />
+                    },
+                    {
+                        path:"/blog",
+                        element: <Blog />,
+                        loader: loaderBlogs
+                    },
+                    {
+                        path:"/blog/:id",
+                        element: <Post />,
+                        loader: loaderPosts
+                    }]
             }]
     }
 ])
