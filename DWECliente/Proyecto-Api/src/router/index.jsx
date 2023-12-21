@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom"
 import Home, { loaderGames } from "../pages/Home.jsx"
 import Contact from "../pages/Contact.jsx"
-import Games, { loaderGames } from "../pages/Games.jsx"
+import Games from "../pages/Games.jsx"
 import NotFound from "../pages/NotFound.jsx"
 import LayoutPublic from "../layouts/LayoutPublic.jsx"
 import Game, { loaderGame } from "../pages/Game.jsx"
@@ -14,7 +14,7 @@ export const router = createBrowserRouter([
         element: <LayoutPublic />,
         errorElement: <NotFound />,
         children: [
-            { /// esta forma es propuesta por react pero no le gusta al profesor
+            { 
                 errorElement: <NotFound />,
                 children:[
                     {

@@ -1,17 +1,17 @@
 import { useLoaderData, Link } from "react-router-dom"
 
-const Blog = () => {
+const Games = () => {
     console.log(useLoaderData())
-    const { blogs} = useLoaderData()
+    const { games} = useLoaderData()
 
     return (
         <div>
             <ul>
                 {
-                    blogs.length > 0 ? (
-                        blogs.map((blog) => (
-                            <li key={blog.id}>
-                                <Link to={`/blog/${blog.id}`}>{blog.title}</Link>
+                    games.length > 0 ? (
+                        games.map((game) => (
+                            <li key={game.id}>
+                                <Link to={`/games/${game.id}`}>{game.title}</Link>
                             </li>
                         ))
                     ) : (<h1>No hay datos</h1>)
@@ -21,10 +21,4 @@ const Blog = () => {
     )
 }
 
-export default Blog
-
-export const loaderBlogs = async() => {
-    const data = await fetch("https://jsonplaceholder.typicode.com/posts")
-    const blogs = await data.json()
-    return {blogs}
-}
+export default Games
