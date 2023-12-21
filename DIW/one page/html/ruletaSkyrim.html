@@ -1,14 +1,15 @@
 <!doctype html5>
-<html id="fondo">
+<html>
     <head>
         <meta charset="utf-8">
         <title>Ruleta de Skyrim</title>
         <link href='../css/ruleta.css' rel='stylesheet' type='text/css'>
     </head>
-    <body onload="cambiaSombras();">
+    <body class="fondo" onload="cambiaSombras();">
         <header>
             <img src="../img/logo/milogo.png" alt="logo">
             <h1>Ruleta de Skyrim</h1>
+            <span></span>
         </header>
         <main>
             <div>
@@ -57,8 +58,8 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td id="carma">Comprar Arma</td>
                                 <td id="carmadura">Comprar Armadura</td>
+                                <td id="carma">Comprar Arma</td>
                             </tr>
                             <tr>
                                 <td id="cescudo">Comprar Escudo</td>
@@ -83,7 +84,7 @@
                 </section>
                 <p id="recompensa" class="anuncios"></p>
             </div>
-            <div id="contenedor">
+            <div class="contenedor">
                 <section class="equipamientos">
                     <img src="../img/personaje/desnudo.png" id="armadura" alt="armaduras">
                     <img src="" id="arma" alt="armas">

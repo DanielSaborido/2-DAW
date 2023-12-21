@@ -11,7 +11,7 @@ const imagen1 = document.getElementById("imag0");
 const imagen2 = document.getElementById("imag1");
 const imagen3 = document.getElementById("imag2");
 const imagen4 = document.getElementById("imag3");
-var dinero = 20000000;
+var dinero = 10000000;
 document.getElementById("dinero").innerHTML = "Dinero disponible: "+dinero+" septim(s)";
 var progreso = document.getElementById("barpro")
 // Almacenamos el indice de la imagen que esta en cada recuadro.
@@ -169,7 +169,7 @@ function analisis() {
             dineropremio();
             lista = [];
         }
-    }, 2000);
+    }, 1000);
 }
 
 function mejorarEquipo(elemento, listaItems) {
@@ -180,7 +180,7 @@ function mejorarEquipo(elemento, listaItems) {
             document.getElementById("recompensa").innerHTML = "";
             document.getElementById("dinero").innerHTML = "Dinero disponible: " + dinero + " septim(s)";
             progresojuego(); 
-        }, 2000);
+        }, 1000);
         progresojuego();
     }
     else {
@@ -189,7 +189,7 @@ function mejorarEquipo(elemento, listaItems) {
         setTimeout(function() {
             document.getElementById("recompensa").innerHTML = "";
             progresojuego();
-        }, 2000);
+        }, 1000);
         progreso.value += 1;
         listaItems.shift();
     }
@@ -200,7 +200,7 @@ function aprenderGrito() {
         document.getElementById("recompensa").innerHTML = "Ya has aprendido todos los gritos existentes.";
         setTimeout(function() {
             document.getElementById("recompensa").innerHTML = "";
-        }, 2000);
+        }, 1000);
         progresojuego();
     }
     else {
@@ -213,7 +213,7 @@ function aprenderGrito() {
         setTimeout(function() {
             document.getElementById("recompensa").innerHTML = "";
             progresojuego();
-        }, 2000);
+        }, 1000);
         progreso.value +=1;
         gritos.shift();
     }
@@ -233,13 +233,13 @@ function dineropremio(){
         setTimeout(function() {
             document.getElementById("recompensa").innerHTML = "";
             document.getElementById("dinero").innerHTML = "Dinero disponible: "+dinero+" septim(s)";
-        }, 2000);
+        }, 1000);
     }
     if (dinpre==0 && lista.length!=0) {
         document.getElementById("recompensa").innerHTML = "No has obtenido nada. Intentalo de nuevo.";
         setTimeout(function() {
             document.getElementById("recompensa").innerHTML = "";
-        }, 2000);
+        }, 1000);
     }
 }
 
@@ -257,7 +257,7 @@ function comprarElemento(costo, tipo, lista) {
         setTimeout(function () {
             document.getElementById("recompensa").innerHTML = "";
             progresojuego();
-        }, 2000);
+        }, 1000);
         progresojuego();
     }
 }

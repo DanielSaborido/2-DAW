@@ -8,7 +8,13 @@
     src: url("../fuentes/GODOFWAR.TTF");
 }
 
-#fondo {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.fondo {
     background: url("../img/fondos/fondo.jpg");
     padding: 10px 30px;
 }
@@ -17,18 +23,20 @@ img {
     object-fit: contain;
 }
 
+/*Cabecera*/
 header{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     height: 12%;
-    position: relative;
     margin-bottom: 3%;
+    border-radius: 45px;
     background-color: #b6b1b19f;
 }
 
 h1 {
-    position: absolute;
-    top: -25px;
-    left: 35%;
     font-size: 70px;
     font-family: 'fuenteskyrim';
 }
@@ -132,29 +140,28 @@ button {
     border: 1px solid black;
     border-radius: 10px;
     background-color: #c5bbbb8f;
-    box-shadow: 2px 2px 5px #999;
+    box-shadow: 3px 3px 6px #999;
 }
 
 button:hover {
-    box-shadow: 2px 2px 5px #333;    
+    background-color: #9791918f;
+    box-shadow: 3px 3px 6px #2b2a2a;    
 }
 
 .anuncios {
     height: 59%;
     margin-top: 50px;
-    padding-top: 15%;
+    padding-top: 10%;
     font-family: 'godofwar';
     font-size: 50px;
     text-align: center;
-    box-sizing: border-box;
-    align-items: center;
     border-radius: 50px;
     border: 1px solid black;
     background-color: #b1a7a7a8;
 }
 
 /*Tercera columna para la mejora del personaje*/
-#contenedor{
+.contenedor{
     padding-right: 30px;
 }
 
