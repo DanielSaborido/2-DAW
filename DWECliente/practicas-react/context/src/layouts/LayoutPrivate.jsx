@@ -1,22 +1,10 @@
-import { Outlet, useNavigation } from "react-router-dom"
-import Navbar from "../components/Navbar"
+import { Outlet } from "react-router-dom"
 
 const LayoutPrivate = () => {
-    const navigation = useNavigation()
-    console.log(navigation)
 
     return (
         <div>
-            <Navbar />
-            <div>
-                {
-                    navigation.state === "loading" && (
-                        <div>Loading</div>
-                    )
-                }
-            </div>
             <Outlet />
-            <footer>Footer</footer>
         </div>
     )
 }

@@ -8,13 +8,6 @@ const LayoutRoot = () => {
     return (
         <div>
             <Navbar />
-            <div>
-                {
-                    navigation.state === "loading" && (
-                        <div>Loading</div>
-                    )
-                }
-            </div>
             <Outlet />
             <footer>Footer</footer>
         </div>
