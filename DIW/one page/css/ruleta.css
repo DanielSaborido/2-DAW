@@ -31,6 +31,8 @@ img[alt="logo"]{
 
 main {
     display: grid;
+    height: 75%;
+    width: 99%;
     grid-template-columns: 25% 50% 25%;
     column-gap: 20px;
 }
@@ -50,7 +52,7 @@ main {
 
 .premios > img {
     width: 75%;
-    height: 75%;
+    height: 80px;
     margin: 8px;
     border: 1px solid black;
 }
@@ -98,6 +100,7 @@ td {
     width: 125px;
     height: 125px;
     margin: 8px;
+    background-color: #b1a7a791;
     border: 1px solid black;
     box-shadow: 2px 2px 5px #66CCFF;
 }
@@ -141,6 +144,10 @@ button:hover {
 }
 
 /*Tercera columna para la mejora del personaje*/
+#contenedor{
+    padding-right: 30px;
+}
+
 .equipamientos {
     grid-template-columns: repeat(2, 50%);
     justify-content: space-evenly;
@@ -158,6 +165,7 @@ button:hover {
 }
 
 .gritos{
+    margin-top: 5%;
     width: 100%;
     border: 1px solid black;
     grid-column-start: span 2;
