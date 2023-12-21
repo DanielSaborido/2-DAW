@@ -9,7 +9,6 @@ const LayoutRoot = () => {
         <div>
             <Navbar />
             <Outlet />
-            <footer>Footer</footer>
         </div>
     )
 }
