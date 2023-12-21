@@ -18,11 +18,11 @@ img {
 }
 
 header{
-    background-color: #999999bd;
     width: 100%;
     height: 12%;
     position: relative;
     margin-bottom: 3%;
+    background-color: #b6b1b19f;
 }
 
 h1 {
@@ -39,23 +39,23 @@ header > img {
 
 main {
     display: grid;
-    height: 75%;
-    width: 99%;
     grid-template-columns: 25% 50% 25%;
     column-gap: 20px;
+    height: 75%;
+    width: 99%;
 }
 
 /*Primera columna para listar premios y comprar*/
 .premios {
     display: grid;
-    border-radius: 25px;
     grid-template-columns: repeat(4, auto);
     justify-content: center;
     height: 475px;
-    background-color: #b1a7a7a8;
-    overflow: auto;
-    border: 1px solid black;
     margin-bottom: 32px;
+    overflow: auto;
+    background-color: #b1a7a7a8;
+    border: 1px solid black;
+    border-radius: 25px;
 }
 
 .premios > img {
@@ -73,8 +73,8 @@ main {
 .progreso{
     width: auto;
     height: 25.5%;
-    background-color: #b1a7a7a8;
     padding: 10px;
+    background-color: #b1a7a7a8;
     border-radius: 25px;
     border: 1px solid black;
 }
@@ -101,7 +101,6 @@ td {
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    text-align: center;
     margin-bottom: 50px;
 }
 
@@ -124,15 +123,15 @@ td {
 
 button {
     display: inline-block;
-    border: 1px solid black;
-    border-radius: 10px;
-    background-color: #c5bbbb8f;
-    font-family: 'fuenteskyrim', cursive;
-    font-size: 30px;
-    text-align: center;
     margin-top: 10px;
     margin-left: 10px;
     width: 20%;
+    font-family: 'fuenteskyrim', cursive;
+    font-size: 30px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: #c5bbbb8f;
     box-shadow: 2px 2px 5px #999;
 }
 
@@ -141,15 +140,15 @@ button:hover {
 }
 
 .anuncios {
-    align-items: center;
-    text-align: center;
-    box-sizing: border-box;
+    height: 59%;
     margin-top: 50px;
     padding-top: 15%;
-    height: 59%;
-    font-size: 50px;
-    border-radius: 50px;
     font-family: 'godofwar';
+    font-size: 50px;
+    text-align: center;
+    box-sizing: border-box;
+    align-items: center;
+    border-radius: 50px;
     border: 1px solid black;
     background-color: #b1a7a7a8;
 }
@@ -162,8 +161,8 @@ button:hover {
 .equipamientos {
     grid-template-columns: repeat(2, 50%);
     justify-content: space-evenly;
-    background-color: #b1a7a7a8;
     padding: 20px;
+    background-color: #b1a7a7a8;
     border: 1px solid black;
     border-radius: 25px;
 }
@@ -175,10 +174,10 @@ button:hover {
 }
 
 .gritos{
-    margin-top: 5%;
+    grid-column-start: span 2;
     width: 100%;
     height: 150px;
-    border: 1px solid black;
-    grid-column-start: span 2;
+    margin-top: 5%;
     overflow: auto;
+    border: 1px solid black;
 }
