@@ -64,7 +64,7 @@ main {
 
 .progreso{
     width: auto;
-    height: auto;
+    height: 25.5%;
     background-color: #b1a7a7a8;
     padding: 10px;
     border-radius: 25px;
@@ -73,6 +73,7 @@ main {
 
 progress {
     width: 100%;
+    margin-bottom: 25px;
     accent-color: hsl(0, 100%, 50%);
 }
 
@@ -135,7 +136,7 @@ button:hover {
     align-items: center;
     text-align: center;
     margin-top: 50px;
-    height: 50%;
+    height: 59%;
     font-size: 50px;
     border-radius: 50px;
     font-family: 'godofwar';
@@ -160,13 +161,13 @@ button:hover {
 .equipamientos > img{
     height: 250px;
     width: 47.5%;
-    border: 1px solid black;
     display: inline-block;
 }
 
 .gritos{
     margin-top: 5%;
     width: 100%;
+    height: 150px;
     border: 1px solid black;
     grid-column-start: span 2;
     overflow: auto;
