@@ -5,7 +5,8 @@ const Games = () => {
     const { games} = useLoaderData()
 
     return (
-        <div>
+        <>
+            <h1>Games</h1>
             <ul>
                 {
                     games.length > 0 ? (
@@ -17,8 +18,19 @@ const Games = () => {
                     ) : (<h1>No hay datos</h1>)
                 }
             </ul>
-        </div>
+        </>
     )
 }
 
 export default Games
+
+export const loaderGames = async({api_key}) => {
+    try {
+        const data = await fetch(`https://api.rawg.io/api/games?key=${api_key}`)
+        const response = await data.json()
+        return { games: response.results }
+    } catch (error) {
+        console.error("Error fetching games:", error)
+        return { games: [] }
+    }
+}

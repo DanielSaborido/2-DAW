@@ -7,7 +7,7 @@ const NotFound = () => {
         <div>
             <h1>404</h1>
             <p>Page Not Found</p>
-            <p>{error.statusText}</p>
+            <p>{error.statusText} || {error.message}</p>
         </div>
     )
 }
