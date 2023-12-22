@@ -1,18 +1,18 @@
 import { useLoaderData, Link } from "react-router-dom"
 
 const Home = () => {
-    const { news } = useLoaderData()
+    const { games } = useLoaderData()
 
-    console.log(news)
+    console.log(games)
 
     return (
         
         <>
             <h1>New Games</h1>
             <ul>
-                {news.map((newgame) => (
-                    <li key={newgame.id}>
-                        <Link to={`/games/${newgame.id}`}>{newgame.title}</Link>
+                {games.map((game) => (
+                    <li key={game.id}>
+                        <Link to={`/games/${game.id}`}>{game.name}</Link>
                     </li>
                 ))}
             </ul>
@@ -22,13 +22,13 @@ const Home = () => {
 
 export default Home
 
-export const loaderNews = async({api_key}) => {
+export const loaderGames = async({api_key}) => {
     try {
         const data = await fetch(`https://api.rawg.io/api/games?key=${api_key}`)
         const response = await data.json()
-        return { news: response.results }
+        return { games: response.results }
     } catch (error) {
-        console.error("Error fetching news:", error)
-        return { news: [] }
+        console.error("Error fetching games:", error)
+        return { games: [] }
     }
 }

@@ -1,8 +1,8 @@
 // api_key 37dea5560e494058945502465024de6a
-// url https://api.rawg.io/api/games?key=${api_key}
-// url https://api.rawg.io/api/genres?key=${api_key}
-// url https://api.rawg.io/api/tags?key=${api_key}
-// url https://api.rawg.io/api/platforms/lists/parents?key=${api_key}
+// url https://api.rawg.io/api/games?key=37dea5560e494058945502465024de6a
+// url https://api.rawg.io/api/genres?key=37dea5560e494058945502465024de6a
+// url https://api.rawg.io/api/tags?key=37dea5560e494058945502465024de6a
+// url https://api.rawg.io/api/platforms/lists/parents?key=37dea5560e494058945502465024de6a
 
 const selectCategorias = document.querySelector('#categorias')
 const selectPlataformas = document.querySelector('#plataformas')

@@ -32,18 +32,19 @@ export const router = createBrowserRouter([
                 errorElement: <NotFound />,
                 children:[
                     {
-                        index:true,
+                        path:"/",
                         element: <Home />,
                         loader: () => loaderGames({ api_key })
                     },
                     {
                         path:"/games",
-                        element: <Games />
+                        element: <Games />,
+                        loader: () => loaderGames({ api_key })
                     },
                     {
                         path:"/games/:id",
                         element: <Game />,
-                        loader: () => loaderGame({ api_key })
+                        loader: ({ params }) => loaderGame({params, api_key })
                     },
                     {
                         path:"/genres",
