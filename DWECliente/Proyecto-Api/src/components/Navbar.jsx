@@ -20,6 +20,7 @@ const Navbar = () => {
                     <NavLink to="/genres" className="btn btn-outline-primary">Genres</NavLink>
                     <NavLink to="/tags" className="btn btn-outline-primary">Tags</NavLink>
                     <NavLink to="/platforms" className="btn btn-outline-primary">Platforms</NavLink>
+                    <NavLink to="/developers" className="btn btn-outline-primary">Developers</NavLink>
                     {user ? (
                         <>
                             <NavLink to="/recommended" className="btn btn-outline-primary">Recommended</NavLink>

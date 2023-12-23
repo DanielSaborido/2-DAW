@@ -7,12 +7,15 @@ import Games from "../pages/games/Games.jsx"
 import Game, { loaderGame } from "../pages/games/Game.jsx"
 //filtro por genros y tags
 import Genres, { loaderGenres } from "../pages/genres/Genres.jsx"
-import Genre from "../pages/genres/Genre.jsx"
+import Genre, { loaderGenre } from "../pages/genres/Genre.jsx"
 import Tags, { loaderTags } from "../pages/genres/Tags.jsx"
-import Tag from "../pages/genres/Tag.jsx"
+import Tag, { loaderTag } from "../pages/genres/Tag.jsx"
 //filtro por plataforma de juego
 import Platforms, {loaderPlatforms} from "../pages/platforms/Platforms.jsx"
-import Console from "../pages/platforms/Console.jsx"
+import Console, { loaderConsole } from "../pages/platforms/Console.jsx"
+//filtro de desarrolladores
+import Developers, { loaderDevelopers } from "../pages/developers/Developers.jsx"
+import Developer, { loaderDeveloper } from "../pages/developers/Developer.jsx"
 //pagina de error
 import NotFound from "../pages/NotFound.jsx"
 //paginas de usuario registrado
@@ -53,7 +56,8 @@ export const router = createBrowserRouter([
                     },
                     {
                         path:"/genres/:id",
-                        element: <Genre />
+                        element: <Genre />,
+                        loader: ({ params }) => loaderGenre({params, api_key })
                     },
                     {
                         path:"/tags",
@@ -62,7 +66,8 @@ export const router = createBrowserRouter([
                     },
                     {
                         path:"/tags/:id",
-                        element: <Tag />
+                        element: <Tag />,
+                        loader: ({ params }) => loaderTag({params, api_key })
                     },
                     {
                         path:"/platforms",
@@ -71,7 +76,18 @@ export const router = createBrowserRouter([
                     },
                     {
                         path:"/platforms/:id",
-                        element: <Console />
+                        element: <Console />,
+                        loader: ({ params }) => loaderConsole({params, api_key })
+                    },
+                    {
+                        path:"/developers",
+                        element: <Developers />,
+                        loader: () => loaderDevelopers({ api_key })
+                    },
+                    {
+                        path:"/developers/:id",
+                        element: <Developer />,
+                        loader: ({ params }) => loaderDeveloper({params, api_key })
                     },
                     {
                         path:"/recommended",
