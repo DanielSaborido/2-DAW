@@ -8,13 +8,24 @@ const Genres = () => {
   return (
     <>
       <h1>Genres</h1>
-      <ul>
-          {genres.map((genre) => (
-              <li key={genre.id}>
-                  <Link to={`/genres/${genre.id}`}>{genre.name}</Link>
-              </li>
-          ))}
-      </ul>
+      <div className="row row-cols-1 row-cols-md-5 g-4">
+          {
+              genres.length > 0 ? (
+                  genres.map((genre) => (
+                      <div key={genre.id} className="col">
+                          <Link to={`/genres/${genre.id}`}>
+                              <div className="card h-100">
+                                  <img src={genre.image_background} className="card-img-top h-50" alt={genre.name} />
+                                  <div className="card-body">
+                                      <h5 className="card-title">{genre.name}</h5>
+                                  </div>
+                              </div>
+                          </Link>
+                      </div>
+                  ))
+              ) : (<div className="col"> <h2>No hay datos</h2> </div>)
+          }
+      </div>
     </>
   )
 }

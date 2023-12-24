@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom"
 import LayoutPublic from "../layouts/LayoutPublic.jsx"
 import LayoutPrivate from "../layouts/LayoutPrivate.jsx"
-import Home, { loaderGames } from "../pages/Home.jsx"
+import Home, { loaderNews } from "../pages/Home.jsx"
 //juegos en general
-import Games from "../pages/games/Games.jsx"
+import Games, { loaderGames } from "../pages/games/Games.jsx"
 import Game, { loaderGame } from "../pages/games/Game.jsx"
 //filtro por genros y tags
 import Genres, { loaderGenres } from "../pages/genres/Genres.jsx"
@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
                     {
                         path:"/",
                         element: <Home />,
-                        loader: () => loaderGames({ api_key })
+                        loader: () => loaderNews({ api_key })
                     },
                     {
                         path:"/games",

@@ -2,22 +2,29 @@ import { useLoaderData, Link } from "react-router-dom"
 
 const Console = () => {
   console.log(useLoaderData())
-  const { platform} = useLoaderData()
+  const { platform, selectedPlatformName } = useLoaderData()
 
   return (
       <>
-          <h1>Games for </h1>
-          <ul>
-              {
-                  platform.length > 0 ? (
-                    platform.map((game) => (
-                          <li key={game.id}>
-                              <Link to={`/games/${game.id}`}>{game.name}</Link>
-                          </li>
-                      ))
-                  ) : (<h1>No hay datos</h1>)
-              }
-          </ul>
+          <h1>Games for {selectedPlatformName}</h1>
+          <div className="row row-cols-1 row-cols-md-5 g-4">
+                {
+                    platform.length > 0 ? (
+                        platform.map((game) => (
+                            <div key={game.id} className="col">
+                                <Link to={`/games/${game.id}`}>
+                                    <div className="card h-100">
+                                        <img src={game.background_image} className="card-img-top h-50" alt={game.name} />
+                                        <div className="card-body">
+                                            <h5 className="card-title">{game.name}</h5>
+                                        </div>
+                                    </div>
+                                </Link>
+                            </div>
+                        ))
+                    ) : (<div className="col"> <h2>No hay datos</h2> </div>)
+                }
+            </div>
       </>
   )
 }
@@ -27,12 +34,14 @@ export default Console
 export const loaderConsole = async({params, api_key}) => {
     console.log(params)
     try {
-        const data = await fetch(`https://api.rawg.io/api/games?key=${api_key}&platforms=${params.id}`)
-        const response = await data.json()
-        console.log(response)
-        return { platform: response.results }
+        const platformResponse = await fetch(`https://api.rawg.io/api/platforms/${params.id}?key=${api_key}`)
+        const platformData = await platformResponse.json()
+        const selectedPlatformName = platformData.name
+        const gameResponse = await fetch(`https://api.rawg.io/api/games?key=${api_key}&platforms=${params.id}`)
+        const gameData = await gameResponse.json()
+        return { platform: gameData.results, selectedPlatformName }
     } catch (error) {
         console.error("Error fetching console:", error)
-        return { platform: [] }
+        return { platform: [], selectedPlatformName: '' }
     }
 }
