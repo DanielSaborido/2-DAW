@@ -6,15 +6,15 @@ const Games = () => {
 
     return (
         <>
-            <h1>Games</h1>
-            <div className="row row-cols-1 row-cols-md-5 g-4">
+            <h2 className='text-center mb-3'>Games</h2>
+            <div className="d-flex flex-wrap row-cols-md-5">
                 {
                     games.length > 0 ? (
                         games.map((game) => (
                             <div key={game.id} className="col">
                                 <Link to={`/games/${game.id}`}>
-                                    <div className="card h-100">
-                                        <img src={game.background_image} className="card-img-top h-50" alt={game.name} />
+                                    <div className="card m-1">
+                                        <img src={game.background_image} className="card-img-top" alt={game.name} />
                                         <div className="card-body">
                                             <h5 className="card-title">{game.name}</h5>
                                         </div>

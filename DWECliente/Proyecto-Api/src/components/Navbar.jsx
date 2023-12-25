@@ -17,8 +17,7 @@ const Navbar = () => {
                 <div className="container">
                     <NavLink to="/" className="btn btn-outline-primary">Home</NavLink>
                     <NavLink to="/games" className="btn btn-outline-primary">Games</NavLink>
-                    <NavLink to="/genres" className="btn btn-outline-primary">Genres</NavLink>
-                    <NavLink to="/tags" className="btn btn-outline-primary">Tags</NavLink>
+                    <NavLink to="/genres" className="btn btn-outline-primary">Genres/Tags</NavLink>
                     <NavLink to="/platforms" className="btn btn-outline-primary">Platforms</NavLink>
                     <NavLink to="/developers" className="btn btn-outline-primary">Developers</NavLink>
                     {user ? (

@@ -8,7 +8,6 @@ import Game, { loaderGame } from "../pages/games/Game.jsx"
 //filtro por genros y tags
 import Genres, { loaderGenres } from "../pages/genres/Genres.jsx"
 import Genre, { loaderGenre } from "../pages/genres/Genre.jsx"
-import Tags, { loaderTags } from "../pages/genres/Tags.jsx"
 import Tag, { loaderTag } from "../pages/genres/Tag.jsx"
 //filtro por plataforma de juego
 import Platforms, {loaderPlatforms} from "../pages/platforms/Platforms.jsx"
@@ -58,11 +57,6 @@ export const router = createBrowserRouter([
                         path:"/genres/:id",
                         element: <Genre />,
                         loader: ({ params }) => loaderGenre({params, api_key })
-                    },
-                    {
-                        path:"/tags",
-                        element: <Tags />,
-                        loader: () => loaderTags({ api_key })
                     },
                     {
                         path:"/tags/:id",
