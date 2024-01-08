@@ -62,20 +62,20 @@ const AccountCreationForm = () => {
           onChange={handleChange}
         />
       </div>
-      {
-        genres.length > 0 ? (
-            genres.map((genre) => (
-                <div key={genre.id} className="form-checked mb-2">
-                    <input type="checkbox" 
-                    id = {genre.id}
-                    name = {genre.name}
-                    onChange={handleChange}
-                    checked = {genreList.contains(genre.id)? "true" : ""}/>
-                    <label htmlFor="prioridad" className="form-checked-label">Prioridad</label>
-                </div>
-            ))
-        ) : (<div className="col"> <h2>No hay datos</h2> </div>)
-      }
+      <div>
+        <label htmlFor="password">Generos favoritos:</label>
+        {
+          genres.length > 0 ? (
+              genres.map((genre) => (
+                <input key={genre.id} type="checkbox" 
+                id = {genre.id}
+                name = {genre.name}
+                onChange={handleChange}
+                checked = {genreList.contains(genre.id)? "true" : ""}/>
+              ))
+          ) : (<div className="col"> <h2>No hay datos</h2> </div>)
+        }
+      </div>
       <button type="submit">Crear cuenta</button>
     </form>
   )
