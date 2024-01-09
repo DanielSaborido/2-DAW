@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, Link, useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 
 const Navbar = () => {
@@ -27,7 +27,7 @@ const Navbar = () => {
                             <NavLink to="/contact" className="btn btn-outline-primary">Contact us</NavLink>
                             <button onClick={() => cerrarSesion()}>Log Out</button>
                         </>
-                        ) : (<button onClick={() => setUser(true)}>Log In</button>)}
+                        ) : (<Link to="./loggin">Log in</Link>)}
                 </div>
             </nav>
         </div>

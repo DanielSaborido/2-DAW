@@ -13,13 +13,23 @@ const AccountCreationForm = () => {
   const {username, email, password, genreList} = user
 
   const handleChange = (e) => {
-    const {name, type, checked, value, id} = e.target
-    setUser({
-      ...user,
-      [type === "checkbox"? genreList:name]: type === "checkbox"? 
-      (checked? id : genreList.filter(!id)) : value
-    })
+    const {name, value} = e.target
+      setUser({
+        ...user,
+        [name]: value
+      })
   }
+
+  const handleCheck = (id) => {
+      console.log(genreList.includes(id))
+      setUser({
+        ...user,
+        genreList: genreList.includes(id)? 
+          [...genreList, id]:
+          genreList.filter((genreId) => genreId !== id)
+      })
+      console.log(genreList)
+    }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -63,15 +73,19 @@ const AccountCreationForm = () => {
         />
       </div>
       <div>
-        <label htmlFor="password">Generos favoritos:</label>
+        <label htmlFor="genres">Generos favoritos:</label>
         {
           genres.length > 0 ? (
               genres.map((genre) => (
-                <input key={genre.id} type="checkbox" 
-                id = {genre.id}
-                name = {genre.name}
-                onChange={handleChange}
-                checked = {genreList.contains(genre.id)? "true" : ""}/>
+                <div key={genre.id} className="form-checked mb-2">
+                    <input type="checkbox" 
+                    id = {genre.id}
+                    name = {genre.name}
+                    onChange={() => handleCheck(genre.id)}
+                    checked = {genreList.includes(genre.id)}/>
+                    {console.log(genreList.includes(genre.id))}
+                    <label htmlFor={genre.id} className="form-checked-label">{genre.name}</label>
+                </div>
               ))
           ) : (<div className="col"> <h2>No hay datos</h2> </div>)
         }

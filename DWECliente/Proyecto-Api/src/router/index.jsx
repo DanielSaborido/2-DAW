@@ -17,6 +17,9 @@ import Developers, { loaderDevelopers } from "../pages/developers/Developers.jsx
 import Developer, { loaderDeveloper } from "../pages/developers/Developer.jsx"
 //pagina de error
 import NotFound from "../pages/NotFound.jsx"
+//registro
+import LoginForm from "../pages/account/Loggin.jsx"
+import AccountCreationForm from "../pages/account/AccountCreation.jsx"
 //paginas de usuario registrado
 import Recommended from "../pages/Recommended.jsx"
 import Favorites from "../pages/Favorites.jsx"
@@ -82,6 +85,15 @@ export const router = createBrowserRouter([
                         path:"/developers/:id",
                         element: <Developer />,
                         loader: ({ params }) => loaderDeveloper({params, api_key })
+                    },
+                    {
+                        path:"/loggin",
+                        element: <LoginForm />
+                    },
+                    {
+                        path:"/loggin/create-account",
+                        element: <AccountCreationForm />,
+                        loader: () => loaderGenres({ api_key })
                     },
                     {
                         path:"/recommended",
