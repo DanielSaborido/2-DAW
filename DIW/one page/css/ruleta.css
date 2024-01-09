@@ -12,15 +12,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    object-fit: contain;
 }
 
 .fondo {
     background: url("../img/fondos/fondo.jpg");
     padding: 10px 30px;
-}
-
-img {
-    object-fit: contain;
 }
 
 /*Cabecera*/
@@ -79,6 +76,9 @@ main {
 }
 
 .progreso{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: auto;
     height: 25.5%;
     padding: 10px;
@@ -89,7 +89,6 @@ main {
 
 progress {
     width: 100%;
-    margin-bottom: 25px;
     accent-color: hsl(0, 100%, 50%);
 }
 
