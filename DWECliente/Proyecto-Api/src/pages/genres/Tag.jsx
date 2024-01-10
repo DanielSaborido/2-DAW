@@ -21,7 +21,7 @@ const Tag = () => {
                                 </Link>
                             </div>
                         ))
-                    ) : (<div className="col"> <h2>No hay datos</h2> </div>)
+                    ) : (<div className="col"> <h2>No data found</h2> </div>)
                 }
             </div>
       </>

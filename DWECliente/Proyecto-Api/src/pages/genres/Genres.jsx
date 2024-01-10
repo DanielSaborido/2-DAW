@@ -20,7 +20,7 @@ const Card = ({ item, linkPrefix }) => (
         {items.length > 0 ? (
           items.map((item) => <Card key={item.id} item={item} linkPrefix={linkPrefix} />)
         ) : (
-          <div className="col"> <h2>No hay datos</h2> </div>
+          <div className="col"> <h2>No data found</h2> </div>
         )}
       </div>
     </>
