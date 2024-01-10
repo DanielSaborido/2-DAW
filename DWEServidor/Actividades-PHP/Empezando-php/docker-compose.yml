@@ -1,0 +1,29 @@
+version: "3.7"
+
+services:
+  server:
+    image: fjortegan/dwes:php
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    ports:
+      - "80:80"
+    volumes:
+      - ./codigophp:/var/www/html
+    # Sólo en máquinas Linux, comentar estas dos líneas en otros sistemas de lusers
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  db:
+    image: mariadb
+    volumes:
+      - ./db-data:/var/lib/mysql/
+    environment:
+      MYSQL_ROOT_PASSWORD: pestillo
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_ARBITRARY=1
+
