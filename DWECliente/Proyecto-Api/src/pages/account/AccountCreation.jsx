@@ -25,8 +25,8 @@ const AccountCreationForm = () => {
       setUser({
         ...user,
         genreList: genreList.includes(id)? 
-          [...genreList, id]:
-          genreList.filter((genreId) => genreId !== id)
+          genreList.filter((genreId) => genreId !== id):
+          [...genreList, id]
       })
       console.log(genreList)
     }
@@ -53,7 +53,7 @@ const AccountCreationForm = () => {
         />
       </div>
       <div>
-        <label htmlFor="email">Correo electrónico:</label>
+        <label htmlFor="email">Email:</label>
         <input
           type="email"
           id="email"
@@ -63,7 +63,7 @@ const AccountCreationForm = () => {
         />
       </div>
       <div>
-        <label htmlFor="password">Contraseña:</label>
+        <label htmlFor="password">Password:</label>
         <input
           type="password"
           id="password"
@@ -72,8 +72,8 @@ const AccountCreationForm = () => {
           onChange={handleChange}
         />
       </div>
-      <div>
-        <label htmlFor="genres">Generos favoritos:</label>
+      <label htmlFor="genres">Favorites Genres:</label>
+      <div className="d-flex flex-wrap row-cols-md-5">
         {
           genres.length > 0 ? (
               genres.map((genre) => (
@@ -87,7 +87,7 @@ const AccountCreationForm = () => {
                     <label htmlFor={genre.id} className="form-checked-label">{genre.name}</label>
                 </div>
               ))
-          ) : (<div className="col"> <h2>No hay datos</h2> </div>)
+          ) : (<div className="col"> <h2>No data found</h2> </div>)
         }
       </div>
       <button type="submit">Crear cuenta</button>

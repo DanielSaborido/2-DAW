@@ -1,64 +1,57 @@
 import { useLoaderData, Link } from "react-router-dom"
 
-const Genres = () => {
-  const { genres, tags } = useLoaderData()
-
-  console.log(genres)
-  return (
+const Card = ({ item, linkPrefix }) => (
+    <div className="col">
+      <Link to={`${linkPrefix}/${item.id}`}>
+        <div className="card m-1">
+          <img src={item.image_background} className="card-img-top" alt={item.name} />
+          <div className="card-body">
+            <h5 className="card-title">{item.name}</h5>
+          </div>
+        </div>
+      </Link>
+    </div>
+  )
+  
+  const Section = ({ title, items, linkPrefix }) => (
     <>
-      <h2 className='text-center mb-3'>Genres</h2>
+      <h2 className='text-center mb-3'>{title}</h2>
       <div className="d-flex flex-wrap row-cols-md-5">
-          {
-              genres.length > 0 ? (
-                  genres.map((genre) => (
-                      <div key={genre.id} className="col">
-                          <Link to={`/genres/${genre.id}`}>
-                              <div className="card m-1">
-                                  <img src={genre.image_background} className="card-img-top" alt={genre.name} />
-                                  <div className="card-body">
-                                      <h5 className="card-title">{genre.name}</h5>
-                                  </div>
-                              </div>
-                          </Link>
-                      </div>
-                  ))
-              ) : (<div className="col"> <h2>No hay datos</h2> </div>)
-          }
-      </div>
-      <h2 className='text-center mb-3'>Tags</h2>
-      <div className="d-flex flex-wrap row-cols-md-5">
-          {
-              tags.length > 0 ? (
-                  tags.map((tag) => (
-                      <div key={tag.id} className="col">
-                          <Link to={`/tags/${tag.id}`}>
-                              <div className="card m-1">
-                                  <img src={tag.image_background} className="card-img-top" alt={tag.name} />
-                                  <div className="card-body">
-                                      <h5 className="card-title">{tag.name}</h5>
-                                  </div>
-                              </div>
-                          </Link>
-                      </div>
-                  ))
-              ) : (<div className="col"> <h2>No hay datos</h2> </div>)
-          }
+        {items.length > 0 ? (
+          items.map((item) => <Card key={item.id} item={item} linkPrefix={linkPrefix} />)
+        ) : (
+          <div className="col"> <h2>No hay datos</h2> </div>
+        )}
       </div>
     </>
   )
+  
+  const Genres = () => {
+    const { genres, tags } = useLoaderData()
+    return(
+    <>
+      <Section title="Genres" items={genres} linkPrefix="/genres" />
+      <Section title="Tags" items={tags} linkPrefix="/tags" />
+    </>
+  )
 }
-
-export default Genres
-
-export const loaderGenres = async({api_key}) => {
+  
+  export default Genres
+  
+  export const loaderGenres = async ({ api_key }) => {
     try {
-        const dataGenre = await fetch(`https://api.rawg.io/api/genres?key=${api_key}`)
-        const responseGenre = await dataGenre.json()
-        const dataTags = await fetch(`https://api.rawg.io/api/tags?page_size=40&key=${api_key}`)
-        const responseTags = await dataTags.json()
-        return { genres: responseGenre.results, tags: responseTags.results }
+      const fetchAndExtract = async (url) => {
+        const data = await fetch(url)
+        const response = await data.json()
+        return response.results || []
+      }
+  
+      const genres = await fetchAndExtract(`https://api.rawg.io/api/genres?key=${api_key}`)
+      const tags = await fetchAndExtract(`https://api.rawg.io/api/tags?page_size=40&key=${api_key}`)
+  
+      return { genres, tags }
     } catch (error) {
-        console.error("Error fetching datas:", error)
-        return { genres: [], tags: [] }
+      console.error("Error fetching datas:", error)
+      return { genres: [], tags: [] }
     }
-}
+  }

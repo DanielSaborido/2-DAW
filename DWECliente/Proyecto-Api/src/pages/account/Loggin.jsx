@@ -25,7 +25,7 @@ const LoginForm = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="username">Nombre de usuario:</label>
+        <label htmlFor="username">User:</label>
         <input
           type="text"
           id="username"
@@ -35,7 +35,7 @@ const LoginForm = () => {
         />
       </div>
       <div>
-        <label htmlFor="password">Contraseña:</label>
+        <label htmlFor="password">Password:</label>
         <input
           type="password"
           id="password"
@@ -44,8 +44,8 @@ const LoginForm = () => {
           onChange={handleChange}
         />
       </div>
-      <button type="submit">Iniciar sesión</button>
-      <Link to="./create-account">Crear cuenta</Link>
+      <button type="submit">Log in</button>
+      <Link to="./create-account">Create Account</Link>
     </form>
   );
 };
