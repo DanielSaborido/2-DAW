@@ -4,11 +4,11 @@ import { UserContext } from '../context/UserContext'
 
 const Navbar = () => {
     console.log(useContext(UserContext))
-    const {user, setUser} = useContext(UserContext)
+    const {log, setLog} = useContext(UserContext)
 
     const navigate = useNavigate()
     const cerrarSesion = () =>{
-        setUser(false)
+        setLog(false)
         navigate("/")
     }
     return (
@@ -20,7 +20,7 @@ const Navbar = () => {
                     <NavLink to="/genres" className="btn btn-outline-primary">Genres/Tags</NavLink>
                     <NavLink to="/platforms" className="btn btn-outline-primary">Platforms</NavLink>
                     <NavLink to="/developers" className="btn btn-outline-primary">Developers</NavLink>
-                    {user ? (
+                    {log ? (
                         <>
                             <NavLink to="/recommended" className="btn btn-outline-primary">Recommended</NavLink>
                             <NavLink to="/favorites" className="btn btn-outline-primary">Favorites</NavLink>

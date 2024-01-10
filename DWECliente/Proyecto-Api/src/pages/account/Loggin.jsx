@@ -1,53 +1,79 @@
-import React, { useState } from 'react'
-import { Link } from "react-router-dom"
+import React, { useContext, useState } from 'react'
+import { Link, useNavigate } from "react-router-dom"
+import Swal from "sweetalert2"
+import { validateAccount } from '../../dataBase/IndexDB'
+import { UserContext } from '../../context/UserContext'
 
 const LoginForm = () => {
+  const { setLog } = useContext(UserContext)
+  const navigate = useNavigate()
   const [user, setUser] = useState({
     username: '',
     password: '',
-  });
+  })
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setUser({
       ...user,
       [name]: value,
-    });
-  };
+    })
+  }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Nombre de usuario:', user.username);
-    console.log('Contraseña:', user.password);
-    // Pendiente de comprovacion en indexeddb
-  };
+    const credentialsValid = await validateAccount(user.email, user.password);
+  
+    if (!validateEmail(user.email) || !credentialsValid) {
+      return Swal.fire({
+        icon: "error",
+        title: "ERROR",
+        text: "Invalid credentials.",
+      })
+    }
+
+    setLog(true)
+    navigate("/")
+  }
+
+  const validateEmail = (email) => {
+    // Expresión regular para validar el formato de correo electrónico
+    const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    return re.test(email)
+  }
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="username">User:</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value={user.username}
+      <div className="mb-3">
+        <label className='form-label' htmlFor="email">Email:</label>
+        <input className='form-control'
+          type="email"
+          id="email"
+          name="email"
+          value={user.email}
           onChange={handleChange}
         />
+        {!validateEmail(user.email) && (
+          <span  className="form-text text-danger">Email is missing</span>
+        )}
       </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
+      <div className="mb-3">
+        <label className='form-label' htmlFor="password">Password:</label>
+        <input className='form-control'
           type="password"
           id="password"
           name="password"
           value={user.password}
           onChange={handleChange}
         />
+        {(user.password.trim() === '' || user.password.length < 8) && (
+          <span className='form-text text-danger'>Your password must be at least 8 characters long</span>
+        )}
       </div>
       <button type="submit">Log in</button>
       <Link to="./create-account">Create Account</Link>
     </form>
-  );
-};
+  )
+}
 
 export default LoginForm

@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, useNavigate } from 'react-router-dom'
 import Swal from "sweetalert2"
+import { createUserDB } from '../../dataBase/IndexDB'
 
 const AccountCreationForm = () => {
   const { genres } = useLoaderData()
+  const navigate = useNavigate()
 
   const [user, setUser] = useState({
     username: '',
@@ -22,7 +24,6 @@ const AccountCreationForm = () => {
   }
 
   const handleCheck = (id) => {
-      console.log(genreList.includes(id))
       setUser({
         ...user,
         genreList: genreList.includes(id)? 
@@ -34,18 +35,15 @@ const AccountCreationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (username.trim() === "" || !validateEmail(email) || password.trim() === "") {
+    if (username.trim() === "" || !validateEmail(email) || password.trim() === "" || password.length < 8) {
       return Swal.fire({
           icon: "error",
           title: "ERROR",
           text: "Un dato no se ha rellenado corretamente",
       })
-  }
-    console.log('Nombre de usuario:', username)
-    console.log('Correo electrónico:', email)
-    console.log('Contraseña:', password)
-    console.log('Generos:', genreList)
-    // Pendiente de igresar datos a indexeddb
+    }
+    createUserDB(user)
+    navigate("/loggin")
   }
 
   const validateEmail = (email) => {
@@ -56,37 +54,46 @@ const AccountCreationForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="username">Nombre de usuario:</label>
-        <input
+      <div className="mb-3">
+        <label className='form-label' htmlFor="username">User:</label>
+        <input className='form-control'
           type="text"
           id="username"
           name="username"
           value={username}
           onChange={handleChange}
         />
+        {username.trim() === '' && (
+          <span  className="form-text text-danger">User name is missing</span>
+        )}
       </div>
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input
+      <div className="mb-3">
+        <label className='form-label' htmlFor="email">Email:</label>
+        <input className='form-control'
           type="email"
           id="email"
           name="email"
           value={email}
           onChange={handleChange}
         />
+        {!validateEmail(email) && (
+          <span  className="form-text text-danger">Email is missing</span>
+        )}
       </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
+      <div className="mb-3">
+        <label className='form-label' htmlFor="password">Password:</label>
+        <input className='form-control'
           type="password"
           id="password"
           name="password"
           value={password}
           onChange={handleChange}
         />
+        {(password.trim() === '' || password.length < 8) && (
+          <span className='form-text text-danger'>Your password must be at least 8 characters long</span>
+        )}
       </div>
-      <label htmlFor="genres">Favorites Genres:</label>
+      <label className='form-label' htmlFor="genres">Favorites Genres:</label>
       <div className="d-flex flex-wrap row-cols-md-5">
         {
           genres.length > 0 ? (
@@ -97,14 +104,13 @@ const AccountCreationForm = () => {
                     name = {genre.name}
                     onChange={() => handleCheck(genre.id)}
                     checked = {genreList.includes(genre.id)}/>
-                    {console.log(genreList.includes(genre.id))}
                     <label htmlFor={genre.id} className="form-checked-label">{genre.name}</label>
                 </div>
               ))
           ) : (<div className="col"> <h2>No data found</h2> </div>)
         }
       </div>
-      <button type="submit">Crear cuenta</button>
+      <button type="submit">Create account</button>
     </form>
   )
 }

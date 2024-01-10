@@ -28,6 +28,8 @@ body {
   justify-content: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #302f2f;
+  color: #ffffff;
 }
 
 h1 {
