@@ -130,7 +130,8 @@ export const router = createBrowserRouter([
                         children:[
                             {
                                 index:true,
-                                element: <ModifyAccount />
+                                element: <ModifyAccount />,
+                                loader: () => loaderGenres({ api_key })
                             }]
                     }]
             }]

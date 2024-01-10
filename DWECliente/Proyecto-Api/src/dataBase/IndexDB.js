@@ -31,32 +31,6 @@ function insertUser(userOBJ, db) {
     }
 }
 
-export function modifyUser(userOBJ) {
-    let request = indexedDB.open("Users", 1)
-
-    request.onerror = function () {
-        console.error("Error al abrir la base de datos")
-    }
-    request.onsuccess = function (event) {
-        const db = event.target.result
-        const txn = db.transaction("User", "readwrite")
-        const store = txn.objectStore("User")
-        let query = store.get(userOBJ.email)
-
-        query.onsuccess = (event) => {
-            store.put(userOBJ, userOBJ.email)
-        }
-
-        query.onerror = (event) => {
-            console.log(event.target.errorCode)
-        }
-
-        txn.oncomplete = function () {
-            db.close()
-        }
-    }
-}
-
 export const validateAccount = (email, password) => {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open('Users', 1)
@@ -88,4 +62,72 @@ export const validateAccount = (email, password) => {
         }
       }
     })
+  }
+
+  export function modifyUser(userOBJ) {
+      let request = indexedDB.open("Users", 1)
+  
+      request.onerror = function () {
+          console.error("Error al abrir la base de datos")
+      }
+      request.onsuccess = function (event) {
+          const db = event.target.result
+          const txn = db.transaction("User", "readwrite")
+          const store = txn.objectStore("User")
+          let query = store.get(userOBJ.email)
+  
+          query.onsuccess = (event) => {
+              store.put(userOBJ, userOBJ.email)
+          }
+  
+          query.onerror = (event) => {
+              console.log(event.target.errorCode)
+          }
+  
+          txn.oncomplete = function () {
+              db.close()
+          }
+      }
+  }
+
+  export function deleteUser(userOBJ) {
+      let request = indexedDB.open("Users", 1)
+  
+      request.onerror = function () {
+          console.error("Error al abrir la base de datos")
+      }
+      request.onsuccess = function (event) {
+          const db = event.target.result
+          const txn = db.transaction("User", "readonly")
+          const store = txn.objectStore("User")
+          let query = store.getAll()
+  
+          query.onsuccess = (event) => {
+            const records = event.target.result
+    
+            if (records.length === 0) {
+                db.close()
+                indexedDB.deleteDatabase(db.name)
+            } else {
+                const txnDelete = db.transaction('User', 'readwrite')
+                const storeDelete = txnDelete.objectStore('User')
+                let query = storeDelete.delete(userOBJ.email)
+
+                query.onsuccess = function (event) {
+                  console.log(event)
+                }
+                query.onerror = function (event) {
+                    console.log(event.target.errorCode)
+                }
+            }
+          }
+  
+          query.onerror = (event) => {
+              console.log(event.target.errorCode)
+          }
+  
+          txn.oncomplete = function () {
+              db.close()
+          }
+      }
   }
