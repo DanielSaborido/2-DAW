@@ -7,19 +7,23 @@ const Platforms = () => {
   console.log(familyPlatforms)
   return (
     <>
-      <h1>Platforms</h1>
+      <h1 className='text-center mb-3'>Platforms</h1>
+      <div className="d-flex flex-wrap row-cols-md-5">
         {familyPlatforms.map((platforms) => (
-          <div key={platforms.id}>
-            <h2>{platforms.name}</h2>
-            <ul>
-                {platforms.platforms.map((platform) => (
-                    <li key={platform.id}>
-                        <Link to={`/platforms/${platform.id}`}>{platform.name}</Link>
-                    </li>
-                ))}
-            </ul>
+          <div key={platforms.id} className="col">
+            <div className="m-1">
+              <h2>{platforms.name}</h2>
+              <ul>
+                  {platforms.platforms.map((platform) => (
+                      <li key={platform.id}>
+                          <Link to={`/platforms/${platform.id}`}>{platform.name}</Link>
+                      </li>
+                  ))}
+              </ul>
+            </div>
           </div>
         ))}
+      </div>
     </>
   )
 }

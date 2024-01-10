@@ -7,10 +7,10 @@ const Developers = () => {
     console.log(developers)
     return (
       <>
-        <h1>Developers</h1>
-        <ul>
+        <h1 className='text-center mb-3'>Developers</h1>
+        <ul className="d-flex flex-wrap row-cols-md-5">
             {developers.map((developer) => (
-                <li key={developer.id}>
+                <li key={developer.id}  className="col">
                     <Link to={`/developers/${developer.id}`}>{developer.name}</Link>
                 </li>
             ))}

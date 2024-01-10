@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useLoaderData } from 'react-router-dom'
+import Swal from "sweetalert2"
 
 const AccountCreationForm = () => {
   const { genres } = useLoaderData()
@@ -33,11 +34,24 @@ const AccountCreationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    if (username.trim() === "" || !validateEmail(email) || password.trim() === "") {
+      return Swal.fire({
+          icon: "error",
+          title: "ERROR",
+          text: "Un dato no se ha rellenado corretamente",
+      })
+  }
     console.log('Nombre de usuario:', username)
     console.log('Correo electrónico:', email)
     console.log('Contraseña:', password)
     console.log('Generos:', genreList)
-    // Pendiente de igresar datos
+    // Pendiente de igresar datos a indexeddb
+  }
+
+  const validateEmail = (email) => {
+    // Expresión regular para validar el formato de correo electrónico
+    const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    return re.test(email)
   }
 
   return (
