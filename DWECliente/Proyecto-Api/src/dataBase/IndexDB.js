@@ -32,8 +32,6 @@ function insertUser(userOBJ, db) {
 }
 
 export function modifyUser(userOBJ) {
-    const urlParams = new URLSearchParams(window.location.search)
-    const clientId = parseInt(urlParams.get("id"), 10)
     let request = indexedDB.open("Users", 1)
 
     request.onerror = function () {
@@ -43,10 +41,10 @@ export function modifyUser(userOBJ) {
         const db = event.target.result
         const txn = db.transaction("User", "readwrite")
         const store = txn.objectStore("User")
-        let query = store.get(clientId)
+        let query = store.get(userOBJ.email)
 
         query.onsuccess = (event) => {
-            store.put(userOBJ, clientId)
+            store.put(userOBJ, userOBJ.email)
         }
 
         query.onerror = (event) => {
@@ -76,9 +74,9 @@ export const validateAccount = (email, password) => {
         getUserRequest.onsuccess = (event) => {
           const user = event.target.result
           if (user && user.password === password) {
-            resolve(true)
+            resolve({ isValid: true, user })
           } else {
-            resolve(false)
+            resolve({ isValid: false })
           }
         }
         getUserRequest.onerror = (event) => {

@@ -21,9 +21,10 @@ import NotFound from "../pages/NotFound.jsx"
 import LoginForm from "../pages/account/Loggin.jsx"
 import AccountCreationForm from "../pages/account/AccountCreation.jsx"
 //paginas de usuario registrado
-import Recommended from "../pages/Recommended.jsx"
+import Recommended, { loaderRecommendations } from "../pages/Recommended.jsx"
 import Favorites from "../pages/Favorites.jsx"
 import Contact from "../pages/Contact.jsx"
+import ModifyAccount from "../pages/account/ModifyAccount.jsx"
 
 const api_key = "37dea5560e494058945502465024de6a"
 
@@ -101,7 +102,8 @@ export const router = createBrowserRouter([
                         children:[
                             {
                                 index:true,
-                                element: <Recommended />
+                                element: <Recommended />,
+                                loader: () => loaderRecommendations({ api_key })
                             }]
                     },
                     {
@@ -120,6 +122,15 @@ export const router = createBrowserRouter([
                             {
                                 index:true,
                                 element: <Contact />
+                            }]
+                    },
+                    {
+                        path:"/modify",
+                        element: <LayoutPrivate />,
+                        children:[
+                            {
+                                index:true,
+                                element: <ModifyAccount />
                             }]
                     }]
             }]

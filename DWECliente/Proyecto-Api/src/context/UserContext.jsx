@@ -3,7 +3,13 @@ import { createContext, useState } from "react";
 export const UserContext = createContext()
 
 const UserProvider = ({children}) => {
-    const [log, setLog] = useState()
+    const [log, setLog] = useState({
+        username: '',
+        email: '',
+        password: '',
+        genreList: [],
+        validation: false
+      })
 
     return(
         <UserContext.Provider value={{log, setLog}}>

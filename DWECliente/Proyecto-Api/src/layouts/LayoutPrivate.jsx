@@ -3,14 +3,14 @@ import { Navigate, Outlet } from "react-router-dom"
 import { UserContext } from "../context/UserContext"
 
 const LayoutPrivate = () => {
-    const {user} = useContext(UserContext)
+    const {log} = useContext(UserContext)
 
     return (
         <>
             {
-            user? 
+            log.validation? 
                 <Outlet /> : 
-                <Navigate to="/" />
+                <Navigate to="/loggin" />
             }
         </>
     )

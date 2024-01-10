@@ -30,7 +30,6 @@ const AccountCreationForm = () => {
           genreList.filter((genreId) => genreId !== id):
           [...genreList, id]
       })
-      console.log(genreList)
     }
 
   const handleSubmit = (e) => {

@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { NavLink, Link, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 
 const Navbar = () => {
@@ -8,7 +8,13 @@ const Navbar = () => {
 
     const navigate = useNavigate()
     const cerrarSesion = () =>{
-        setLog(false)
+        setLog({
+            username: '',
+            email: '',
+            password: '',
+            genreList: [],
+            validation: false
+          })
         navigate("/")
     }
     return (
@@ -20,14 +26,16 @@ const Navbar = () => {
                     <NavLink to="/genres" className="btn btn-outline-primary">Genres/Tags</NavLink>
                     <NavLink to="/platforms" className="btn btn-outline-primary">Platforms</NavLink>
                     <NavLink to="/developers" className="btn btn-outline-primary">Developers</NavLink>
-                    {log ? (
+                    {log.validation ? (
                         <>
                             <NavLink to="/recommended" className="btn btn-outline-primary">Recommended</NavLink>
                             <NavLink to="/favorites" className="btn btn-outline-primary">Favorites</NavLink>
                             <NavLink to="/contact" className="btn btn-outline-primary">Contact us</NavLink>
+
+                            <button onClick={() => navigate("/modify")}>{log.username}</button>
                             <button onClick={() => cerrarSesion()}>Log Out</button>
                         </>
-                        ) : (<Link to="./loggin">Log in</Link>)}
+                        ) : (<button onClick={() => navigate("./loggin")}>Log in</button>)}
                 </div>
             </nav>
         </div>

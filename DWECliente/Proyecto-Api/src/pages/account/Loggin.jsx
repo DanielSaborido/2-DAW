@@ -8,7 +8,7 @@ const LoginForm = () => {
   const { setLog } = useContext(UserContext)
   const navigate = useNavigate()
   const [user, setUser] = useState({
-    username: '',
+    email: '',
     password: '',
   })
 
@@ -22,7 +22,7 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const credentialsValid = await validateAccount(user.email, user.password);
+    const credentialsValid = await validateAccount(user.email, user.password)
   
     if (!validateEmail(user.email) || !credentialsValid) {
       return Swal.fire({
@@ -32,7 +32,15 @@ const LoginForm = () => {
       })
     }
 
-    setLog(true)
+    const {username, email, password, genreList} = credentialsValid.user
+
+    setLog({
+      username: username,
+      email: email,
+      password: password,
+      genreList: genreList,
+      validation: true
+    })
     navigate("/")
   }
 
