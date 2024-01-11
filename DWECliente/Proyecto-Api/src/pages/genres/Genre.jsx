@@ -31,13 +31,13 @@ const Genre = () => {
 
 export default Genre
 
-export const loaderGenre = async({params, api_key}) => {
+export const loaderGenre = async({params, api_key, page_size}) => {
     console.log(params)
     try {
         const genreResponse = await fetch(`https://api.rawg.io/api/genres/${params.id}?key=${api_key}`)
         const genreData = await genreResponse.json()
         const selectedGenreName = genreData.name
-        const gameResponse = await fetch(`https://api.rawg.io/api/games?key=${api_key}&genres=${params.id}`)
+        const gameResponse = await fetch(`https://api.rawg.io/api/games?key=${api_key}&genres=${params.id}&page_size=${page_size}`)
         const gameData = await gameResponse.json()
         return { genre: gameData.results, selectedGenreName }
     } catch (error) {

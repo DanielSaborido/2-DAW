@@ -31,13 +31,13 @@ const Console = () => {
 
 export default Console
 
-export const loaderConsole = async({params, api_key}) => {
+export const loaderConsole = async({params, page_size, api_key}) => {
     console.log(params)
     try {
         const platformResponse = await fetch(`https://api.rawg.io/api/platforms/${params.id}?key=${api_key}`)
         const platformData = await platformResponse.json()
         const selectedPlatformName = platformData.name
-        const gameResponse = await fetch(`https://api.rawg.io/api/games?key=${api_key}&platforms=${params.id}`)
+        const gameResponse = await fetch(`https://api.rawg.io/api/games?key=${api_key}&platforms=${params.id}&page_size=${page_size}`)
         const gameData = await gameResponse.json()
         return { platform: gameData.results, selectedPlatformName }
     } catch (error) {

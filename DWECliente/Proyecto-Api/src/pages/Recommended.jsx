@@ -31,11 +31,11 @@ const Recommended = () => {
 
 export default Recommended
 
-export const loaderRecommendations = async({api_key, params}) => {
+export const loaderRecommendations = async({api_key, page_size, params}) => {
     try {
         const log = await getUserById(parseInt(params.id, 10))
         const genres = log.genreList.toString()
-        const data = await fetch(`https://api.rawg.io/api/games?key=${api_key}&genres=${genres}`)
+        const data = await fetch(`https://api.rawg.io/api/games?key=${api_key}&genres=${genres}&page_size=${page_size}`)
         const response = await data.json()
         return { recommended: response.results }
     } catch (error) {

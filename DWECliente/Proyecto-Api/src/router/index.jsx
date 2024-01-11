@@ -27,6 +27,7 @@ import Contact from "../pages/Contact.jsx"
 import ModifyAccount from "../pages/account/ModifyAccount.jsx"
 
 const api_key = "37dea5560e494058945502465024de6a"
+const page_size = 40 //por mas que añadas este es el maximo de una pagina
 
 export const router = createBrowserRouter([
     {
@@ -45,7 +46,7 @@ export const router = createBrowserRouter([
                     {
                         path:"/games",
                         element: <Games />,
-                        loader: () => loaderGames({ api_key })
+                        loader: () => loaderGames({ api_key, page_size })
                     },
                     {
                         path:"/games/:id",
@@ -60,12 +61,12 @@ export const router = createBrowserRouter([
                     {
                         path:"/genres/:id",
                         element: <Genre />,
-                        loader: ({ params }) => loaderGenre({params, api_key })
+                        loader: ({ params }) => loaderGenre({params, page_size, api_key })
                     },
                     {
                         path:"/tags/:id",
                         element: <Tag />,
-                        loader: ({ params }) => loaderTag({params, api_key })
+                        loader: ({ params }) => loaderTag({params, page_size, api_key })
                     },
                     {
                         path:"/platforms",
@@ -75,7 +76,7 @@ export const router = createBrowserRouter([
                     {
                         path:"/platforms/:id",
                         element: <Console />,
-                        loader: ({ params }) => loaderConsole({params, api_key })
+                        loader: ({ params }) => loaderConsole({params, page_size, api_key })
                     },
                     {
                         path:"/developers",
@@ -85,7 +86,7 @@ export const router = createBrowserRouter([
                     {
                         path:"/developers/:id",
                         element: <Developer />,
-                        loader: ({ params }) => loaderDeveloper({params, api_key })
+                        loader: ({ params }) => loaderDeveloper({params, page_size, api_key })
                     },
                     {
                         path:"/loggin",
@@ -103,7 +104,7 @@ export const router = createBrowserRouter([
                             {
                                 index:true,
                                 element: <Recommended />,
-                                loader: ({ params }) => loaderRecommendations({ api_key, params })
+                                loader: ({ params }) => loaderRecommendations({ api_key, page_size, params })
                             }]
                     },
                     {
