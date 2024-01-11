@@ -24,7 +24,7 @@ const LoginForm = () => {
     e.preventDefault();
     const credentialsValid = await validateAccount(user.email, user.password)
   
-    if (!validateEmail(user.email) || !credentialsValid) {
+    if (!validateEmail(user.email) || !credentialsValid.isValid) {
       return Swal.fire({
         icon: "error",
         title: "ERROR",

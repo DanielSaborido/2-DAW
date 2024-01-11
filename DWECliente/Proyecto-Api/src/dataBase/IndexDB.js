@@ -47,14 +47,22 @@ export const validateAccount = (email, password) => {
   
         cursorRequest.onsuccess = (event) => {
             let cursor = event.target.result;
-            if (cursor.value.email === email && cursor.value.password === password) {
-                let id = cursor.key;
-                let user = cursor.value;
-                resolve({ isValid: true, id, user})
+            if (cursor){
+                if (cursor.value.email === email && cursor.value.password === password) {
+                    let id = cursor.key;
+                    let user = cursor.value;
+                    resolve({ isValid: true, id, user})
+                }
+                else{
+                    cursor.continue()
+                }
+            } else{
+                resolve({ isValid: false})
             }
-            else{
-                cursor.continue()
-            }
+        }
+        cursorRequest.onerror = function () {
+          console.error('Error', request.error)
+          reject(request.error)
         }
         txn.oncomplete = () => {
           db.close()
@@ -89,7 +97,7 @@ export const validateAccount = (email, password) => {
       }
   }
 
-  export function deleteUser(userOBJ, id) {
+  export function deleteUser(id) {
       let request = indexedDB.open("Users", 1)
   
       request.onerror = function () {

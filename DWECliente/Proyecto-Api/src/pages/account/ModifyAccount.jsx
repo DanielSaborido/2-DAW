@@ -115,7 +115,7 @@ const ModifyAccount = () => {
       </div>
       <button type="submit">Save Changes</button>
       <button onClick={() => {
-        deleteUser(user, id)
+        deleteUser(id)
         setLog({
             validation: false
           })
