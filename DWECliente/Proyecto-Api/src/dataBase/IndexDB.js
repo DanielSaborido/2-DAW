@@ -46,11 +46,11 @@ export const validateAccount = (email, password) => {
         const cursorRequest = store.openCursor()
   
         cursorRequest.onsuccess = (event) => {
-            let cursor = event.target.result;
+            let cursor = event.target.result
             if (cursor){
                 if (cursor.value.email === email && cursor.value.password === password) {
-                    let id = cursor.key;
-                    let user = cursor.value;
+                    let id = cursor.key
+                    let user = cursor.value
                     resolve({ isValid: true, id, user})
                 }
                 else{
@@ -66,6 +66,52 @@ export const validateAccount = (email, password) => {
         }
         txn.oncomplete = () => {
           db.close()
+        }
+      }
+    })
+  }
+
+  export const getUserById = (id) => {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open('Users', 1)
+  
+      request.onerror = function () {
+        console.error('Error', request.error)
+        reject(request.error)
+      }
+  
+      request.onsuccess = function (event) {
+        const db = event.target.result
+        const txn = db.transaction('User', 'readonly')
+        const store = txn.objectStore('User')
+        const getAllKeysRequest = store.getAllKeys()
+
+        getAllKeysRequest.onsuccess = (event) => {
+            const keys = event.target.result
+            const matchingKey = keys.find(key => key === id)
+
+            if (matchingKey !== undefined) {
+                const getRequest = store.get(matchingKey)
+                getRequest.onsuccess = (event) => {
+                    const user = event.target.result
+                    resolve(user)
+                }
+                getRequest.onerror = (event) => {
+                    console.error('Error al obtener el usuario', event.target.error)
+                    reject(event.target.error)
+                }
+            } else {
+                reject({ error: 'Usuario no encontrado.' })
+            }
+        }
+
+        getAllKeysRequest.onerror = (event) => {
+            console.error('Error al obtener las claves', event.target.error)
+            reject(event.target.error)
+        }
+
+        txn.oncomplete = () => {
+            db.close()
         }
       }
     })

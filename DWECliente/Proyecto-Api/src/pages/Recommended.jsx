@@ -1,4 +1,5 @@
 import { Link, useLoaderData } from "react-router-dom"
+import { getUserById } from "../dataBase/IndexDB"
 
 const Recommended = () => {
     const { recommended } = useLoaderData()
@@ -21,7 +22,7 @@ const Recommended = () => {
                                 </Link>
                             </div>
                         ))
-                    ) : (<div className="col"> <h2>No data found</h2> </div>)
+                    ) : (<div className="col"> <h2>There are no games to recommend to you</h2> </div>)
                 }
             </div>
         </>
@@ -32,7 +33,8 @@ export default Recommended
 
 export const loaderRecommendations = async({api_key, params}) => {
     try {
-        const genres = params.id//log.genreList.join(',')
+        const log = await getUserById(parseInt(params.id, 10))
+        const genres = log.genreList.toString()
         const data = await fetch(`https://api.rawg.io/api/games?key=${api_key}&genres=${genres}`)
         const response = await data.json()
         return { recommended: response.results }
