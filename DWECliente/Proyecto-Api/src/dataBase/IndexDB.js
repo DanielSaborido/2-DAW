@@ -43,8 +43,7 @@ export const validateAccount = (email, password) => {
         const db = event.target.result
         const txn = db.transaction('User', 'readonly')
         const store = txn.objectStore('User')
-        const cursorRequest = store.openCursor()/*
-        const getUserRequest = store.index('email').get(email)*/
+        const cursorRequest = store.openCursor()
   
         cursorRequest.onsuccess = (event) => {
             let cursor = event.target.result;
@@ -56,19 +55,7 @@ export const validateAccount = (email, password) => {
             else{
                 cursor.continue()
             }
-        }/*
-        getUserRequest.onsuccess = (event) => {
-          const user = event.target.result
-          if (user && user.password === password) {
-            resolve({ isValid: true, user })
-          } else {
-            resolve({ isValid: false })
-          }
         }
-        getUserRequest.onerror = (event) => {
-          console.error('Error al obtener usuario', event.target.error)
-          reject(event.target.error)
-        }*/
         txn.oncomplete = () => {
           db.close()
         }

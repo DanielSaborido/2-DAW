@@ -29,7 +29,7 @@ const Navbar = () => {
                     <NavLink to="/developers" className="btn btn-outline-primary">Developers</NavLink>
                     {log.validation ? (
                         <>
-                            <NavLink to="/recommended" className="btn btn-outline-primary">Recommended</NavLink>
+                            <NavLink to={`/recommended/${log.id}`} className="btn btn-outline-primary">Recommended</NavLink>
                             <NavLink to="/favorites" className="btn btn-outline-primary">Favorites</NavLink>
                             <NavLink to="/contact" className="btn btn-outline-primary">Contact us</NavLink>
 

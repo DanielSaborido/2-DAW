@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Swal from "sweetalert2"
 import { validateAccount } from '../../dataBase/IndexDB'
 import { UserContext } from '../../context/UserContext'
@@ -76,11 +76,11 @@ const LoginForm = () => {
           onChange={handleChange}
         />
         {(user.password.trim() === '' || user.password.length < 8) && (
-          <span className='form-text text-danger'>Your password must be at least 8 characters long</span>
+          <span className='form-text text-danger'>The password must be at least 8 characters long</span>
         )}
       </div>
       <button type="submit">Log in</button>
-      <Link to="./create-account">Create Account</Link>
+      <button onClick={() => navigate("./create-account")}>Create Account</button>
     </form>
   )
 }

@@ -117,10 +117,6 @@ const ModifyAccount = () => {
       <button onClick={() => {
         deleteUser(user, id)
         setLog({
-            username: '',
-            email: '',
-            password: '',
-            genreList: [],
             validation: false
           })
         navigate("/loggin")

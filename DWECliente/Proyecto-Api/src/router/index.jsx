@@ -97,13 +97,13 @@ export const router = createBrowserRouter([
                         loader: () => loaderGenres({ api_key })
                     },
                     {
-                        path:"/recommended",
+                        path:"/recommended/:id",
                         element: <LayoutPrivate />,
                         children:[
                             {
                                 index:true,
                                 element: <Recommended />,
-                                loader: () => loaderRecommendations({ api_key })
+                                loader: ({ params }) => loaderRecommendations({ api_key, params })
                             }]
                     },
                     {
