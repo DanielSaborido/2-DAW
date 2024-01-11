@@ -43,8 +43,20 @@ export const validateAccount = (email, password) => {
         const db = event.target.result
         const txn = db.transaction('User', 'readonly')
         const store = txn.objectStore('User')
-        const getUserRequest = store.index('email').get(email)
+        const cursorRequest = store.openCursor()/*
+        const getUserRequest = store.index('email').get(email)*/
   
+        cursorRequest.onsuccess = (event) => {
+            let cursor = event.target.result;
+            if (cursor.value.email === email && cursor.value.password === password) {
+                let id = cursor.key;
+                let user = cursor.value;
+                resolve({ isValid: true, id, user})
+            }
+            else{
+                cursor.continue()
+            }
+        }/*
         getUserRequest.onsuccess = (event) => {
           const user = event.target.result
           if (user && user.password === password) {
@@ -56,7 +68,7 @@ export const validateAccount = (email, password) => {
         getUserRequest.onerror = (event) => {
           console.error('Error al obtener usuario', event.target.error)
           reject(event.target.error)
-        }
+        }*/
         txn.oncomplete = () => {
           db.close()
         }
@@ -64,7 +76,7 @@ export const validateAccount = (email, password) => {
     })
   }
 
-  export function modifyUser(userOBJ) {
+  export function modifyUser(userOBJ, id) {
       let request = indexedDB.open("Users", 1)
   
       request.onerror = function () {
@@ -74,10 +86,10 @@ export const validateAccount = (email, password) => {
           const db = event.target.result
           const txn = db.transaction("User", "readwrite")
           const store = txn.objectStore("User")
-          let query = store.get(userOBJ.email)
+          let query = store.get(id)
   
           query.onsuccess = (event) => {
-              store.put(userOBJ, userOBJ.email)
+              store.put(userOBJ, id)
           }
   
           query.onerror = (event) => {
@@ -90,7 +102,7 @@ export const validateAccount = (email, password) => {
       }
   }
 
-  export function deleteUser(userOBJ) {
+  export function deleteUser(userOBJ, id) {
       let request = indexedDB.open("Users", 1)
   
       request.onerror = function () {
@@ -111,7 +123,7 @@ export const validateAccount = (email, password) => {
             } else {
                 const txnDelete = db.transaction('User', 'readwrite')
                 const storeDelete = txnDelete.objectStore('User')
-                let query = storeDelete.delete(userOBJ.email)
+                let query = storeDelete.delete(id)
 
                 query.onsuccess = function (event) {
                   console.log(event)

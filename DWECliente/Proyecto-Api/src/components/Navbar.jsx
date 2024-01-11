@@ -9,6 +9,7 @@ const Navbar = () => {
     const navigate = useNavigate()
     const cerrarSesion = () =>{
         setLog({
+            id: 0,
             username: '',
             email: '',
             password: '',

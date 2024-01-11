@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import Swal from "sweetalert2"
+import { UserContext } from '../context/UserContext'
 
 const Contact = () => {
+    const {log} = useContext(UserContext)
     const [formData, setFormData] = useState({
-        name: '',
-        email: '',
+        name: log.username,
+        email: log.email,
         message: ''
     })
     const {name, email, message} = formData
@@ -62,6 +64,9 @@ const Contact = () => {
                 value={email}
                 onChange={handleChange}
             />
+            {!validateEmail(email) && (
+              <span  className="form-text text-danger">Email is missing</span>
+            )}
             <label htmlFor="message">Message:</label>
             <textarea
                 id="message"
@@ -70,7 +75,7 @@ const Contact = () => {
                 value={message}
                 onChange={handleChange}
             ></textarea>
-            <button type="submit" className='btn btn-primary'>Enviar</button>
+            <button type="submit" className='btn btn-primary'>Sent</button>
         </form>
     </div>
   )

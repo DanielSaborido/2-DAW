@@ -35,6 +35,7 @@ const LoginForm = () => {
     const {username, email, password, genreList} = credentialsValid.user
 
     setLog({
+      id: credentialsValid.id,
       username: username,
       email: email,
       password: password,

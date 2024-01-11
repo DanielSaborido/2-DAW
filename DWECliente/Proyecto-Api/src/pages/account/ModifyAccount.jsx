@@ -10,12 +10,9 @@ const ModifyAccount = () => {
   const navigate = useNavigate()
 
   const [user, setUser] = useState({
-    username: log.username,
-    email: log.email,
-    password: log.password,
-    genreList: log.genreList
+    ...log
   })
-  const {username, email, password, genreList} = user
+  const {id, username, email, password, genreList} = user
 
   const handleChange = (e) => {
     const {name, value} = e.target
@@ -43,7 +40,12 @@ const ModifyAccount = () => {
           text: "Un dato no se ha rellenado corretamente",
       })
     }
-    modifyUser(user)
+
+    modifyUser(user, id)
+    setLog({
+      ...user,
+      validation:true
+    })
     navigate("/")
   }
 
@@ -113,7 +115,14 @@ const ModifyAccount = () => {
       </div>
       <button type="submit">Save Changes</button>
       <button onClick={() => {
-        deleteUser(user)
+        deleteUser(user, id)
+        setLog({
+            username: '',
+            email: '',
+            password: '',
+            genreList: [],
+            validation: false
+          })
         navigate("/loggin")
         }}>Delete Account</button>
     </form>
