@@ -11,7 +11,7 @@ const imagen1 = document.getElementById("imag0");
 const imagen2 = document.getElementById("imag1");
 const imagen3 = document.getElementById("imag2");
 const imagen4 = document.getElementById("imag3");
-var dinero = 10000000;
+var dinero = 100000;
 document.getElementById("dinero").innerHTML = "Dinero disponible: "+dinero+" septim(s)";
 var progreso = document.getElementById("barpro")
 // Almacenamos el indice de la imagen que esta en cada recuadro.
