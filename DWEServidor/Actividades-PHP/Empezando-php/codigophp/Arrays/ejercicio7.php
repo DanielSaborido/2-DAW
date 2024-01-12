@@ -1,33 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tabla de Multiplicar</title>
+    <title>Prueba de Traduccion</title>
 </head>
 <body>
-    <table style="border: 2;">
-        <tr>
-            <th></th>
-            <?php
-            for ($i = 1; $i <= 10; $i++) {
-                echo "<th>Tabla" . $i . "</th>";
-            }
-            ?>
-        </tr>
+    <?php
+    $diccionario = array(
+        'casa' => 'house',
+        'perro' => 'dog',
+        'gato' => 'cat',
+        'libro' => 'book',
+        'mesa' => 'table',
+        'sol' => 'sun',
+        'luna' => 'moon',
+        'manzana' => 'apple',
+        'coche' => 'car',
+        'amarillo' => 'yellow'
+    );
+    $palabrasAleatorias = array_rand($diccionario, 5);
+    $respuestasCorrectas = 0;
+    $respuestasIncorrectas = 0;
 
-        <?php
-        for ($i = 1; $i <= 10; $i++) {
-            echo "<tr>";
-            echo "<th>Tabla" . $i . "</th>";
-            
-            for ($j = 1; $j <= 10; $j++) {
-                $resultado = $i * $j;
-                echo "<td>" . $resultado . "</td>";
-            }
+    foreach ($palabrasAleatorias as $palabraEspanol) {
+        $traduccionCorrecta = $diccionario[$palabraEspanol];
+        $respuestaUsuario = strtolower(readline("Traduce '$palabraEspanol' al ingles: "));
 
-            echo "</tr>";
+        if ($respuestaUsuario == $traduccionCorrecta) {
+            echo "<p>¡Correcto! La traduccion de '$palabraEspanol' es '$traduccionCorrecta'.</p>";
+            $respuestasCorrectas++;
+        } else {
+            echo "<p>Incorrecto. La traduccion correcta de '$palabraEspanol' es '$traduccionCorrecta'.</p>";
+            $respuestasIncorrectas++;
         }
-        ?>
-    </table>
+    }
 
+    echo "<p>Respuestas Correctas: $respuestasCorrectas</p>";
+    echo "<p>Respuestas Incorrectas: $respuestasIncorrectas</p>";
+    ?>
 </body>
 </html>

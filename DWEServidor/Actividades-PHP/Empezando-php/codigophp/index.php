@@ -36,12 +36,12 @@
     <h2>Arrays</h2>
     <ul>
         <li><a href="./Arrays/ejercicio1.php">Ejercicio 1: Operaciones con Array</a></li>
-        <li><a href="./Arrays/ejercicio2.php">Ejercicio 2: Calculador de Salario Semanal</a></li>
-        <li><a href="./Arrays/ejercicio3.php">Ejercicio 3: Nota media</a></li>
-        <li><a href="./Arrays/ejercicio4.php">Ejercicio 4: Ordenar Numeros</a></li>
-        <li><a href="./Arrays/ejercicio5.php">Ejercicio 5: Analisis Numerico</a></li>
-        <li><a href="./Arrays/ejercicio6.php">Ejercicio 6: Multiplos de 5</a></li>
-        <li><a href="./Arrays/ejercicio7.php">Ejercicio 7: Tabla de Multiplicar</a></li>
+        <li><a href="./Arrays/ejercicio2.php">Ejercicio 2: Arrays en PHP</a></li>
+        <li><a href="./Arrays/ejercicio3.php">Ejercicio 3: Variables en Array</a></li>
+        <li><a href="./Arrays/ejercicio4.php">Ejercicio 4: Tabla de Juegos</a></li>
+        <li><a href="./Arrays/ejercicio5.php">Ejercicio 5: Valores Maximo y Minimo</a></li>
+        <li><a href="./Arrays/ejercicio6.php">Ejercicio 6: Diccionario Español-Ingles</a></li>
+        <li><a href="./Arrays/ejercicio7.php">Ejercicio 7: Prueba de Traduccion</a></li>
     </ul>
 </body>
 </html>

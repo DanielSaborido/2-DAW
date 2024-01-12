@@ -1,30 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ordenador de Numeros</title>
+    <title>Tabla de Juegos</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 20px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-    <form action="#" method="post">
-        <label for="numero1">Numero 1:</label>
-        <input type="number" name="numero1" required><br>
-        <label for="numero2">Numero 2:</label>
-        <input type="number" name="numero2" required><br>
-        <label for="numero3">Numero 3:</label>
-        <input type="number" name="numero3" required><br>
-        <button type="submit">Ordenar Numeros</button>
-    </form>
-
     <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $numero1 = $_POST["numero1"];
-        $numero2 = $_POST["numero2"];
-        $numero3 = $_POST["numero3"];
+    $juegos = array(
+        'Accion' => array('GTA 5', 'Call Of Duty', 'PUBG'),
+        'Aventura' => array('Assassin Creed', 'Tomb Raider', 'Last of Us'),
+        'Deporte' => array('FIFA', 'PES', 'Moto G')
+    );
+    $categorias = array_keys($juegos);
 
-        $numeros_ordenados = [$numero1, $numero2, $numero3];
-        sort($numeros_ordenados);
-
-        echo "<p>Numeros ordenados: " . implode(", ", $numeros_ordenados) . "</p>";
+    echo '<table>';
+    echo '<tr><th>Categoría</th><th>Juegos</th></tr>';
+    foreach ($categorias as $categoria) {
+        echo '<tr>';
+        echo "<td>$categoria</td><td>";
+        foreach ($juegos[$categoria] as $juego) {
+            echo "$juego<br>";
+        }
+        echo '</td>';
+        echo '</tr>';
     }
+    echo '</table>';
     ?>
 
 </body>
