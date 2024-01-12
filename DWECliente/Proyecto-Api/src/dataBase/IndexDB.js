@@ -33,18 +33,18 @@ function insertUser(userOBJ, db) {
 
 export const validateAccount = (email, password) => {
     return new Promise((resolve, reject) => {
-      const request = indexedDB.open('Users', 1)
-  
-      request.onerror = function () {
+    const request = indexedDB.open('Users', 1)
+
+    request.onerror = function () {
         console.error('Error', request.error)
         reject(request.error)
-      }
-      request.onsuccess = function (event) {
+    }
+    request.onsuccess = function (event) {
         const db = event.target.result
         const txn = db.transaction('User', 'readonly')
         const store = txn.objectStore('User')
         const cursorRequest = store.openCursor()
-  
+
         cursorRequest.onsuccess = (event) => {
             let cursor = event.target.result
             if (cursor){
@@ -61,16 +61,16 @@ export const validateAccount = (email, password) => {
             }
         }
         cursorRequest.onerror = function () {
-          console.error('Error', request.error)
-          reject(request.error)
+        console.error('Error', request.error)
+        reject(request.error)
         }
         txn.oncomplete = () => {
-          db.close()
+        db.close()
         }
-      }
+    }
     })
-  }
-
+}
+    
   export const getUserById = (id) => {
     return new Promise((resolve, reject) => {
       const request = indexedDB.open('Users', 1)
