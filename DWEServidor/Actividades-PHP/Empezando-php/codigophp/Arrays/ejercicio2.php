@@ -10,7 +10,7 @@
         $miArray[] = "Elemento-$i";
     }
 
-    echo "<pre>" . $miArray . "</pre>";
+    echo "<pre>" . print_r($miArray) . "</pre>";
     ?>
 
 </body>
