@@ -24,8 +24,6 @@ a:hover {
 
 body {
   padding: 10px 30px;
-  display: flex;
-  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
   background-color: #302f2f;
