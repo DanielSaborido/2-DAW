@@ -1,6 +1,6 @@
 import { useLoaderData, Link } from "react-router-dom"
 import { useContext } from "react"
-import { UserContext } from "../context/UserContext"
+import { UserContext } from "../../context/UserContext"
 import Swal from "sweetalert2"
 import { modifyUser } from "../../dataBase/IndexDB"
 
@@ -64,7 +64,7 @@ export const loaderDeveloper = async({params, api_key, page_size}) => {
         const developerResponse = await fetch(`https://api.rawg.io/api/developers/${params.id}?key=${api_key}`)
         const developerData = await developerResponse.json()
         const selectedDeveloperName = developerData.name
-        const gameResponse = await fetch(`https://api.rawg.io/api/games?key=${api_key}&developers=${params.id}&page_size=${page_size}`)
+        const gameResponse = await fetch(`https://api.rawg.io/api/games?key=${api_key}&developer=${params.id}&page_size=${page_size}`)
         const gameData = await gameResponse.json()
         return { developer: gameData.results, selectedDeveloperName }
     } catch (error) {

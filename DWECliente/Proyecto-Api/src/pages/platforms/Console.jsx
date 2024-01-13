@@ -1,8 +1,8 @@
 import { useLoaderData, Link } from "react-router-dom"
 import { useContext } from "react"
-import { UserContext } from "../context/UserContext"
 import Swal from "sweetalert2"
 import { modifyUser } from "../../dataBase/IndexDB"
+import { UserContext } from "../../context/UserContext"
 
 const Console = () => {
   const { platform, selectedPlatformName } = useLoaderData()
