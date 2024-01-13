@@ -1,8 +1,31 @@
 import { Link, useLoaderData } from "react-router-dom"
-import { getUserById } from "../dataBase/IndexDB"
+import { getUserById, modifyUser } from "../dataBase/IndexDB"
+import { useContext } from "react"
+import { UserContext } from "../context/UserContext"
+import Swal from "sweetalert2"
 
 const Recommended = () => {
     const { recommended } = useLoaderData()
+    const {log ,setLog} = useContext(UserContext)
+    const {favorites} = log
+
+    const addFavorite = (id) => {
+        if (log.validation) {
+            setLog({
+                ...log,
+                favorites: favorites.includes(id)
+                    ? favorites.filter((gameId) => gameId !== id)
+                    : [...favorites, id]
+            })
+            modifyUser(log, log.id)
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "ERROR",
+                text: "You must be logged in to have favorites",
+            })
+        }
+    }
 
     return (
         <>
@@ -13,14 +36,18 @@ const Recommended = () => {
                         recommended.filter((game, index, self) => index === self.findIndex((g) => g.id === game.id))
                         .map((game) => (
                             <div key={game.id} className="col">
-                                <Link to={`/games/${game.id}`}>
                                 <div className="card m-1">
-                                    <img src={game.background_image} className="card-img-top" alt={game.name} />
-                                    <div className="card-body">
-                                    <h5 className="card-title">{game.name}</h5>
-                                    </div>
+                                    <Link to={`/games/${game.id}`}>
+                                        <img src={game.background_image} className="card-img-top" alt={game.name} />
+                                        <div className="card-body">
+                                            <h5 className="card-title">{game.name}</h5>
+                                        </div>
+                                    </Link>
+                                    <button onClick={() => addFavorite(game.id)}
+                                    className={`btn ${favorites.includes(game.id) ? 'btn-danger' : 'btn-primary'}`}>
+                                        {favorites.includes(game.id) ? 'Remove from Favorites' : 'Add to Favorites'}
+                                    </button>
                                 </div>
-                                </Link>
                             </div>
                         ))
                     ) : (<div className="col"> <h2>There are no games to recommend to you</h2> </div>)

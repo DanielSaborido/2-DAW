@@ -1,47 +1,79 @@
-import { useLoaderData, Link } from "react-router-dom"
+import { Link, useLoaderData } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
+import { useContext } from "react";
+import { modifyUser } from "../dataBase/IndexDB";
+import Swal from "sweetalert2";
 
-const GameCard = ({ game }) => (
-    <div className="col">
-      <Link to={`/games/${game.id}`}>
-        <div className="card m-1">
-          <img src={game.background_image} className="card-img-top" alt={game.name} />
-          <div className="card-body">
-            <h5 className="card-title">{game.name}</h5>
-          </div>
-        </div>
-      </Link>
+
+const GameCard = ({ game, addFavorite, favorites }) => (
+  <div className="col">
+    <div className="card m-1">
+        <Link to={`/games/${game.id}`}>
+            <img src={game.background_image} className="card-img-top" alt={game.name} />
+            <div className="card-body">
+                <h5 className="card-title">{game.name}</h5>
+            </div>
+        </Link>
+        <button
+            onClick={() => addFavorite(game.id)}
+            className={`btn ${favorites.includes(game.id) ? 'btn-danger' : 'btn-primary'}`}
+        >
+            {favorites.includes(game.id) ? 'Remove from Favorites' : 'Add to Favorites'}
+        </button>
     </div>
-  );
-  
-  const PlatformSection = ({ title, games }) => (
+  </div>
+);
+
+const PlatformSection = ({ title, games, addFavorite, favorites }) => (
+  <>
+    <h2 className='text-center mb-3'>{title}</h2>
+    <div className="d-flex flex-wrap row-cols-md-5">
+      {games.length > 0 ? (
+        games.map((game) => (
+          <GameCard key={game.id} game={game} addFavorite={addFavorite} favorites={favorites} />
+        ))
+      ) : (
+        <div className="col"> <h2>No hay datos</h2> </div>
+      )}
+    </div>
+  </>
+);
+
+const Home = () => {
+  const { newPC, newPlay, newXbox, newAndroid, newNintendo } = useLoaderData();
+  const { log, setLog } = useContext(UserContext);
+  const { favorites } = log;
+
+  const addFavorite = (id) => {
+      if (log.validation) {
+          setLog({
+              ...log,
+              favorites: favorites.includes(id)
+                  ? favorites.filter((gameId) => gameId !== id)
+                  : [...favorites, id]
+          });
+          modifyUser(log, log.id);
+      } else {
+          Swal.fire({
+              icon: "error",
+              title: "ERROR",
+              text: "You must be logged in to have favorites",
+          });
+      }
+  };
+
+  return (
     <>
-      <h2 className='text-center mb-3'>{title}</h2>
-      <div className="d-flex flex-wrap row-cols-md-5">
-        {games.length > 0 ? (
-          games.map((game) => <GameCard key={game.id} game={game} />)
-        ) : (
-          <div className="col"> <h2>No hay datos</h2> </div>
-        )}
-      </div>
+        <PlatformSection title="New PC Games" games={newPC} addFavorite={addFavorite} favorites={favorites} />
+        <PlatformSection title="New Playstation Games" games={newPlay} addFavorite={addFavorite} favorites={favorites} />
+        <PlatformSection title="New Xbox Games" games={newXbox} addFavorite={addFavorite} favorites={favorites} />
+        <PlatformSection title="New Android Games" games={newAndroid} addFavorite={addFavorite} favorites={favorites} />
+        <PlatformSection title="New Nintendo Games" games={newNintendo} addFavorite={addFavorite} favorites={favorites} />
     </>
   );
-  
-const Home = () => {
-    const { newPC, newPlay, newXbox, newAndroid, newNintendo } = useLoaderData()
-    
-    return (
-      <>
-          <PlatformSection title="New PC Games" games={newPC} />
-          <PlatformSection title="New Playstation Games" games={newPlay} />
-          <PlatformSection title="New Xbox Games" games={newXbox} />
-          <PlatformSection title="New Android Games" games={newAndroid} />
-          <PlatformSection title="New Nintendo Games" games={newNintendo} />
-      </>
-    )
 }
-  
 
-export default Home
+export default Home;
 
 export const loaderNews = async({api_key}) => {
     try {

@@ -5,9 +5,9 @@ import Swal from "sweetalert2"
 import { modifyUser } from "../../dataBase/IndexDB"
 
 const Games = () => {
+    const { games} = useLoaderData()
     const {log ,setLog} = useContext(UserContext)
     const {favorites} = log
-    const { games} = useLoaderData()
 
     const addFavorite = (id) => {
         if (log.validation) {

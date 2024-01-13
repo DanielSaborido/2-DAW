@@ -27,7 +27,7 @@ import Contact from "../pages/Contact.jsx"
 import ModifyAccount from "../pages/account/ModifyAccount.jsx"
 
 const api_key = "37dea5560e494058945502465024de6a"
-const page_size = 40 //por mas que añadas este es el maximo de una pagina
+const page_size = 20 //por mas que añadas este es el maximo de una pagina
 
 export const router = createBrowserRouter([
     {
