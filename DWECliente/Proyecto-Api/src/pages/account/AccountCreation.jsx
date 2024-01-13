@@ -11,7 +11,8 @@ const AccountCreationForm = () => {
     username: '',
     email: '',
     password: '',
-    genreList: []
+    genreList: [],
+    favorites: []
   })
   const {username, email, password, genreList} = user
 

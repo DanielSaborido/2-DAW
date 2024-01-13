@@ -56,64 +56,66 @@ const ModifyAccount = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="mb-3">
-        <label className='form-label' htmlFor="username">User:</label>
-        <input className='form-control'
-          type="text"
-          id="username"
-          name="username"
-          value={username}
-          onChange={handleChange}
-        />
-        {username.trim() === '' && (
-          <span  className="form-text text-danger">User name is missing</span>
-        )}
-      </div>
-      <div className="mb-3">
-        <label className='form-label' htmlFor="email">Email:</label>
-        <input className='form-control'
-          type="email"
-          id="email"
-          name="email"
-          value={email}
-          onChange={handleChange}
-        />
-        {!validateEmail(email) && (
-          <span  className="form-text text-danger">Email is missing</span>
-        )}
-      </div>
-      <div className="mb-3">
-        <label className='form-label' htmlFor="password">Password:</label>
-        <input className='form-control'
-          type="password"
-          id="password"
-          name="password"
-          value={password}
-          onChange={handleChange}
-        />
-        {(password.trim() === '' || password.length < 8) && (
-          <span className='form-text text-danger'>Your password must be at least 8 characters long</span>
-        )}
-      </div>
-      <label className='form-label' htmlFor="genres">Favorites Genres:</label>
-      <div className="d-flex flex-wrap row-cols-md-5">
-        {
-          genres.length > 0 ? (
-              genres.map((genre) => (
-                <div key={genre.id} className="form-checked mb-2">
-                    <input type="checkbox" 
-                    id = {genre.id}
-                    name = {genre.name}
-                    onChange={() => handleCheck(genre.id)}
-                    checked = {genreList.includes(genre.id)}/>
-                    <label htmlFor={genre.id} className="form-checked-label">{genre.name}</label>
-                </div>
-              ))
-          ) : (<div className="col"> <h2>No data found</h2> </div>)
-        }
-      </div>
-      <button type="submit">Save Changes</button>
+    <>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label className='form-label' htmlFor="username">User:</label>
+          <input className='form-control'
+            type="text"
+            id="username"
+            name="username"
+            value={username}
+            onChange={handleChange}
+          />
+          {username.trim() === '' && (
+            <span  className="form-text text-danger">User name is missing</span>
+          )}
+        </div>
+        <div className="mb-3">
+          <label className='form-label' htmlFor="email">Email:</label>
+          <input className='form-control'
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={handleChange}
+          />
+          {!validateEmail(email) && (
+            <span  className="form-text text-danger">Email is missing</span>
+          )}
+        </div>
+        <div className="mb-3">
+          <label className='form-label' htmlFor="password">Password:</label>
+          <input className='form-control'
+            type="password"
+            id="password"
+            name="password"
+            value={password}
+            onChange={handleChange}
+          />
+          {(password.trim() === '' || password.length < 8) && (
+            <span className='form-text text-danger'>Your password must be at least 8 characters long</span>
+          )}
+        </div>
+        <label className='form-label' htmlFor="genres">Favorites Genres:</label>
+        <div className="d-flex flex-wrap row-cols-md-5">
+          {
+            genres.length > 0 ? (
+                genres.map((genre) => (
+                  <div key={genre.id} className="form-checked mb-2">
+                      <input type="checkbox" 
+                      id = {genre.id}
+                      name = {genre.name}
+                      onChange={() => handleCheck(genre.id)}
+                      checked = {genreList.includes(genre.id)}/>
+                      <label htmlFor={genre.id} className="form-checked-label">{genre.name}</label>
+                  </div>
+                ))
+            ) : (<div className="col"> <h2>No data found</h2> </div>)
+          }
+        </div>
+        <button type="submit">Save Changes</button>
+      </form>
       <button onClick={() => {
         deleteUser(id)
         setLog({
@@ -121,7 +123,7 @@ const ModifyAccount = () => {
           })
         navigate("/loggin")
         }}>Delete Account</button>
-    </form>
+    </>
   )
 }
 

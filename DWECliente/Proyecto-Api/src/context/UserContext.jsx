@@ -9,6 +9,7 @@ const UserProvider = ({children}) => {
         email: '',
         password: '',
         genreList: [],
+        favorites: [],
         validation: false
       })
 

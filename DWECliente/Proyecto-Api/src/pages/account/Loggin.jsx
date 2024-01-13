@@ -32,7 +32,7 @@ const LoginForm = () => {
       })
     }
 
-    const {username, email, password, genreList} = credentialsValid.user
+    const {username, email, password, genreList, favorites} = credentialsValid.user
 
     setLog({
       id: credentialsValid.id,
@@ -40,6 +40,7 @@ const LoginForm = () => {
       email: email,
       password: password,
       genreList: genreList,
+      favorites: favorites,
       validation: true
     })
     navigate("/")

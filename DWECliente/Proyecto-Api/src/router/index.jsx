@@ -22,7 +22,7 @@ import LoginForm from "../pages/account/Loggin.jsx"
 import AccountCreationForm from "../pages/account/AccountCreation.jsx"
 //paginas de usuario registrado
 import Recommended, { loaderRecommendations } from "../pages/Recommended.jsx"
-import Favorites from "../pages/Favorites.jsx"
+import Favorites, { loaderFavorites } from "../pages/Favorites.jsx"
 import Contact from "../pages/Contact.jsx"
 import ModifyAccount from "../pages/account/ModifyAccount.jsx"
 
@@ -108,12 +108,13 @@ export const router = createBrowserRouter([
                             }]
                     },
                     {
-                        path:"/favorites",
+                        path:"/favorites/:id",
                         element: <LayoutPrivate />,
                         children:[
                             {
                                 index:true,
-                                element: <Favorites />
+                                element: <Favorites />,
+                                loader: ({ params }) => loaderFavorites({ api_key, params })
                             }]
                     },
                     {

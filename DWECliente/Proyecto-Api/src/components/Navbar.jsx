@@ -30,7 +30,7 @@ const Navbar = () => {
                     {log.validation ? (
                         <>
                             <NavLink to={`/recommended/${log.id}`} className="btn btn-outline-primary">Recommended</NavLink>
-                            <NavLink to="/favorites" className="btn btn-outline-primary">Favorites</NavLink>
+                            <NavLink to={`/favorites/${log.id}`} className="btn btn-outline-primary">Favorites</NavLink>
                             <NavLink to="/contact" className="btn btn-outline-primary">Contact us</NavLink>
 
                             <button onClick={() => navigate("/modify")}>{log.username}</button>
