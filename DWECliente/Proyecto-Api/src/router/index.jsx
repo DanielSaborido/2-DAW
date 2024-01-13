@@ -9,12 +9,10 @@ import Game, { loaderGame } from "../pages/games/Game.jsx"
 import Genres, { loaderGenres } from "../pages/genres/Genres.jsx"
 import Genre, { loaderGenre } from "../pages/genres/Genre.jsx"
 import Tag, { loaderTag } from "../pages/genres/Tag.jsx"
-//filtro por plataforma de juego
-import Platforms, {loaderPlatforms} from "../pages/platforms/Platforms.jsx"
-import Console, { loaderConsole } from "../pages/platforms/Console.jsx"
-//filtro de desarrolladores
-import Developers, { loaderDevelopers } from "../pages/developers/Developers.jsx"
-import Developer, { loaderDeveloper } from "../pages/developers/Developer.jsx"
+//filtro por plataforma de juego y desarrolladores
+import Others, { loaderOthers } from "../pages/others/Others.jsx"
+import Console, { loaderConsole } from "../pages/others/Console.jsx"
+import Developer, { loaderDeveloper } from "../pages/others/Developer.jsx"
 //pagina de error
 import NotFound from "../pages/NotFound.jsx"
 //registro
@@ -69,19 +67,14 @@ export const router = createBrowserRouter([
                         loader: ({ params }) => loaderTag({params, page_size, api_key })
                     },
                     {
-                        path:"/platforms",
-                        element: <Platforms />,
-                        loader: () => loaderPlatforms({ api_key })
+                        path:"/others",
+                        element: <Others />,
+                        loader: () => loaderOthers({ api_key })
                     },
                     {
                         path:"/platforms/:id",
                         element: <Console />,
                         loader: ({ params }) => loaderConsole({params, page_size, api_key })
-                    },
-                    {
-                        path:"/developers",
-                        element: <Developers />,
-                        loader: () => loaderDevelopers({ api_key })
                     },
                     {
                         path:"/developers/:id",
