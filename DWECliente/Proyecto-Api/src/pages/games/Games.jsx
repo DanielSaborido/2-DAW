@@ -9,7 +9,7 @@ const Games = () => {
     const {favorites} = log
     const { games} = useLoaderData()
 
-    const addFavourite = (id) => {
+    const addFavorite = (id) => {
         if (log.validation) {
             setLog({
                 ...log,
@@ -42,7 +42,7 @@ const Games = () => {
                                             <h5 className="card-title">{game.name}</h5>
                                         </div>
                                     </Link>
-                                    <button onClick={() => addFavourite(game.id)}
+                                    <button onClick={() => addFavorite(game.id)}
                                     className={`btn ${favorites.includes(game.id) ? 'btn-danger' : 'btn-primary'}`}>
                                         {favorites.includes(game.id) ? 'Remove from Favorites' : 'Add to Favorites'}
                                     </button>

@@ -2,26 +2,17 @@ import React, { useContext } from 'react'
 import { getUserById, modifyUser } from '../dataBase/IndexDB'
 import { UserContext } from '../context/UserContext'
 import { Link, useLoaderData } from 'react-router-dom'
-import Swal from 'sweetalert2'
 
 const Favorites = () => {
   const {log ,setLog} = useContext(UserContext)
   const { favorites } = useLoaderData()
 
-  const removeFavourite = (id) => {
-      if (log.validation) {
-          setLog({
-              ...log,
-              favorites: log.favorites.filter((gameId) => gameId !== id)
-          })
-          modifyUser(log, log.id)
-      } else {
-          Swal.fire({
-              icon: "error",
-              title: "ERROR",
-              text: "You must be logged in to have favorites",
-          })
-      }
+  const removeFavorite = (id) => {
+    setLog({
+        ...log,
+        favorites: log.favorites.filter((gameId) => gameId !== id)
+    })
+    modifyUser(log, log.id)
   }
 
   return (
@@ -39,7 +30,7 @@ const Favorites = () => {
                                           <h5 className="card-title">{game.name}</h5>
                                       </div>
                                   </Link>
-                                  <button onClick={() => removeFavourite(game.id)}
+                                  <button onClick={() => removeFavorite(game.id)}
                                   className={`btn btn-danger`}>Remove from Favorites</button>
                               </div>
                           </div>
