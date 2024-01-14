@@ -10,11 +10,12 @@ const AccountCreationForm = () => {
   const [user, setUser] = useState({
     username: '',
     email: '',
+    phone: '',
     password: '',
     genreList: [],
     favorites: []
   })
-  const {username, email, password, genreList} = user
+  const {username, email, phone, password, genreList} = user
 
   const handleChange = (e) => {
     const {name, value} = e.target
@@ -35,7 +36,7 @@ const AccountCreationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (username.trim() === "" || !validateEmail(email) || password.trim() === "" || password.length < 8) {
+    if (username.trim() === "" || !validateEmail(email) || phone.trim() === '' || phone.length!=9 || password.trim() === "" || password.length < 8) {
       return Swal.fire({
           icon: "error",
           title: "ERROR",
@@ -78,6 +79,20 @@ const AccountCreationForm = () => {
         />
         {!validateEmail(email) && (
           <span  className="form-text text-danger">Email is missing</span>
+        )}
+      </div>
+      <div className="mb-3">
+        <label className='form-label' htmlFor="phone">Phone:</label>
+        <input
+          className='form-control'
+          type="number"
+          id="phone"
+          name="phone"
+          value={phone}
+          onChange={handleChange}
+        />
+        {(phone.trim() !== '' && phone.length!=9) && (
+          <span  className="form-text text-danger">Phone is invalid</span>
         )}
       </div>
       <div className="mb-3">

@@ -7,9 +7,10 @@ const Contact = () => {
     const [formData, setFormData] = useState({
         name: log.username,
         email: log.email,
+        phone: log.phone,
         message: ''
     })
-    const {name, email, message} = formData
+    const {name, email, phone, message} = formData
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -32,6 +33,7 @@ const Contact = () => {
         setFormData({
             name: '',
             email: '',
+            phone: '',
             message: ''
         })
     }
@@ -46,35 +48,54 @@ const Contact = () => {
     <div>
         <h2>Contact</h2>
         <form onSubmit={handleSubmit}>
-            <label htmlFor="name">Name:</label>
-            <input
+            <div className="mb-3">
+                <label className='form-label' htmlFor="name">User:</label>
+                <input className='form-control'
                 type="text"
                 id="name"
                 name="name"
-                className="form-control mb-2" 
                 value={name}
                 onChange={handleChange}
-            />
-            <label htmlFor="email">Email:</label>
-            <input
+                />
+                {name.trim() === '' && (
+                <span  className="form-text text-danger">User name is missing</span>
+                )}
+            </div>
+            <div className="mb-3">
+                <label className='form-label' htmlFor="email">Email:</label>
+                <input className='form-control'
                 type="email"
                 id="email"
                 name="email"
-                className="form-control mb-2" 
                 value={email}
                 onChange={handleChange}
-            />
-            {!validateEmail(email) && (
-              <span  className="form-text text-danger">Email is missing</span>
-            )}
-            <label htmlFor="message">Message:</label>
-            <textarea
+                />
+                {!validateEmail(email) && (
+                <span  className="form-text text-danger">Email is missing</span>
+                )}
+            </div>
+            <div className="mb-3">
+                <label className='form-label' htmlFor="phone">Phone:</label>
+                <input
+                className='form-control'
+                type="number"
+                id="phone"
+                name="phone"
+                value={phone}
+                onChange={handleChange}
+                />
+            </div>
+            <div className="mb-3">
+                <label htmlFor="message">Message:</label>
+                <textarea
                 id="message"
                 name="message"
                 className="form-control mb-2" 
                 value={message}
                 onChange={handleChange}
-            ></textarea>
+                ></textarea>
+            </div>
+            
             <button type="submit" className='btn btn-primary'>Sent</button>
         </form>
     </div>

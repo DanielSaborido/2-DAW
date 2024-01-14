@@ -36,6 +36,7 @@ const Navbar = () => {
       id: 0,
       username: '',
       email: '',
+      phone: '',
       password: '',
       genreList: [],
       validation: false

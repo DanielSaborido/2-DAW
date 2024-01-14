@@ -7,6 +7,7 @@ const UserProvider = ({children}) => {
         id:0,
         username: '',
         email: '',
+        phone: '',
         password: '',
         genreList: [],
         favorites: [],

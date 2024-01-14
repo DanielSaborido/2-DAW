@@ -12,7 +12,7 @@ const ModifyAccount = () => {
   const [user, setUser] = useState({
     ...log
   })
-  const {id, username, email, password, genreList} = user
+  const {id, username, email, phone, password, genreList} = user
 
   const handleChange = (e) => {
     const {name, value} = e.target
@@ -83,6 +83,17 @@ const ModifyAccount = () => {
           {!validateEmail(email) && (
             <span  className="form-text text-danger">Email is missing</span>
           )}
+        </div>
+        <div className="mb-3">
+          <label className='form-label' htmlFor="phone">Phone:</label>
+          <input
+            className='form-control'
+            type="number"
+            id="phone"
+            name="phone"
+            value={phone}
+            onChange={handleChange}
+          />
         </div>
         <div className="mb-3">
           <label className='form-label' htmlFor="password">Password:</label>
