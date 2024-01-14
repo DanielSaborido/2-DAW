@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { getUserById, modifyUser } from '../dataBase/IndexDB'
+import { useContext } from 'react'
+import { modifyUser } from '../dataBase/IndexDB'
 import { UserContext } from '../context/UserContext'
 import { Link, useLoaderData } from 'react-router-dom'
 
