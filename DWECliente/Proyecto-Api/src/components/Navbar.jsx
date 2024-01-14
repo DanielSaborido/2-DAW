@@ -51,9 +51,9 @@ const Navbar = () => {
   }, [])
 
   return (
-    <div>
-      <nav className="navbar navbar-dark bg-dark">
-        <div className="container-fluid my-2 d-flex justify-content-between align-items-center">
+    <div className="mb-5">
+      <nav className="navbar navbar-dark bg-dark fixed-top">
+        <div className="container-fluid d-flex justify-content-between align-items-center">
           <div className="d-flex gap-2">
             <NavLink to="/" className="btn btn-outline-primary mr-2">Home</NavLink>
             <NavLink to="/games" className="btn btn-outline-primary mr-2">Games</NavLink>
@@ -92,7 +92,7 @@ const Navbar = () => {
               </div>
             )}
           </div>
-          <div>
+          <div className="d-flex gap-2">
             {log.validation ? (
               <>
                 <button onClick={() => navigate('/modify')}>{log.username}</button>
