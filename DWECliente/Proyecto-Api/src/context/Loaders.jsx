@@ -12,9 +12,16 @@ export const loaderGame = async({params, api_key}) => {
     }
 }
 
-export const loaderGames = async({api_key, page_size}) => {
+export const loaderGames = async({api_key, page_size, pageNumber}) => {
     try {
-        const data = await fetch(`https://api.rawg.io/api/games?key=${api_key}&page_size=${page_size}`)
+        let apiUrl
+
+        if (pageNumber === 1) {
+            apiUrl = `https://api.rawg.io/api/games?key=${api_key}&page_size=${page_size}`
+        } else {
+            apiUrl = `https://api.rawg.io/api/games?key=${api_key}&page_size=${page_size}&page=${pageNumber}`
+        }
+        const data = await fetch(apiUrl)
         const response = await data.json()
         return { games: response.results }
     } catch (error) {

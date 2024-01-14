@@ -1,13 +1,17 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useLoaderData, Link } from "react-router-dom"
 import { UserContext } from "../../context/UserContext"
 import Swal from "sweetalert2"
 import { modifyUser } from "../../dataBase/IndexDB"
+import { loaderGames } from "../../context/Loaders"
 
-const Games = () => {
-    const { games} = useLoaderData()
+const Games = ({api_key, page_size}) => {
+    const { games } = useLoaderData()
     const {log ,setLog} = useContext(UserContext)
     const {favorites} = log
+    const [pageNumber, setPageNumber] = useState(1)
+    const [loading, setLoading] = useState(false)
+    const [gamesList, setGames] = useState(games)
 
     const addFavorite = (id) => {
         if (log.validation) {
@@ -27,13 +31,48 @@ const Games = () => {
         }
     }
 
+    useEffect(() => {
+        const handleScroll = () => {
+          if (
+            window.innerHeight + document.documentElement.scrollTop ===
+            document.documentElement.offsetHeight
+          ) {
+            if (!loading) {
+              setLoading(true)
+              setPageNumber((prevPageNumber) => prevPageNumber + 1)
+            }
+          }
+        }
+        window.addEventListener("scroll", handleScroll)
+    
+        return () => {
+          window.removeEventListener("scroll", handleScroll)
+        }
+    }, [loading])
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const { games: newGames } = await loaderGames({ api_key, page_size, pageNumber })
+                setGames((prevGames) => [...prevGames, ...newGames])
+                setLoading(false)
+            } catch (error) {
+                console.error("Error fetching games:", error)
+                setLoading(false)
+            }
+        }
+
+        fetchData()
+    }, [pageNumber, setGames, api_key, page_size])
+
     return (
         <>
             <h2 className='text-center mb-3'>Games</h2>
             <div className="d-flex flex-wrap row-cols-md-5">
                 {
-                    games.length > 0 ? (
-                        games.map((game) => (
+                    gamesList.length > 0 ? (
+                        gamesList.filter((game, index, self) => index === self.findIndex((g) => g.id === game.id))
+                        .map((game) => (
                             <div key={game.id} className="col">
                                 <div className="card m-1">
                                     <Link to={`/games/${game.id}`}>

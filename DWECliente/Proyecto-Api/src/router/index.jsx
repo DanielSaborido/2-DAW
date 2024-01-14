@@ -28,6 +28,7 @@ import { loaderConsole, loaderDeveloper, loaderFavorites, loaderGame, loaderGame
 
 const api_key = "37dea5560e494058945502465024de6a"
 const page_size = 25
+const pageNumber = 1
 
 export const router = createBrowserRouter([
     {
@@ -45,8 +46,8 @@ export const router = createBrowserRouter([
                     },
                     {
                         path:"/games",
-                        element: <Games />,
-                        loader: () => loaderGames({ api_key, page_size })
+                        element: <Games api_key={api_key} page_size={page_size} />,
+                        loader: () => loaderGames({ api_key, page_size, pageNumber })
                     },
                     {
                         path:"/games/:id",
