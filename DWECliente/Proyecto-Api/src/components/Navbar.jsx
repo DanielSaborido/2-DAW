@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 
 const Navbar = () => {
@@ -7,7 +7,7 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [searchResults, setSearchResults] = useState([])
   const [showResults, setShowResults] = useState(false)
-
+  const rutaLogo = new URL('../assets/logo.jpg', import.meta.url).toString()
   const navigate = useNavigate()
 
   const handleSearchChange = async (e) => {
@@ -55,7 +55,9 @@ const Navbar = () => {
       <nav className="navbar navbar-dark bg-dark fixed-top">
         <div className="container-fluid d-flex justify-content-between align-items-center">
           <div className="d-flex gap-2">
-            <NavLink to="/" className="btn btn-outline-primary mr-2">Home</NavLink>
+            <Link to="/" className='h-auto'>
+              <img src={rutaLogo} alt="Home"/>
+            </Link>
             <NavLink to="/games" className="btn btn-outline-primary mr-2">Games</NavLink>
             <NavLink to="/genres" className="btn btn-outline-primary mr-2">Genres/Tags</NavLink>
             <NavLink to="/others" className="btn btn-outline-primary">Others</NavLink>
