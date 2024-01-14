@@ -43,22 +43,3 @@ const Favorites = () => {
 }
 
 export default Favorites
-
-export const loaderFavorites = async({api_key, params}) => {
-    try {
-        const log = await getUserById(parseInt(params.id, 10))
-        const favorites = log.favorites
-        console.log(favorites)
-        let favoritesGames = []
-        await Promise.all((favorites || []).map(async (gameId) => {
-          const data = await fetch(`https://api.rawg.io/api/games/${gameId}?key=${api_key}`)
-          const response = await data.json()
-          const { id, name, background_image } = response
-          favoritesGames.push({ id, name, background_image })
-      }))
-        return { favorites: favoritesGames }
-    } catch (error) {
-        console.error("Error fetching favorites:", error)
-        return { favorites: [] }
-    }
-}

@@ -36,16 +36,3 @@ const Others = () => {
 }
 
 export default Others
-
-export const loaderOthers = async ({ api_key }) => {
-  try {
-    const developersData = await fetch(`https://api.rawg.io/api/developers?key=${api_key}`);
-    const developersResponse = await developersData.json();
-    const platformsData = await fetch(`https://api.rawg.io/api/platforms/lists/parents?key=${api_key}`);
-    const platformsResponse = await platformsData.json();
-    return { developers: developersResponse.results, familyPlatforms: platformsResponse.results };
-  } catch (error) {
-    console.error('Error fetching data for Others:', error);
-    return { developers: [], familyPlatforms: [] };
-  }
-};

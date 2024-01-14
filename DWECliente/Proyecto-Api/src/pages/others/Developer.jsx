@@ -57,18 +57,3 @@ const Developer = () => {
 }
 
 export default Developer
-
-export const loaderDeveloper = async({params, api_key, page_size}) => {
-    console.log(params)
-    try {
-        const developerResponse = await fetch(`https://api.rawg.io/api/developers/${params.id}?key=${api_key}`)
-        const developerData = await developerResponse.json()
-        const selectedDeveloperName = developerData.name
-        const gameResponse = await fetch(`https://api.rawg.io/api/games?key=${api_key}&developer=${params.id}&page_size=${page_size}`)
-        const gameData = await gameResponse.json()
-        return { developer: gameData.results, selectedDeveloperName }
-    } catch (error) {
-        console.error("Error fetching console:", error)
-        return { developer: [], selectedDeveloperName: '' }
-    }
-}

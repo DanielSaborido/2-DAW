@@ -37,21 +37,3 @@ const Card = ({ item, linkPrefix }) => (
 }
   
   export default Genres
-  
-  export const loaderGenres = async ({ api_key }) => {
-    try {
-      const fetchAndExtract = async (url) => {
-        const data = await fetch(url)
-        const response = await data.json()
-        return response.results || []
-      }
-  
-      const genres = await fetchAndExtract(`https://api.rawg.io/api/genres?key=${api_key}`)
-      const tags = await fetchAndExtract(`https://api.rawg.io/api/tags?page_size=40&key=${api_key}`)
-  
-      return { genres, tags }
-    } catch (error) {
-      console.error("Error fetching datas:", error)
-      return { genres: [], tags: [] }
-    }
-  }

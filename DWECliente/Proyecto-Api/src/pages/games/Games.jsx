@@ -57,14 +57,3 @@ const Games = () => {
 }
 
 export default Games
-
-export const loaderGames = async({api_key, page_size}) => {
-    try {
-        const data = await fetch(`https://api.rawg.io/api/games?key=${api_key}&page_size=${page_size}`)
-        const response = await data.json()
-        return { games: response.results }
-    } catch (error) {
-        console.error("Error fetching games:", error)
-        return { games: [] }
-    }
-}

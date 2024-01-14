@@ -1,5 +1,5 @@
 import { Link, useLoaderData } from "react-router-dom"
-import { getUserById, modifyUser } from "../dataBase/IndexDB"
+import { modifyUser } from "../dataBase/IndexDB"
 import { useContext } from "react"
 import { UserContext } from "../context/UserContext"
 import Swal from "sweetalert2"
@@ -58,32 +58,3 @@ const Recommended = () => {
 }
 
 export default Recommended
-
-export const loaderRecommendations = async({api_key, page_size, params}) => {
-    try {
-        const log = await getUserById(parseInt(params.id, 10))
-        const genresList = log.genreList.toString()
-        const fetchAndFilter = async (genres) => {
-            const data = await fetch(`https://api.rawg.io/api/games?key=${api_key}&genres=${genres}&ordering=-released&page_size=${page_size}`)
-            const response = await data.json()
-            const filteredResults = response.results.filter(game => game.background_image !== null)
-            return filteredResults
-          }
-        const fillEmptySlots = async (gamesArray, requiredLength, genres) => {
-            const emptySlots = requiredLength - gamesArray.length
-            if (emptySlots > 0) {
-                const additionalData = await fetch(`https://api.rawg.io/api/games?key=${api_key}&genres=${genres}&ordering=-released&page_size=${emptySlots}&page=2`)
-                const additionalResponse = await additionalData.json()
-                const additionalGames = additionalResponse.results.filter(game => game.background_image !== null)
-                return [...gamesArray, ...additionalGames]
-            }
-            return gamesArray.slice(0, requiredLength)
-        }
-        const data = await fetchAndFilter(genresList)
-        const newData = await fillEmptySlots(data, 40, genresList)
-        return { recommended: newData }
-    } catch (error) {
-        console.error("Error fetching recommended:", error)
-        return { recommended: [] }
-    }
-}

@@ -57,17 +57,3 @@ const Tag = () => {
 }
 
 export default Tag
-
-export const loaderTag = async ({ params, api_key, page_size }) => {
-    try {
-      const tagResponse = await fetch(`https://api.rawg.io/api/tags/${params.id}?key=${api_key}`)
-      const tagData = await tagResponse.json()
-      const selectedTagName = tagData.name
-      const gameResponse = await fetch(`https://api.rawg.io/api/games?key=${api_key}&tags=${params.id}&page_size=${page_size}`)
-      const gameData = await gameResponse.json()
-      return { tag: gameData.results, selectedTagName }
-    } catch (error) {
-      console.error('Error fetching tag:', error)
-      return { tag: [], selectedTagName: '' }
-    }
-}

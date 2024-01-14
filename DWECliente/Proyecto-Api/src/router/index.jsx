@@ -1,31 +1,32 @@
 import { createBrowserRouter } from "react-router-dom"
 import LayoutPublic from "../layouts/LayoutPublic.jsx"
 import LayoutPrivate from "../layouts/LayoutPrivate.jsx"
-import Home, { loaderNews } from "../pages/Home.jsx"
+import Home from "../pages/Home.jsx"
 //juegos en general
-import Games, { loaderGames } from "../pages/games/Games.jsx"
-import Game, { loaderGame } from "../pages/games/Game.jsx"
+import Games from "../pages/games/Games.jsx"
+import Game from "../pages/games/Game.jsx"
 //filtro por genros y tags
-import Genres, { loaderGenres } from "../pages/genres/Genres.jsx"
-import Genre, { loaderGenre } from "../pages/genres/Genre.jsx"
-import Tag, { loaderTag } from "../pages/genres/Tag.jsx"
+import Genres from "../pages/genres/Genres.jsx"
+import Genre from "../pages/genres/Genre.jsx"
+import Tag from "../pages/genres/Tag.jsx"
 //filtro por plataforma de juego y desarrolladores
-import Others, { loaderOthers } from "../pages/others/Others.jsx"
-import Console, { loaderConsole } from "../pages/others/Console.jsx"
-import Developer, { loaderDeveloper } from "../pages/others/Developer.jsx"
+import Others from "../pages/others/Others.jsx"
+import Console from "../pages/others/Console.jsx"
+import Developer from "../pages/others/Developer.jsx"
 //pagina de error
 import NotFound from "../pages/NotFound.jsx"
 //registro
 import LoginForm from "../pages/account/Loggin.jsx"
 import AccountCreationForm from "../pages/account/AccountCreation.jsx"
 //paginas de usuario registrado
-import Recommended, { loaderRecommendations } from "../pages/Recommended.jsx"
-import Favorites, { loaderFavorites } from "../pages/Favorites.jsx"
+import Recommended from "../pages/Recommended.jsx"
+import Favorites from "../pages/Favorites.jsx"
 import Contact from "../pages/Contact.jsx"
 import ModifyAccount from "../pages/account/ModifyAccount.jsx"
+import { loaderConsole, loaderDeveloper, loaderFavorites, loaderGame, loaderGames, loaderGenre, loaderGenres, loaderNews, loaderOthers, loaderRecommendations, loaderTag } from "../context/Loaders.jsx"
 
 const api_key = "37dea5560e494058945502465024de6a"
-const page_size = 20 //por mas que añadas este es el maximo de una pagina
+const page_size = 25
 
 export const router = createBrowserRouter([
     {
