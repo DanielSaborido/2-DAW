@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import { useLoaderData, useNavigate } from 'react-router-dom'
 import Swal from "sweetalert2"
 import { deleteUser, modifyUser } from '../../dataBase/IndexDB'
