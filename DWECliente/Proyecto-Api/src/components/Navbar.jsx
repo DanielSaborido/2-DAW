@@ -53,7 +53,7 @@ const Navbar = () => {
     <div>
       <nav className="navbar navbar-dark bg-dark">
         <div className="container-fluid my-2 d-flex justify-content-between align-items-center">
-          <div className="d-flex">
+          <div className="d-flex gap-2">
             <NavLink to="/" className="btn btn-outline-primary mr-2">Home</NavLink>
             <NavLink to="/games" className="btn btn-outline-primary mr-2">Games</NavLink>
             <NavLink to="/genres" className="btn btn-outline-primary mr-2">Genres/Tags</NavLink>
