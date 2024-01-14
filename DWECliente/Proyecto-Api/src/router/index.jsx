@@ -23,6 +23,7 @@ import Recommended from "../pages/Recommended.jsx"
 import Favorites from "../pages/Favorites.jsx"
 import Contact from "../pages/Contact.jsx"
 import ModifyAccount from "../pages/account/ModifyAccount.jsx"
+//data loaders
 import { loaderConsole, loaderDeveloper, loaderFavorites, loaderGame, loaderGames, loaderGenre, loaderGenres, loaderNews, loaderOthers, loaderRecommendations, loaderTag } from "../context/Loaders.jsx"
 
 const api_key = "37dea5560e494058945502465024de6a"
