@@ -1,13 +1,18 @@
-import { useLoaderData, Link } from "react-router-dom"
-import { useContext } from "react"
+import { useLoaderData, Link, useParams } from "react-router-dom"
+import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../../context/UserContext"
 import Swal from "sweetalert2"
 import { modifyUser } from "../../dataBase/IndexDB"
+import { loaderGenre } from "../../context/Loaders"
 
-const Genre = () => {
-  const { genre, selectedGenreName} = useLoaderData()
+const Genre = ({api_key, page_size}) => {
+    const params = useParams()
+  const { genre: initialGenre, selectedGenreName} = useLoaderData()
   const {log ,setLog} = useContext(UserContext)
   const {favorites} = log
+  const [pageNumber, setPageNumber] = useState(1)
+  const [loading, setLoading] = useState(false)
+  const [genreList, setGenre] = useState(initialGenre)
 
   const addFavorite = (id) => {
       if (log.validation) {
@@ -27,13 +32,49 @@ const Genre = () => {
       }
   }
 
+  useEffect(() => {
+      const handleScroll = () => {
+        if (
+          window.innerHeight + document.documentElement.scrollTop ===
+          document.documentElement.offsetHeight
+        ) {
+          if (!loading) {
+            setLoading(true)
+            setPageNumber((prevPageNumber) => prevPageNumber + 1)
+          }
+        }
+      }
+      window.addEventListener("scroll", handleScroll)
+  
+      return () => {
+        window.removeEventListener("scroll", handleScroll)
+      }
+  }, [loading])
+  
+  useEffect(() => {
+      const fetchData = async () => {
+          try {
+              const { genre: newGenre } = await loaderGenre({ params, api_key, page_size, pageNumber })
+              console.log(newGenre)
+              setGenre((prevGenre) => [...prevGenre, ...newGenre])
+              setLoading(false)
+          } catch (error) {
+              console.error("Error fetching genre:", error)
+              setLoading(false)
+          }
+      }
+
+      fetchData()
+  }, [pageNumber, setGenre, params, api_key, page_size])
+
   return (
       <>
           <h1>Games of {selectedGenreName}</h1>
           <div className="row row-cols-1 row-cols-md-5 g-4">
                 {
-                    genre.length > 0 ? (
-                        genre.map((game) => (
+                    genreList.length > 0 ? (
+                        genreList.filter((game, index, self) => index === self.findIndex((g) => g.id === game.id))
+                        .map((game) => (
                             <div key={game.id} className="col">
                                 <div className="card m-1">
                                     <Link to={`/games/${game.id}`}>

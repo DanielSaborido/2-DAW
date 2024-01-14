@@ -1,13 +1,18 @@
-import { useLoaderData, Link } from "react-router-dom"
-import { useContext } from "react"
+import { useLoaderData, Link, useParams } from "react-router-dom"
+import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../../context/UserContext"
 import Swal from "sweetalert2"
 import { modifyUser } from "../../dataBase/IndexDB"
+import { loaderTag } from "../../context/Loaders"
 
-const Tag = () => {
+const Tag = ({api_key, page_size}) => {
+    const params = useParams()
   const { tag, selectedTagName } = useLoaderData()
   const {log ,setLog} = useContext(UserContext)
   const {favorites} = log
+  const [pageNumber, setPageNumber] = useState(1)
+  const [loading, setLoading] = useState(false)
+  const [tagList, setTags] = useState(tag)
 
   const addFavorite = (id) => {
       if (log.validation) {
@@ -27,13 +32,48 @@ const Tag = () => {
       }
   }
 
+  useEffect(() => {
+      const handleScroll = () => {
+        if (
+          window.innerHeight + document.documentElement.scrollTop ===
+          document.documentElement.offsetHeight
+        ) {
+          if (!loading) {
+            setLoading(true)
+            setPageNumber((prevPageNumber) => prevPageNumber + 1)
+          }
+        }
+      }
+      window.addEventListener("scroll", handleScroll)
+  
+      return () => {
+        window.removeEventListener("scroll", handleScroll)
+      }
+  }, [loading])
+  
+  useEffect(() => {
+      const fetchData = async () => {
+          try {
+              const { tag: newTags } = await loaderTag({ params,api_key, page_size, pageNumber })
+              setTags((prevTags) => [...prevTags, ...newTags])
+              setLoading(false)
+          } catch (error) {
+              console.error("Error fetching tag:", error)
+              setLoading(false)
+          }
+      }
+
+      fetchData()
+  }, [pageNumber, setTags,params, api_key, page_size])
+
   return (
       <>
           <h1>Games of {selectedTagName}</h1>
           <div className="row row-cols-1 row-cols-md-5 g-4">
                 {
-                    tag.length > 0 ? (
-                        tag.map((game) => (
+                    tagList.length > 0 ? (
+                        tagList.filter((game, index, self) => index === self.findIndex((g) => g.id === game.id))
+                        .map((game) => (
                             <div key={game.id} className="col">
                                 <div className="card m-1">
                                     <Link to={`/games/${game.id}`}>

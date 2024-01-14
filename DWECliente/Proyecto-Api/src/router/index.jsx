@@ -61,13 +61,13 @@ export const router = createBrowserRouter([
                     },
                     {
                         path:"/genres/:id",
-                        element: <Genre />,
-                        loader: ({ params }) => loaderGenre({params, page_size, api_key })
+                        element: <Genre api_key={api_key} page_size={page_size} />,
+                        loader: ({ params }) => loaderGenre({params, page_size, api_key, pageNumber })
                     },
                     {
                         path:"/tags/:id",
-                        element: <Tag />,
-                        loader: ({ params }) => loaderTag({params, page_size, api_key })
+                        element: <Tag api_key={api_key} page_size={page_size} />,
+                        loader: ({ params }) => loaderTag({params, page_size, api_key, pageNumber })
                     },
                     {
                         path:"/others",
@@ -76,13 +76,13 @@ export const router = createBrowserRouter([
                     },
                     {
                         path:"/platforms/:id",
-                        element: <Console />,
-                        loader: ({ params }) => loaderConsole({params, page_size, api_key })
+                        element: <Console api_key={api_key} page_size={page_size} />,
+                        loader: ({ params }) => loaderConsole({params, page_size, api_key, pageNumber })
                     },
                     {
                         path:"/developers/:id",
-                        element: <Developer />,
-                        loader: ({ params }) => loaderDeveloper({params, page_size, api_key })
+                        element: <Developer api_key={api_key} page_size={page_size} />,
+                        loader: ({ params }) => loaderDeveloper({params, page_size, api_key, pageNumber })
                     },
                     {
                         path:"/loggin",
@@ -99,8 +99,8 @@ export const router = createBrowserRouter([
                         children:[
                             {
                                 index:true,
-                                element: <Recommended />,
-                                loader: ({ params }) => loaderRecommendations({ api_key, page_size, params })
+                                element: <Recommended api_key={api_key} page_size={page_size} />,
+                                loader: ({ params }) => loaderRecommendations({ api_key, page_size, params, pageNumber })
                             }]
                     },
                     {

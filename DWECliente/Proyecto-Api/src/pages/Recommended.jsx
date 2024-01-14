@@ -1,13 +1,18 @@
-import { Link, useLoaderData } from "react-router-dom"
+import { Link, useLoaderData, useParams } from "react-router-dom"
 import { modifyUser } from "../dataBase/IndexDB"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../context/UserContext"
 import Swal from "sweetalert2"
+import { loaderRecommendations } from "../context/Loaders"
 
-const Recommended = () => {
+const Recommended = ({api_key, page_size}) => {
+    const params = useParams()
     const { recommended } = useLoaderData()
     const {log ,setLog} = useContext(UserContext)
     const {favorites} = log
+    const [pageNumber, setPageNumber] = useState(1)
+    const [loading, setLoading] = useState(false)
+    const [recommendedList, setRecommended] = useState(recommended)
 
     const addFavorite = (id) => {
         if (log.validation) {
@@ -27,13 +32,47 @@ const Recommended = () => {
         }
     }
 
+    useEffect(() => {
+        const handleScroll = () => {
+          if (
+            window.innerHeight + document.documentElement.scrollTop ===
+            document.documentElement.offsetHeight
+          ) {
+            if (!loading) {
+              setLoading(true)
+              setPageNumber((prevPageNumber) => prevPageNumber + 1)
+            }
+          }
+        }
+        window.addEventListener("scroll", handleScroll)
+    
+        return () => {
+          window.removeEventListener("scroll", handleScroll)
+        }
+    }, [loading])
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const { recommended: newRecommended } = await loaderRecommendations({params, api_key, page_size, pageNumber })
+                setRecommended((prevRecommended) => [...prevRecommended, ...newRecommended])
+                setLoading(false)
+            } catch (error) {
+                console.error("Error fetching recommended:", error)
+                setLoading(false)
+            }
+        }
+
+        fetchData()
+    }, [pageNumber, setRecommended,params, api_key, page_size])
+
     return (
         <>
             <h2 className='text-center mb-3'>Recommended Games</h2>
             <div className="d-flex flex-wrap row-cols-md-5">
                 {
-                    recommended.length > 0 ? (
-                        recommended.filter((game, index, self) => index === self.findIndex((g) => g.id === game.id))
+                    recommendedList.length > 0 ? (
+                        recommendedList.filter((game, index, self) => index === self.findIndex((g) => g.id === game.id))
                         .map((game) => (
                             <div key={game.id} className="col">
                                 <div className="card m-1">
