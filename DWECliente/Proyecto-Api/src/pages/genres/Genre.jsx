@@ -55,7 +55,6 @@ const Genre = ({api_key, page_size}) => {
       const fetchData = async () => {
           try {
               const { genre: newGenre } = await loaderGenre({ params, api_key, page_size, pageNumber })
-              console.log(newGenre)
               setGenre((prevGenre) => [...prevGenre, ...newGenre])
               setLoading(false)
           } catch (error) {

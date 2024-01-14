@@ -73,6 +73,7 @@ const Recommended = ({api_key, page_size}) => {
                 {
                     recommendedList.length > 0 ? (
                         recommendedList.filter((game, index, self) => index === self.findIndex((g) => g.id === game.id))
+                        .filter((game) => game.background_image !== null)
                         .map((game) => (
                             <div key={game.id} className="col">
                                 <div className="card m-1">

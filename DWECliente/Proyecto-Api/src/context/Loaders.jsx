@@ -139,7 +139,7 @@ export const loaderOthers = async ({ api_key }) => {
   }
 }
 
-export const loaderConsole = async({params, page_size, api_key, pageNumber }) => {
+export const loaderConsole = async({params, api_key, page_size, pageNumber }) => {
     try {
         const platformResponse = await fetch(`https://api.rawg.io/api/platforms/${params.id}?key=${api_key}`)
         const platformData = await platformResponse.json()
@@ -198,29 +198,19 @@ export const loaderFavorites = async({api_key, params}) => {
     }
 }
 
-export const loaderRecommendations = async({api_key, page_size, params}) => {
+export const loaderRecommendations = async({params, api_key, page_size, pageNumber}) => {
     try {
         const log = await getUserById(parseInt(params.id, 10))
         const genresList = log.genreList.toString()
-        const fetchAndFilter = async (genres) => {
-            const data = await fetch(`https://api.rawg.io/api/games?key=${api_key}&genres=${genres}&ordering=-released&page_size=${page_size}`)
-            const response = await data.json()
-            const filteredResults = response.results.filter(game => game.background_image !== null)
-            return filteredResults
-          }
-        const fillEmptySlots = async (gamesArray, requiredLength, genres) => {
-            const emptySlots = requiredLength - gamesArray.length
-            if (emptySlots > 0) {
-                const additionalData = await fetch(`https://api.rawg.io/api/games?key=${api_key}&genres=${genres}&ordering=-released&page_size=${emptySlots}&page=2`)
-                const additionalResponse = await additionalData.json()
-                const additionalGames = additionalResponse.results.filter(game => game.background_image !== null)
-                return [...gamesArray, ...additionalGames]
-            }
-            return gamesArray.slice(0, requiredLength)
+        let apiUrl
+        if (pageNumber === 1) {
+            apiUrl = `https://api.rawg.io/api/games?key=${api_key}&genres=${genresList}&ordering=-released&page_size=${page_size}`
+        } else {
+            apiUrl = `https://api.rawg.io/api/games?key=${api_key}&genres=${genresList}&ordering=-released&page_size=${page_size}&page=${pageNumber}`
         }
-        const data = await fetchAndFilter(genresList)
-        const newData = await fillEmptySlots(data, 40, genresList)
-        return { recommended: newData }
+        const data = await fetch(apiUrl)
+        const gameData = await data.json()
+        return { recommended: gameData.results }
     } catch (error) {
         console.error("Error fetching recommended:", error)
         return { recommended: [] }

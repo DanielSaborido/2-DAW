@@ -62,12 +62,12 @@ export const router = createBrowserRouter([
                     {
                         path:"/genres/:id",
                         element: <Genre api_key={api_key} page_size={page_size} />,
-                        loader: ({ params }) => loaderGenre({params, page_size, api_key, pageNumber })
+                        loader: ({ params }) => loaderGenre({params, api_key, page_size, pageNumber })
                     },
                     {
                         path:"/tags/:id",
                         element: <Tag api_key={api_key} page_size={page_size} />,
-                        loader: ({ params }) => loaderTag({params, page_size, api_key, pageNumber })
+                        loader: ({ params }) => loaderTag({params, api_key, page_size, pageNumber })
                     },
                     {
                         path:"/others",
@@ -77,12 +77,12 @@ export const router = createBrowserRouter([
                     {
                         path:"/platforms/:id",
                         element: <Console api_key={api_key} page_size={page_size} />,
-                        loader: ({ params }) => loaderConsole({params, page_size, api_key, pageNumber })
+                        loader: ({ params }) => loaderConsole({params, api_key, page_size, pageNumber })
                     },
                     {
                         path:"/developers/:id",
                         element: <Developer api_key={api_key} page_size={page_size} />,
-                        loader: ({ params }) => loaderDeveloper({params, page_size, api_key, pageNumber })
+                        loader: ({ params }) => loaderDeveloper({params, api_key, page_size, pageNumber })
                     },
                     {
                         path:"/loggin",
@@ -98,9 +98,9 @@ export const router = createBrowserRouter([
                         element: <LayoutPrivate />,
                         children:[
                             {
-                                index:true,
+                                path:"/recommended/:id",
                                 element: <Recommended api_key={api_key} page_size={page_size} />,
-                                loader: ({ params }) => loaderRecommendations({ api_key, page_size, params, pageNumber })
+                                loader: ({ params }) => loaderRecommendations({ params ,api_key, page_size, pageNumber })
                             }]
                     },
                     {
