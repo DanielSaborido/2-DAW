@@ -73,6 +73,7 @@ const Platform = ({api_key, page_size}) => {
                 {
                     platformParentList.length > 0 ? (
                         platformParentList.filter((game, index, self) => index === self.findIndex((g) => g.id === game.id))
+                        .filter((game) => game.background_image !== null)
                         .map((game) => (
                             <div key={game.id} className="col">
                                 <div className="card m-1">
