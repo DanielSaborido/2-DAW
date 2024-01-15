@@ -52,6 +52,9 @@ const Game = () => {
       <div className="mt-4">
         <h3>Additional Information</h3>
         <p>
+          <strong>Platforms:</strong> {game.platforms.map((platforms) => platforms.platform.name).join(', ')}
+        </p>
+        <p>
           <strong>Genres:</strong> {game.genres.map((genre) => genre.name).join(', ')}
         </p>
         <p>
