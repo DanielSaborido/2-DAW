@@ -69,7 +69,7 @@ const Developer = ({ api_key, page_size}) => {
   return (
       <>
           <h1>Games of {selectedDeveloperName}</h1>
-          <div className="row row-cols-1 row-cols-md-6 g-4">
+          <div className="row row-cols-1 row-cols-md-6 g-2">
                 {
                     developerList.length > 0 ? (
                         developerList.filter((game, index, self) => index === self.findIndex((g) => g.id === game.id))

@@ -68,7 +68,7 @@ const Games = ({api_key, page_size}) => {
     return (
         <>
             <h2 className='text-center mb-3'>Games</h2>
-            <div className="d-flex flex-wrap row-cols-md-6">
+            <div className="d-flex flex-wrap row-cols-md-6 g-2">
                 {
                     gamesList.length > 0 ? (
                         gamesList.filter((game, index, self) => index === self.findIndex((g) => g.id === game.id))

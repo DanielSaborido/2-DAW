@@ -6,7 +6,7 @@ const Others = () => {
   return (
     <>
       <h1 className='text-center mb-3'>Platforms</h1>
-      <div className="d-flex flex-wrap row-cols-md-6">
+      <div className="d-flex flex-wrap row-cols-md-6 g-2">
         {familyPlatforms.map((platforms) => (
           <div key={platforms.id} className="col">
             <div className="m-1">

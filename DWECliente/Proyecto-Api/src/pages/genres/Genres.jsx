@@ -16,7 +16,7 @@ const Card = ({ item, linkPrefix }) => (
   const Section = ({ title, items, linkPrefix }) => (
     <>
       <h2 className='text-center mb-3'>{title}</h2>
-      <div className="d-flex flex-wrap row-cols-md-6">
+      <div className="d-flex flex-wrap row-cols-md-6 g-2">
         {items.length > 0 ? (
           items.map((item) => <Card key={item.id} item={item} linkPrefix={linkPrefix} />)
         ) : (

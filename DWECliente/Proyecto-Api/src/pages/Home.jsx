@@ -28,7 +28,7 @@ const GameCard = ({ game, addFavorite, favorites }) => (
 const PlatformSection = ({ title, games, addFavorite, favorites, platformId }) => (
   <>
     <h2 className='text-center mb-3'>{title}</h2>
-    <div className="d-flex flex-wrap row-cols-md-6">
+    <div className="d-flex flex-wrap row-cols-md-6 g-2">
       {games.length > 0 ? (
         games.map((game) => (
           <GameCard key={game.id} game={game} addFavorite={addFavorite} favorites={favorites} />

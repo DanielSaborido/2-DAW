@@ -69,7 +69,7 @@ const Console = ({api_key, page_size}) => {
   return (
       <>
           <h1>Games for {selectedPlatformName}</h1>
-          <div className="row row-cols-1 row-cols-md-6 g-4">
+          <div className="row row-cols-1 row-cols-md-6 g-2">
                 {
                     platformList.length > 0 ? (
                         platformList.filter((game, index, self) => index === self.findIndex((g) => g.id === game.id))
