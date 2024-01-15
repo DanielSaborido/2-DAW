@@ -18,7 +18,7 @@ const Favorites = () => {
   return (
       <>
           <h2 className='text-center mb-3'>Favorites Games</h2>
-          <div className="d-flex flex-wrap row-cols-md-5">
+          <div className="d-flex flex-wrap row-cols-md-6">
               {
                   favorites.length > 0 ? (
                     favorites.map((game) => (

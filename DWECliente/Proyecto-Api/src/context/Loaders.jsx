@@ -139,6 +139,26 @@ export const loaderOthers = async ({ api_key }) => {
   }
 }
 
+export const loaderPlatform = async({params, api_key, page_size, pageNumber }) => {
+    try {
+        const platformResponse = await fetch(`https://api.rawg.io/api/platforms/${params.id}?key=${api_key}`)
+        const platformData = await platformResponse.json()
+        const selectedPlatformName = platformData.name
+        let apiUrl
+        if (pageNumber === 1) {
+            apiUrl = `https://api.rawg.io/api/games?key=${api_key}&parent_platforms=${params.id}&ordering=-released&page_size=${page_size}`
+        } else {
+            apiUrl = `https://api.rawg.io/api/games?key=${api_key}&parent_platforms=${params.id}&ordering=-released&page_size=${page_size}&page=${pageNumber}`
+        }
+        const data = await fetch(apiUrl)
+        const gameData = await data.json()
+        return { platformParent: gameData.results, selectedPlatformName }
+    } catch (error) {
+        console.error("Error fetching console:", error)
+        return { platformParent: [], selectedplatformParentName: '' }
+    }
+}
+
 export const loaderConsole = async({params, api_key, page_size, pageNumber }) => {
     try {
         const platformResponse = await fetch(`https://api.rawg.io/api/platforms/${params.id}?key=${api_key}`)

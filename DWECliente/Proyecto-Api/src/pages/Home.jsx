@@ -3,7 +3,8 @@ import { UserContext } from "../context/UserContext"
 import { useContext } from "react"
 import { modifyUser } from "../dataBase/IndexDB"
 import Swal from "sweetalert2"
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 const GameCard = ({ game, addFavorite, favorites }) => (
   <div className="col">
@@ -24,10 +25,10 @@ const GameCard = ({ game, addFavorite, favorites }) => (
   </div>
 )
 
-const PlatformSection = ({ title, games, addFavorite, favorites }) => (
+const PlatformSection = ({ title, games, addFavorite, favorites, platformId }) => (
   <>
     <h2 className='text-center mb-3'>{title}</h2>
-    <div className="d-flex flex-wrap row-cols-md-5">
+    <div className="d-flex flex-wrap row-cols-md-6">
       {games.length > 0 ? (
         games.map((game) => (
           <GameCard key={game.id} game={game} addFavorite={addFavorite} favorites={favorites} />
@@ -35,6 +36,9 @@ const PlatformSection = ({ title, games, addFavorite, favorites }) => (
       ) : (
         <div className="col"> <h2>No hay datos</h2> </div>
       )}
+        <Link to={`/platformParent/${platformId}`}>
+          <FontAwesomeIcon icon={ faPlus } size="lg" />
+        </Link>
     </div>
   </>
 )
@@ -64,11 +68,11 @@ const Home = () => {
 
   return (
     <>
-        <PlatformSection title="New PC Games" games={newPC} addFavorite={addFavorite} favorites={favorites} />
-        <PlatformSection title="New Playstation Games" games={newPlay} addFavorite={addFavorite} favorites={favorites} />
-        <PlatformSection title="New Xbox Games" games={newXbox} addFavorite={addFavorite} favorites={favorites} />
-        <PlatformSection title="New Android Games" games={newAndroid} addFavorite={addFavorite} favorites={favorites} />
-        <PlatformSection title="New Nintendo Games" games={newNintendo} addFavorite={addFavorite} favorites={favorites} />
+        <PlatformSection title="New PC Games" games={newPC} addFavorite={addFavorite} favorites={favorites} platformId={1}/>
+        <PlatformSection title="New Playstation Games" games={newPlay} addFavorite={addFavorite} favorites={favorites} platformId={2}/>
+        <PlatformSection title="New Xbox Games" games={newXbox} addFavorite={addFavorite} favorites={favorites} platformId={3}/>
+        <PlatformSection title="New Android Games" games={newAndroid} addFavorite={addFavorite} favorites={favorites} platformId={7}/>
+        <PlatformSection title="New Nintendo Games" games={newNintendo} addFavorite={addFavorite} favorites={favorites} platformId={8}/>
     </>
   )
 }

@@ -3,16 +3,16 @@ import { useContext, useEffect, useState } from "react"
 import Swal from "sweetalert2"
 import { modifyUser } from "../../dataBase/IndexDB"
 import { UserContext } from "../../context/UserContext"
-import { loaderConsole } from "../../context/Loaders"
+import { loaderPlatform } from "../../context/Loaders"
 
-const Console = ({api_key, page_size}) => {
+const Platform = ({api_key, page_size}) => {
     const params = useParams()
-  const { platform, selectedPlatformName } = useLoaderData()
+  const { platformParent, selectedplatformParentName } = useLoaderData()
   const {log ,setLog} = useContext(UserContext)
   const {favorites} = log
   const [pageNumber, setPageNumber] = useState(1)
   const [loading, setLoading] = useState(false)
-  const [platformList, setConsole] = useState(platform)
+  const [platformParentList, setPlatformParent] = useState(platformParent)
 
   const addFavorite = (id) => {
       if (log.validation) {
@@ -54,8 +54,8 @@ const Console = ({api_key, page_size}) => {
   useEffect(() => {
       const fetchData = async () => {
           try {
-              const { platform: newConsole } = await loaderConsole({params, api_key, page_size, pageNumber })
-              setConsole((prevConsole) => [...prevConsole, ...newConsole])
+              const { platformParent: newPlatform } = await loaderPlatform({params, api_key, page_size, pageNumber })
+              setPlatformParent((prevPlatform) => [...prevPlatform, ...newPlatform])
               setLoading(false)
           } catch (error) {
               console.error("Error fetching games:", error)
@@ -64,15 +64,15 @@ const Console = ({api_key, page_size}) => {
       }
 
       fetchData()
-  }, [pageNumber, setConsole,params, api_key, page_size])
+  }, [pageNumber, setPlatformParent,params, api_key, page_size])
 
   return (
       <>
-          <h1>Games for {selectedPlatformName}</h1>
+          <h1>Games for {selectedplatformParentName}</h1>
           <div className="row row-cols-1 row-cols-md-6 g-4">
                 {
-                    platformList.length > 0 ? (
-                        platformList.filter((game, index, self) => index === self.findIndex((g) => g.id === game.id))
+                    platformParentList.length > 0 ? (
+                        platformParentList.filter((game, index, self) => index === self.findIndex((g) => g.id === game.id))
                         .map((game) => (
                             <div key={game.id} className="col">
                                 <div className="card m-1">
@@ -96,4 +96,4 @@ const Console = ({api_key, page_size}) => {
   )
 }
 
-export default Console
+export default Platform

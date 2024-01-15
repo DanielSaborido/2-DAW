@@ -11,6 +11,7 @@ import Genre from "../pages/genres/Genre.jsx"
 import Tag from "../pages/genres/Tag.jsx"
 //filtro por plataforma de juego y desarrolladores
 import Others from "../pages/others/Others.jsx"
+import Platform from "../pages/others/Platform.jsx"
 import Console from "../pages/others/Console.jsx"
 import Developer from "../pages/others/Developer.jsx"
 //pagina de error
@@ -24,10 +25,10 @@ import Favorites from "../pages/Favorites.jsx"
 import Contact from "../pages/Contact.jsx"
 import ModifyAccount from "../pages/account/ModifyAccount.jsx"
 //data loaders
-import { loaderConsole, loaderDeveloper, loaderFavorites, loaderGame, loaderGames, loaderGenre, loaderGenres, loaderNews, loaderOthers, loaderRecommendations, loaderTag } from "../context/Loaders.jsx"
+import { loaderConsole, loaderDeveloper, loaderFavorites, loaderGame, loaderGames, loaderGenre, loaderGenres, loaderNews, loaderOthers, loaderPlatform, loaderRecommendations, loaderTag } from "../context/Loaders.jsx"
 
 const api_key = "37dea5560e494058945502465024de6a"
-const page_size = 25
+const page_size = 30
 const pageNumber = 1
 
 export const router = createBrowserRouter([
@@ -43,6 +44,11 @@ export const router = createBrowserRouter([
                         path:"/",
                         element: <Home />,
                         loader: () => loaderNews({ api_key })
+                    },
+                    {
+                        path:"/platformParent/:id",
+                        element: <Platform api_key={api_key} page_size={page_size} />,
+                        loader: ({ params }) => loaderPlatform({params, api_key, page_size, pageNumber })
                     },
                     {
                         path:"/games",

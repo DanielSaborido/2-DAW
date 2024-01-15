@@ -6,7 +6,7 @@ const Others = () => {
   return (
     <>
       <h1 className='text-center mb-3'>Platforms</h1>
-      <div className="d-flex flex-wrap row-cols-md-5">
+      <div className="d-flex flex-wrap row-cols-md-6">
         {familyPlatforms.map((platforms) => (
           <div key={platforms.id} className="col">
             <div className="m-1">
@@ -23,7 +23,7 @@ const Others = () => {
         ))}
       </div>
       <h1 className='text-center mb-3'>Developers</h1>
-      <ul className="d-flex flex-wrap row-cols-md-5">
+      <ul className="d-flex flex-wrap row-cols-md-6">
           {developers.map((developer) => (
               <li key={developer.id}  className="col">
                   <Link to={`/developers/${developer.id}`}>{developer.name}</Link>

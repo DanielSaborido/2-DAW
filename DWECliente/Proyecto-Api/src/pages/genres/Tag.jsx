@@ -69,7 +69,7 @@ const Tag = ({api_key, page_size}) => {
   return (
       <>
           <h1>Games of {selectedTagName}</h1>
-          <div className="row row-cols-1 row-cols-md-5 g-4">
+          <div className="row row-cols-1 row-cols-md-6 g-4">
                 {
                     tagList.length > 0 ? (
                         tagList.filter((game, index, self) => index === self.findIndex((g) => g.id === game.id))
