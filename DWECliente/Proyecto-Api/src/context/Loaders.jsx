@@ -60,7 +60,6 @@ export const loaderGame = async({params, api_key}) => {
     try {
         const data = await fetch(`https://api.rawg.io/api/games/${params.id}?key=${api_key}`)
         const response = await data.json()
-        response)
         return { game: response }
     } catch (error) {
         console.error("Error fetching game:", error)
