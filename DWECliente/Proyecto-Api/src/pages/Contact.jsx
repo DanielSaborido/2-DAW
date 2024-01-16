@@ -29,7 +29,6 @@ const Contact = () => {
                 text: "Un dato no se ha rellenado corretamente",
             })
         }
-        console.log('Datos del formulario:', formData)
         setFormData({
             name: '',
             email: '',

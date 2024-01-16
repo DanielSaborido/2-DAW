@@ -36,9 +36,7 @@ const Favorites = () => {
                                     </div>
                                 </Link>
                                 <div className="mt-auto">
-                                    <button onClick={() => addFavorite(game.id)} className={`btn ${favorites.includes(game.id) ? 'btn-danger' : 'btn-primary'} w-100`}>
-                                        {favorites.includes(game.id) ? 'Remove from Favorites' : 'Add to Favorites'}
-                                    </button>
+                                    <button onClick={() => removeFavorite(game.id)} className={`btn btn-danger w-100`}>Remove from Favorites</button>
                                 </div>
                             </div>
                         </div>

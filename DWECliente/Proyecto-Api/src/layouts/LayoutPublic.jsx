@@ -3,7 +3,6 @@ import Navbar from "../components/Navbar"
 
 const LayoutPublic = () => {
     const navigation = useNavigation()
-    console.log(navigation)
 
     return (
         <div>

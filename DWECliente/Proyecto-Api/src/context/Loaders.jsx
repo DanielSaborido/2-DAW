@@ -60,7 +60,7 @@ export const loaderGame = async({params, api_key}) => {
     try {
         const data = await fetch(`https://api.rawg.io/api/games/${params.id}?key=${api_key}`)
         const response = await data.json()
-        console.log(response)
+        response)
         return { game: response }
     } catch (error) {
         console.error("Error fetching game:", error)
@@ -144,9 +144,7 @@ export const loaderPlatform = async({params, api_key, page_size, pageNumber }) =
         const parentPlatformId = parseInt(params.id)
         const platformResponse = await fetch(`https://api.rawg.io/api/platforms/lists/parents?key=${api_key}`)
         const platformData = await platformResponse.json()
-        console.log(platformData.results)
         const parentPlatforms = platformData.results.find(parent => parent.id === parentPlatformId)
-        console.log(parentPlatforms)
         const selectedPlatformName = parentPlatforms ? parentPlatforms.name : null
         let apiUrl
         if (pageNumber === 1) {
@@ -207,7 +205,6 @@ export const loaderFavorites = async({api_key, params}) => {
     try {
         const log = await getUserById(parseInt(params.id, 10))
         const favorites = log.favorites
-        console.log(favorites)
         let favoritesGames = []
         await Promise.all((favorites || []).map(async (gameId) => {
           const data = await fetch(`https://api.rawg.io/api/games/${gameId}?key=${api_key}`)
