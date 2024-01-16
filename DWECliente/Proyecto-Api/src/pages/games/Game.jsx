@@ -17,7 +17,7 @@ const Game = () => {
       </div>
       <div className="mt-4">
         <h3>Metacritic Scores</h3>
-        <ul className="list-unstyled">
+        <ul>
           {game.metacritic_platforms.map((platform) => (
             <li key={platform.platform.slug}>
               <a href={platform.url} target="_blank" rel="noopener noreferrer" > {platform.platform.name} : {platform.metascore} </a>
@@ -31,7 +31,7 @@ const Game = () => {
       </div>
       <div className="mt-4">
         <h3>Ratings</h3>
-        <ul className="list-unstyled">
+        <ul>
           {game.ratings.map((rating) => (
             <li key={rating.id}>
               {rating.title}: {rating.percent}%
@@ -49,7 +49,7 @@ const Game = () => {
       </div>
       <div className="mt-4">
         <h3>Stores</h3>
-        <ul className="list-unstyled">
+        <ul>
           {game.stores.map((store) => (
             <li key={store.id}>
               <a href={`https://${store.store.domain}`} target="_blank" rel="noopener noreferrer">{store.store.name}</a>
@@ -59,7 +59,7 @@ const Game = () => {
       </div>
       <div className="mt-4">
         <h3>Links</h3>
-        <ul className="list-unstyled">
+        <ul>
             <li>
               <a href={`https://${game.website}`} target="_blank" rel="noopener noreferrer">Official Website</a>
             </li>
