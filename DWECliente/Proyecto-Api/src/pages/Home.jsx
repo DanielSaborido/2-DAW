@@ -4,7 +4,7 @@ import { useContext } from "react"
 import { modifyUser } from "../dataBase/IndexDB"
 import Swal from "sweetalert2"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons' //npm install --save @fortawesome/free-solid-svg-icons
 
 const GameCard = ({ game, addFavorite, favorites }) => (
   <div className="col">
@@ -13,6 +13,11 @@ const GameCard = ({ game, addFavorite, favorites }) => (
             <img src={game.background_image} className="card-img-top" alt={game.name} />
             <div className="card-body">
                 <h5 className="card-title">{game.name}</h5>
+                <p className="card-text">
+                  <strong>Platforms:</strong> {game.platforms.map((platform) => platform.platform.name).join(', ')}
+                </p>
+                <h6 className="card-subtitle mb-2 text-muted">Release Date</h6>
+                <p className="card-text">{game.released}</p>
             </div>
         </Link>
         <button
@@ -37,7 +42,7 @@ const PlatformSection = ({ title, games, addFavorite, favorites, platformId }) =
         <div className="col"> <h2>No hay datos</h2> </div>
       )}
         <Link to={`/platformParent/${platformId}`}>
-          <FontAwesomeIcon icon={ faPlus } size="lg" />
+          <FontAwesomeIcon icon={ faPlus } size="xl" />
         </Link>
     </div>
   </>

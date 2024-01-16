@@ -79,8 +79,13 @@ const Recommended = ({api_key, page_size}) => {
                                 <div className="card m-1">
                                     <Link to={`/games/${game.id}`}>
                                         <img src={game.background_image} className="card-img-top" alt={game.name} />
-                                        <div className="card-body">
+                                        <div className="card-body">                    
                                             <h5 className="card-title">{game.name}</h5>
+                                            <p className="card-text">
+                                            <strong>Platforms:</strong> {game.platforms.map((platform) => platform.platform.name).join(', ')}
+                                            </p>
+                                            <h6 className="card-subtitle mb-2 text-muted">Release Date</h6>
+                                            <p className="card-text">{game.released}</p>
                                         </div>
                                     </Link>
                                     <button onClick={() => addFavorite(game.id)}
