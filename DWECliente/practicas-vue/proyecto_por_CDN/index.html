@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="vueApp">
+        <p> {{ mensaje }}</p>
+        <p> {{ otro }}</p>
+        <button v-on:click="cambiarMensaje">Mensaje</button>
+        <p> {{ quotes }}</p>
+        <hr>
+        <input type="text" v-model="nuevoMensaje" v-on:keypress.enter="addMensaje">
+        <p>Datos input: {{ nuevoMensaje}}</p>
+        <ul><!--Nunca usar el v-for y el v-if en un mismo elemento-->
+            <li v-for="({quote, author}, index) in quotes">
+                <p>{{(index+1)*5}}. {{ quote }}</p>
+                <p v-if="author">* {{author}}</p>
+                <p v-show="author">* {{author}}</p>
+            </li>
+        </ul>
+        <hr>
+        <p v-if="active">Texto activo v-if</p>
+        <p v-else class="verde">Texto activo v-else</p>
+        <button v-on:click="cambiarValido">Alternar condicional</button>
+        <hr>
+        <img v-bind:src="rutaImagen">
+        <hr>
+        <p v-bind:style="red">HOOOOOOOOOLAAAAA</p>
+        <hr>
+        <button v-model="contador" v-on:click="(contador++)">Veces pulsado: {{contador}}</button>
+    </div>
+</body>
+<script src="script.js"></script>
+</html>
