@@ -41,7 +41,7 @@ const app = Vue.createApp(
                 mensaje: `mensaje reactivo inerpolado`,
                 otro: "buenas",
                 quotes: quotes,
-                nuevoMensaje: "hola",
+                nuevoMensaje: "quote, author",
                 active: false,
                 rutaImagen: "descarga.jpg",
                 red: "color:blue",

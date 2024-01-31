@@ -1,3 +1,20 @@
+:root {
+    --background-color: #f3f3f3;
+    --text-color: #242424;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #242424;
+        --text-color: #dddddd;
+    }
+}
+
+body {
+    background: var(--background-color);
+    color: var(--text-color);
+ }
+
 .verde{
     color: blueviolet;
 }
